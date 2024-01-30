@@ -1,0 +1,1108 @@
+[
+	{
+		"category": "society_and_culture",
+		"id": "622a1c3d7cc59eab6f951c6f",
+		"correctAnswer": "God",
+		"incorrectAnswers": [
+			"Noah",
+			"Joseph",
+			"King Herod"
+		],
+		"question": {
+			"text": "According to the Bible who is Jesus's father?"
+		},
+		"tags": [
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c3c7cc59eab6f9518aa",
+		"correctAnswer": "Rubik's Cube",
+		"incorrectAnswers": [
+			"Furby",
+			"Playmobil",
+			"Hula Hoop"
+		],
+		"question": {
+			"text": "Which toy is a multi-colored block you have to reorganize?"
+		},
+		"tags": [
+			"toys",
+			"general_knowledge",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c357cc59eab6f94fcb2",
+		"correctAnswer": "Afroasiatic",
+		"incorrectAnswers": [
+			"Indo-European",
+			"Kra–Dai",
+			"Uralic"
+		],
+		"question": {
+			"text": "The language 'Mesopotamian Arabic' belongs to which language family?"
+		},
+		"tags": [
+			"language",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "62ab33285202de619af28142",
+		"correctAnswer": "RAV4",
+		"incorrectAnswers": [
+			"3-Series",
+			"Silver Ghost",
+			"XK120"
+		],
+		"question": {
+			"text": "Which of these is a model of car made by Toyota?"
+		},
+		"tags": [
+			"motoring",
+			"business",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6262af894b176d54800e3dce",
+		"correctAnswer": "Not Safe For Work",
+		"incorrectAnswers": [
+			"Nice Suckers Finish Worst",
+			"Now, Salt For Weeks",
+			"No Situation For Wheels"
+		],
+		"question": {
+			"text": "What do the letters 'NSFW' mean on internet chats?"
+		},
+		"tags": [
+			"the_internet",
+			"initials"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "63bc3fb10e893d6e5a6a0fe0",
+		"correctAnswer": "Gothic",
+		"incorrectAnswers": [
+			"Grunge",
+			"Hippie",
+			"Preppy"
+		],
+		"question": {
+			"text": "What is the name of the fashion trend popularized in the 1990s that involves wearing dark colours, plaid shirts, Doc Martens, and ripped jeans?"
+		},
+		"tags": [
+			"society_and_culture",
+			"fashion"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c357cc59eab6f94fd10",
+		"correctAnswer": "Jean-Paul Sartre",
+		"incorrectAnswers": [
+			"Thomas Hobbes",
+			"Ludwig Wittgenstein",
+			"G. W. F. Hegel"
+		],
+		"question": {
+			"text": "Which philosopher famously said 'Man is condemned to be free'?"
+		},
+		"tags": [
+			"philosophy",
+			"quotes",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6293ec837f41d6338b96eef6",
+		"correctAnswer": "Joseph Stalin",
+		"incorrectAnswers": [
+			"Vladimir Lenin",
+			"Nikita Khrushchev",
+			"Peter the Great"
+		],
+		"question": {
+			"text": "Who was the ruler of the Soviet Union from 1924 to his death, leading the Soviet Union in WWII?"
+		},
+		"tags": [
+			"people",
+			"history",
+			"society_and_culture",
+			"russia",
+			"cold_war",
+			"soviet_union",
+			"leaders",
+			"world_war_2"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "63e13a05106de6ffa7d4a77b",
+		"correctAnswer": "Charles Lindbergh",
+		"incorrectAnswers": [
+			"Orson Welles",
+			"Albert Einstein",
+			"Mark Twain"
+		],
+		"question": {
+			"text": "Which famous person's infant child was kidnapped in 1932?"
+		},
+		"tags": [
+			"society_and_culture",
+			"crime",
+			"people",
+			"1930's"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6266e5f8ff2394bd44dee027",
+		"correctAnswer": "Nero",
+		"incorrectAnswers": [
+			"Noir",
+			"Zwart",
+			"Nove"
+		],
+		"question": {
+			"text": "What is the Italian word for 'black'?"
+		},
+		"tags": [
+			"language",
+			"translations",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c367cc59eab6f9500e4",
+		"correctAnswer": "Jacob",
+		"incorrectAnswers": [
+			"Joshua",
+			"Aaron",
+			"Michael"
+		],
+		"question": {
+			"text": "Whose name did God change to Israel?"
+		},
+		"tags": [
+			"christianity",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "639c9d93929b90846f2fc959",
+		"correctAnswer": "Diwali",
+		"incorrectAnswers": [
+			"Holi",
+			"Dusshera",
+			"Navaratri"
+		],
+		"question": {
+			"text": "What is the name of the Hindu festival of lights?"
+		},
+		"tags": [
+			"hinduism",
+			"religion",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c367cc59eab6f950108",
+		"correctAnswer": "Joseph Smith",
+		"incorrectAnswers": [
+			"Mark Adams",
+			"Brian Jones",
+			"George Michael"
+		],
+		"question": {
+			"text": "Who founded Mormonism?"
+		},
+		"tags": [
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "647f9dbc3a4302a71927162c",
+		"correctAnswer": "The Trojan War",
+		"incorrectAnswers": [
+			"The Hundred Years' War",
+			"The Peloponnesian War",
+			"The Punic Wars"
+		],
+		"question": {
+			"text": "According to legend, refugees of which 1200 B.C. conflict first fled to Thrace, then north Africa and finally Italy?"
+		},
+		"tags": [
+			"mythology",
+			"the_ancient_world",
+			"romans",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c367cc59eab6f95010c",
+		"correctAnswer": "Odin",
+		"incorrectAnswers": [
+			"Thor",
+			"Loki",
+			"Freya"
+		],
+		"question": {
+			"text": "Which Norse god had the Valkyries as handmaidens?"
+		},
+		"tags": [
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6371626d1bf863c45ca6c377",
+		"correctAnswer": "Do not speak against the Sun",
+		"incorrectAnswers": [
+			"To dare is to do",
+			"Every man is the maker of his own fortune",
+			"I came, I saw, I conquered"
+		],
+		"question": {
+			"text": "How does that Latin phrase 'Adversus solem ne loquitor' translate into English?"
+		},
+		"tags": [
+			"society_and_culture",
+			"language",
+			"the_romans",
+			"classics"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6463391d01d576cfac3aa31f",
+		"correctAnswer": "Hansel and Gretel",
+		"incorrectAnswers": [
+			"The Magic Flute",
+			"Little Red Riding Hood",
+			"The Barber of Seville"
+		],
+		"question": {
+			"text": "In which famous fairy tale do two children fall into the hands of a witch after being abandoned in a forest?"
+		},
+		"tags": [
+			"fairy_tales",
+			"society_and_culture",
+			"arts_and_literature"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "62c2fa01b3eadb0437fda6b9",
+		"correctAnswer": "Eagle",
+		"incorrectAnswers": [
+			"Elephant",
+			"Bat",
+			"Bull"
+		],
+		"question": {
+			"text": "Which animal would you associate with the American Airlines logo?"
+		},
+		"tags": [
+			"society_and_culture",
+			"business",
+			"marketing",
+			"animals",
+			"aviation",
+			"symbols",
+			"logos"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "645cb1627d263fd5097043bb",
+		"correctAnswer": "Songs",
+		"incorrectAnswers": [
+			"Dances",
+			"Theatrical performances",
+			"Magic shows"
+		],
+		"question": {
+			"text": "What does a \"casa de fado\" in Portugal usually feature in addition to food?"
+		},
+		"tags": [
+			"society_and_culture",
+			"portugal"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c367cc59eab6f95039f",
+		"correctAnswer": "Diamonds",
+		"incorrectAnswers": [
+			"Frankincense",
+			"Myrhh",
+			"Gold"
+		],
+		"question": {
+			"text": "Which of the following was not a gift from one of the biblical wise men?"
+		},
+		"tags": [
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c3b7cc59eab6f951752",
+		"correctAnswer": "Marc Bolan",
+		"incorrectAnswers": [
+			"John Lennon",
+			"Jeff Buckley",
+			"Jimi Hendrix"
+		],
+		"question": {
+			"text": "Which rockstar died when the Mini driven by his girlfriend crashed into a tree?"
+		},
+		"tags": [
+			"society_and_culture",
+			"people",
+			"musicians",
+			"music",
+			"rock_music"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "637162311bf863c45ca6c35c",
+		"correctAnswer": "Carpe vinum",
+		"incorrectAnswers": [
+			"Nil volentibus arduum",
+			"Memores acti prudentes future",
+			"Oderint dum metuant"
+		],
+		"question": {
+			"text": "Which of these Latin phrases means 'Seize the wine'?"
+		},
+		"tags": [
+			"society_and_culture",
+			"language",
+			"the_romans",
+			"classics"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6357fd1f68bd5000211e717f",
+		"correctAnswer": "China",
+		"incorrectAnswers": [
+			"Mozambique",
+			"Brazil",
+			"Rwanda"
+		],
+		"question": {
+			"text": "Cantonese is a language spoken in which of these countries?"
+		},
+		"tags": [
+			"language",
+			"linguistics",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6461403f4d46e537ca8cd9a6",
+		"correctAnswer": "Their chains",
+		"incorrectAnswers": [
+			"Their shirts",
+			"Their homes",
+			"Their families"
+		],
+		"question": {
+			"text": "What do the proletarians \"have nothing to lose but\", according to The Communist Manifesto?"
+		},
+		"tags": [
+			"politics",
+			"socialism",
+			"revolution",
+			"communism",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c3a7cc59eab6f9511d3",
+		"correctAnswer": "Polycrates",
+		"incorrectAnswers": [
+			"Minos",
+			"Hercules",
+			"Perseus"
+		],
+		"question": {
+			"text": "In Greek mythology, who ruled over the island of Samos?"
+		},
+		"tags": [
+			"ancient_greece",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "639c9db2929b90846f2fc998",
+		"correctAnswer": "Vishnu",
+		"incorrectAnswers": [
+			"Brahma",
+			"Brihaspati",
+			"Krishna"
+		],
+		"question": {
+			"text": "What is the name of the Hindu god of preservation?"
+		},
+		"tags": [
+			"hinduism",
+			"religion",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6293ebe97f41d6338b96eec9",
+		"correctAnswer": "Nicolaus Copernicus",
+		"incorrectAnswers": [
+			"Zoroaster",
+			"Aristotle",
+			"Ernest Rutherford"
+		],
+		"question": {
+			"text": "Which of these people was a Renaissance mathematician and astronomer who believed Sun was the centre of the Universe - rather than Earth?"
+		},
+		"tags": [
+			"people",
+			"history",
+			"society_and_culture",
+			"astronomy",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6293ecbd7f41d6338b96ef07",
+		"correctAnswer": "Founder of Manichaeism, a gnostic religion which for a time was a rival to Christianity.",
+		"incorrectAnswers": [
+			"Dictator of Nazi Germany.",
+			"Founder of the Achaemenid Empire, the first Persian Empire.",
+			"Spiritual teacher and central figure of Christianity."
+		],
+		"question": {
+			"text": "Which of the following was Mani famous for?"
+		},
+		"tags": [
+			"people",
+			"history",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c3d7cc59eab6f951c6e",
+		"correctAnswer": "The Shepherds",
+		"incorrectAnswers": [
+			"Three Wise Men",
+			"King Herod",
+			"The Stable Boy"
+		],
+		"question": {
+			"text": "According to the bible, who were the baby Jesus's first visitors?"
+		},
+		"tags": [
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6293ec087f41d6338b96eed2",
+		"correctAnswer": "Military and political leader of the Mongols.",
+		"incorrectAnswers": [
+			"Engineer who helped develop radio transmission.",
+			"Political philosopher who promoted a theory of liberal democracy and a social contract.",
+			"Inventor of the printing press."
+		],
+		"question": {
+			"text": "Which of the following describes Genghis Kahn?"
+		},
+		"tags": [
+			"people",
+			"history",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6266e68eff2394bd44dee053",
+		"correctAnswer": "Seven",
+		"incorrectAnswers": [
+			"Yellow",
+			"White",
+			"Black"
+		],
+		"question": {
+			"text": "In Spanish, what is the meaning of the word 'siete'?"
+		},
+		"tags": [
+			"language",
+			"translations",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c3d7cc59eab6f951cb3",
+		"correctAnswer": "6 Geese A Laying",
+		"incorrectAnswers": [
+			"6 Maids a Milking",
+			"6 Gold Rings",
+			"6 Drummers Drumming"
+		],
+		"question": {
+			"text": "What did 'my true love give to me' on the sixth day of Christmas?"
+		},
+		"tags": [
+			"christmas",
+			"lyrics",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6293ec387f41d6338b96eee0",
+		"correctAnswer": "Biologist who discovered penicillin.",
+		"incorrectAnswers": [
+			"Renaissance mathematician and astronomer who believed Sun was the centre of the Universe - rather than Earth.",
+			"United most of Western Europe to form the Carolingian Empire.",
+			"Roman ruler who oversaw the demise of the Roman Republic to be replaced with a Roman Emperor."
+		],
+		"question": {
+			"text": "Which of the following describes Alexander Fleming?"
+		},
+		"tags": [
+			"people",
+			"history",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "64976c110752843c0d8aadbb",
+		"correctAnswer": "ICBM",
+		"incorrectAnswers": [
+			"ABM",
+			"HAMB",
+			"BOMB"
+		],
+		"question": {
+			"text": "What is the abbreviation for a missile with a range greater than 3,400 miles?"
+		},
+		"tags": [
+			"weapons",
+			"military",
+			"initials",
+			"abbreviations",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c3c7cc59eab6f951b09",
+		"correctAnswer": "Canada",
+		"incorrectAnswers": [
+			"France",
+			"Australia",
+			"Russia"
+		],
+		"question": {
+			"text": "In which country was Greenpeace founded in 1971?"
+		},
+		"tags": [
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6266e668ff2394bd44dee048",
+		"correctAnswer": "Vijf",
+		"incorrectAnswers": [
+			"Cinque",
+			"Fünf",
+			"Groen"
+		],
+		"question": {
+			"text": "What is the Dutch word for 'five'?"
+		},
+		"tags": [
+			"language",
+			"translations",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6266e6b6ff2394bd44dee05f",
+		"correctAnswer": "Nine",
+		"incorrectAnswers": [
+			"Blue",
+			"Three",
+			"Black"
+		],
+		"question": {
+			"text": "What does the word 'nueve' mean in Spanish?"
+		},
+		"tags": [
+			"language",
+			"translations",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "646140784d46e537ca8cd9c3",
+		"correctAnswer": "The muses",
+		"incorrectAnswers": [
+			"The graces",
+			"The fates",
+			"The sirens"
+		],
+		"question": {
+			"text": "In Greek mythology, who were the inspirational sister goddesses that were born to Mnemosyne?"
+		},
+		"tags": [
+			"mythology",
+			"ancient_greece",
+			"society_and_culture",
+			"siblings"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c367cc59eab6f95010f",
+		"correctAnswer": "Valhalla",
+		"incorrectAnswers": [
+			"Trondheim",
+			"Odinsbahn",
+			"Asgard"
+		],
+		"question": {
+			"text": "What's heaven to fallen Norse warriors?"
+		},
+		"tags": [
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "62ab32a95202de619af2811d",
+		"correctAnswer": "Chevrolet",
+		"incorrectAnswers": [
+			"Ford",
+			"BMW",
+			"Aston Martin"
+		],
+		"question": {
+			"text": "The Corvette is a model of car made by which manufacturer?"
+		},
+		"tags": [
+			"motoring",
+			"business",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "639c9db0929b90846f2fc992",
+		"correctAnswer": "Karma",
+		"incorrectAnswers": [
+			"Hajj",
+			"Salat",
+			"Zakat"
+		],
+		"question": {
+			"text": "Which of the following is not a pillar of Islam?"
+		},
+		"tags": [
+			"islam",
+			"religion",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c3b7cc59eab6f95173f",
+		"correctAnswer": "Mini",
+		"incorrectAnswers": [
+			"Beetle",
+			"Porsche 911",
+			"E-Type"
+		],
+		"question": {
+			"text": "Which iconic car did Austin And Morris launch in 1959?"
+		},
+		"tags": [
+			"motoring",
+			"business",
+			"1950's",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "6293ec9b7f41d6338b96eefd",
+		"correctAnswer": "Lao Tzu",
+		"incorrectAnswers": [
+			"Zoroaster",
+			"Mao Zedong",
+			"Sun Tzu"
+		],
+		"question": {
+			"text": "Which influential historical person was the author of Tao Te Ching and founder of Taoism?"
+		},
+		"tags": [
+			"people",
+			"history",
+			"society_and_culture",
+			"religion",
+			"china"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "649ca3c7e3aef0a3c23f6412",
+		"correctAnswer": "A cobbler",
+		"incorrectAnswers": [
+			"A chef",
+			"A cooper",
+			"A fletcher"
+		],
+		"question": {
+			"text": "What is the term used to describe a person who repairs shoes?"
+		},
+		"tags": [
+			"occupations",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c3a7cc59eab6f9511c1",
+		"correctAnswer": "Terpsichore",
+		"incorrectAnswers": [
+			"Penelope",
+			"Thalia",
+			"Medea"
+		],
+		"question": {
+			"text": "Who is the Greek muse of dance and choral song?"
+		},
+		"tags": [
+			"society_and_culture",
+			"ancient_greece",
+			"mythology"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c357cc59eab6f94fce3",
+		"correctAnswer": "Austronesian",
+		"incorrectAnswers": [
+			"Sino-Tibetan",
+			"Indo-European",
+			"Austroasiatic"
+		],
+		"question": {
+			"text": "The language 'Indonesian' belongs to which language family?"
+		},
+		"tags": [
+			"language",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c357cc59eab6f94fcd1",
+		"correctAnswer": "Afroasiatic",
+		"incorrectAnswers": [
+			"Turkic",
+			"Austroasiatic",
+			"Japonic"
+		],
+		"question": {
+			"text": "The language 'North Levantine Arabic' belongs to which language family?"
+		},
+		"tags": [
+			"language",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "622a1c377cc59eab6f950444",
+		"correctAnswer": "Samhain",
+		"incorrectAnswers": [
+			"All Hallows Eve",
+			"Harvest Festival",
+			"Thanksgiving"
+		],
+		"question": {
+			"text": "Halloween originated from which Pagan festival?"
+		},
+		"tags": [
+			"halloween",
+			"traditions",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "63b069514799123c67712f7b",
+		"correctAnswer": "Indlamu",
+		"incorrectAnswers": [
+			"Hula",
+			"Tango",
+			"Flamenco"
+		],
+		"question": {
+			"text": "What is the traditional dance of the Zulu people of South Africa?"
+		},
+		"tags": [
+			"society_and_culture",
+			"dance",
+			"africa",
+			"zulu"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "society_and_culture",
+		"id": "645fcc89541c4d4fc8cf308e",
+		"correctAnswer": "The Sunflower State",
+		"incorrectAnswers": [
+			"The Prairie State",
+			"The Rusty State",
+			"The Wheat State"
+		],
+		"question": {
+			"text": "What is the nickname for the state of Kansas?"
+		},
+		"tags": [
+			"nicknames",
+			"us_states",
+			"usa",
+			"kansas",
+			"geography",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	}
+]

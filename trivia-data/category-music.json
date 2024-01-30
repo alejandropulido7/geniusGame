@@ -1,0 +1,1073 @@
+[
+    {
+        "category": "music",
+        "id": "622a1c397cc59eab6f950d4e",
+        "correctAnswer": "One Direction",
+        "incorrectAnswers": [
+            "The Beatles",
+            "Talking Heads",
+            "Backstreet Boys"
+        ],
+        "question": {
+            "text": "Which band did Zayn Malik belong to?"
+        },
+        "tags": [
+            "people",
+            "music",
+            "bands"
+        ],
+        "type": "text_choice",
+        "difficulty": "easy",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "625063a7e12f6dec240bdf78",
+        "correctAnswer": "Right Said Fred",
+        "incorrectAnswers": [
+            "Vanilla Ice",
+            "Musical Youth",
+            "Rob Base & DJ E-Z Rock"
+        ],
+        "question": {
+            "text": "Who had a hit in 1991 with I'm Too Sexy?"
+        },
+        "tags": [
+            "songs",
+            "one_hit_wonders",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "6250644ee12f6dec240bdfa9",
+        "correctAnswer": "Rockwell",
+        "incorrectAnswers": [
+            "The Verve",
+            "Big Country",
+            "Deee-Lite"
+        ],
+        "question": {
+            "text": "'Somebody's Watching Me' was a one hit wonder in 1984 by which artist?"
+        },
+        "tags": [
+            "songs",
+            "one_hit_wonders",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c357cc59eab6f94fd4a",
+        "correctAnswer": "Guns N Roses",
+        "incorrectAnswers": [
+            "Sex Pistols",
+            "The Ramones",
+            "The Clash"
+        ],
+        "question": {
+            "text": "With Which Rock Band Does \"Slash\" Play Guitar?"
+        },
+        "tags": [
+            "people",
+            "general_knowledge",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "6471299f64c916f9c84814ab",
+        "correctAnswer": "Bang bang",
+        "incorrectAnswers": [
+            "Yeah yeah",
+            "Hey hey",
+            "Go go"
+        ],
+        "question": {
+            "text": "What two-word musical exclamation is used by The Beatles before \"Maxwell's Silver Hammer\" comes down on various heads?"
+        },
+        "tags": [
+            "songs",
+            "the_beatles",
+            "music",
+            "lyrics"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "64746ab65a4c31088dd9cfc6",
+        "correctAnswer": "UB40",
+        "incorrectAnswers": [
+            "Red Hot Chili Peppers",
+            "The Police",
+            "Radiohead"
+        ],
+        "question": {
+            "text": "What band's rendition of 'Red Red Wine' topped the charts in 1988?"
+        },
+        "tags": [
+            "bands",
+            "songs",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c357cc59eab6f94fd6c",
+        "correctAnswer": "Fatboy Slim",
+        "incorrectAnswers": [
+            "Basement Jaxx",
+            "Chemical Brothers",
+            "Daft Punk"
+        ],
+        "question": {
+            "text": "Whose Albums Include \"Better Living By Chemistry\" & \"You've Come A Long Way Baby\"?"
+        },
+        "tags": [
+            "music_albums",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c357cc59eab6f94fdce",
+        "correctAnswer": "Best Shot",
+        "incorrectAnswers": [
+            "Rhythm Stick",
+            "Lovin'",
+            "Poison Arrow"
+        ],
+        "question": {
+            "text": "Pat Benatar Asked You To \"Hit Me With Your ________\""
+        },
+        "tags": [
+            "songs",
+            "lyrics",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "636a527a990390307063f39d",
+        "correctAnswer": "I Want Candy",
+        "incorrectAnswers": [
+            "Louie Louie",
+            "Cocaine",
+            "Mad World"
+        ],
+        "question": {
+            "text": "Which song was originally recorded by The Strangeloves and was later covered by Bow Wow Wow?"
+        },
+        "tags": [
+            "music",
+            "cover_song",
+            "songs",
+            "musicians"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c397cc59eab6f950d02",
+        "correctAnswer": "The Beatles",
+        "incorrectAnswers": [
+            "Deep Purple",
+            "Feeder",
+            "Uriah Heep"
+        ],
+        "question": {
+            "text": "Which English rock band released the song 'Yellow Submarine'?"
+        },
+        "tags": [
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "easy",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c347cc59eab6f94fba0",
+        "correctAnswer": "\"Don't Stop Me Now\" by Queen",
+        "incorrectAnswers": [
+            "\"Gimme More\" by Britney Spears",
+            "\"Welcome to the Black Parade\" by My Chemical Romance",
+            "\"Crazy Train\" by Ozzy Osbourne"
+        ],
+        "question": {
+            "text": "Which song begins with the lyrics: \"Tonight, I’m gonna have myself a real good time / I feel alive / And the world, I'll turn it inside out, yeah / I'm floating around in ecstasy...\"?"
+        },
+        "tags": [
+            "songs",
+            "lyrics",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "649553a42cb69a84d25273eb",
+        "correctAnswer": "Blondie",
+        "incorrectAnswers": [
+            "No Doubt",
+            "Siouxsie and the Banshees",
+            "Garbage"
+        ],
+        "question": {
+            "text": "Which band was founded and fronted by Debbie Harry and was nominated for the Grammy award for their song 'Call Me'?"
+        },
+        "tags": [
+            "bands",
+            "music",
+            "songs"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c347cc59eab6f94fb8f",
+        "correctAnswer": "\"No Scrubs\" by TLC",
+        "incorrectAnswers": [
+            "\"Hooked on a Feeling\" by B.J. Thomas",
+            "\"Rapper's Delight\" by Sugarhill Gang",
+            "\"Fergalicious\" by Fergie and will.i.am."
+        ],
+        "question": {
+            "text": "Which song begins with the lyrics: \"A scrub is a guy that thinks he's fly and is also known as a busta.\"?"
+        },
+        "tags": [
+            "lyrics",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c357cc59eab6f94fda2",
+        "correctAnswer": "Billy Joel",
+        "incorrectAnswers": [
+            "George Michael",
+            "Stevie Wonder",
+            "Cyndi Lauper"
+        ],
+        "question": {
+            "text": "Who Had A 1984 Hit With The Song \"The Longest Time\"?"
+        },
+        "tags": [
+            "musicians",
+            "songs",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "6250640ee12f6dec240bdf96",
+        "correctAnswer": "Starland Vocal Band",
+        "incorrectAnswers": [
+            "New Radicals",
+            "Faith No More",
+            "Bobby McFerrin"
+        ],
+        "question": {
+            "text": "'Afternoon Delight' was a one hit wonder in 1976 by which artist?"
+        },
+        "tags": [
+            "songs",
+            "one_hit_wonders",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c397cc59eab6f950d73",
+        "correctAnswer": "Guns N' Roses",
+        "incorrectAnswers": [
+            "AC/DC",
+            "Metallica",
+            "Whitesnake"
+        ],
+        "question": {
+            "text": "Which band has Slash as its lead guitarist?"
+        },
+        "tags": [
+            "music",
+            "bands"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c387cc59eab6f950b6d",
+        "correctAnswer": "The Clash",
+        "incorrectAnswers": [
+            "Deep Purple",
+            "Feeder",
+            "The Rolling Stones"
+        ],
+        "question": {
+            "text": "Which band did Joe Strummer co-found in 1976?"
+        },
+        "tags": [
+            "music",
+            "bands",
+            "1970's"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "645c9f5442ea81e2554c5f1e",
+        "correctAnswer": "\"Can't Buy Me Love\"",
+        "incorrectAnswers": [
+            "\"Twist and Shout\"",
+            "\"A Hard Day's Night\"",
+            "\"Help!\""
+        ],
+        "question": {
+            "text": "Which song became The Beatles' third No. 1 in a row in April 1964, with the lyrics \"I'll buy you a diamond ring, my friend\"?"
+        },
+        "tags": [
+            "songs",
+            "lyrics",
+            "the_beatles",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c367cc59eab6f950378",
+        "correctAnswer": "Fleetwood Mac",
+        "incorrectAnswers": [
+            "Neil Young",
+            "ABBA",
+            "Elvis Costello"
+        ],
+        "question": {
+            "text": "Who Released The 70's Album 'Rumours'?"
+        },
+        "tags": [
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "636a5234990390307063f37f",
+        "correctAnswer": "Rusty Cage",
+        "incorrectAnswers": [
+            "Where Is My Mind",
+            "Cocaine",
+            "Woodstock"
+        ],
+        "question": {
+            "text": "Which song was originally recorded by Soundgarden and was later covered by Johnny Cash?"
+        },
+        "tags": [
+            "music",
+            "cover_song",
+            "songs",
+            "musicians"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c347cc59eab6f94fb89",
+        "correctAnswer": "\"I Write Sins Not Tragedies\" by Panic! at the Disco",
+        "incorrectAnswers": [
+            "\"Yo Home to Bel-Air\"",
+            "\"All Star\" by Smash Mouth",
+            "\"Old Man\" by Neil Young"
+        ],
+        "question": {
+            "text": "Which song begins with the lyrics: \"Oh, well imagine, as I'm pacing the pews in a church corridor.\"?"
+        },
+        "tags": [
+            "lyrics",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c387cc59eab6f950b35",
+        "correctAnswer": "Blondie",
+        "incorrectAnswers": [
+            "The Pussycat Dolls",
+            "Three 6 Mafia",
+            "The Velvet Underground"
+        ],
+        "question": {
+            "text": "Which American rock band released the song 'Heart of Glass'?"
+        },
+        "tags": [
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c357cc59eab6f94fdcb",
+        "correctAnswer": "2",
+        "incorrectAnswers": [
+            "1/2",
+            "4",
+            "8"
+        ],
+        "question": {
+            "text": "How Many Crotchets Do You Get In A Minim?"
+        },
+        "tags": [
+            "words",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c397cc59eab6f950c40",
+        "correctAnswer": "Coldplay",
+        "incorrectAnswers": [
+            "Level 42",
+            "Deep Purple",
+            "Feeder"
+        ],
+        "question": {
+            "text": "Which British band released the studio album 'A Rush of Blood to the Head'?"
+        },
+        "tags": [
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c397cc59eab6f950d48",
+        "correctAnswer": "One Direction",
+        "incorrectAnswers": [
+            "Blur",
+            "The Beatles",
+            "U2"
+        ],
+        "question": {
+            "text": "Which band did Liam Payne belong to?"
+        },
+        "tags": [
+            "people",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "easy",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c357cc59eab6f94fd90",
+        "correctAnswer": "Donny Osmond",
+        "incorrectAnswers": [
+            "David Bowie",
+            "Elton John",
+            "The Carpenters"
+        ],
+        "question": {
+            "text": "Who Had A Number One Hit With Puppy Love In 1972?"
+        },
+        "tags": [
+            "1970's",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c367cc59eab6f950399",
+        "correctAnswer": "Barbara Streisand",
+        "incorrectAnswers": [
+            "Dolly Parton",
+            "Grace Jones",
+            "Cher"
+        ],
+        "question": {
+            "text": "Which US Singer Duetted With Donna Summer On The US Number One 'No More Tears'?"
+        },
+        "tags": [
+            "songs",
+            "people",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "64824e707778562fd76a964e",
+        "correctAnswer": "Guys and Dolls",
+        "incorrectAnswers": [
+            "Grease",
+            "West Side Story",
+            "A Chorus Line"
+        ],
+        "question": {
+            "text": "Which musical features the songs 'Adelaide's Lament' and 'Luck Be a Lady'?"
+        },
+        "tags": [
+            "musicals",
+            "theater",
+            "music",
+            "arts_and_literature"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c357cc59eab6f94ff3a",
+        "correctAnswer": "Michael Jackson",
+        "incorrectAnswers": [
+            "Nicki Minaj",
+            "Neil Young",
+            "Eric Clapton"
+        ],
+        "question": {
+            "text": "Which American musician sung 'Rock with You'?"
+        },
+        "tags": [
+            "songs",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "easy",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "625064d0e12f6dec240bdfcf",
+        "correctAnswer": "Eddy Grant",
+        "incorrectAnswers": [
+            "Devo",
+            "Suzi Quatro",
+            "Nick Gilder"
+        ],
+        "question": {
+            "text": "'Electric Avenue' was a one hit wonder in 1983 by which artist?"
+        },
+        "tags": [
+            "songs",
+            "one_hit_wonders",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c3d7cc59eab6f951c6c",
+        "correctAnswer": "4 O'clock",
+        "incorrectAnswers": [
+            "Midnight",
+            "9 O'clock",
+            "Lunchtime"
+        ],
+        "question": {
+            "text": "According to The Everly Bros Song \"Wake Up Little Susie\", What Time Did Susie Finally Wake Up?"
+        },
+        "tags": [
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c397cc59eab6f950c4c",
+        "correctAnswer": "The Beach Boys",
+        "incorrectAnswers": [
+            "Swans",
+            "Three 6 Mafia",
+            "The Velvet Underground"
+        ],
+        "question": {
+            "text": "Which American rock band released the song 'Blue Christmas'?"
+        },
+        "tags": [
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c347cc59eab6f94fbb8",
+        "correctAnswer": "\"Wait for It\" - Hamilton",
+        "incorrectAnswers": [
+            "\"Defying Gravity\" - Wicked",
+            "\"Edelweiss\" - The Sound of Music",
+            "\"I Dreamed a Dream\" - Les Misérables"
+        ],
+        "question": {
+            "text": "Which song from a musical begins with the lyrics: \"Theodosia writes me a letter every day...\"?"
+        },
+        "tags": [
+            "musicals",
+            "theater",
+            "songs",
+            "lyrics",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c397cc59eab6f950d95",
+        "correctAnswer": "The Who",
+        "incorrectAnswers": [
+            "Deep Purple",
+            "Travis",
+            "Spandau Ballet"
+        ],
+        "question": {
+            "text": "Which band includes 'Keith Moon'?"
+        },
+        "tags": [
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "6477bb12550bc819ad646b55",
+        "correctAnswer": "Rihanna",
+        "incorrectAnswers": [
+            "Beyonce",
+            "Adele",
+            "Lady Gaga"
+        ],
+        "question": {
+            "text": "Who found a hit with Calvin Harris with the song 'We Found Love'?"
+        },
+        "tags": [
+            "music",
+            "songs"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c357cc59eab6f94fd70",
+        "correctAnswer": "Cher",
+        "incorrectAnswers": [
+            "Lady Gaga",
+            "Sia",
+            "Madonna"
+        ],
+        "question": {
+            "text": "Whose Real Name Is 'Cherilyn Sarkisian La Pier'?"
+        },
+        "tags": [
+            "pseudonyms",
+            "people",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "easy",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "6463394601d576cfac3aa32b",
+        "correctAnswer": "Jailhouse Rock",
+        "incorrectAnswers": [
+            "All Shook Up",
+            "Hound Dog",
+            "Love Me Tender"
+        ],
+        "question": {
+            "text": "Which Elvis song has the lyrics 'Everybody in the whole cell block was dancin' to the ...'?"
+        },
+        "tags": [
+            "songs",
+            "lyrics",
+            "music",
+            "elvis_presley"
+        ],
+        "type": "text_choice",
+        "difficulty": "easy",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c387cc59eab6f950b98",
+        "correctAnswer": "Slayer",
+        "incorrectAnswers": [
+            "MercyMe",
+            "Three 6 Mafia",
+            "The Velvet Underground"
+        ],
+        "question": {
+            "text": "Which American thrash metal band released the studio album 'Divine Intervention'?"
+        },
+        "tags": [
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c397cc59eab6f950c17",
+        "correctAnswer": "Nirvana",
+        "incorrectAnswers": [
+            "The Velvet Underground",
+            "Pearl Jam",
+            "Metallica"
+        ],
+        "question": {
+            "text": "Which American rock band released the song 'Smells Like Teen Spirit'?"
+        },
+        "tags": [
+            "general_knowledge",
+            "rock_music",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "easy",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c347cc59eab6f94fb9e",
+        "correctAnswer": "\"Rapper's Delight\" by Sugarhill Gang",
+        "incorrectAnswers": [
+            "\"Man! I Feel Like a Woman!\" by Shania Twain",
+            "\"You're So Vain\" by Carly Simon",
+            "\"Gimme More\" by Britney Spears"
+        ],
+        "question": {
+            "text": "Which song begins with the lyrics: \"I said a hip-hop, the hippie the hippie / To the hip, hip hop you don't stop / Rock it to the bang bang boogie / Say up jump the boogie to the rhythm of the boogie, the beat...\"?"
+        },
+        "tags": [
+            "rap_music",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c387cc59eab6f950b18",
+        "correctAnswer": "Spice Girls",
+        "incorrectAnswers": [
+            "Destiny's Child",
+            "The Pussycat Dolls",
+            "En Vogue"
+        ],
+        "question": {
+            "text": "Which band had Melanie Brown as one of its members?"
+        },
+        "tags": [
+            "music",
+            "bands"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c367cc59eab6f9503aa",
+        "correctAnswer": "Thriller",
+        "incorrectAnswers": [
+            "Brothers in Arms",
+            "Tango in the Night",
+            "The Joshua Tree"
+        ],
+        "question": {
+            "text": "Which eighties album, selling over 20 million copies, featured an appearance by the classic horror actor Vincent Price?"
+        },
+        "tags": [
+            "1980's",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c357cc59eab6f94ffd1",
+        "correctAnswer": "The Rolling Stones",
+        "incorrectAnswers": [
+            "Black",
+            "Sticky Fingers",
+            "Brown Sugar"
+        ],
+        "question": {
+            "text": "What was the title of the first album released by The Rolling Stones?"
+        },
+        "tags": [
+            "music_albums",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "6266bc6ab0e62e469cf43e93",
+        "correctAnswer": "Ukelele",
+        "incorrectAnswers": [
+            "Ocarina",
+            "Clarinet",
+            "Castanets"
+        ],
+        "question": {
+            "text": "Which of these is a stringed instrument?"
+        },
+        "tags": [
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "easy",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c397cc59eab6f950c86",
+        "correctAnswer": "Metallica",
+        "incorrectAnswers": [
+            "Alice Cooper",
+            "The Pussycat Dolls",
+            "Three 6 Mafia"
+        ],
+        "question": {
+            "text": "Which American heavy metal band released the song 'Enter Sandman'?"
+        },
+        "tags": [
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c357cc59eab6f94fddd",
+        "correctAnswer": "Barbra Streisand",
+        "incorrectAnswers": [
+            "Madonna",
+            "Hilary Duff",
+            "Aretha Franklin"
+        ],
+        "question": {
+            "text": "Which American singer starred in the film 'Hello, Dolly!'?"
+        },
+        "tags": [
+            "film",
+            "acting",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c397cc59eab6f950db2",
+        "correctAnswer": "The Rolling Stones",
+        "incorrectAnswers": [
+            "McFly",
+            "Delirious?",
+            "Depeche Mode"
+        ],
+        "question": {
+            "text": "Which band was Charlie Watts a member of?"
+        },
+        "tags": [
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c357cc59eab6f94fee8",
+        "correctAnswer": "David Bowie",
+        "incorrectAnswers": [
+            "Eric Clapton",
+            "Madonna",
+            "Mika"
+        ],
+        "question": {
+            "text": "Which British musician performed under the alter ego 'Ziggy Stardust'?"
+        },
+        "tags": [
+            "pseudonyms",
+            "people",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "622a1c397cc59eab6f950d8f",
+        "correctAnswer": "Red Hot Chili Peppers",
+        "incorrectAnswers": [
+            "The Monkees",
+            "Black Flag",
+            "Journey"
+        ],
+        "question": {
+            "text": "Which band is John Frusciante a part of?"
+        },
+        "tags": [
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "hard",
+        "regions": [],
+        "isNiche": false
+    },
+    {
+        "category": "music",
+        "id": "6477ba5c550bc819ad646a8a",
+        "correctAnswer": "David Bowie",
+        "incorrectAnswers": [
+            "Elton John",
+            "Freddie Mercury",
+            "Jim Morrison"
+        ],
+        "question": {
+            "text": "Which musician wrote the lyrics 'Am I sitting in a tin can? Far above the world, planet Earth is blue and there's nothing I can do'?"
+        },
+        "tags": [
+            "lyrics",
+            "songs",
+            "music"
+        ],
+        "type": "text_choice",
+        "difficulty": "medium",
+        "regions": [],
+        "isNiche": false
+    }
+]

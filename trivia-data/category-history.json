@@ -1,0 +1,1105 @@
+[
+	{
+		"category": "history",
+		"id": "639898405c9a75021f31046b",
+		"correctAnswer": "Japan",
+		"incorrectAnswers": [
+			"Germany",
+			"Italy",
+			"Russia"
+		],
+		"question": {
+			"text": "Which country declared war on the US after the attack on Pearl Harbor?"
+		},
+		"tags": [
+			"history",
+			"world_war_2",
+			"wars"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f9518ca",
+		"correctAnswer": "India",
+		"incorrectAnswers": [
+			"Thailand",
+			"Persia",
+			"Turkey"
+		],
+		"question": {
+			"text": "What was the most Eastern land in Alexander The Great's command at his peak?"
+		},
+		"tags": [
+			"ancient_greece",
+			"leaders",
+			"the_ancient_world",
+			"empires",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "647f9de83a4302a71927164a",
+		"correctAnswer": "The Hudson",
+		"incorrectAnswers": [
+			"The Thames",
+			"The Amazon",
+			"The Mississippi"
+		],
+		"question": {
+			"text": "Onto which river did an Airbus A320  make an emergency landing in January 2009, with all 155 people onboard surviving?"
+		},
+		"tags": [
+			"aviation",
+			"rivers",
+			"history",
+			"00's"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c377cc59eab6f95042f",
+		"correctAnswer": "Concorde",
+		"incorrectAnswers": [
+			"The Channel Tunnel",
+			"Eurostar",
+			"An animal cloning plant"
+		],
+		"question": {
+			"text": "In 1962, for what did Britain and France sign an agreement to build together?"
+		},
+		"tags": [
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "62611fe54b176d54800e3d78",
+		"correctAnswer": "1945",
+		"incorrectAnswers": [
+			"1921",
+			"1880",
+			"1972"
+		],
+		"question": {
+			"text": "When did Alan Turing break the Enigma code?"
+		},
+		"tags": [
+			"events",
+			"technology",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3d7cc59eab6f951c50",
+		"correctAnswer": "Cleopatra",
+		"incorrectAnswers": [
+			"Imhotep",
+			"Tutankhamen",
+			"Ramesses"
+		],
+		"question": {
+			"text": "At the time of Julius Caesar, who was the ruler of Egypt?"
+		},
+		"tags": [
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "645c9f8742ea81e2554c5f41",
+		"correctAnswer": "Hawaii",
+		"incorrectAnswers": [
+			"Alaska",
+			"Puerto Rico",
+			"Guam"
+		],
+		"question": {
+			"text": "Which U.S. territory was attacked 18 years before it became a state in 1959?"
+		},
+		"tags": [
+			"usa",
+			"us_states",
+			"1950's"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "62611f7e4b176d54800e3d5d",
+		"correctAnswer": "1961",
+		"incorrectAnswers": [
+			"1947",
+			"1954",
+			"1968"
+		],
+		"question": {
+			"text": "In which year was the first human sent into space?"
+		},
+		"tags": [
+			"events",
+			"firsts",
+			"space_exploration",
+			"exploration",
+			"cold_war",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f95180b",
+		"correctAnswer": "Michael Crichton",
+		"incorrectAnswers": [
+			"Steven Spielberg",
+			"Stephen Chbosky",
+			"David Lynch"
+		],
+		"question": {
+			"text": "Which best selling American writer wrote and directed the sci-fi film Westworld?"
+		},
+		"tags": [
+			"film",
+			"science_fiction",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "62611fe24b176d54800e3d77",
+		"correctAnswer": "1927",
+		"incorrectAnswers": [
+			"1918",
+			"1936",
+			"1945"
+		],
+		"question": {
+			"text": "When was the first movie with sound?"
+		},
+		"tags": [
+			"events",
+			"firsts",
+			"film",
+			"inventions",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f951aa3",
+		"correctAnswer": "Australia",
+		"incorrectAnswers": [
+			"Canada",
+			"The United Kingdom",
+			"New Zealand"
+		],
+		"question": {
+			"text": "Of which country did Robert Menzies become Prime Minister in April 1939?"
+		},
+		"tags": [
+			"politics",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f951a36",
+		"correctAnswer": "The Trail of Tears",
+		"incorrectAnswers": [
+			"The Way of Woe",
+			"The Road of Ruin",
+			"The Path of Pain"
+		],
+		"question": {
+			"text": "What was the most famous relocation by the Cherokee native Americans known as?"
+		},
+		"tags": [
+			"usa",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f9519dd",
+		"correctAnswer": "Prohibition",
+		"incorrectAnswers": [
+			"Segregation",
+			"Slavery",
+			"British Rule"
+		],
+		"question": {
+			"text": "What came to an end in the United States in December 1933?"
+		},
+		"tags": [
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "62611f854b176d54800e3d5f",
+		"correctAnswer": "2015",
+		"incorrectAnswers": [
+			"2000",
+			"1993",
+			"2004"
+		],
+		"question": {
+			"text": "In which year was the creation of the first artificial heart?"
+		},
+		"tags": [
+			"events",
+			"inventions",
+			"medicine",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "6396edc26017b1e8e09020d1",
+		"correctAnswer": "Sir Rowland Hill",
+		"incorrectAnswers": [
+			"Sir Alan Sugar",
+			"Sir Thomas Moore",
+			"Sir Richard Stamp"
+		],
+		"question": {
+			"text": "Who invented the postage stamp, and is seen as the inventor of the modern postal system?"
+		},
+		"tags": [
+			"history",
+			"inventions",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c377cc59eab6f950447",
+		"correctAnswer": "Turkey",
+		"incorrectAnswers": [
+			"Italy",
+			"Russia",
+			"Spain"
+		],
+		"question": {
+			"text": "Germany's WWI allies were Austria-Hungary, Bulgaria, and ________."
+		},
+		"tags": [],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f9519b7",
+		"correctAnswer": "Washington D.C.",
+		"incorrectAnswers": [
+			"Atlanta",
+			"San Francisco",
+			"Denver"
+		],
+		"question": {
+			"text": "Which US City Did British Troops Invade and Burn In 1814?"
+		},
+		"tags": [
+			"usa",
+			"wars",
+			"cities",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "64626286ab138b829b81ea04",
+		"correctAnswer": "Liberia",
+		"incorrectAnswers": [
+			"Egypt",
+			"South Africa",
+			"Morocco"
+		],
+		"question": {
+			"text": "William Tolbert, who was killed in a 1980 coup, was the president of which African nation?"
+		},
+		"tags": [
+			"politics",
+			"government",
+			"assassinations",
+			"history",
+			"1980's"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f9518d8",
+		"correctAnswer": "The Holy Roman Empire",
+		"incorrectAnswers": [
+			"The Roman Empire",
+			"Napoleon's French Empire",
+			"The German Empire"
+		],
+		"question": {
+			"text": "What did Nazi Germany refer to as The First Reich?"
+		},
+		"tags": [
+			"world_war_2",
+			"germany",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f951a1a",
+		"correctAnswer": "Marie Antoinette",
+		"incorrectAnswers": [
+			"Eleanor of Aquitaine",
+			"Margaret of Provence",
+			"Maria Theresa"
+		],
+		"question": {
+			"text": "Which Queen of France was beheaded in 1793?"
+		},
+		"tags": [
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c367cc59eab6f95034b",
+		"correctAnswer": "Rommel",
+		"incorrectAnswers": [
+			"MacArthur",
+			"Montgomery",
+			"Zhukov"
+		],
+		"question": {
+			"text": "Which WWII general was nicknamed 'The Desert Fox'?"
+		},
+		"tags": [
+			"world_war_2",
+			"people",
+			"wars",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f9519b3",
+		"correctAnswer": "Belize",
+		"incorrectAnswers": [
+			"Barbados",
+			"Guatemala",
+			"Jamaica"
+		],
+		"question": {
+			"text": "What did British Honduras change its name to in 1973?"
+		},
+		"tags": [
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c367cc59eab6f95032d",
+		"correctAnswer": "John Adams",
+		"incorrectAnswers": [
+			"George Washington",
+			"Abraham Lincoln",
+			"Thomas Jefferson"
+		],
+		"question": {
+			"text": "Who Was The First US President To Take Up Residence In The Whitehouse?"
+		},
+		"tags": [
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "639ae2de929b90846f2fc8be",
+		"correctAnswer": "Blót",
+		"incorrectAnswers": [
+			"Flägen",
+			"Midsommar",
+			"Odinskón"
+		],
+		"question": {
+			"text": "What is the name of the Viking practice of sacrificing prisoners to their gods?"
+		},
+		"tags": [
+			"history",
+			"vikings",
+			"traditions"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "639ae34d929b90846f2fc8c3",
+		"correctAnswer": "The Triple Alliance",
+		"incorrectAnswers": [
+			"The Tenochca Empire",
+			"The Empire of the Sun",
+			"The Toltec Empire"
+		],
+		"question": {
+			"text": "What was another name for the Aztec Empire?"
+		},
+		"tags": [
+			"history",
+			"aztecs",
+			"empires",
+			"names"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f9518d1",
+		"correctAnswer": "Guillotine",
+		"incorrectAnswers": [
+			"Firing Squad",
+			"Fire",
+			"Dogs"
+		],
+		"question": {
+			"text": "What was the instrument of execution during the \"Reign of Terror\"?"
+		},
+		"tags": [
+			"france",
+			"1700's",
+			"revolutions",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c367cc59eab6f9503fb",
+		"correctAnswer": "Chicago",
+		"incorrectAnswers": [
+			"Denver",
+			"Dallas",
+			"Seattle"
+		],
+		"question": {
+			"text": "The St. Valentine's Day massacre took place in this which city? "
+		},
+		"tags": [
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "62611fc74b176d54800e3d70",
+		"correctAnswer": "1989",
+		"incorrectAnswers": [
+			"1984",
+			"1994",
+			"1999"
+		],
+		"question": {
+			"text": "When did the scientist Tim Berners-Lee invent the World Wide Web?"
+		},
+		"tags": [
+			"events",
+			"the_internet",
+			"technology",
+			"inventions",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f951a6d",
+		"correctAnswer": "Laika",
+		"incorrectAnswers": [
+			"Albert",
+			"Pirouette",
+			"Querida"
+		],
+		"question": {
+			"text": "What was the name of the first animal (a dog) to orbit the earth?"
+		},
+		"tags": [
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c367cc59eab6f950321",
+		"correctAnswer": "Hannibal",
+		"incorrectAnswers": [
+			"Spartacus",
+			"Arminius",
+			"Brennus"
+		],
+		"question": {
+			"text": "Who was the most famous leader of the Carthaginians?"
+		},
+		"tags": [
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f951803",
+		"correctAnswer": "Ming",
+		"incorrectAnswers": [
+			"Tang",
+			"Qing",
+			"Wu"
+		],
+		"question": {
+			"text": "Which dynasty ruled China from 1368- to 1644?"
+		},
+		"tags": [
+			"china",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3d7cc59eab6f951c15",
+		"correctAnswer": "Midway",
+		"incorrectAnswers": [
+			"Iwo Jima",
+			"Pearl Harbour",
+			"Okinawa"
+		],
+		"question": {
+			"text": "In which WWII battle were four Japanese carriers destroyed?"
+		},
+		"tags": [
+			"battles",
+			"world_war_2",
+			"japan",
+			"usa",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3d7cc59eab6f951c40",
+		"correctAnswer": "The Red Baron",
+		"incorrectAnswers": [
+			"The Blue Baron",
+			"The Yellow Baron",
+			"The Black Baron"
+		],
+		"question": {
+			"text": "By what name was Baron Manfred von Richthofen better known?"
+		},
+		"tags": [
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f951ac8",
+		"correctAnswer": "Van Morrison",
+		"incorrectAnswers": [
+			"Cat Stevens",
+			"David Bowie",
+			"Bob Dylan"
+		],
+		"question": {
+			"text": "'Moondance' was a hit for which male singer?"
+		},
+		"tags": [
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c347cc59eab6f94f9ae",
+		"correctAnswer": "Mary I",
+		"incorrectAnswers": [
+			"Mary II",
+			"Richard III",
+			"Henry I"
+		],
+		"question": {
+			"text": "Who was the monarch of England during the time period 1553-1558?"
+		},
+		"tags": [
+			"uk",
+			"middle_ages",
+			"medieval",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f951822",
+		"correctAnswer": "Apollo 11",
+		"incorrectAnswers": [
+			"Apollo 1",
+			"Apollo 3",
+			"Apollo 9"
+		],
+		"question": {
+			"text": "Which Apollo space mission put the first people on the moon?"
+		},
+		"tags": [
+			"history",
+			"space_exploration",
+			"space",
+			"events"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3b7cc59eab6f9516fa",
+		"correctAnswer": "Catharine of Aragon",
+		"incorrectAnswers": [
+			"Anne Boleyn",
+			"Jane Seymour",
+			"Mary, Queen of Scots "
+		],
+		"question": {
+			"text": "Who did King Henry VIII marry when he was 18?"
+		},
+		"tags": [
+			"history",
+			"medieval",
+			"middle_ages",
+			"people"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f951a54",
+		"correctAnswer": "Nero",
+		"incorrectAnswers": [
+			"Claudius",
+			"Augustus",
+			"Marcus Aurelius"
+		],
+		"question": {
+			"text": "The Colosseum received its name not for its size, but for a colossal statue of which Emperor that stood close by?"
+		},
+		"tags": [
+			"romans",
+			"tourist_attractions",
+			"italy",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c377cc59eab6f950442",
+		"correctAnswer": "Aristotle",
+		"incorrectAnswers": [
+			"Plato",
+			"Socrates",
+			"Diogenes"
+		],
+		"question": {
+			"text": "Who taught Alexander the Great? "
+		},
+		"tags": [
+			"ancient_greece",
+			"the_ancient_world",
+			"classics",
+			"philosophy",
+			"people",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "62611fd8014f58b5fc1a3fd1",
+		"correctAnswer": "1996",
+		"incorrectAnswers": [
+			"1986",
+			"1991",
+			"2001"
+		],
+		"question": {
+			"text": "In which year was a mammal first cloned?"
+		},
+		"tags": [
+			"events",
+			"firsts",
+			"animals",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "6471bcf37206d7c314606f68",
+		"correctAnswer": "Nicholas II",
+		"incorrectAnswers": [
+			"Alexander III",
+			"Peter III",
+			"Ivan IV"
+		],
+		"question": {
+			"text": "Who was crowned Tsar of Russia in 1896?"
+		},
+		"tags": [
+			"people",
+			"monarchs",
+			"russia",
+			"history",
+			"revolutions"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c377cc59eab6f950439",
+		"correctAnswer": "Nine",
+		"incorrectAnswers": [
+			"One",
+			"Two",
+			"Six"
+		],
+		"question": {
+			"text": "How Many Crusades Were There?"
+		},
+		"tags": [
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "63a039b2c7d86251f9b65ca1",
+		"correctAnswer": "Pennsylvania",
+		"incorrectAnswers": [
+			"Virginia",
+			"Maryland",
+			"New York"
+		],
+		"question": {
+			"text": "In which US State was the site of the 1863 Battle of Gettysburg?"
+		},
+		"tags": [
+			"history",
+			"usa",
+			"american_civil_war",
+			"wars",
+			"1800's"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "647638d1f05ea6d6f587a154",
+		"correctAnswer": "Germany",
+		"incorrectAnswers": [
+			"France",
+			"Spain",
+			"Italy"
+		],
+		"question": {
+			"text": "During World War 2, which country was home to the White Rose, a group of student rebels fighting against fascism?"
+		},
+		"tags": [
+			"history",
+			"world_war_2",
+			"politics"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "63e4c361106de6ffa7d4a7e4",
+		"correctAnswer": "Francis II",
+		"incorrectAnswers": [
+			"Charles V",
+			"Frederick III",
+			"Maximilian I"
+		],
+		"question": {
+			"text": "Who was the last ruler of the Holy Roman Empire?"
+		},
+		"tags": [
+			"history",
+			"holy_roman_empire",
+			"leaders"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f9518c0",
+		"correctAnswer": "Spirit of St Louis",
+		"incorrectAnswers": [
+			"Heart of Houston",
+			"Body of Baltimore",
+			"Soul of Seattle"
+		],
+		"question": {
+			"text": "What was the name of Charles Lindbergh's plane in which he completed the first non-stop solo trans-Atlantic flight?"
+		},
+		"tags": [
+			"firsts",
+			"exploration",
+			"technology",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f9517b2",
+		"correctAnswer": "Winston Churchill",
+		"incorrectAnswers": [
+			"Clement Atlee",
+			"Tony Blair",
+			"Neville Chamberlain"
+		],
+		"question": {
+			"text": "Which former British prime minister returned to power in 1951?"
+		},
+		"tags": [
+			"uk",
+			"politics",
+			"history",
+			"leaders"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "63a039cac7d86251f9b65cb5",
+		"correctAnswer": "Abraham Lincoln",
+		"incorrectAnswers": [
+			"John Adams",
+			"Thomas Jefferson",
+			"Andrew Johnson"
+		],
+		"question": {
+			"text": "Which president signed the Emancipation Proclamation?"
+		},
+		"tags": [
+			"history",
+			"usa",
+			"presidents"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c3c7cc59eab6f951b02",
+		"correctAnswer": "Memphis",
+		"incorrectAnswers": [
+			"Knoxville",
+			"Nashville",
+			"Dallas"
+		],
+		"question": {
+			"text": "In which US City was Martin Luther King assassinated in 1968?"
+		},
+		"tags": [
+			"people",
+			"usa",
+			"1960's",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "history",
+		"id": "622a1c367cc59eab6f9503f2",
+		"correctAnswer": "Rome",
+		"incorrectAnswers": [
+			"Athens",
+			"Beijing",
+			"Bagdhad"
+		],
+		"question": {
+			"text": "What city was founded in 753 BC?"
+		},
+		"tags": [
+			"cities",
+			"the_ancient_world",
+			"history"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	}
+]

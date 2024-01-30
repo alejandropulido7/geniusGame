@@ -1,0 +1,1063 @@
+[
+	{
+		"category": "general_knowledge",
+		"id": "64824ee57778562fd76a96a7",
+		"correctAnswer": "92",
+		"incorrectAnswers": [
+			"90",
+			"89",
+			"91"
+		],
+		"question": {
+			"text": "What is the total number of days in March, April, and May combined?"
+		},
+		"tags": [
+			"numbers",
+			"arithmetic"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "63a03977c7d86251f9b65c63",
+		"correctAnswer": "3",
+		"incorrectAnswers": [
+			"1",
+			"2",
+			"4"
+		],
+		"question": {
+			"text": "In the nursery rhyme Baa Baa Black Sheep, how many bags of wool does the sheep have?"
+		},
+		"tags": [
+			"arts_and_literature",
+			"nursery_rhymes"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c367cc59eab6f950323",
+		"correctAnswer": "Charles Manson",
+		"incorrectAnswers": [
+			"Ed Gein",
+			"Ted Bundy",
+			"Jim Jones"
+		],
+		"question": {
+			"text": "Who was the man convicted of masterminding the 1969 LaBianca-Tate murders?"
+		},
+		"tags": [
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "64a32df9fc63594e30247823",
+		"correctAnswer": "A kiln",
+		"incorrectAnswers": [
+			"An inferno",
+			"A furnace",
+			"A forge"
+		],
+		"question": {
+			"text": "What is the name of the type of oven used to make pottery?"
+		},
+		"tags": [
+			"arts_and_literature",
+			"ceramics"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c377cc59eab6f95044e",
+		"correctAnswer": "His System Of Wind Force Indicators",
+		"incorrectAnswers": [
+			"Being the first person to circumnavigate the globe alone",
+			"Discovering Hawaii",
+			"Surviving adrift at sea for 2 weeks"
+		],
+		"question": {
+			"text": "For what is the eighteenth and nineteenth century sailor Sir Francis Beaufort best remembered?"
+		},
+		"tags": [
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6355b7e4e8b368eed3a68234",
+		"correctAnswer": "plosive",
+		"incorrectAnswers": [
+			"nasal",
+			"approximant",
+			"fricative"
+		],
+		"question": {
+			"text": "In phonetics, the b in 'boat' is an example of what kind of sound?"
+		},
+		"tags": [
+			"language",
+			"linguistics",
+			"general_knowledge",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6355b7ebe8b368eed3a68237",
+		"correctAnswer": "The k in 'sock'",
+		"incorrectAnswers": [
+			"The m in 'mother'",
+			"The f in 'fish'",
+			"The n in 'no'"
+		],
+		"question": {
+			"text": "In phonetics, which of these is an example of a plosive sound?"
+		},
+		"tags": [
+			"language",
+			"linguistics",
+			"general_knowledge",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c377cc59eab6f950431",
+		"correctAnswer": "Pelee",
+		"incorrectAnswers": [
+			"Krakatoa",
+			"Vesuvias",
+			"Mt St Helen's"
+		],
+		"question": {
+			"text": "In 1902 this volcano erupted, killing 30,000"
+		},
+		"tags": [
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "649b45ba828109028d236240",
+		"correctAnswer": "Anger",
+		"incorrectAnswers": [
+			"Happiness",
+			"Sadness",
+			"Fear"
+		],
+		"question": {
+			"text": "If your dander is up, what emotion are you feeling?"
+		},
+		"tags": [
+			"phrases"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c357cc59eab6f94fc87",
+		"correctAnswer": "Erf",
+		"incorrectAnswers": [
+			"Billingsgate",
+			"Taradiddle",
+			"Blatherskite"
+		],
+		"question": {
+			"text": "Which word is defined as 'a plot of land'?"
+		},
+		"tags": [
+			"words",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c357cc59eab6f94fc69",
+		"correctAnswer": "Meldrop",
+		"incorrectAnswers": [
+			"Agastopia",
+			"Blatherskite",
+			"Tittynope"
+		],
+		"question": {
+			"text": "Which word is defined as 'A drop of mucus at the nose, whether produced by cold or otherwise'?"
+		},
+		"tags": [
+			"words",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "648889135dba6c873ef650c3",
+		"correctAnswer": "Grand prix",
+		"incorrectAnswers": [
+			"Bon appétit",
+			"Vive la France",
+			"C'est la vie"
+		],
+		"question": {
+			"text": "What is the French term for a big prize?"
+		},
+		"tags": [
+			"french",
+			"language"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6355b7e9e8b368eed3a68236",
+		"correctAnswer": "The d in 'door'",
+		"incorrectAnswers": [
+			"The y in 'yellow'",
+			"The r in 'red'",
+			"The z in 'zoo'"
+		],
+		"question": {
+			"text": "In phonetics, which of these is an example of a plosive sound?"
+		},
+		"tags": [
+			"language",
+			"linguistics",
+			"general_knowledge",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c357cc59eab6f94fe32",
+		"correctAnswer": "Euro",
+		"incorrectAnswers": [
+			"Peso",
+			"Lira",
+			"Dollar"
+		],
+		"question": {
+			"text": "What is the basic unit of currency for San Marino?"
+		},
+		"tags": [
+			"currency",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c357cc59eab6f94fe2b",
+		"correctAnswer": "Lira",
+		"incorrectAnswers": [
+			"Dinar",
+			"Dollar",
+			"Rial"
+		],
+		"question": {
+			"text": "What is the basic unit of currency for Turkey?"
+		},
+		"tags": [
+			"currency",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c3a7cc59eab6f950ffd",
+		"correctAnswer": "The Hoover Dam",
+		"incorrectAnswers": [
+			"The Three Gorges Dam",
+			"The Oroville Dam",
+			"The Theodore Roosevelt Dam"
+		],
+		"question": {
+			"text": "Which Dam Harnesses The Colorado River"
+		},
+		"tags": [
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c367cc59eab6f95017e",
+		"correctAnswer": "Mrs Malaprop",
+		"incorrectAnswers": [
+			"Mrs Uninten",
+			"Mrs Misparl",
+			"Mrs Anagob"
+		],
+		"question": {
+			"text": "Which character invariably misused english words?"
+		},
+		"tags": [
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c357cc59eab6f94fc8b",
+		"correctAnswer": "Doodle Sack",
+		"incorrectAnswers": [
+			"Fipple",
+			"Tittynope",
+			"Quire"
+		],
+		"question": {
+			"text": "Which word is defined as 'Old English word for bagpipe'?"
+		},
+		"tags": [
+			"words",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c3d7cc59eab6f951c3a",
+		"correctAnswer": "Testicles",
+		"incorrectAnswers": [
+			"Eyes",
+			"Fists",
+			"Arms"
+		],
+		"question": {
+			"text": "'Christmas Crackers' is cockney rhyming slang for which body part?"
+		},
+		"tags": [
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6488889b5dba6c873ef65060",
+		"correctAnswer": "The spin",
+		"incorrectAnswers": [
+			"The tumble",
+			"The shake",
+			"The toss"
+		],
+		"question": {
+			"text": "What is the name of the cycle in a washing machine that dries clothes?"
+		},
+		"tags": [
+			"general_knowledge",
+			"words"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c377cc59eab6f95040e",
+		"correctAnswer": "Michael Collins",
+		"incorrectAnswers": [
+			"David Beckett",
+			"Sam Norman",
+			"Phillip Normandy"
+		],
+		"question": {
+			"text": "Neil Armstrong And Buzz Aldrin Landed On The Moon But Who Stayed Behind In The Command Capsule?"
+		},
+		"tags": [
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "645c9fc142ea81e2554c5f61",
+		"correctAnswer": "Odometer",
+		"incorrectAnswers": [
+			"Fuel gauge",
+			"Tachometer",
+			"Speedometer"
+		],
+		"question": {
+			"text": "Which dashboard feature measures the distance travelled in a car?"
+		},
+		"tags": [
+			"cars",
+			"motoring"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6471e4297206d7c314606f6e",
+		"correctAnswer": "A caw",
+		"incorrectAnswers": [
+			"A blint",
+			"A tweet",
+			"A chirp"
+		],
+		"question": {
+			"text": "What word is for the harsh call of a crow or raven?"
+		},
+		"tags": [
+			"birds",
+			"sounds",
+			"animals",
+			"words"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c357cc59eab6f94fc97",
+		"correctAnswer": "Deipnophobia",
+		"incorrectAnswers": [
+			"Cacophony",
+			"Cabotage",
+			"Futz"
+		],
+		"question": {
+			"text": "Which word is defined as 'a morbid fear of dinner parties'?"
+		},
+		"tags": [
+			"words",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c357cc59eab6f94fc4e",
+		"correctAnswer": "Zoanthropy",
+		"incorrectAnswers": [
+			"Bobsy-die",
+			"Agastopia",
+			"Halfpace"
+		],
+		"question": {
+			"text": "Which word is defined as 'delusion of a person who believes himself changed into an animal'?"
+		},
+		"tags": [
+			"words",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c367cc59eab6f9503e2",
+		"correctAnswer": "Warlock",
+		"incorrectAnswers": [
+			"Mage",
+			"Magus",
+			"Magician"
+		],
+		"question": {
+			"text": "What Is A Male Witch Known As"
+		},
+		"tags": [
+			"words",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "647129af64c916f9c84814bc",
+		"correctAnswer": "bounced",
+		"incorrectAnswers": [
+			"delayed",
+			"rejected",
+			"invalid"
+		],
+		"question": {
+			"text": "What is the expression used to describe a check that failed to clear due to insufficient funds?"
+		},
+		"tags": [
+			"words",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c357cc59eab6f94fe4f",
+		"correctAnswer": "The Netherlands ",
+		"incorrectAnswers": [
+			"Belgium",
+			"Sweden",
+			"Spain"
+		],
+		"question": {
+			"text": "KLM Is The National Airline Of Which Country?"
+		},
+		"tags": [
+			"business"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c397cc59eab6f950fb3",
+		"correctAnswer": "Apple",
+		"incorrectAnswers": [
+			"Microsoft",
+			"Google",
+			"Linux"
+		],
+		"question": {
+			"text": "Who Make Macintosh Computers?"
+		},
+		"tags": [
+			"technology",
+			"business",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "645b69d8f09106226db23569",
+		"correctAnswer": "Library of Congress",
+		"incorrectAnswers": [
+			"The British Library",
+			"The New York Public Library",
+			"The Vatican Library"
+		],
+		"question": {
+			"text": "What is the world's largest library, with over 115 million volumes on 532 miles of bookshelves?"
+		},
+		"tags": [
+			"buildings"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c357cc59eab6f94fc65",
+		"correctAnswer": "Pauciloquent",
+		"incorrectAnswers": [
+			"Grommet",
+			"Lackadaisical",
+			"Borborygmus"
+		],
+		"question": {
+			"text": "Which word is defined as 'uttering few words; brief in speech'?"
+		},
+		"tags": [
+			"words",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6505704a7a97013de78b5575",
+		"correctAnswer": "Indian summer",
+		"incorrectAnswers": [
+			"Mercury summer",
+			"Roman summer",
+			"Alaska summer"
+		],
+		"question": {
+			"text": "What is the name given to a heat wave that occurs in autumn?"
+		},
+		"tags": [
+			"meteorology",
+			"weather"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "64730798cf09068746f6377c",
+		"correctAnswer": "Abbreviate",
+		"incorrectAnswers": [
+			"Abolish",
+			"Abduct",
+			"Abhor"
+		],
+		"question": {
+			"text": "What is the verb that means to shorten a word or phrase by omitting letters?"
+		},
+		"tags": [
+			"vocabulary",
+			"grammar",
+			"words",
+			"language",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6355b7f5e8b368eed3a6823b",
+		"correctAnswer": "nasal",
+		"incorrectAnswers": [
+			"fricative",
+			"affricative",
+			"plosive"
+		],
+		"question": {
+			"text": "In phonetics, the m in 'mother' is an example of what kind of sound?"
+		},
+		"tags": [
+			"language",
+			"linguistics",
+			"general_knowledge",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6239f80e9129041bf3925cc2",
+		"correctAnswer": "Foxtrot",
+		"incorrectAnswers": [
+			"Forget",
+			"Fail",
+			"Felicity"
+		],
+		"question": {
+			"text": "What word is used in the NATO Phonetic Alphabet for the letter F?"
+		},
+		"tags": [
+			"words",
+			"general_knowledge",
+			"language"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6239f8269129041bf3925ccb",
+		"correctAnswer": "Oscar",
+		"incorrectAnswers": [
+			"Ordinary",
+			"Otter",
+			"Ombudsman"
+		],
+		"question": {
+			"text": "What word is used in the NATO Phonetic Alphabet for the letter O?"
+		},
+		"tags": [
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "648888d35dba6c873ef6507f",
+		"correctAnswer": "Crosshairs",
+		"incorrectAnswers": [
+			"Target",
+			"Aiming point",
+			"Scope lines"
+		],
+		"question": {
+			"text": "What is the technical name for the pair of intersecting lines in a firearm scope?"
+		},
+		"tags": [
+			"weapons",
+			"words",
+			"military"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c357cc59eab6f94fc82",
+		"correctAnswer": "Flummox",
+		"incorrectAnswers": [
+			"Argle-bargle",
+			"Kakorrhaphiophobia",
+			"Pauciloquent"
+		],
+		"question": {
+			"text": "Which word is defined as 'to perplex someone greatly'?"
+		},
+		"tags": [
+			"words",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "645c9fc142ea81e2554c5f65",
+		"correctAnswer": "Breathing",
+		"incorrectAnswers": [
+			"Pushing",
+			"Emotions",
+			"Noise"
+		],
+		"question": {
+			"text": "What does psychoprophylaxis teach a mother to control and relax during pregnancy and childbirth?"
+		},
+		"tags": [
+			"medicine"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "64720cd33bbb58c31f411cc1",
+		"correctAnswer": "Heteronyms",
+		"incorrectAnswers": [
+			"Homonyms",
+			"Synonyms",
+			"Antonyms"
+		],
+		"question": {
+			"text": "Which term refers to words that are spelled the same but have different sounds and neanings?"
+		},
+		"tags": [
+			"words",
+			"language",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c357cc59eab6f94fc61",
+		"correctAnswer": "Ratoon",
+		"incorrectAnswers": [
+			"Curmudgeon",
+			"Tittynope",
+			"Fudgel"
+		],
+		"question": {
+			"text": "Which word is defined as 'a small shoot growing from the root of a plant'?"
+		},
+		"tags": [
+			"words",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6496ac48e831b1ab5aa11146",
+		"correctAnswer": "Lapidary",
+		"incorrectAnswers": [
+			"Byzantine",
+			"Iconography",
+			"Philately"
+		],
+		"question": {
+			"text": "What is the term for the polishing and cutting of stones and gems?"
+		},
+		"tags": [
+			"jewelry",
+			"words"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "645ab32d158db1bd1779f1b4",
+		"correctAnswer": "DNR (do not resuscitate)",
+		"incorrectAnswers": [
+			"CPR (cardiopulmonary resuscitation)",
+			"ALS (advanced life support)",
+			"SOS (save our souls)"
+		],
+		"question": {
+			"text": "What is the 3-letter order which, when given by a patient, calls for no chest compressions?"
+		},
+		"tags": [
+			"medicine",
+			"healthcare",
+			"initials",
+			"words"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "645cb0ee602ff42ca52fb413",
+		"correctAnswer": "Cobra",
+		"incorrectAnswers": [
+			"Mustang",
+			"Charger",
+			"Thunderbird"
+		],
+		"question": {
+			"text": "Which iconic sports car designed by Carroll Shelby was produced during the 1960s?"
+		},
+		"tags": [
+			"cars",
+			"motoring",
+			"1960's"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6239f8239129041bf3925cca",
+		"correctAnswer": "November",
+		"incorrectAnswers": [
+			"Naughty",
+			"North",
+			"Neat"
+		],
+		"question": {
+			"text": "What word is used in the NATO Phonetic Alphabet for the letter N?"
+		},
+		"tags": [
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "645c9f6b42ea81e2554c5f2a",
+		"correctAnswer": "Oklahoma",
+		"incorrectAnswers": [
+			"Texas",
+			"California",
+			"New York"
+		],
+		"question": {
+			"text": "Which is the only US state whose official song was written for a Broadway musical?"
+		},
+		"tags": [
+			"us_states",
+			"musicals"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "646089cade964ebc39016c75",
+		"correctAnswer": "Dachshund",
+		"incorrectAnswers": [
+			"German Shepherd",
+			"Doberman Pinscher",
+			"Rottweiler"
+		],
+		"question": {
+			"text": "Which German dog breed features short legs and a long body?"
+		},
+		"tags": [
+			"dogs",
+			"animals"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6355b7dbe8b368eed3a68230",
+		"correctAnswer": "The th in 'think'",
+		"incorrectAnswers": [
+			"The ch in 'cheese'",
+			"The j in 'juice'",
+			"The t in 'train'"
+		],
+		"question": {
+			"text": "In phonetics, which of these is an example of a fricative sound?"
+		},
+		"tags": [
+			"language",
+			"linguistics",
+			"general_knowledge",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "6355b7f3e8b368eed3a6823a",
+		"correctAnswer": "affricative",
+		"incorrectAnswers": [
+			"nasal",
+			"plosive",
+			"approximant"
+		],
+		"question": {
+			"text": "In phonetics, the j in 'juice' is an example of what kind of sound?"
+		},
+		"tags": [
+			"language",
+			"linguistics",
+			"general_knowledge",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "general_knowledge",
+		"id": "622a1c3d7cc59eab6f951c67",
+		"correctAnswer": "12",
+		"incorrectAnswers": [
+			"11",
+			"10",
+			"9"
+		],
+		"question": {
+			"text": "According To The Christmas Song, How Many Drummers Drumming Were There?"
+		},
+		"tags": [
+			"christmas",
+			"general_knowledge"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	}
+]

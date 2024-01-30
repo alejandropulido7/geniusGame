@@ -1,0 +1,1062 @@
+[
+	{
+		"category": "science",
+		"id": "6242cb94d543524f1b19c93c",
+		"correctAnswer": "A flock",
+		"incorrectAnswers": [
+			"A cast",
+			"A plump",
+			"A kindle"
+		],
+		"question": {
+			"text": "What is the word for a group of sheep?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "62433403cfaae40c12961419",
+		"correctAnswer": "A Tadpole",
+		"incorrectAnswers": [
+			"A Calf",
+			"A Piglet",
+			"A Maggot"
+		],
+		"question": {
+			"text": "What would you call a baby frog?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c377cc59eab6f9504fc",
+		"correctAnswer": "weather",
+		"incorrectAnswers": [
+			"animal diseases",
+			"hair and scalp",
+			"human beings killing other human beings"
+		],
+		"question": {
+			"text": "What is Meteorology the study of?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "6477bacc550bc819ad646b0c",
+		"correctAnswer": "Gasket",
+		"incorrectAnswers": [
+			"Circuit",
+			"Fuse",
+			"Bolt"
+		],
+		"question": {
+			"text": "What is the name of the piece used to cover the intersection between two surfaces, usually to prevent leaking?"
+		},
+		"tags": [
+			"engineering",
+			"words",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c377cc59eab6f950467",
+		"correctAnswer": "Viruses",
+		"incorrectAnswers": [
+			"Wine",
+			"Parasites",
+			"The therapeutic use of plants"
+		],
+		"question": {
+			"text": "What is Virology the study of?"
+		},
+		"tags": [
+			"words",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c3e7cc59eab6f95227e",
+		"correctAnswer": "Water",
+		"incorrectAnswers": [
+			"Oxygen",
+			"Salt",
+			"Wood"
+		],
+		"question": {
+			"text": "What is Hydrogen Hydroxide is more commonly known as?"
+		},
+		"tags": [
+			"science",
+			"chemistry",
+			"materials"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "63a0395bc7d86251f9b65c4b",
+		"correctAnswer": "Domain Name System",
+		"incorrectAnswers": [
+			"Data Network Server",
+			"Dynamic Network System",
+			"Data Name System"
+		],
+		"question": {
+			"text": "In computer networking, what does DNS stand for?"
+		},
+		"tags": [
+			"the_internet",
+			"technology",
+			"science",
+			"initials",
+			"computing"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "62433545cfaae40c12961497",
+		"correctAnswer": "A Pup",
+		"incorrectAnswers": [
+			"A Tadpole",
+			"A Codling",
+			"A Calf"
+		],
+		"question": {
+			"text": "What is the word for a young shark?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "62443779746187c5e7be9356",
+		"correctAnswer": "Iron Oxide",
+		"incorrectAnswers": [
+			"Magnesium sulphate heptahydrate",
+			"Calcium sulphate dihydrate",
+			"Potassium hydrogen tartrate"
+		],
+		"question": {
+			"text": "What chemical has the formula Fe2O3?"
+		},
+		"tags": [
+			"chemistry",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c3c7cc59eab6f9519d1",
+		"correctAnswer": "Red",
+		"incorrectAnswers": [
+			"Purple",
+			"Yellow",
+			"Blue"
+		],
+		"question": {
+			"text": "What Colour Are Holly Berries?"
+		},
+		"tags": [
+			"christmas",
+			"plants",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c377cc59eab6f950483",
+		"correctAnswer": "the ecological interrelationships among communities of organisms",
+		"incorrectAnswers": [
+			"demons",
+			"cells",
+			"vocal sounds"
+		],
+		"question": {
+			"text": "What is Synecology the study of?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "63e13a25106de6ffa7d4a7a1",
+		"correctAnswer": "Dodecagon",
+		"incorrectAnswers": [
+			"Octagon",
+			"Hexagon",
+			"Triangle"
+		],
+		"question": {
+			"text": "What is the name of a shape with twelve sides?"
+		},
+		"tags": [
+			"science",
+			"mathematics",
+			"shapes"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c377cc59eab6f950570",
+		"correctAnswer": "The characteristics of the skull",
+		"incorrectAnswers": [
+			"Mythological beings",
+			"Large machinery",
+			"Angels and Demons"
+		],
+		"question": {
+			"text": "What is Craniology the study of?"
+		},
+		"tags": [
+			"words",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "648889175dba6c873ef650de",
+		"correctAnswer": "Endangered species",
+		"incorrectAnswers": [
+			"Exotic species",
+			"Invasive species",
+			"Declining species"
+		],
+		"question": {
+			"text": "What is the term for animals that are at risk of becoming extinct?"
+		},
+		"tags": [
+			"biology",
+			"animals",
+			"nature",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c397cc59eab6f950fb5",
+		"correctAnswer": "Louis Bleriot",
+		"incorrectAnswers": [
+			"The Wright Brothers",
+			"Amelia Earhart",
+			"Glenn Curtiss"
+		],
+		"question": {
+			"text": "Who was the first to fly over the English Channel?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c3a7cc59eab6f95108f",
+		"correctAnswer": "Africa",
+		"incorrectAnswers": [
+			"Asia",
+			"Autralasia",
+			"North America"
+		],
+		"question": {
+			"text": "The small red deer is the only type of deer found on which continent? "
+		},
+		"tags": [
+			"biology",
+			"animals",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c3a7cc59eab6f95101e",
+		"correctAnswer": "Poisons",
+		"incorrectAnswers": [
+			"Radiation",
+			"Abstract Categorisation",
+			"Venomous Animals"
+		],
+		"question": {
+			"text": "What Is Toxicology The Study Of?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c3e7cc59eab6f95230c",
+		"correctAnswer": "Scurvy",
+		"incorrectAnswers": [
+			"Polio",
+			"Smallpox",
+			"Syphilis"
+		],
+		"question": {
+			"text": "What disease did sailors use to contract because of lack of Vitamin C? "
+		},
+		"tags": [
+			"medicine",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "63adbd6b04c68cc1e14b8e33",
+		"correctAnswer": "Sedimentary Rocks",
+		"incorrectAnswers": [
+			"Igneous Rocks",
+			"Metamorphic Rocks",
+			"Diamonds"
+		],
+		"question": {
+			"text": "What type of rocks contain fossils?"
+		},
+		"tags": [
+			"geology",
+			"science",
+			"paleontology"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c377cc59eab6f95056d",
+		"correctAnswer": "Mythical animals",
+		"incorrectAnswers": [
+			"Blackberries",
+			"Allergies",
+			"Flags"
+		],
+		"question": {
+			"text": "What is Cryptozoology the study of?"
+		},
+		"tags": [
+			"science",
+			"words"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c3a7cc59eab6f95100a",
+		"correctAnswer": "The Universe",
+		"incorrectAnswers": [
+			"The Milky Way",
+			"Andromeda",
+			"Infinity"
+		],
+		"question": {
+			"text": "What was created with the big bang?"
+		},
+		"tags": [
+			"physics",
+			"general_knowledge",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "6242cb09d543524f1b19c906",
+		"correctAnswer": "A drove",
+		"incorrectAnswers": [
+			"A covey",
+			"A murder",
+			"A sloth"
+		],
+		"question": {
+			"text": "What is the word for a group of cattle?"
+		},
+		"tags": [
+			"animals",
+			"words",
+			"biology"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c377cc59eab6f950521",
+		"correctAnswer": "Sacred texts",
+		"incorrectAnswers": [
+			"Ancient Egypt",
+			"Family Trees",
+			"Waves"
+		],
+		"question": {
+			"text": "What is Hierographology the study of?"
+		},
+		"tags": [
+			"words",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "63951efbe55fa75b149597b4",
+		"correctAnswer": "Ionization",
+		"incorrectAnswers": [
+			"Electionification",
+			"Molecularization",
+			"Atomification"
+		],
+		"question": {
+			"text": "What is the process by which an atom gains or loses charge by gaining or losing an electron?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c3a7cc59eab6f951048",
+		"correctAnswer": "Acidity Or Alkalinity",
+		"incorrectAnswers": [
+			"Radiation",
+			"Wind Speed",
+			"Gravity"
+		],
+		"question": {
+			"text": "What Is PH A Measure Of"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "6477bb12550bc819ad646b5e",
+		"correctAnswer": "Anemia",
+		"incorrectAnswers": [
+			"Diabetes",
+			"Cancer",
+			"Arthritis"
+		],
+		"question": {
+			"text": "What disease may be diagnosed by checking Vitamin B12 levels and is characterized by a lack of red blood cells?"
+		},
+		"tags": [
+			"medicine",
+			"health",
+			"disease",
+			"diseases",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "63e4c355106de6ffa7d4a7d6",
+		"correctAnswer": "Diplodocus",
+		"incorrectAnswers": [
+			"Triceratops",
+			"Velociraptor",
+			"Stegosaurus"
+		],
+		"question": {
+			"text": "Which of these dinosaur s is known for its enormous size, with a long neck and tail?"
+		},
+		"tags": [
+			"science",
+			"dinosaurs",
+			"nature"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c377cc59eab6f950484",
+		"correctAnswer": "study of the mouth and its diseases",
+		"incorrectAnswers": [
+			"music in society, usually non-western music",
+			"illness",
+			"embryos"
+		],
+		"question": {
+			"text": "What is Stomatology the study of?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c3a7cc59eab6f950fe6",
+		"correctAnswer": "Stainless Steel",
+		"incorrectAnswers": [
+			"Aluminium",
+			"Einsteinium",
+			"Cast Iron"
+		],
+		"question": {
+			"text": "Which metal was invented by British metallurgist Harold Brearley in 1912?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "645cb1627d263fd5097043c3",
+		"correctAnswer": "Mars",
+		"incorrectAnswers": [
+			"Venus",
+			"Mercury",
+			"Jupiter"
+		],
+		"question": {
+			"text": "Phobos is a moon of which planet in our solar system?"
+		},
+		"tags": [
+			"astronomy",
+			"the_solar_system",
+			"planets"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "63adbd6404c68cc1e14b8e2a",
+		"correctAnswer": "Willow Tree",
+		"incorrectAnswers": [
+			"Maple Tree",
+			"Oak Tree",
+			"Birch Tree"
+		],
+		"question": {
+			"text": "What type of tree is known for its 'weeping' shape?"
+		},
+		"tags": [
+			"science",
+			"trees",
+			"plants",
+			"nature"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "6243330ecfaae40c129613ba",
+		"correctAnswer": "A Doe",
+		"incorrectAnswers": [
+			"A Gander",
+			"A Jill",
+			"A Hen"
+		],
+		"question": {
+			"text": "What would you call a female antelope?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c377cc59eab6f9504bf",
+		"correctAnswer": "Algae",
+		"incorrectAnswers": [
+			"Bacteria",
+			"Viruses",
+			"Moss"
+		],
+		"question": {
+			"text": "What is Phycology the study of?"
+		},
+		"tags": [
+			"science",
+			"biology"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "645cb16b7d263fd5097043c9",
+		"correctAnswer": "A goose",
+		"incorrectAnswers": [
+			"A flamingo",
+			"A pelican",
+			"An ostrich"
+		],
+		"question": {
+			"text": "What type of bird is Hawaii's state bird, the Nene?"
+		},
+		"tags": [
+			"birds",
+			"symbols",
+			"animals",
+			"us_states"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "62443753746187c5e7be9347",
+		"correctAnswer": "Dolomite",
+		"incorrectAnswers": [
+			"Gypsum",
+			"Baking Soda",
+			"Marsh Gas"
+		],
+		"question": {
+			"text": "What is calcium magnesium carbonate commonly known as?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c377cc59eab6f95055d",
+		"correctAnswer": "Flies",
+		"incorrectAnswers": [
+			"Schematics",
+			"The interpretation of symbols",
+			"Ligaments"
+		],
+		"question": {
+			"text": "What is Dipterology the study of?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c377cc59eab6f9504ec",
+		"correctAnswer": "dreams",
+		"incorrectAnswers": [
+			"drug dosage",
+			"the interrelationship between an organism's physical functioning and its environment",
+			"crop circles"
+		],
+		"question": {
+			"text": "What is Oneirology the study of?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c377cc59eab6f9505ad",
+		"correctAnswer": "Medicating patients during surgery",
+		"incorrectAnswers": [
+			"Algae",
+			"Karyotypes",
+			"Spiders"
+		],
+		"question": {
+			"text": "What is Anesthesiology the study of?"
+		},
+		"tags": [
+			"science",
+			"words"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c3a7cc59eab6f950fed",
+		"correctAnswer": "Hippopotamus",
+		"incorrectAnswers": [
+			"Elephant",
+			"Rhinoceros",
+			"American Bison"
+		],
+		"question": {
+			"text": "Which Is The Second Heaviest Land Animal?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "6462621bab138b829b81e9c8",
+		"correctAnswer": "Gregor Mendel",
+		"incorrectAnswers": [
+			"Francis Galton",
+			"Charles Lyell",
+			"Sigmund Freud"
+		],
+		"question": {
+			"text": "What pioneer of genetics is known for his contemporary work with Darwin in the field of botany?"
+		},
+		"tags": [
+			"botany",
+			"genetics",
+			"people",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "63adbd7204c68cc1e14b8e3f",
+		"correctAnswer": "Mineraloid",
+		"incorrectAnswers": [
+			"Flotsam",
+			"Gemstone",
+			"Pseudomineral"
+		],
+		"question": {
+			"text": "What is the name given to a naturally occurring mineral-like substance that does not demonstrate crystallinity?"
+		},
+		"tags": [
+			"geology",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c3a7cc59eab6f951058",
+		"correctAnswer": "Chlorophyll",
+		"incorrectAnswers": [
+			"Nutrients",
+			"Grass",
+			"Oxygen"
+		],
+		"question": {
+			"text": "What gives leaves their colour ?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c377cc59eab6f950598",
+		"correctAnswer": "The influences of celestial bodies on earthly affairs",
+		"incorrectAnswers": [
+			"Friction at very small scale",
+			"The Sun",
+			"Men"
+		],
+		"question": {
+			"text": "What is astrology the study of?"
+		},
+		"tags": [
+			"words",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "64976c110752843c0d8aadb5",
+		"correctAnswer": "Pelvis",
+		"incorrectAnswers": [
+			"Spine",
+			"Skull",
+			"Rib cage"
+		],
+		"question": {
+			"text": "What part of your body is the ischium a part of?"
+		},
+		"tags": [
+			"biology",
+			"anatomy",
+			"medicine",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "6242caf0d543524f1b19c8fc",
+		"correctAnswer": "A shrewdness",
+		"incorrectAnswers": [
+			"A muster",
+			"A cete",
+			"A litter"
+		],
+		"question": {
+			"text": "What is the word for a group of apes?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "624437b9746187c5e7be936f",
+		"correctAnswer": "It is used in fertilizers, rocket propellants and fireworks.",
+		"incorrectAnswers": [
+			"It is used in baking to stabilize egg whites.",
+			"It is used as an ingredient in the production of glass, bricks, and ceramics.",
+			"It is a poisonous gas."
+		],
+		"question": {
+			"text": "What is the chemical potassium nitrate often used for?"
+		},
+		"tags": [
+			"chemistry",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "6242cbaad543524f1b19c945",
+		"correctAnswer": "A pack",
+		"incorrectAnswers": [
+			"A kindle",
+			"A flight",
+			"A plump"
+		],
+		"question": {
+			"text": "What is the word for a group of wolves?"
+		},
+		"tags": [
+			"animals",
+			"biology",
+			"general_knowledge",
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c3f7cc59eab6f952399",
+		"correctAnswer": "Petri dish",
+		"incorrectAnswers": [
+			"Bunson burner",
+			"Erlenmeyer flask",
+			"Graduated cylinder"
+		],
+		"question": {
+			"text": "What is the name for a shallow dish with a cover, used for science specimens?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "622a1c3a7cc59eab6f951036",
+		"correctAnswer": "Aminiotic Fluid",
+		"incorrectAnswers": [
+			"Birth Fluid",
+			"Placental Fluid",
+			"Grow Juice"
+		],
+		"question": {
+			"text": "What Is The Fluid Which Surrounds A Foetus Known As?"
+		},
+		"tags": [
+			"science"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "science",
+		"id": "63a03954c7d86251f9b65c42",
+		"correctAnswer": "Internet Protocol",
+		"incorrectAnswers": [
+			"Information Protocol",
+			"Internet Program",
+			"Internet Portal"
+		],
+		"question": {
+			"text": "In computer networking, what is meaning of the initials IP?"
+		},
+		"tags": [
+			"the_internet",
+			"technology",
+			"science",
+			"computing"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	}
+]

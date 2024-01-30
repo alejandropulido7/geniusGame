@@ -1,0 +1,1060 @@
+[
+	{
+		"category": "geography",
+		"id": "6237426ecb85f7ce9e949dcc",
+		"correctAnswer": "Khartoum",
+		"incorrectAnswers": [
+			"Nur-Sultan",
+			"Bratislava",
+			"Rabat"
+		],
+		"question": {
+			"text": "What is the capital city of Sudan?"
+		},
+		"tags": [
+			"africa",
+			"capital_cities",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "645cb0ee602ff42ca52fb41c",
+		"correctAnswer": "Ghana",
+		"incorrectAnswers": [
+			"Egypt",
+			"Kenya",
+			"Gabon"
+		],
+		"question": {
+			"text": "Which African country was once known as the Gold Coast and is located adjacent to the Ivory Coast?"
+		},
+		"tags": [
+			"africa",
+			"countries",
+			"history",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623735d2cfe13103f55eb571",
+		"correctAnswer": "Singapore",
+		"incorrectAnswers": [
+			"Senegal",
+			"Saint Vincent and the Grenadines",
+			"Guinea"
+		],
+		"question": {
+			"text": "Which region of the world uses '.sg' at the end of its web addresses?"
+		},
+		"tags": [
+			"the_internet",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "622a1c357cc59eab6f94fdeb",
+		"correctAnswer": "Nevada",
+		"incorrectAnswers": [
+			"Arizona",
+			"Colorado",
+			"Alaska"
+		],
+		"question": {
+			"text": "Which U.S. state has the least rainfall?"
+		},
+		"tags": [
+			"us_states",
+			"usa",
+			"meteorology",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "6237428ccb85f7ce9e949dd8",
+		"correctAnswer": "Dushanbe",
+		"incorrectAnswers": [
+			"Moscow",
+			"Vilnius",
+			"Antananarivo"
+		],
+		"question": {
+			"text": "What is the capital city of Tajikistan?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "626030354b176d54800e3d14",
+		"correctAnswer": "Morocco",
+		"incorrectAnswers": [
+			"Kenya",
+			"Sudan",
+			"Nigeria"
+		],
+		"question": {
+			"text": "Casablanca is a city in which country?"
+		},
+		"tags": [
+			"cities",
+			"africa",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623735aacfe13103f55eb556",
+		"correctAnswer": "Panama",
+		"incorrectAnswers": [
+			"Pakistan",
+			"Paraguay",
+			"Palau"
+		],
+		"question": {
+			"text": "Which region of the world uses '.pa' at the end of its web addresses?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "6237413dcb85f7ce9e949d51",
+		"correctAnswer": "Malawi",
+		"incorrectAnswers": [
+			"Bahrain",
+			"France",
+			"Mauritius"
+		],
+		"question": {
+			"text": "Lilongwe is the capital city of which country?"
+		},
+		"tags": [
+			"capital_cities",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "625e9ffa796f721e95543fc5",
+		"correctAnswer": "Red with a yellow star in the center.",
+		"incorrectAnswers": [
+			"Blue with a yellow cross extending to the edges.",
+			"White with a large red disk in the center.",
+			"Three equal vertical bands of blue gold and red."
+		],
+		"question": {
+			"text": "What does the flag of Vietnam look like?"
+		},
+		"tags": [
+			"flags",
+			"southeast_asia",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "625e9f89796f721e95543fa4",
+		"correctAnswer": "White",
+		"incorrectAnswers": [
+			"Gold",
+			"Green",
+			"Black"
+		],
+		"question": {
+			"text": "Which of these colors is included on the flag of Poland?"
+		},
+		"tags": [
+			"flags",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623742d6cb85f7ce9e949df6",
+		"correctAnswer": "Washington, D.C.",
+		"incorrectAnswers": [
+			"New York",
+			"Los Angeles",
+			"Chicago"
+		],
+		"question": {
+			"text": "What is the capital city of The United States of America?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "62374153cb85f7ce9e949d5a",
+		"correctAnswer": "Valletta",
+		"incorrectAnswers": [
+			"Brazzaville",
+			"Sarajevo",
+			"Maputo"
+		],
+		"question": {
+			"text": "What is the capital city of Malta?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "622a1c387cc59eab6f950a29",
+		"correctAnswer": "Laos",
+		"incorrectAnswers": [
+			"Vietnam",
+			"Singapore",
+			"Bangladesh"
+		],
+		"question": {
+			"text": "Which of these countries borders Thailand?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623b584dfd6c701a921183ae",
+		"correctAnswer": "Russia",
+		"incorrectAnswers": [
+			"Argentina",
+			"Hungary",
+			"Spain"
+		],
+		"question": {
+			"text": "In which country would you find The Kremlin and Red Square?"
+		},
+		"tags": [
+			"tourist_attractions",
+			"general_knowledge",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623385d662eaad73716a8c97",
+		"correctAnswer": "Mount Whitney",
+		"incorrectAnswers": [
+			"Mount Rushmore",
+			"Mount Elbert",
+			"Mount Rainier"
+		],
+		"question": {
+			"text": "What's the highest mountain in the 48 contiguous U.S. states?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "62374258cb85f7ce9e949dc3",
+		"correctAnswer": "Somalia",
+		"incorrectAnswers": [
+			"United States of America",
+			"Guyana",
+			"Mauritius"
+		],
+		"question": {
+			"text": "Mogadishu is the capital city of which country?"
+		},
+		"tags": [
+			"capital_cities",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623388880161109f922aac92",
+		"correctAnswer": "Laos",
+		"incorrectAnswers": [
+			"Cambodia",
+			"Thailand",
+			"Vietnam"
+		],
+		"question": {
+			"text": "Which is the only landlocked country in South East Asia?"
+		},
+		"tags": [
+			"southeast_asia",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "639c9d9f929b90846f2fc972",
+		"correctAnswer": "Skyscraper",
+		"incorrectAnswers": [
+			"Cathedral",
+			"Museum",
+			"Stadium"
+		],
+		"question": {
+			"text": "The Gherkin is a well-known London building designed by Norman Foster. What type of building is it?"
+		},
+		"tags": [
+			"architecture",
+			"geography",
+			"buildings",
+			"london",
+			"uk"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "622a1c387cc59eab6f950ad7",
+		"correctAnswer": "France",
+		"incorrectAnswers": [
+			"Monaco",
+			"Algeria",
+			"Belgium"
+		],
+		"question": {
+			"text": "Which of these countries borders Spain?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "62602e404b176d54800e3ccd",
+		"correctAnswer": "Austria",
+		"incorrectAnswers": [
+			"Estonia",
+			"Slovenia",
+			"Greece"
+		],
+		"question": {
+			"text": "Graz is a city in which country?"
+		},
+		"tags": [
+			"cities",
+			"europe",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "646b3ec40361c7fb32d6b6cf",
+		"correctAnswer": "Vatican City",
+		"incorrectAnswers": [
+			"Monaco",
+			"Nauru",
+			"San Marino"
+		],
+		"question": {
+			"text": "What is the smallest country in the world?"
+		},
+		"tags": [
+			"geography",
+			"countries"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "648888d35dba6c873ef6507b",
+		"correctAnswer": "South",
+		"incorrectAnswers": [
+			"East",
+			"West",
+			"North"
+		],
+		"question": {
+			"text": "What direction comes before \"Sudan\" in the name of a country in Africa?"
+		},
+		"tags": [
+			"countries",
+			"geography",
+			"africa"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "62602e144b176d54800e3cc0",
+		"correctAnswer": "Salzburg",
+		"incorrectAnswers": [
+			"Lisbon",
+			"Brussels",
+			"Athens"
+		],
+		"question": {
+			"text": "Which of these cities is in Austria?"
+		},
+		"tags": [
+			"cities",
+			"europe",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "622a1c357cc59eab6f94fe28",
+		"correctAnswer": "Florida",
+		"incorrectAnswers": [
+			"Kansas",
+			"Texas",
+			"California"
+		],
+		"question": {
+			"text": "Which American state's name is Spanish for \"flowered\" or \"flowery land\"?"
+		},
+		"tags": [
+			"us_states",
+			"language",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "62374193cb85f7ce9e949d74",
+		"correctAnswer": "Windhoek",
+		"incorrectAnswers": [
+			"Caracas",
+			"Ashgabat",
+			"Accra"
+		],
+		"question": {
+			"text": "What is the capital city of Namibia?"
+		},
+		"tags": [
+			"capital_cities",
+			"africa",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "6233877f0161109f922aac2a",
+		"correctAnswer": "China",
+		"incorrectAnswers": [
+			"Russia",
+			"Brazil",
+			"Canada"
+		],
+		"question": {
+			"text": "Which country has the longest land border?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "63b0587e4799123c67712f43",
+		"correctAnswer": "Himalayas",
+		"incorrectAnswers": [
+			"Aravalli",
+			"Vindhyas",
+			"Satpura"
+		],
+		"question": {
+			"text": "Which is the largest mountain range in India?"
+		},
+		"tags": [
+			"india",
+			"geography",
+			"mountains"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "626030d3014f58b5fc1a3fcb",
+		"correctAnswer": "Tajikistan",
+		"incorrectAnswers": [
+			"Azerbaijan",
+			"Georgia",
+			"Pakistan"
+		],
+		"question": {
+			"text": "Where would you find the city of Dushanbe?"
+		},
+		"tags": [
+			"cities",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "62602d2f4b176d54800e3c85",
+		"correctAnswer": "Italy",
+		"incorrectAnswers": [
+			"Lithuania",
+			"Sweden",
+			"Serbia"
+		],
+		"question": {
+			"text": "Milan is a city in which country?"
+		},
+		"tags": [
+			"cities",
+			"europe",
+			"general_knowledge",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623b57b8fd6c701a92118376",
+		"correctAnswer": "Italy",
+		"incorrectAnswers": [
+			"Russia",
+			"Czech Republic",
+			"USA"
+		],
+		"question": {
+			"text": "In which country would you find the city of Venice?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "622a1c387cc59eab6f950a23",
+		"correctAnswer": "Malaysia",
+		"incorrectAnswers": [
+			"Vietnam",
+			"Singapore",
+			"Bangladesh"
+		],
+		"question": {
+			"text": "Which of these countries borders Thailand?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "62373f96cb85f7ce9e949ca7",
+		"correctAnswer": "Barbados",
+		"incorrectAnswers": [
+			"Timor-Leste",
+			"Morocco",
+			"Oman"
+		],
+		"question": {
+			"text": "Bridgetown is the capital city of which country?"
+		},
+		"tags": [
+			"capital_cities",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623741c5cb85f7ce9e949d88",
+		"correctAnswer": "Oslo",
+		"incorrectAnswers": [
+			"Bern",
+			"Ljubljana",
+			"Nicosia"
+		],
+		"question": {
+			"text": "What is the capital city of Norway?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623742d1cb85f7ce9e949df4",
+		"correctAnswer": "London",
+		"incorrectAnswers": [
+			"Manchester",
+			"Birmingham",
+			"Winchester"
+		],
+		"question": {
+			"text": "What is the capital city of The United Kingdom?"
+		},
+		"tags": [
+			"capital_cities",
+			"uk",
+			"cities",
+			"general_knowledge",
+			"europe",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623387a40161109f922aac38",
+		"correctAnswer": "Somalia",
+		"incorrectAnswers": [
+			"Niger",
+			"Chad",
+			"Tunisia"
+		],
+		"question": {
+			"text": "Which of these countries occupies the 'horn' of Africa?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "622a1c387cc59eab6f950804",
+		"correctAnswer": "Asia",
+		"incorrectAnswers": [
+			"South America",
+			"Oceania",
+			"Europe"
+		],
+		"question": {
+			"text": "The country of Bahrain is on which continent?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623385e262eaad73716a8c9c",
+		"correctAnswer": "Lebanon ",
+		"incorrectAnswers": [
+			"Saudi Arabia",
+			"Oman",
+			"Jordan"
+		],
+		"question": {
+			"text": "What's the only Middle Eastern country without a desert?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "622a1c3a7cc59eab6f950fde",
+		"correctAnswer": "The Pan American Highway",
+		"incorrectAnswers": [
+			"Route 1",
+			"The Transcontinental Road",
+			"Christopher Columbus Road"
+		],
+		"question": {
+			"text": "Which Road Runs From Alaska To Chile?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "622a1c357cc59eab6f95000f",
+		"correctAnswer": "St. louis",
+		"incorrectAnswers": [
+			"New York City",
+			"Washington, D.C.",
+			"Los Angeles"
+		],
+		"question": {
+			"text": "___________ was called the \"Gateway to the West\" in the 1800s because it served as a starting place for wagon train departures."
+		},
+		"tags": [
+			"usa",
+			"1800's",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623735d8cfe13103f55eb575",
+		"correctAnswer": "Somalia",
+		"incorrectAnswers": [
+			"Burkina Faso",
+			"Lesotho",
+			"Solomon Islands"
+		],
+		"question": {
+			"text": "Which region of the world uses '.so' at the end of its web addresses?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623b57f2fd6c701a9211838b",
+		"correctAnswer": "Scotland",
+		"incorrectAnswers": [
+			"Argentina",
+			"Ireland",
+			"The USA"
+		],
+		"question": {
+			"text": "In which country would you find the UNESCO World Heritage site of St. Kilda?"
+		},
+		"tags": [
+			"tourist_attractions",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "62374300cb85f7ce9e949e07",
+		"correctAnswer": "Zimbabwe",
+		"incorrectAnswers": [
+			"Namibia",
+			"Malaysia",
+			"Belgium"
+		],
+		"question": {
+			"text": "Harare is the capital city of which country?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "622a1c387cc59eab6f95080c",
+		"correctAnswer": "Europe",
+		"incorrectAnswers": [
+			"South America",
+			"Oceania",
+			"Asia"
+		],
+		"question": {
+			"text": "The country of Andorra is on which continent?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "625e9f63796f721e95543f99",
+		"correctAnswer": "Blue",
+		"incorrectAnswers": [
+			"Maroon",
+			"Black",
+			"Gold"
+		],
+		"question": {
+			"text": "Which of these colors would you find on the flag of New Zealand?"
+		},
+		"tags": [
+			"flags",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "6233862662eaad73716a8cb7",
+		"correctAnswer": "London",
+		"incorrectAnswers": [
+			"Dublin",
+			"Brussels",
+			"Ghent"
+		],
+		"question": {
+			"text": "Where is Euston Station?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "623388ca0161109f922aacac",
+		"correctAnswer": "The Cantabrian Mountains ",
+		"incorrectAnswers": [
+			"The Atlas Mountains",
+			"The Alps",
+			"The Valencian Mountains"
+		],
+		"question": {
+			"text": "Which Mountain Range Lies In The North Of Spain?"
+		},
+		"tags": [
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "645f9526541c4d4fc8cf2ead",
+		"correctAnswer": "Italy",
+		"incorrectAnswers": [
+			"Spain",
+			"Portugal",
+			"Greece"
+		],
+		"question": {
+			"text": "Which country is home to the cities of Taranto, Anzio, and Padua?"
+		},
+		"tags": [
+			"cities",
+			"europe",
+			"countries",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "622a1c357cc59eab6f94fff8",
+		"correctAnswer": "Algiers",
+		"incorrectAnswers": [
+			"Oran",
+			"Constantine",
+			"Rabat"
+		],
+		"question": {
+			"text": "What is the capital of Algeria?"
+		},
+		"tags": [
+			"capital_cities",
+			"africa",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "625e9dff796f721e95543f38",
+		"correctAnswer": "Brazil",
+		"incorrectAnswers": [
+			"Jamaica",
+			"Faroe Islands",
+			"Iran"
+		],
+		"question": {
+			"text": "Which country's flag can be described as 'Green with a yellow diamond in the center with a blue celestial globe.'?"
+		},
+		"tags": [
+			"flags",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "geography",
+		"id": "622a1c357cc59eab6f94ffe5",
+		"correctAnswer": "Honolulu",
+		"incorrectAnswers": [
+			"Hilo",
+			"Kailua",
+			"Maui"
+		],
+		"question": {
+			"text": "What is the capital of Hawaii?"
+		},
+		"tags": [
+			"us_states",
+			"usa",
+			"geography"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	}
+]

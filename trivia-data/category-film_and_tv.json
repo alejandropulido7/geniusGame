@@ -1,0 +1,1092 @@
+[
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94fb39",
+		"correctAnswer": "Gladiator",
+		"incorrectAnswers": [
+			"Chocolat",
+			"Crouching Tiger, Hidden Dragon",
+			"Erin Brockovich"
+		],
+		"question": {
+			"text": "Which film won the Academy Award for Best Picture in 2000?"
+		},
+		"tags": [
+			"academy_awards",
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c3c7cc59eab6f951af5",
+		"correctAnswer": "A Nightmare On Elm Street",
+		"incorrectAnswers": [
+			"Halloween",
+			"It",
+			"Scream"
+		],
+		"question": {
+			"text": "In Which Series Of Films Did Robert Englund Star As Freddy Krueger?"
+		},
+		"tags": [
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "624dba41de6018633d31f6bb",
+		"correctAnswer": "George Lazenby",
+		"incorrectAnswers": [
+			"Roger Moore",
+			"Pierce Brosnan",
+			"Sean Connery"
+		],
+		"question": {
+			"text": "Who played the role of James Bond in On Her Majesty's Secret Service?"
+		},
+		"tags": [
+			"james_bond",
+			"film",
+			"acting",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "624db9f9de6018633d31f6ad",
+		"correctAnswer": "Garbage",
+		"incorrectAnswers": [
+			"Shirley Bassey",
+			"Matt Monro",
+			"Sam Smith"
+		],
+		"question": {
+			"text": "Who performed the theme song to the James Bond film The World is Not Enough?"
+		},
+		"tags": [
+			"james_bond",
+			"film",
+			"soundtracks",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c367cc59eab6f9501e8",
+		"correctAnswer": "Chris Columbus",
+		"incorrectAnswers": [
+			"Steven Spielberg",
+			"Woody Allen",
+			"Martin Scorsese"
+		],
+		"question": {
+			"text": "Which director directed Harry Potter and the Chamber of Secrets?"
+		},
+		"tags": [
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c377cc59eab6f95077f",
+		"correctAnswer": "Sigourney Weaver",
+		"incorrectAnswers": [
+			"Natalie Portman",
+			"Kate Winslet",
+			"Helen Mirren"
+		],
+		"question": {
+			"text": "Which actress has featured in films including Avatar and Alien?"
+		},
+		"tags": [
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c377cc59eab6f9506b9",
+		"correctAnswer": "Kristin Scott Thomas",
+		"incorrectAnswers": [
+			"Glenn Close",
+			"Reese Witherspoon",
+			"Melissa Leo"
+		],
+		"question": {
+			"text": "Which actress has appeared in films including The English Patient and Gosford Park?"
+		},
+		"tags": [
+			"film_and_tv",
+			"film",
+			"acting"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94f91a",
+		"correctAnswer": "Taxi Driver",
+		"incorrectAnswers": [
+			"Blue Velvet",
+			"Wall Street",
+			"To Kill a Mockingbird"
+		],
+		"question": {
+			"text": "Which film contains the character 'Travis Bickle'?"
+		},
+		"tags": [
+			"film",
+			"fictitious_characters",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94f941",
+		"correctAnswer": "Saturday Night Fever",
+		"incorrectAnswers": [
+			"Midnight Cowboy",
+			"The Treasure of the Sierra Madre",
+			"On the Waterfront"
+		],
+		"question": {
+			"text": "Which film contains the character 'Tony Manero'?"
+		},
+		"tags": [
+			"film",
+			"fictitious_characters",
+			"cult_films",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94fc26",
+		"correctAnswer": "\"Plastics.\"",
+		"incorrectAnswers": [
+			"\"Hello, gorgeous.\"",
+			"\"Fasten your seatbelts. It's going to be a bumpy night.\"",
+			"\"We’re goin’ streaking!\""
+		],
+		"question": {
+			"text": "Which of these quotes is from the film 'The Graduate'?"
+		},
+		"tags": [
+			"quotes",
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c377cc59eab6f950651",
+		"correctAnswer": "Frances McDormand",
+		"incorrectAnswers": [
+			"Rachel Weisz",
+			"Frances Fisher",
+			"Salma Hayek"
+		],
+		"question": {
+			"text": "Which actress has starred in films including Fargo and Three Billboards Outside Ebbing, Missouri?"
+		},
+		"tags": [
+			"acting",
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "625fd6cadc0dd3b72da64d0b",
+		"correctAnswer": "1997",
+		"incorrectAnswers": [
+			"1989",
+			"1993",
+			"2001"
+		],
+		"question": {
+			"text": "In which year was Good Will Hunting released?"
+		},
+		"tags": [
+			"film"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "625fd729dc0dd3b72da64d27",
+		"correctAnswer": "1982",
+		"incorrectAnswers": [
+			"1977",
+			"1987",
+			"1992"
+		],
+		"question": {
+			"text": "Blade Runner was released in which year?"
+		},
+		"tags": [
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94f8d3",
+		"correctAnswer": "Glenn Close",
+		"incorrectAnswers": [
+			"Olivia Newton-John",
+			"Judy Garland",
+			"Anne Bancroft"
+		],
+		"question": {
+			"text": "Which actress played the role of Alex Forrest in Fatal Attraction?"
+		},
+		"tags": [
+			"film",
+			"acting",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "625fd6acdc0dd3b72da64d02",
+		"correctAnswer": "2012",
+		"incorrectAnswers": [
+			"2006",
+			"2008",
+			"2010"
+		],
+		"question": {
+			"text": "In which year was Django Unchained released?"
+		},
+		"tags": [
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94f900",
+		"correctAnswer": "Whoopi Goldberg",
+		"incorrectAnswers": [
+			"Frances McDormand",
+			"Katharine Hepburn",
+			"Gloria Swanson"
+		],
+		"question": {
+			"text": "Which actress played the role of Oda Mae Brown in Ghost?"
+		},
+		"tags": [
+			"film",
+			"acting",
+			"general_knowledge",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "647f9df73a4302a71927169f",
+		"correctAnswer": "Friends",
+		"incorrectAnswers": [
+			"Seinfeld",
+			"The Office",
+			"Band of Brothers"
+		],
+		"question": {
+			"text": "What Emmy-winning show did Lisa Kudrow star in?"
+		},
+		"tags": [
+			"sitcoms",
+			"tv",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94fadd",
+		"correctAnswer": "Tom Hanks",
+		"incorrectAnswers": [
+			"Morgan Freeman",
+			"Nigel Hawthorne",
+			"Paul Newman"
+		],
+		"question": {
+			"text": "Who won the 1994 Academy Award for Best Leading Actor for playing the role of Forrest Gump in Forrest Gump?"
+		},
+		"tags": [
+			"academy_awards",
+			"acting",
+			"film",
+			"general_knowledge",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c377cc59eab6f9506ad",
+		"correctAnswer": "Reese Witherspoon",
+		"incorrectAnswers": [
+			"Kristin Scott Thomas",
+			"Naomi Watts",
+			"Penélope Cruz"
+		],
+		"question": {
+			"text": "Which actress has featured in both Little Nicky and Cruel Intentions?"
+		},
+		"tags": [
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94fbe9",
+		"correctAnswer": "\"I’m already pregnant. So, what other shenanigans could I get myself into?\"",
+		"incorrectAnswers": [
+			"\"This is Sparta!\"",
+			"\"Sawyer, you're going out a youngster, but you've t to come back a star!\"",
+			"\"You shall not pass!\""
+		],
+		"question": {
+			"text": "Which of these quotes is from the film 'Juno'?"
+		},
+		"tags": [
+			"quotes",
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c357cc59eab6f94fdc7",
+		"correctAnswer": "The Jungle Book",
+		"incorrectAnswers": [
+			"The Beatle Boot",
+			"The Lion King",
+			"The Little Mermaid"
+		],
+		"question": {
+			"text": "In Which Disney Movie Were There Characters Called \"John, Paul, George & Ringo\"?"
+		},
+		"tags": [
+			"film",
+			"disney",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c367cc59eab6f95039e",
+		"correctAnswer": "Jingle All The Way",
+		"incorrectAnswers": [
+			"The Santa Clause",
+			"Miracle on 34th Street",
+			"Bad Santa"
+		],
+		"question": {
+			"text": "Which Popular Christmas Movie Featured A Must Have Toy Called 'Turbo Man''"
+		},
+		"tags": [
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94fad5",
+		"correctAnswer": "Kevin Spacey",
+		"incorrectAnswers": [
+			"Russell Crowe",
+			"Richard Farnsworth",
+			"Sean Penn"
+		],
+		"question": {
+			"text": "Who won the 1999 Academy Award for Best Leading Actor for playing the role of Lester Burnham in American Beauty?"
+		},
+		"tags": [
+			"academy_awards",
+			"film",
+			"acting",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "624db9dade6018633d31f6a6",
+		"correctAnswer": "Roger Moore",
+		"incorrectAnswers": [
+			"Pierce Brosnan",
+			"George Lazenby",
+			"Timothy Dalton"
+		],
+		"question": {
+			"text": "Who played the role of James Bond in The Man with the Golden Gun?"
+		},
+		"tags": [
+			"james_bond",
+			"film",
+			"acting",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c377cc59eab6f9505cd",
+		"correctAnswer": "Stephen Fry",
+		"incorrectAnswers": [
+			"Michael Ironside",
+			"Luke Evans",
+			"Tom Waits"
+		],
+		"question": {
+			"text": "Which actor has played roles in both Blackadder and The Hobbit: The Desolation of Smaug?"
+		},
+		"tags": [
+			"acting",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c377cc59eab6f95074a",
+		"correctAnswer": "Gérard Depardieu",
+		"incorrectAnswers": [
+			"Kevin Costner",
+			"Shah Rukh Khan",
+			"Jack Nicholson"
+		],
+		"question": {
+			"text": "Which actor has featured in films including Life of Pi and Cyrano de Bergerac?"
+		},
+		"tags": [
+			"acting",
+			"film"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94fb33",
+		"correctAnswer": "Crash",
+		"incorrectAnswers": [
+			"Brokeback Mountain",
+			"Capote",
+			"Good Night, and Good Luck."
+		],
+		"question": {
+			"text": "Which film won the Academy Award for Best Picture in 2005?"
+		},
+		"tags": [
+			"film",
+			"academy_awards",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "625fd6c0dc0dd3b72da64d08",
+		"correctAnswer": "1995",
+		"incorrectAnswers": [
+			"1983",
+			"1987",
+			"1991"
+		],
+		"question": {
+			"text": "In which year was Braveheart released?"
+		},
+		"tags": [
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94fc34",
+		"correctAnswer": "\"You can't handle the truth!\"",
+		"incorrectAnswers": [
+			"\"Just keep swimming.\"",
+			"\"Of all the gin joints in all the towns in all the world, she walks into mine.\"",
+			"\"As God is my witness, I'll never be hungry again.\""
+		],
+		"question": {
+			"text": "Which of these quotes is from the film 'A Few Good Men'?"
+		},
+		"tags": [
+			"quotes",
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94fb4f",
+		"correctAnswer": "Annie Hall",
+		"incorrectAnswers": [
+			"The Goodbye Girl",
+			"Julia",
+			"Star Wars"
+		],
+		"question": {
+			"text": "Which film won the Academy Award for Best Picture in 1977?"
+		},
+		"tags": [
+			"academy_awards",
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "648888d55dba6c873ef6508e",
+		"correctAnswer": "Man vs. Wild",
+		"incorrectAnswers": [
+			"Survivor",
+			"The Amazing Race",
+			"Naked and Afraid"
+		],
+		"question": {
+			"text": "What television show follows host Bear Grylls as he survives in harsh environments in different parts of the world?"
+		},
+		"tags": [
+			"film_and_tv",
+			"tv",
+			"reality_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c377cc59eab6f950737",
+		"correctAnswer": "Josh Brolin",
+		"incorrectAnswers": [
+			"Michael Douglas",
+			"Ben Kingsley",
+			"Kiefer Sutherland"
+		],
+		"question": {
+			"text": "Which actor has had starring roles in films including Guardians of the Galaxy and No Country for Old Men?"
+		},
+		"tags": [
+			"film_and_tv",
+			"film",
+			"acting"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94fc2f",
+		"correctAnswer": "\"I'll have what she's having.\"",
+		"incorrectAnswers": [
+			"\"Toga! Toga!\"",
+			"\"I’m just one stomach flu away from my goal weight.\"",
+			"\"Just keep swimming.\""
+		],
+		"question": {
+			"text": "Which of these quotes is from the film 'When Harry Met Sally...'?"
+		},
+		"tags": [
+			"quotes",
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "645bc4634638d58091b1b9d5",
+		"correctAnswer": "Mick Jagger",
+		"incorrectAnswers": [
+			"Elvis Presley",
+			"David Bowie",
+			"Elton John"
+		],
+		"question": {
+			"text": "Which singer starred as the Australian outlaw \"Ned Kelly\" in the 1970 film?"
+		},
+		"tags": [
+			"music",
+			"films"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94fb13",
+		"correctAnswer": "Halle Berry",
+		"incorrectAnswers": [
+			"Judi Dench",
+			"Nicole Kidman",
+			"Sissy Spacek"
+		],
+		"question": {
+			"text": "Who won the 2001 Academy Award for Best Leading Actress for playing the role of Leticia Musgrove in Monster's Ball?"
+		},
+		"tags": [
+			"acting",
+			"academy_awards",
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "624dba63de6018633d31f6c3",
+		"correctAnswer": "Roger Moore",
+		"incorrectAnswers": [
+			"George Lazenby",
+			"Sean Connery",
+			"Timothy Dalton"
+		],
+		"question": {
+			"text": "Who played the role of James Bond in Licence to Kill?"
+		},
+		"tags": [
+			"james_bond",
+			"film",
+			"acting",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c377cc59eab6f9506fc",
+		"correctAnswer": "Elizabeth Banks",
+		"incorrectAnswers": [
+			"Sandra Bæ Hovedr",
+			"Penélope Cruz",
+			"Emma Thompson"
+		],
+		"question": {
+			"text": "Which actress has played roles in films including Spider-Man and The Hunger Games?"
+		},
+		"tags": [
+			"film_and_tv",
+			"acting"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c377cc59eab6f950668",
+		"correctAnswer": "Dennis Hopper",
+		"incorrectAnswers": [
+			"Tim Roth",
+			"Hugo Weaving",
+			"Warwick Davis"
+		],
+		"question": {
+			"text": "Which actor has appeared in films including Apocalypse Now and Speed?"
+		},
+		"tags": [
+			"acting",
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c377cc59eab6f9507aa",
+		"correctAnswer": "Tom Hanks",
+		"incorrectAnswers": [
+			"Leonardo DiCaprio",
+			"Tom Cruise",
+			"Sean Connery"
+		],
+		"question": {
+			"text": "Which actor has featured in films including Forrest Gump and Saving Private Ryan?"
+		},
+		"tags": [
+			"film",
+			"acting",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c377cc59eab6f9506d7",
+		"correctAnswer": "Drew Barrymore",
+		"incorrectAnswers": [
+			"Penélope Cruz",
+			"Kirsten Dunst",
+			"Charlize Theron"
+		],
+		"question": {
+			"text": "Which actor has played roles in films including Batman Forever and Donnie Darko?"
+		},
+		"tags": [
+			"film_and_tv",
+			"film",
+			"acting"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "625fd72fdc0dd3b72da64d29",
+		"correctAnswer": "1998",
+		"incorrectAnswers": [
+			"1995",
+			"2001",
+			"2004"
+		],
+		"question": {
+			"text": "The Big Lebowski was released in which year?"
+		},
+		"tags": [
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "647c9855f89e0968cfbc1a29",
+		"correctAnswer": "Homeland",
+		"incorrectAnswers": [
+			"Badland",
+			"Madland",
+			"Motherland"
+		],
+		"question": {
+			"text": "What is the name of the TV drama starring Claire Danes that was popular throughout the 2010s?"
+		},
+		"tags": [
+			"tv",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94f8d8",
+		"correctAnswer": "Katharine Hepburn",
+		"incorrectAnswers": [
+			"Judy Garland",
+			"Sigourney Weaver",
+			"Angela Lansbury"
+		],
+		"question": {
+			"text": "Which actress played the role of Susan Vance in Bringing Up Baby?"
+		},
+		"tags": [
+			"acting",
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "64a09f9fcf8fd58080cf0016",
+		"correctAnswer": "Ricky Gervais",
+		"incorrectAnswers": [
+			"Steve Carell",
+			"John Oliver",
+			"Sacha Baron Cohen"
+		],
+		"question": {
+			"text": "Who co-created the British TV show 'The Office' with Stephen Merchant?"
+		},
+		"tags": [
+			"tv",
+			"sitcoms",
+			"film_and_tv",
+			"comedy"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "625740b99da29df7b05f73f3",
+		"correctAnswer": "Room",
+		"incorrectAnswers": [
+			"L.A. Confidential",
+			"Barry Lyndon",
+			"Beauty and the Beast"
+		],
+		"question": {
+			"text": "Name the movie that matches the following plot summary: 'Held captive for 7 years, a woman and her young son finally gain their freedom.'"
+		},
+		"tags": [
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "625740bc9da29df7b05f73f4",
+		"correctAnswer": "Warrior",
+		"incorrectAnswers": [
+			"No Country for Old Men",
+			"The Terminator",
+			"Lawrence of Arabia"
+		],
+		"question": {
+			"text": "Name the movie that matches the following plot summary: 'The son of a former boxer is trained by his father for a mixed martial arts tournament.'"
+		},
+		"tags": [
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c3c7cc59eab6f951967",
+		"correctAnswer": "Mother",
+		"incorrectAnswers": [
+			"HAL",
+			"Colossus",
+			"Jarvis"
+		],
+		"question": {
+			"text": "What is the nickname of the ship's computer in the 1979 film Alien?"
+		},
+		"tags": [
+			"film",
+			"cult_films",
+			"science_fiction",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94fb07",
+		"correctAnswer": "Frances McDormand",
+		"incorrectAnswers": [
+			"Brenda Blethyn",
+			"Diane Keaton",
+			"Kristin Scott Thomas"
+		],
+		"question": {
+			"text": "Who won the 1996 Academy Award for Best Leading Actress for playing the role of Marge Gunderson in Fargo?"
+		},
+		"tags": [
+			"acting",
+			"academy_awards",
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94f961",
+		"correctAnswer": "Ghost",
+		"incorrectAnswers": [
+			"Apocalypse Now",
+			"Blue Velvet",
+			"Terms of Endearment"
+		],
+		"question": {
+			"text": "Which film contains the character 'Oda Mae Brown'?"
+		},
+		"tags": [
+			"film",
+			"fictitious_characters",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "film_and_tv",
+		"id": "622a1c347cc59eab6f94f94a",
+		"correctAnswer": "Rain Man",
+		"incorrectAnswers": [
+			"The Godfather",
+			"The 400 Blows",
+			"Fast Times at Ridgemont High"
+		],
+		"question": {
+			"text": "Which film contains the character 'Raymond Babbitt'?"
+		},
+		"tags": [
+			"fictitious_characters",
+			"film",
+			"film_and_tv"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	}
+]

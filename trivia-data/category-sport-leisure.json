@@ -1,0 +1,1066 @@
+[
+	{
+		"category": "sport_and_leisure",
+		"id": "63a03970c7d86251f9b65c5a",
+		"correctAnswer": "Connect Four",
+		"incorrectAnswers": [
+			"Chess",
+			"Clue",
+			"Monopoly"
+		],
+		"question": {
+			"text": "What is the name of the classic board game where players must create a path of dots from one side of the board to the other?"
+		},
+		"tags": [
+			"board_games"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417d0c0f96c4efe8d7739f",
+		"correctAnswer": "Denver Broncos",
+		"incorrectAnswers": [
+			"Denver Hornets",
+			"Denver Marlins",
+			"Denver Indians"
+		],
+		"question": {
+			"text": "Which of these is an American Football team based in Denver?"
+		},
+		"tags": [
+			"nfl",
+			"american_football",
+			"football",
+			"usa",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417d1c0f96c4efe8d773a5",
+		"correctAnswer": "Edmonton Oilers",
+		"incorrectAnswers": [
+			"Edmonton Steelers",
+			"Edmonton Eathquakes",
+			"Edmonton Padres"
+		],
+		"question": {
+			"text": "Which of these is a hockey team based in Edmonton?"
+		},
+		"tags": [
+			"canada",
+			"hockey",
+			"nhl",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c367cc59eab6f95006f",
+		"correctAnswer": "Martina Hingis",
+		"incorrectAnswers": [
+			"Serena Williams",
+			"Maria Sharapova",
+			"Steffi Graf"
+		],
+		"question": {
+			"text": "Which Female Tennis Star Was Handed A Two Year Ban After Testing Positive For Cocaine At Wimbledon In 2007?"
+		},
+		"tags": [
+			"tennis",
+			"people",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62399ef6af96521963a0870d",
+		"correctAnswer": "Argentina",
+		"incorrectAnswers": [
+			"France",
+			"Brazil",
+			"England"
+		],
+		"question": {
+			"text": "Which country won the 1986 FIFA World Cup, hosted in Mexico?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62399f08af96521963a08713",
+		"correctAnswer": "West Germany",
+		"incorrectAnswers": [
+			"France",
+			"United States",
+			"Mexico"
+		],
+		"question": {
+			"text": "Which country hosted the 1974 FIFA World Cup?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417d580f96c4efe8d773bd",
+		"correctAnswer": "New Orleans Pelicans",
+		"incorrectAnswers": [
+			"New Orleans Rockets",
+			"New Orleans Suns",
+			"New Orleans Blackhawks"
+		],
+		"question": {
+			"text": "Which of these is a basketball team based in New Orleans?"
+		},
+		"tags": [
+			"new_orleans",
+			"basketball",
+			"nba",
+			"usa",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417da70f96c4efe8d773dc",
+		"correctAnswer": "San Jose Sharks",
+		"incorrectAnswers": [
+			"San Jose United",
+			"San Jose Bills",
+			"San Jose Flames"
+		],
+		"question": {
+			"text": "Which of these is a hockey team based in San Jose?"
+		},
+		"tags": [
+			"hockey",
+			"usa",
+			"nhl",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417d5d0f96c4efe8d773bf",
+		"correctAnswer": "New York Mets",
+		"incorrectAnswers": [
+			"New York Canadiens",
+			"New York A's",
+			"New York Braves"
+		],
+		"question": {
+			"text": "Which of these is a baseball team based in New York?"
+		},
+		"tags": [
+			"baseball",
+			"nba",
+			"new_york",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c3d7cc59eab6f951c1f",
+		"correctAnswer": "Munich",
+		"incorrectAnswers": [
+			"Belgrade",
+			"Budapest",
+			"Rome"
+		],
+		"question": {
+			"text": "In 1958 a plane carrying Manchester United home from a match in Belgrade crash during take-off at which city's Airport?"
+		},
+		"tags": [
+			"manchester",
+			"football",
+			"soccer",
+			"events",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "646262f6ab138b829b81ea6d",
+		"correctAnswer": "18",
+		"incorrectAnswers": [
+			"20",
+			"14",
+			"16"
+		],
+		"question": {
+			"text": "How many slots with odd numbers does a standard roulette wheel have?"
+		},
+		"tags": [
+			"gambling",
+			"casinos",
+			"games"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "63b058744799123c67712f31",
+		"correctAnswer": "Bandy",
+		"incorrectAnswers": [
+			"Korfball",
+			"Kabaddi",
+			"Jereed"
+		],
+		"question": {
+			"text": "Which of these is a traditional Russian sport?"
+		},
+		"tags": [
+			"russia",
+			"society_and_culture",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417dd70f96c4efe8d773ef",
+		"correctAnswer": "Washington Wizards",
+		"incorrectAnswers": [
+			"Washington Knicks",
+			"Washington Raiders",
+			"Washington Red Sox"
+		],
+		"question": {
+			"text": "Which of these is a basketball team based in Washington?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417d550f96c4efe8d773bc",
+		"correctAnswer": "New Orleans Saints",
+		"incorrectAnswers": [
+			"New Orleans Flames",
+			"New Orleans Dolphins",
+			"New Orleans Cardinals"
+		],
+		"question": {
+			"text": "Which of these is an American Football team based in New Orleans?"
+		},
+		"tags": [
+			"new_orleans",
+			"nfl",
+			"american_football",
+			"football",
+			"usa",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "6492d7ae9975daf4109a79f4",
+		"correctAnswer": "Ballet",
+		"incorrectAnswers": [
+			"Tap",
+			"Jazz",
+			"Hip Hop"
+		],
+		"question": {
+			"text": "In which type of dance are there five basic foot positions?"
+		},
+		"tags": [
+			"dance"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62399f33af96521963a08724",
+		"correctAnswer": "Uruguay",
+		"incorrectAnswers": [
+			"France",
+			"Brazil",
+			"Argentina"
+		],
+		"question": {
+			"text": "Which country won the 1930 FIFA World Cup, hosted in Uruguay?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62399f10af96521963a08716",
+		"correctAnswer": "England",
+		"incorrectAnswers": [
+			"France",
+			"Brazil",
+			"West Germany"
+		],
+		"question": {
+			"text": "Which country won the 1966 FIFA World Cup, hosted in England?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c367cc59eab6f95006c",
+		"correctAnswer": "Orange",
+		"incorrectAnswers": [
+			"Blue",
+			"Yellow",
+			"Red"
+		],
+		"question": {
+			"text": "Which Grade Follows A Yellow Belt In Judo"
+		},
+		"tags": [
+			"martial_arts",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "648889135dba6c873ef650be",
+		"correctAnswer": "Chess",
+		"incorrectAnswers": [
+			"Checkers",
+			"Backgammon",
+			"Go"
+		],
+		"question": {
+			"text": "In 1988, Bobby Fischer invented a new type of clock that has since become widely used in which board game?"
+		},
+		"tags": [
+			"board_games",
+			"games",
+			"inventions"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417dbb0f96c4efe8d773e4",
+		"correctAnswer": "Tampa Bay Rays",
+		"incorrectAnswers": [
+			"Tamba Bay Trailblazers",
+			"Tampa Bay Bengals",
+			"Tampa Bay Pistons"
+		],
+		"question": {
+			"text": "Which of these is a baseball team based in Tampa?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c367cc59eab6f9500b1",
+		"correctAnswer": "Andre Agassi",
+		"incorrectAnswers": [
+			"Roger Federer",
+			"Pete Sampras",
+			"Andy Roddick"
+		],
+		"question": {
+			"text": "In April 2003 Who Became The Oldest Man To Be Rated No1 In The World Tennis Association Rankings At The Age Of 33?"
+		},
+		"tags": [
+			"people",
+			"tennis",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c367cc59eab6f9500bb",
+		"correctAnswer": "6",
+		"incorrectAnswers": [
+			"3",
+			"10",
+			"8"
+		],
+		"question": {
+			"text": "How Many Players Are There In A Volleyball Team?"
+		},
+		"tags": [
+			"olympics",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "63a03986c7d86251f9b65c74",
+		"correctAnswer": "Risk",
+		"incorrectAnswers": [
+			"Monopoly",
+			"Trivial Pursuit",
+			"Life"
+		],
+		"question": {
+			"text": "What is the name of the classic board game where players must conquer the world by building armies and invading other players' territories?"
+		},
+		"tags": [
+			"board_games"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c347cc59eab6f94f866",
+		"correctAnswer": "Tennis",
+		"incorrectAnswers": [
+			"Baseball",
+			"Gymnastics",
+			"Skiing"
+		],
+		"question": {
+			"text": "With which sport is Rod Laver associated?"
+		},
+		"tags": [
+			"people",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c367cc59eab6f950092",
+		"correctAnswer": "Black",
+		"incorrectAnswers": [
+			"White",
+			"Red",
+			"Brown"
+		],
+		"question": {
+			"text": "What Colour Is The 8 Ball In A Game Of Pool?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c367cc59eab6f9500c1",
+		"correctAnswer": "Five",
+		"incorrectAnswers": [
+			"Six",
+			"Seven",
+			"Eight"
+		],
+		"question": {
+			"text": "How Many Players Are In A Basketball Team?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "64626286ab138b829b81ea07",
+		"correctAnswer": "Javelin",
+		"incorrectAnswers": [
+			"Shot put",
+			"Discus",
+			"Hammer throw"
+		],
+		"question": {
+			"text": "Which Olympic sport involves throwing a spear?"
+		},
+		"tags": [
+			"athletics",
+			"olympics",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c347cc59eab6f94f88f",
+		"correctAnswer": "Cycling",
+		"incorrectAnswers": [
+			"Motor racing",
+			"Gymnastics",
+			"Hockey"
+		],
+		"question": {
+			"text": "With which sport is Jacques Anquetil associated?"
+		},
+		"tags": [
+			"people",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "6242e83fa22452794eaef20c",
+		"correctAnswer": "The Cherries",
+		"incorrectAnswers": [
+			"The Potters",
+			"The Hornets",
+			"The Sky Blues"
+		],
+		"question": {
+			"text": "What is the nickname of the English football team AFC Bournemouth?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417ddc0f96c4efe8d773f1",
+		"correctAnswer": "Winnipeg Jets",
+		"incorrectAnswers": [
+			"Winnipeg Padres",
+			"Winnipeg Broncos",
+			"Winnipeg Penguins"
+		],
+		"question": {
+			"text": "Which of these is a hockey team based in Winnipeg?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417d280f96c4efe8d773aa",
+		"correctAnswer": "Houston Dynamo",
+		"incorrectAnswers": [
+			"Houston Saints",
+			"Houston Islanders",
+			"Houston Fire"
+		],
+		"question": {
+			"text": "Which of these is a soccer team based in Houston?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "6242e845a22452794eaef20e",
+		"correctAnswer": "The Blues",
+		"incorrectAnswers": [
+			"The Hoops",
+			"The Citizens",
+			"Cottagers"
+		],
+		"question": {
+			"text": "What is the nickname of the English football team Birmingham City?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c367cc59eab6f950051",
+		"correctAnswer": "Kimi Raikkonen",
+		"incorrectAnswers": [
+			"Michael Schumacher",
+			"Max Verstappen",
+			"Damon Hill"
+		],
+		"question": {
+			"text": "Who Won The Formula One Drivers Championship In 2007?"
+		},
+		"tags": [
+			"racing",
+			"motoring",
+			"00's",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c367cc59eab6f950060",
+		"correctAnswer": "Baseball",
+		"incorrectAnswers": [
+			"Basketball",
+			"Football",
+			"Ice Hockey"
+		],
+		"question": {
+			"text": "Which sport is played by the Minnesota Twins?"
+		},
+		"tags": [
+			"usa",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "6477bad7550bc819ad646b32",
+		"correctAnswer": "A full house",
+		"incorrectAnswers": [
+			"A flush",
+			"A straight",
+			"Three of a kind"
+		],
+		"question": {
+			"text": "What is the name of the poker hand that consists of three cards of one rank and two cards of another rank?"
+		},
+		"tags": [
+			"card_games",
+			"games",
+			"society_and_culture"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417da50f96c4efe8d773db",
+		"correctAnswer": "San Francisco 49ers",
+		"incorrectAnswers": [
+			"San Francisco Jaguars",
+			"San Francisco Pistons",
+			"San Francisco Predators"
+		],
+		"question": {
+			"text": "Which of these is an American Football team based in San Francisco?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c347cc59eab6f94f862",
+		"correctAnswer": "Athletics",
+		"incorrectAnswers": [
+			"Motor Racing",
+			"Ice Hockey",
+			"Figure skating"
+		],
+		"question": {
+			"text": "With which sport is Tegla Laroupe associated?"
+		},
+		"tags": [
+			"people",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c347cc59eab6f94f85c",
+		"correctAnswer": "Football",
+		"incorrectAnswers": [
+			"Swimming",
+			"Tennis",
+			"Golf"
+		],
+		"question": {
+			"text": "With which sport is Wayne Rooney associated?"
+		},
+		"tags": [
+			"football",
+			"people",
+			"soccer",
+			"uk",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417d020f96c4efe8d7739b",
+		"correctAnswer": "Dallas Cowboys",
+		"incorrectAnswers": [
+			"Dallas Crew",
+			"Dallas United",
+			"Dallas Bengals"
+		],
+		"question": {
+			"text": "Which of these is an American Football team based in Dallas?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "6242e81d8c2538f9601d2f95",
+		"correctAnswer": "The Eagles",
+		"incorrectAnswers": [
+			"The Bluebirds",
+			"The Sky Blues",
+			"The Rams"
+		],
+		"question": {
+			"text": "What is the nickname of the English football team Crystal Palace?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "65056ec37a97013de78b5357",
+		"correctAnswer": "Black",
+		"incorrectAnswers": [
+			"White",
+			"Red",
+			"Pink"
+		],
+		"question": {
+			"text": "In snooker, what is the color of the last ball to be potted?"
+		},
+		"tags": [
+			"sport_and_leisure",
+			"sport",
+			"snooker"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c367cc59eab6f95005c",
+		"correctAnswer": "Adidas",
+		"incorrectAnswers": [
+			"Reebok",
+			"Puma",
+			"Nike"
+		],
+		"question": {
+			"text": "Which Sportswear Company Is The Brand With The Three Stripes?"
+		},
+		"tags": [
+			"marketing",
+			"logos",
+			"business",
+			"fashion",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c367cc59eab6f9500de",
+		"correctAnswer": "Shigeru Miyamoto",
+		"incorrectAnswers": [
+			"Yu Suzuki",
+			"Satoru Iwata",
+			"Gunpei Yokoi"
+		],
+		"question": {
+			"text": "Which legendary games designer/producer created the Super Mario Brothers franchise for Nintendo?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417ce80f96c4efe8d77391",
+		"correctAnswer": "Chicago Blackhawks",
+		"incorrectAnswers": [
+			"Chicago Thunder",
+			"Chicago Steelers",
+			"Chicago Suns"
+		],
+		"question": {
+			"text": "Which of these is a hockey team based in Chicago?"
+		},
+		"tags": [
+			"chicago",
+			"animals",
+			"hockey",
+			"nhl",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "622a1c347cc59eab6f94f857",
+		"correctAnswer": "Boxing",
+		"incorrectAnswers": [
+			"Cycling",
+			"Cricket",
+			"Ice Hockey"
+		],
+		"question": {
+			"text": "With which sport is Henry Cooper associated?"
+		},
+		"tags": [
+			"people",
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "62417cba8c3137686862d734",
+		"correctAnswer": "Atlanta Braves",
+		"incorrectAnswers": [
+			"Atlanta Seahawks",
+			"Atlanta Canadiens",
+			"Atlanta Impact"
+		],
+		"question": {
+			"text": "Which of these is a baseball team based in Atlanta?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "63a0397ec7d86251f9b65c6b",
+		"correctAnswer": "Scrabble",
+		"incorrectAnswers": [
+			"Risk",
+			"Chess",
+			"Monopoly"
+		],
+		"question": {
+			"text": "What is the name of the classic board game where players must spell words with tiles?"
+		},
+		"tags": [
+			"board_games"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "6384b44183dddfb71ee5e36a",
+		"correctAnswer": "American Football",
+		"incorrectAnswers": [
+			"Horse Racing",
+			"Tennis",
+			"Cycling"
+		],
+		"question": {
+			"text": "Which sport is played at The Super Bowl?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "easy",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "6384b44d83dddfb71ee5e36f",
+		"correctAnswer": "Soccer",
+		"incorrectAnswers": [
+			"Cycling",
+			"American Football",
+			"Sailing"
+		],
+		"question": {
+			"text": "Which sport is played at The Copa América?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "hard",
+		"regions": [],
+		"isNiche": false
+	},
+	{
+		"category": "sport_and_leisure",
+		"id": "6384b45783dddfb71ee5e373",
+		"correctAnswer": "The F1 Grand Prix",
+		"incorrectAnswers": [
+			"The FIFA World Cup",
+			"The Africa Cup of Nations",
+			"The Hopman Cup"
+		],
+		"question": {
+			"text": "Which of these is a Motorsports competition?"
+		},
+		"tags": [
+			"sport"
+		],
+		"type": "text_choice",
+		"difficulty": "medium",
+		"regions": [],
+		"isNiche": false
+	}
+]
