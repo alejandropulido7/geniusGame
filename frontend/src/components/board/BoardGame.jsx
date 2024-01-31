@@ -2,38 +2,65 @@ import React, { useState, useEffect } from 'react';
 import {FLAGS } from '../../utils/constants'
 import {CHALLENGES_IN_BOARD, getRandomObject} from '../../utils/constants'
 import StepsBoard from './StepsBoard';
-import socket from '../../config/socket'
-import {updatePositionTeam} from '../../services/teamService';
+import socket from '../../config/socket';
+import {updateBoardPositions, getSession} from '../../services/sessionService';
+import {useParams, useNavigate} from 'react-router-dom';
 
-const BoardGame = ({players}) => {
+const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
-  const [posicionJugador, setPosicionJugador] = useState(1);
+  const [session, setSession] = useState({})
   const [playersPositions, setPlayersPositions] = useState([]); 
-  const [flags, setFlags] = useState(FLAGS)
-
-  const LENGTH_BOARD = 10;
-  const QUANTITY_CHALLENGES = 5;
+  const [flags, setFlags] = useState(FLAGS);
+  const {idRoom} = useParams();
+  const navigate = useNavigate();
+  const [configBoard, setConfigBoard] = useState({
+      lenghtBoard: 10,
+      quantityChallenges: 5
+  });
+   
 
   useEffect(() => { 
-    //TODO: Consultar de BD
-    const flagPositionsSaved = localStorage.getItem('positions-GG');
-    if(flagPositionsSaved){
-      setFlagPositions(JSON.parse(flagPositionsSaved));
-    } else {
-      inizializeSteps();  
+    getSessionCreated(idRoom);       
+
+    socket.on('throwDice', (playersUpdated) => {
+      console.log(playersPositions)
+      setPlayersPositions(playersUpdated)
+    });
+
+    return () => {
+      socket.off('throwDice');
     }
   }, []);
 
-  const inizializePlayers = () => {
-    const teams = [];
-    players.map(player => {
-      teams.push({teamName: player.teamName, flagActive: player.flagActive, position: 1})
-    });
-    setPlayersPositions(teams);
+
+  socket.on('playerJoinedRoom', (playersInSession) => {
+    setPlayersPositions(playersInSession);
+  }); 
+
+  const getSessionCreated = async (idRoom) => {        
+      getSession(idRoom)
+      .then(sessionCreated => {
+          if(sessionCreated){
+              setSession(sessionCreated);
+              const boardPositions = sessionCreated.json_boardPositions;
+              if( boardPositions != ''){
+                setFlagPositions(JSON.parse(boardPositions));
+              } else {
+                inizializeSteps();  
+              } 
+              socket.emit('createNewGame', {
+                  gameId: sessionCreated.id, 
+                  lenghtBoard: configBoard.lenghtBoard, 
+                  quantityChallenges: configBoard.quantityChallenges
+              });
+          } else {
+              navigate('../room');
+          }
+      });      
   }
   
-  const inizializeSteps = () => {
-    const positionsBoard = Array.from({ length: LENGTH_BOARD }, (_, index) => index + 1);      
+  const inizializeSteps = async () => {
+    const positionsBoard = Array.from({ length: configBoard.lenghtBoard }, (_, index) => index + 1);      
     let newPositions = [];
     let addflagPositions = [];
     positionsBoard.forEach(position => {
@@ -43,61 +70,39 @@ const BoardGame = ({players}) => {
       addflagPositions.push({flag: flag, positions: generateNewSteps(newPositions)});
     }); 
     if(addflagPositions.length > 0) {
+      const savePositions = JSON.stringify(addflagPositions);
+      await updateBoardPositions(savePositions, session.id);
       setFlagPositions(addflagPositions); 
-      //TODO: Guardar en BD
-      localStorage.setItem('positions-GG', JSON.stringify(addflagPositions));
     } 
   };
 
   const generateNewSteps = (array) => {
     let positionsChallenges = [...array]
-    for (let index = 0; index < QUANTITY_CHALLENGES; index++) {
-        const random = Math.floor(Math.random() * LENGTH_BOARD) + 1;
+    for (let index = 0; index < configBoard.quantityChallenges; index++) {
+        const random = Math.floor(Math.random() * configBoard.lenghtBoard) + 1;
         positionsChallenges = positionsChallenges.map(item => item.position == random && random > 1 ? {...item, challenge: getRandomObject(CHALLENGES_IN_BOARD)} : item);
       }
       return positionsChallenges;
   }
 
-  socket.on('playerJoinedRoom', (players) => {
-    const teams = [];
-    players.map(player => {
-      teams.push({teamName: player.teamName, flagActive: player.flagActive, position: player.positionActive})
-    });
-    setPlayersPositions(teams);
-  });
-
-  
-
-  socket.on('throwDice', (data) => {
-      const playerMoved = playersPositions.find(player => player.teamName === data.teamName);
-      if(playerMoved){
-        const newPosition = playerMoved.position + data.diceValue;
-        if(newPosition <= LENGTH_BOARD){
-          const playerNewPosition = playersPositions.map(player => player.teamName == data.teamName ? {...player, position: newPosition} : player);
-          updatePositionPlayer(data, newPosition);    
-          setPlayersPositions(playerNewPosition);
-        } else {
-          return
-        }
-
-      }
-  });
-
-  async function updatePositionPlayer(data, newPosition){
-    const updatePositionPlayer = await updatePositionTeam(data.teamName, data.gameId, data.flagActive, newPosition);
-    return updatePositionPlayer;
+  const readyToPlay = () => {
+    socket.emit('startGame')
   }
-  
-  console.log(playersPositions)
 
   return (
     <div>
+      <div>
+          <h3>Game configuration</h3>
+          <h4>{codeSession}</h4>
+          <p>Minutes to answer: {session.min_to_answer}</p>
+      </div>
+      <button onClick={readyToPlay}>Ready to play</button>
       <h1>Tablero de Escalera</h1>
       {
           playersPositions.map((player) => {
               return (
                   <div key={player.teamName}>
-                      <h3>{player.teamName} - {player.position}</h3>
+                      <h3>{player.teamName} - {player.positionActive}</h3>
                   </div>
               )
           })

@@ -14,7 +14,7 @@ const BoardPlayer = () => {
     const [flagActive, setFlagActive] = useState('');
     const [positionActive, setPositionActive] = useState(1);
     const [diceResult, setDiceResult] = useState(0);
-    const [youTurn, setYouTurn] = useState(true);
+    const [youTurn, setYouTurn] = useState(false);
     const navigate = useNavigate();
 
     const getTeamCreated = async (idRoom) => {
@@ -43,6 +43,14 @@ const BoardPlayer = () => {
         getTeamCreated(idRoom);             
                
     },[]);
+
+    socket.on('turnOf', (player) => {
+        if(player.socketId == socket.id){
+            setYouTurn(true);
+        } else {
+            setYouTurn(false);
+        }
+    })
 
     const throwDice = () => {
         const randomNumber = Math.floor(Math.random() * 6) + 1;

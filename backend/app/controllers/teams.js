@@ -63,4 +63,23 @@ function updatePositionTeam(req, res) {
     });
 }
 
-module.exports = {createTeam, getTeam, getTeamByName, updatePositionTeam}
+function updatePositionTeamFromSocket(name_team, id_session, flag_active, position_active) {
+    console.log('//entra actualizar')
+    Team.update({
+        flag_active: flag_active,
+        position_active: position_active
+    },
+    {
+        where: {
+            name_team: name_team,
+            id_session: id_session
+        }
+    }).then(team => {
+        return team
+    }).catch(err => {
+        console.log(err)
+        return 0;
+    });
+}
+
+module.exports = {createTeam, getTeam, getTeamByName, updatePositionTeam, updatePositionTeamFromSocket}

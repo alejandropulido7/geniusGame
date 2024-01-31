@@ -1,10 +1,14 @@
 const detectMobileDevice = require('../utils/detectDevice');
+const {updatePositionTeamFromSocket} = require('./teams')
 
 var io
 var gameSocket
 // gamesInSession stores an array of all active socket connections
 var players = [];
-var boards = []
+var boards = [];
+var round = [];
+var lenght_board = 0;
+var quantity_challenges = 0;
 
 
 const initializeGame = (sio, socket) => {
@@ -24,20 +28,29 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("throwDice", throwDice)
 
+    gameSocket.on("startGame", startGame)
+
+
 }
 
 
-function createNewGame(gameId) {
-    console.log(gameId);
+function createNewGame(data) {
     // Return the Room ID (gameId) and the socket ID (mySocketId) to the browser client
-    this.emit('createNewGame', {gameId: gameId, mySocketId: this.id});
+    this.emit('createNewGame', {gameId: data.gameId, mySocketId: this.id});
+    lenght_board = data.lenghtBoard;
+    quantity_challenges = data.quantityChallenges;
 
     console.log('romm created')
     console.log(this.id)
-    boards.push(gameId)
+    boards.push(data.gameId)
 
     // Join the Room and wait for the other player
-    this.join(gameId)
+    this.join(data.gameId)
+}
+
+function startGame() {
+    const player = players[0];
+    io.sockets.in(player.gameId).emit('turnOf', player);    
 }
 
 function joinPlayerGame(dataPlayer) {
@@ -61,15 +74,43 @@ function joinPlayerGame(dataPlayer) {
     console.log(players)
     currentSocket.join(gameId);
 
-    io.sockets.in(gameId).emit('playerJoinedRoom', players);
+    io.sockets.in(gameId).emit('playerJoinedRoom', players.filter(player => player.gameId == gameId));
     io.sockets.in(gameId).emit('otherPlayersJoinedRoom', players);
 
 }
 
-function throwDice (dataTeam) {
+async function throwDice (dataTeam) {
     const gameId = dataTeam.gameId;
-    console.log(dataTeam.diceValue);
-    io.sockets.in(gameId).emit('throwDice', dataTeam);
+    const playersNoThrow = players.filter(player => player.teamName != dataTeam.teamName);
+    if(playersNoThrow.length != 0){
+        io.sockets.in(gameId).emit('turnOf', playersNoThrow[0]);
+    } else {
+        io.sockets.in(gameId).emit('turnOf', round[0]);
+        round = [];
+    }
+
+    const playerMoved = players.find(player => player.teamName === dataTeam.teamName);
+    console.log(playerMoved)
+    if(playerMoved != undefined){
+        const newPosition = playerMoved.positionActive + dataTeam.diceValue;
+        console.log('////cantidad posiciones: '+lenght_board)
+        if(newPosition <= lenght_board){
+            const playerNewPosition = players.map(player => player.teamName == playerMoved.teamName ? {...player, positionActive: newPosition} : player);
+            console.log('///array actualizado')
+            console.log(playerNewPosition)
+            const playerUpdated = await updatePositionTeamFromSocket(dataTeam.teamName, dataTeam.gameId, dataTeam.flagActive, newPosition);
+            console.log('///actualizado en BD')
+            console.log(playerUpdated);
+            
+            if(playerUpdated != 0){
+                players = playerNewPosition;
+                console.log(players)
+            }
+        }
+    }
+    io.sockets.in(gameId).emit('throwDice', players);
+
+    
 }
 
 

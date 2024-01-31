@@ -24,7 +24,7 @@ const StepsBoard = ({arrayPositions, flag, players}) => {
             <p>{position.challenge}</p>
             {
               players.map(player => {
-                if(player.position === position.position && flag == player.flagActive){
+                if(player.positionActive === position.position && flag == player.flagActive){
                   return (<div key={player.teamName}>
                     {player.teamName}
                   </div>);

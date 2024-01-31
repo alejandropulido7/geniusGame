@@ -12,6 +12,9 @@ const Session = sequelize.define('Session', {
   },
   min_to_answer: {
     type: DataTypes.INTEGER
+  },
+  json_boardPositions: {
+    type: DataTypes.TEXT
   }
 });
 
