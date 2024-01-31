@@ -5,6 +5,7 @@ import StepsBoard from './StepsBoard';
 import socket from '../../config/socket';
 import {updateBoardPositions, getSession} from '../../services/sessionService';
 import {useParams, useNavigate} from 'react-router-dom';
+import ContainerChallenges from '../challenges/ContainerChallenges';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
@@ -46,7 +47,7 @@ const BoardGame = () => {
               if( boardPositions != ''){
                 setFlagPositions(JSON.parse(boardPositions));
               } else {
-                inizializeSteps();  
+                inizializeSteps(idRoom);  
               } 
               socket.emit('createNewGame', {
                   gameId: sessionCreated.id, 
@@ -59,7 +60,7 @@ const BoardGame = () => {
       });      
   }
   
-  const inizializeSteps = async () => {
+  const inizializeSteps = async (idRoom) => {
     const positionsBoard = Array.from({ length: configBoard.lenghtBoard }, (_, index) => index + 1);      
     let newPositions = [];
     let addflagPositions = [];
@@ -71,7 +72,7 @@ const BoardGame = () => {
     }); 
     if(addflagPositions.length > 0) {
       const savePositions = JSON.stringify(addflagPositions);
-      await updateBoardPositions(savePositions, session.id);
+      await updateBoardPositions(savePositions, idRoom);
       setFlagPositions(addflagPositions); 
     } 
   };
@@ -80,7 +81,7 @@ const BoardGame = () => {
     let positionsChallenges = [...array]
     for (let index = 0; index < configBoard.quantityChallenges; index++) {
         const random = Math.floor(Math.random() * configBoard.lenghtBoard) + 1;
-        positionsChallenges = positionsChallenges.map(item => item.position == random && random > 1 ? {...item, challenge: getRandomObject(CHALLENGES_IN_BOARD)} : item);
+        positionsChallenges = positionsChallenges.map(item => item.position == random && (random > 1 || random == configBoard.lenghtBoard) ? {...item, challenge: getRandomObject(CHALLENGES_IN_BOARD)} : item);
       }
       return positionsChallenges;
   }
@@ -93,7 +94,7 @@ const BoardGame = () => {
     <div>
       <div>
           <h3>Game configuration</h3>
-          <h4>{codeSession}</h4>
+          <h4>{session.id}</h4>
           <p>Minutes to answer: {session.min_to_answer}</p>
       </div>
       <button onClick={readyToPlay}>Ready to play</button>
@@ -110,6 +111,7 @@ const BoardGame = () => {
       { flagPositions.map(flagPosition => {
         return <StepsBoard key={flagPosition.flag} arrayPositions={flagPosition.positions} flag={flagPosition.flag} players={playersPositions}/>
       })} 
+      <ContainerChallenges/>
     </div>
   );
 };

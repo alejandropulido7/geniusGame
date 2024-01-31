@@ -13,17 +13,13 @@ var quantity_challenges = 0;
 
 const initializeGame = (sio, socket) => {
 
-    // initialize global variables.
     io = sio 
     gameSocket = socket 
 
-    // Run code when the client disconnects from their socket session. 
     gameSocket.on("disconnect", onDisconnect)
 
-    // User creates new game room after clicking 'submit' on the frontend
     gameSocket.on("createNewGame", createNewGame)
 
-    // User creates new game room after clicking 'submit' on the frontend
     gameSocket.on("joinPlayerGame", joinPlayerGame)
 
     gameSocket.on("throwDice", throwDice)
@@ -35,7 +31,6 @@ const initializeGame = (sio, socket) => {
 
 
 function createNewGame(data) {
-    // Return the Room ID (gameId) and the socket ID (mySocketId) to the browser client
     this.emit('createNewGame', {gameId: data.gameId, mySocketId: this.id});
     lenght_board = data.lenghtBoard;
     quantity_challenges = data.quantityChallenges;
@@ -90,17 +85,11 @@ async function throwDice (dataTeam) {
     }
 
     const playerMoved = players.find(player => player.teamName === dataTeam.teamName);
-    console.log(playerMoved)
     if(playerMoved != undefined){
         const newPosition = playerMoved.positionActive + dataTeam.diceValue;
-        console.log('////cantidad posiciones: '+lenght_board)
         if(newPosition <= lenght_board){
             const playerNewPosition = players.map(player => player.teamName == playerMoved.teamName ? {...player, positionActive: newPosition} : player);
-            console.log('///array actualizado')
-            console.log(playerNewPosition)
             const playerUpdated = await updatePositionTeamFromSocket(dataTeam.teamName, dataTeam.gameId, dataTeam.flagActive, newPosition);
-            console.log('///actualizado en BD')
-            console.log(playerUpdated);
             
             if(playerUpdated != 0){
                 players = playerNewPosition;
