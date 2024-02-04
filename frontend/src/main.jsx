@@ -11,6 +11,7 @@ import BoardGame from './components/board/BoardGame.jsx';
 import Hunged from './components/challenges/Hunged.jsx';
 import Pictionary from './components/challenges/Pictionary.jsx';
 import ChainWord from './components/challenges/ChainWords.jsx';
+import ActingAndWhistle from './components/challenges/ActingAndWhistle.jsx';
 
 
 
@@ -26,6 +27,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/hunged' Component={Hunged}/>
         <Route path='/pictionary' Component={Pictionary}/>
         <Route path='/chainWord' Component={ChainWord}/>
+        <Route path='/acting' Component={ActingAndWhistle}/>
       </Routes>
     
     </BrowserRouter>

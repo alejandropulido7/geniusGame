@@ -3,12 +3,19 @@ import React, {useState} from 'react'
 const AddPlayerToTeam = ({players, setPlayers}) => {
 
   const [newPLayer, setNewPlayer] = useState('');
+  const [error, setError] = useState('');
 
   const addPlayer = () => {
-    if (newPLayer.trim() !== '') {
-      setPlayers([...players, newPLayer]);
+    if (newPLayer.trim() !== '' && newPLayer.length > 2) {
+      if(!players.includes(newPLayer)){
+        setError('');
+        setPlayers([...players, newPLayer]);
+      } else {
+        setError('Already exist that player in your team');
+      }
       setNewPlayer('');
     }
+    
   };
 
   const removePlayer = (index) => {
@@ -38,7 +45,12 @@ const AddPlayerToTeam = ({players, setPlayers}) => {
             </li>
           ))}
         </ul>
-      </div>      
+      </div>  
+      { error != "" &&
+        <div>
+          <p>{error}</p>
+      </div>
+      }    
     </>
   )
 }

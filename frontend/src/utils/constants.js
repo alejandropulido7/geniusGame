@@ -1,6 +1,6 @@
 const PICTIONARY = 'pictionary';
-const FIRST_WORD = 'word_chain'; //Palabras encadenadas por la ultima letra
-const HANGED = 'hanged';
+const WORD_CHAIN = 'word_chain'; //Palabras encadenadas por la ultima letra
+const HUNGED = 'hanged';
 const TRIVIA = 'trivia';
 const ACTING = "acting";
 const WHISTLE_SONG = "whistle_song" //silbar cancion que el oponente ponga
@@ -10,8 +10,8 @@ const FLAGS = ['blue', 'red', 'purple', 'green'];
 
 const CHALLENGES_IN_BOARD = [
     PICTIONARY,
-    FIRST_WORD,
-    HANGED,
+    WORD_CHAIN,
+    HUNGED,
     TRIVIA,
     ACTING,
     BACK_HOME,
@@ -26,5 +26,5 @@ const getRandomObject = (arrayDeObjetos) => {
     return arrayDeObjetos[indiceAleatorio];
   }
 
-export {CHALLENGES_IN_BOARD, PICTIONARY, FIRST_WORD, HANGED, TRIVIA, ACTING, BACK_HOME, getRandomObject, FLAGS}
+export {CHALLENGES_IN_BOARD, PICTIONARY, WORD_CHAIN, HUNGED, TRIVIA, ACTING, BACK_HOME, getRandomObject, FLAGS}
 

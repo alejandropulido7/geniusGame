@@ -22,8 +22,12 @@ const AppTeam = () => {
         const jsonPlayers = JSON.stringify(players);
         console.log(jsonPlayers);
         createTeam(sessionId, teamName, jsonPlayers, '', flagSelected)
-          .then(() => {
-            navigate(sessionId);
+          .then((team) => {
+            if(!team.error){              
+              navigate(sessionId);
+            } else {
+              setError(team.error);
+            }
           })
           .catch(err => {
             setError(err);
@@ -37,15 +41,36 @@ const AppTeam = () => {
     setFlagSelected(event.target.value);
   };
 
-  const entrySessionGame = () => {
-    setCookie('teamName-GG', teamName, 1);
-    if(players.length > 0 && flagSelected !== '') {
-      setError('')
-      getSessionCreated();
-    } else {
-      setError('Team dont have any players');
-    }
+  const entrySessionGame = () => {  
+    setCookie('teamName-GG', teamName, 1);  
+    setError('');
+    if(validateFields()){
+      if(error == '') {
+        getSessionCreated();
+      }
+    };
   }
+
+  const validateFields = () => {
+    if(sessionId == ''){
+      setError('Type the room code');
+      return false;
+    }
+    if(teamName == ''){
+      setError('Type some name for your team');
+      return false;
+    }
+    if(players.length == 0){
+      setError('Team dont have any players');
+      return false;
+    }
+    if(flagSelected == ''){
+      setError('Select one board to start');
+      return false;
+    }    
+    return true;
+  }
+
 
   return (
     <div>

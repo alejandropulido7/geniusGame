@@ -5,19 +5,34 @@ function createTeam(req, res) {
     console.log(req.body.name_team)
     console.log(req.body.id_session)
 
-    Team.create({
-        name_team: req.body.name_team,
-        avatar: req.body.avatar,
-        score_game: 0,
-        status: true,
-        players: req.body.players,
-        id_session: req.body.id_session,
-        flag_active: req.body.flag_active
+    Team.findOne({
+        where: {
+            name_team: req.body.name_team,
+            id_session: req.body.id_session
+        }
     }).then(team => {
-        res.status(200).json(team)
+        if(team == null){
+            Team.create({
+                name_team: req.body.name_team,
+                avatar: req.body.avatar,
+                score_game: 0,
+                status: true,
+                players: req.body.players,
+                id_session: req.body.id_session,
+                flag_active: req.body.flag_active
+            }).then(team => {
+                res.status(200).json(team)
+            }).catch(err => {
+                return res.status(400).json({error: 'An error occurred: '+err});
+            });
+        } else {
+            res.status(400).json({error:'Team already has been created'});
+        }
     }).catch(err => {
-        return res.status(400).json(['An error occurred: '+err]);
+        return res.status(400).json({error:'An error occurred: '+err});
     });
+
+    
 }
 
 function getTeam(req, res) {
@@ -63,22 +78,18 @@ function updatePositionTeam(req, res) {
     });
 }
 
-function updatePositionTeamFromSocket(name_team, id_session, flag_active, position_active) {
+function updatePositionTeamFromSocket(name_team, id_session, flag_active, position_active, prev_position) {
     console.log('//entra actualizar')
-    Team.update({
+    return Team.update({
         flag_active: flag_active,
-        position_active: position_active
+        position_active: position_active,
+        prev_position: prev_position
     },
     {
         where: {
             name_team: name_team,
             id_session: id_session
         }
-    }).then(team => {
-        return team
-    }).catch(err => {
-        console.log(err)
-        return 0;
     });
 }
 

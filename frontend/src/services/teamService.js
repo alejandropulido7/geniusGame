@@ -2,9 +2,6 @@ import axios from 'axios';
 
 
 async function createTeam(id_session, name_team, players, avatar, flag_active) {
-    console.log(id_session)
-    console.log(name_team);
-    console.log(flag_active)
     try {
         const response = await axios.post(`http://localhost:5000/api/teams`, {
             id_session,
@@ -15,10 +12,12 @@ async function createTeam(id_session, name_team, players, avatar, flag_active) {
         });
         return response.data;
     } catch (error) {
-        console.error('Error:', error.message);
-        return error;
+        console.error('Error:', error.response.data);
+        return error.response.data;
     }
 }
+
+
 
 async function getTeam(idTeam) {
     try {
@@ -35,6 +34,7 @@ async function getTeamByName(name_team, id_session) {
         return response.data;
     } catch (error) {
         console.error('Error:', error.message);
+        console.log(error);
     }
 }
 

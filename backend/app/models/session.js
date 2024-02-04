@@ -13,6 +13,13 @@ const Session = sequelize.define('Session', {
   min_to_answer: {
     type: DataTypes.INTEGER
   },
+  gameStarted: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  turnOf: {
+    type: DataTypes.TEXT
+  },
   json_boardPositions: {
     type: DataTypes.TEXT
   }

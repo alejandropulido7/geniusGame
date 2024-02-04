@@ -4,7 +4,8 @@ import socket from '../../config/socket';
 import { getCookie } from '../../utils/cookies';
 import OtherPlayers from './OtherPlayers';
 import { Link, useNavigate } from 'react-router-dom';
-import {getTeamByName} from '../../services/teamService'
+import {getTeamByName} from '../../services/teamService';
+import {getSession} from '../../services/sessionService';
 
 const BoardPlayer = () => {
 
@@ -13,19 +14,19 @@ const BoardPlayer = () => {
     const {idRoom} = useParams();
     const [flagActive, setFlagActive] = useState('');
     const [positionActive, setPositionActive] = useState(1);
+    const [prevPosition, setPrevPosition] = useState(1);
     const [diceResult, setDiceResult] = useState(0);
     const [youTurn, setYouTurn] = useState(false);
     const navigate = useNavigate();
 
-    const getTeamCreated = async (idRoom) => {
+    const getTeamCreated = (idRoom) => {
         const nameTeamCookie = getCookie('teamName-GG');
-        const teamCreatedinSession = await getTeamByName(nameTeamCookie, idRoom);
-        if(!teamCreatedinSession) {
-            navigate('../player')
-        }else {
+        getTeamByName(nameTeamCookie, idRoom)
+        .then((teamCreatedinSession) => {
             setTeamName(nameTeamCookie);
-            console.log(teamCreatedinSession)
+            console.log(teamCreatedinSession);
             setFlagActive(teamCreatedinSession.flag_active);
+            setPrevPosition(teamCreatedinSession.prev_position)
             setPositionActive(teamCreatedinSession.position_active);
             socket.emit('joinPlayerGame', {
                 gameId: teamCreatedinSession.id_session,
@@ -33,8 +34,15 @@ const BoardPlayer = () => {
                 flagActive: teamCreatedinSession.flag_active,
                 positionActive: teamCreatedinSession.position_active
             });
-            
-        }
+            getSession(idRoom)
+            .then((sessionCreated) => {
+                if(sessionCreated.turnOf == nameTeamCookie){
+                    setYouTurn(true);
+                }
+            })
+        }).catch(()=>{
+            navigate('../player')
+        });
     }
 
     useEffect(() => {
@@ -59,7 +67,8 @@ const BoardPlayer = () => {
             gameId: codeSesion,
             teamName,
             diceValue: randomNumber,
-            flagActive
+            flagActive,
+            prev_position: prevPosition
         });
       };
 

@@ -1,5 +1,6 @@
 const detectMobileDevice = require('../utils/detectDevice');
-const {updatePositionTeamFromSocket} = require('./teams')
+const {updatePositionTeamFromSocket} = require('./teams');
+const {updateTurnOfTeamFromSocket} = require('./sessions')
 
 var io
 var gameSocket
@@ -26,6 +27,8 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("startGame", startGame)
 
+    gameSocket.on("renderChallenge", renderChallenge)
+
 
 }
 
@@ -45,7 +48,13 @@ function createNewGame(data) {
 
 function startGame() {
     const player = players[0];
-    io.sockets.in(player.gameId).emit('turnOf', player);    
+    updateTurnOfTeamFromSocket(player.gameId, true, player.teamName)
+    .then(() => {
+        io.sockets.in(player.gameId).emit('turnOf', player);
+    })
+    .catch(err => {
+        console.error(err);
+    });
 }
 
 function joinPlayerGame(dataPlayer) {
@@ -74,32 +83,57 @@ function joinPlayerGame(dataPlayer) {
 
 }
 
-async function throwDice (dataTeam) {
+function throwDice (dataTeam) {
     const gameId = dataTeam.gameId;
     const playersNoThrow = players.filter(player => player.teamName != dataTeam.teamName);
     if(playersNoThrow.length != 0){
-        io.sockets.in(gameId).emit('turnOf', playersNoThrow[0]);
-    } else {
-        io.sockets.in(gameId).emit('turnOf', round[0]);
-        round = [];
+        updateTurnOfTeamFromSocket(gameId, true, playersNoThrow[0].teamName)
+        .then(() => {
+            io.sockets.in(gameId).emit('turnOf', playersNoThrow[0]);            
+        })
+        .catch(err => {
+            console.error("Update turn to throw");
+            console.error(err);
+        });
+    } else {        
+        updateTurnOfTeamFromSocket(gameId, true, round[0].teamName)
+        .then(() => {
+            io.sockets.in(gameId).emit('turnOf', round[0]);
+            round = [];           
+        })
+        .catch(err => {
+            console.error("Update turn to throw");
+            console.error(err);
+        });
     }
 
     const playerMoved = players.find(player => player.teamName === dataTeam.teamName);
     if(playerMoved != undefined){
         const newPosition = playerMoved.positionActive + dataTeam.diceValue;
         if(newPosition <= lenght_board){
-            const playerNewPosition = players.map(player => player.teamName == playerMoved.teamName ? {...player, positionActive: newPosition} : player);
-            const playerUpdated = await updatePositionTeamFromSocket(dataTeam.teamName, dataTeam.gameId, dataTeam.flagActive, newPosition);
-            
-            if(playerUpdated != 0){
+            const playerMovedModified = {...playerMoved};
+            playerMovedModified.positionActive = newPosition;
+            io.sockets.in(gameId).emit('playerMoved', playerMovedModified);
+            const prev_position = playerMoved.positionActive;
+            const playerNewPosition = players.map(player => player.teamName == playerMoved.teamName ? {...player, prev_position: prev_position, positionActive: newPosition} : player);
+            updatePositionTeamFromSocket(dataTeam.teamName, dataTeam.gameId, dataTeam.flagActive, newPosition, prev_position)
+            .then(() => {
                 players = playerNewPosition;
-                console.log(players)
-            }
+                io.sockets.in(gameId).emit('throwDice', players);
+                
+            })
+            .catch(err => {
+                console.error(err)
+            });
         }
     }
-    io.sockets.in(gameId).emit('throwDice', players);
+}
 
-    
+function renderChallenge(data) {
+    if(data.challenge != ""){
+        console.log(data);
+        io.sockets.in(data.player.gameId).emit('renderChallenge', data);
+    }
 }
 
 

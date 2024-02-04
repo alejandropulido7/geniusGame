@@ -6,11 +6,15 @@ import socket from '../../config/socket';
 import {updateBoardPositions, getSession} from '../../services/sessionService';
 import {useParams, useNavigate} from 'react-router-dom';
 import ContainerChallenges from '../challenges/ContainerChallenges';
+import DataGame from './DataGame';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
   const [session, setSession] = useState({})
-  const [playersPositions, setPlayersPositions] = useState([]); 
+  const [playersPositions, setPlayersPositions] = useState([]);
+  const [gameStarted, setGameStarted] = useState(false); 
+  const [isChallengeActive, setIsChallengeActive] = useState(false);
+  const [dataChallengeActive, setDataChallengeActive] = useState({});
   const [flags, setFlags] = useState(FLAGS);
   const {idRoom} = useParams();
   const navigate = useNavigate();
@@ -28,6 +32,13 @@ const BoardGame = () => {
       setPlayersPositions(playersUpdated)
     });
 
+    socket.on('renderChallenge', (dataChallenge) => {
+      if(dataChallenge.challenge != ''){
+        setIsChallengeActive(true);
+        setDataChallengeActive(dataChallenge);
+      }
+    })
+
     return () => {
       socket.off('throwDice');
     }
@@ -43,6 +54,7 @@ const BoardGame = () => {
       .then(sessionCreated => {
           if(sessionCreated){
               setSession(sessionCreated);
+              setGameStarted(sessionCreated.gameStarted);
               const boardPositions = sessionCreated.json_boardPositions;
               if( boardPositions != ''){
                 setFlagPositions(JSON.parse(boardPositions));
@@ -81,37 +93,23 @@ const BoardGame = () => {
     let positionsChallenges = [...array]
     for (let index = 0; index < configBoard.quantityChallenges; index++) {
         const random = Math.floor(Math.random() * configBoard.lenghtBoard) + 1;
-        positionsChallenges = positionsChallenges.map(item => item.position == random && (random > 1 || random == configBoard.lenghtBoard) ? {...item, challenge: getRandomObject(CHALLENGES_IN_BOARD)} : item);
+        positionsChallenges = positionsChallenges.map(item => item.position == random && (random > 1 && random != configBoard.lenghtBoard) ? {...item, challenge: getRandomObject(CHALLENGES_IN_BOARD)} : item);
       }
       return positionsChallenges;
-  }
-
-  const readyToPlay = () => {
-    socket.emit('startGame')
   }
 
   return (
     <div>
       <div>
           <h3>Game configuration</h3>
-          <h4>{session.id}</h4>
-          <p>Minutes to answer: {session.min_to_answer}</p>
       </div>
-      <button onClick={readyToPlay}>Ready to play</button>
-      <h1>Tablero de Escalera</h1>
-      {
-          playersPositions.map((player) => {
-              return (
-                  <div key={player.teamName}>
-                      <h3>{player.teamName} - {player.positionActive}</h3>
-                  </div>
-              )
-          })
-      }
-      { flagPositions.map(flagPosition => {
-        return <StepsBoard key={flagPosition.flag} arrayPositions={flagPosition.positions} flag={flagPosition.flag} players={playersPositions}/>
-      })} 
-      <ContainerChallenges/>
+      <DataGame playersPositions={playersPositions} session={session} startGame={gameStarted}/>
+      { !isChallengeActive && <div>
+        { flagPositions.map(flagPosition => {
+          return <StepsBoard key={flagPosition.flag} arrayPositions={flagPosition.positions} flag={flagPosition.flag} players={playersPositions}/>
+        })} 
+      </div>}
+      { isChallengeActive && <ContainerChallenges setActiveChallenge={setIsChallengeActive} dataChallenge={dataChallengeActive}/>}
     </div>
   );
 };

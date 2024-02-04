@@ -24,6 +24,10 @@ const Team = sequelize.define('Team', {
     flags_obtained: {
         type: DataTypes.TEXT
     },
+    prev_position: {
+        type: DataTypes.INTEGER,
+        defaultValue: 1
+    },
     position_active: {
         type: DataTypes.INTEGER,
         defaultValue: 1

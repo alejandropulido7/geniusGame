@@ -6,6 +6,8 @@ function createSesion(req, res) {
         id: req.body.codeSession,
         idHost: req.body.idHost,
         min_to_answer: req.body.configGame.min_to_answer,
+        turnOf: '',
+        gameStarted: false,
         json_boardPositions: ''
     }).then(session => {
         res.status(200).json(session)
@@ -48,4 +50,17 @@ function getSesion(req, res) {
 
 }
 
-module.exports = {createSesion, getSesion, updateBoardPositions};
+function updateTurnOfTeamFromSocket(id_session, gameStarted, name_team) {
+    return Session.update({
+        turnOf: name_team,
+        gameStarted
+    },
+    {
+        where: {
+            id: id_session
+        }
+    });
+}
+
+
+module.exports = {createSesion, getSesion, updateBoardPositions, updateTurnOfTeamFromSocket};
