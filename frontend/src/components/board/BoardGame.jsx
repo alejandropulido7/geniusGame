@@ -14,7 +14,6 @@ const BoardGame = () => {
   const [playersPositions, setPlayersPositions] = useState([]);
   const [gameStarted, setGameStarted] = useState(false); 
   const [isChallengeActive, setIsChallengeActive] = useState(false);
-  const [dataChallengeActive, setDataChallengeActive] = useState({});
   const [flags, setFlags] = useState(FLAGS);
   const {idRoom} = useParams();
   const navigate = useNavigate();
@@ -31,23 +30,16 @@ const BoardGame = () => {
       console.log(playersPositions)
       setPlayersPositions(playersUpdated)
     });
-
-    socket.on('renderChallenge', (dataChallenge) => {
-      if(dataChallenge.challenge != ''){
-        setIsChallengeActive(true);
-        setDataChallengeActive(dataChallenge);
-      }
-    })
-
+    
     return () => {
       socket.off('throwDice');
+      setFlagPositions([]);
     }
   }, []);
 
-
   socket.on('playerJoinedRoom', (playersInSession) => {
     setPlayersPositions(playersInSession);
-  }); 
+  });  
 
   const getSessionCreated = async (idRoom) => {        
       getSession(idRoom)
@@ -83,9 +75,11 @@ const BoardGame = () => {
       addflagPositions.push({flag: flag, positions: generateNewSteps(newPositions)});
     }); 
     if(addflagPositions.length > 0) {
+      console.log('addflagPositions GENERADA');
+      console.log(addflagPositions);
+      setFlagPositions(addflagPositions); 
       const savePositions = JSON.stringify(addflagPositions);
       await updateBoardPositions(savePositions, idRoom);
-      setFlagPositions(addflagPositions); 
     } 
   };
 
@@ -98,18 +92,19 @@ const BoardGame = () => {
       return positionsChallenges;
   }
 
+
   return (
     <div>
       <div>
           <h3>Game configuration</h3>
       </div>
-      <DataGame playersPositions={playersPositions} session={session} startGame={gameStarted}/>
+      <DataGame playersPositions={playersPositions} session={session} startGame={gameStarted} setStartGame={setGameStarted}/>
       { !isChallengeActive && <div>
         { flagPositions.map(flagPosition => {
           return <StepsBoard key={flagPosition.flag} arrayPositions={flagPosition.positions} flag={flagPosition.flag} players={playersPositions}/>
         })} 
       </div>}
-      { isChallengeActive && <ContainerChallenges setActiveChallenge={setIsChallengeActive} dataChallenge={dataChallengeActive}/>}
+      <ContainerChallenges setActiveChallenge={setIsChallengeActive}/>
     </div>
   );
 };

@@ -16,7 +16,6 @@ import ActingAndWhistle from './components/challenges/ActingAndWhistle.jsx';
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path='/' Component={AppBoard}/>
@@ -28,9 +27,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path='/pictionary' Component={Pictionary}/>
         <Route path='/chainWord' Component={ChainWord}/>
         <Route path='/acting' Component={ActingAndWhistle}/>
-      </Routes>
-    
-    </BrowserRouter>
-
-  </React.StrictMode>,
+      </Routes>    
+    </BrowserRouter>,
 )

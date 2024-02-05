@@ -23,7 +23,13 @@ const AppTeam = () => {
         console.log(jsonPlayers);
         createTeam(sessionId, teamName, jsonPlayers, '', flagSelected)
           .then((team) => {
-            if(!team.error){              
+            if(!team.error){
+              socket.emit('joinPlayerGame', {
+                gameId: sessionId,
+                teamName: teamName,
+                flagActive: flagSelected,
+                positionActive: 1
+              });              
               navigate(sessionId);
             } else {
               setError(team.error);

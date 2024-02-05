@@ -27,17 +27,18 @@ const StepsBoard = ({arrayPositions, flag, players}) => {
   }
 
   const emitChallenge = (player) => {
-    const positionPlayerInArray = arrayPositions.find(position => position.position == player.positionActive && flag == player.flagActive);
-    console.log('positionPlayerInArray');
-    console.log(positionPlayerInArray);
-    if(positionPlayerInArray && positionPlayerInArray.challenge != ''){
-      const ongoingChallenge = {
-        challenge: positionPlayerInArray.challenge,
-        player: player
-      };
-      localStorage.setItem('ongoingChallenge-GG', JSON.stringify(ongoingChallenge));
-      socket.emit('renderChallenge', ongoingChallenge);
-    }
+    const positionPlayerInArray = arrayPositions.find(position => flag === player.flagActive && position.position === player.positionActive);
+      console.log('positionPlayerInArray');
+      console.log(positionPlayerInArray);
+      if(positionPlayerInArray && positionPlayerInArray.challenge != ''){
+        const ongoingChallenge = {
+          challenge: positionPlayerInArray.challenge,
+          player: player
+        };
+        localStorage.setItem('ongoingChallenge-GG', JSON.stringify(ongoingChallenge));
+        socket.emit('renderChallenge', ongoingChallenge);
+      }
+    
   }
 
   return (
