@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Hunged = () => {
+const Hunged = ({setActiveChallenge}) => {
   const palabras = ['react', 'javascript', 'componente', 'desarrollo', 'ahorcado'];
 //   const palabraSecreta = palabras[Math.floor(Math.random() * palabras.length)];
     const palabraSecreta = 'javascript';
@@ -71,6 +71,7 @@ const Hunged = () => {
           <button onClick={reiniciarJuego}>Reiniciar Juego</button>
         </div>
       )}
+      <button onClick={() => setActiveChallenge(false)}>Terminar</button>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-const Pictionary = () => {
+const Pictionary = ({setActiveChallenge}) => {
   const canvasRef = useRef(null);
   const canvasRefBoard = useRef(null);
   const [context, setContext] = useState(null);
@@ -104,6 +104,7 @@ const Pictionary = () => {
                 style={{ border: '1px solid #ccc' }}
             />
         </div>
+        <button onClick={() => setActiveChallenge(false)}>Terminar</button>
     </div>
   );
 };

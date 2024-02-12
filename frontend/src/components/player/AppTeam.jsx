@@ -4,7 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import {getSession} from '../../services/sessionService'
 import {createTeam} from '../../services/teamService'
 import AddPlayerToTeam from './AddPlayerToTeam';
-import { FLAGS } from '../../utils/constants'
+import { FLAGS } from '../../utils/constants';
+import socket from '../../config/socket';
 
 const AppTeam = () => {
 
@@ -23,13 +24,7 @@ const AppTeam = () => {
         console.log(jsonPlayers);
         createTeam(sessionId, teamName, jsonPlayers, '', flagSelected)
           .then((team) => {
-            if(!team.error){
-              socket.emit('joinPlayerGame', {
-                gameId: sessionId,
-                teamName: teamName,
-                flagActive: flagSelected,
-                positionActive: 1
-              });              
+            if(!team.error){                           
               navigate(sessionId);
             } else {
               setError(team.error);
@@ -52,6 +47,12 @@ const AppTeam = () => {
     setError('');
     if(validateFields()){
       if(error == '') {
+        socket.emit('joinPlayerGame', {
+          gameId: sessionId,
+          teamName: teamName,
+          flagActive: flagSelected,
+          positionActive: 1
+        });
         getSessionCreated();
       }
     };

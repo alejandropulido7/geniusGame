@@ -26,5 +26,5 @@ const getRandomObject = (arrayDeObjetos) => {
     return arrayDeObjetos[indiceAleatorio];
   }
 
-export {CHALLENGES_IN_BOARD, PICTIONARY, WORD_CHAIN, HUNGED, TRIVIA, ACTING, BACK_HOME, getRandomObject, FLAGS}
+export {CHALLENGES_IN_BOARD, PICTIONARY, WORD_CHAIN, HUNGED, TRIVIA, ACTING, BACK_HOME, WHISTLE_SONG, getRandomObject, FLAGS}
 

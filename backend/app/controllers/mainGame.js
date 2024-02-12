@@ -38,9 +38,9 @@ function createNewGame(data) {
     lenght_board = data.lenghtBoard;
     quantity_challenges = data.quantityChallenges;
 
-    console.log('romm created')
-    console.log(this.id)
-    boards.push(data.gameId)
+    console.log('romm created');
+    console.log(this.id);
+    boards.push({gameId: data.gameId, mySocketId: this.id});
 
     // Join the Room and wait for the other player
     this.join(data.gameId)
@@ -78,13 +78,15 @@ function joinPlayerGame(dataPlayer) {
     console.log(players)
     currentSocket.join(gameId);
 
-    io.sockets.in(gameId).emit('playerJoinedRoom', players.filter(player => player.gameId == gameId));
+    // io.sockets.in(gameId).emit('playerJoinedRoom', players.filter(player => player.gameId == gameId));
+    io.sockets.in(gameId).emit('playerJoinedRoom', players);
     io.sockets.in(gameId).emit('otherPlayersJoinedRoom', players);
 
 }
 
 function throwDice (dataTeam) {
     const gameId = dataTeam.gameId;
+    round.push(dataTeam)
     const playersNoThrow = players.filter(player => player.teamName != dataTeam.teamName);
     if(playersNoThrow.length != 0){
         updateTurnOfTeamFromSocket(gameId, true, playersNoThrow[0].teamName)
@@ -112,19 +114,19 @@ function throwDice (dataTeam) {
         const newPosition = playerMoved.positionActive + dataTeam.diceValue;
         if(newPosition <= lenght_board){
             const playerMovedModified = {...playerMoved};
+            playerMovedModified.prev_position = playerMovedModified.positionActive;
             playerMovedModified.positionActive = newPosition;
-            io.sockets.in(gameId).emit('playerMoved', playerMovedModified);
             const prev_position = playerMoved.positionActive;
             const playerNewPosition = players.map(player => player.teamName == playerMoved.teamName ? {...player, prev_position: prev_position, positionActive: newPosition} : player);
             updatePositionTeamFromSocket(dataTeam.teamName, dataTeam.gameId, dataTeam.flagActive, newPosition, prev_position)
             .then(() => {
                 players = playerNewPosition;
-                io.sockets.in(gameId).emit('throwDice', players);
-                
+                io.sockets.in(gameId).emit('throwDice', {playermoved: playerMovedModified, players });  
             })
             .catch(err => {
                 console.error(err)
             });
+
         }
     }
 }

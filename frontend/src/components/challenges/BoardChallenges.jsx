@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Chronometer from './Chronometer';
-import {ACTING, BACK_HOME, WORD_CHAIN, HUNGED, PICTIONARY, TRIVIA} from '../../utils/constants'
+import {ACTING, BACK_HOME, WORD_CHAIN, HUNGED, PICTIONARY, TRIVIA, WHISTLE_SONG} from '../../utils/constants'
 import Hunged from './Hunged';
 import ActingAndWhistle from './ActingAndWhistle';
 import ChainWord from './ChainWords';
@@ -8,7 +8,7 @@ import Pictionary from './Pictionary';
 import Trivia from './Trivia';
 import socket from '../../config/socket';
 
-const ContainerChallenges = ({setActiveChallenge}) => {
+const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
 
   const [challengeFinished, setChallengeFinished] = useState(false);
   const [componentChallenge, setComponentChallenge] = useState(null);
@@ -17,31 +17,35 @@ const ContainerChallenges = ({setActiveChallenge}) => {
   useEffect(() => {
     socket.on('renderChallenge', (dataChallenge) => {
       console.log('dataChallenge');
-      console.log(dataChallenge);
+      console.log(dataChallenge);      
       if(dataChallenge.challenge != ''){
         setActiveChallenge(true);
         setDataChallengeActive(dataChallenge);
+        
       }
     });
 
     switch (dataChallengeActive.challenge) {
       case ACTING:
-        setComponentChallenge(<ActingAndWhistle/>)
+        setComponentChallenge(<ActingAndWhistle setActiveChallenge={setActiveChallenge}/>)
+        break;
+      case WHISTLE_SONG:
+        setComponentChallenge(<ActingAndWhistle setActiveChallenge={setActiveChallenge}/>)
         break;
       case WORD_CHAIN:
-        setComponentChallenge(<ChainWord/>)
+        setComponentChallenge(<ChainWord setActiveChallenge={setActiveChallenge}/>)
         break;
       case PICTIONARY:
-        setComponentChallenge(<Pictionary/>)
+        setComponentChallenge(<Pictionary setActiveChallenge={setActiveChallenge}/>)
         break;
       case TRIVIA:
-        setComponentChallenge(<Trivia/>)
+        setComponentChallenge(<Trivia setActiveChallenge={setActiveChallenge}/>)
         break;
       case HUNGED:
-        setComponentChallenge(<Hunged/>)
+        setComponentChallenge(<Hunged setActiveChallenge={setActiveChallenge}/>)
         break;  
       case BACK_HOME:
-        setComponentChallenge(<h1>BACK HOME</h1>)
+        setComponentChallenge(<div><h1>BACK HOME</h1><button onClick={() => setActiveChallenge(false)}>Terminar</button></div>)
         break; 
       default:
         setComponentChallenge(null)
@@ -57,11 +61,15 @@ const ContainerChallenges = ({setActiveChallenge}) => {
 
   return (
     <div>
-      <h1>Contenedor de visor de challenges</h1>
-      <Chronometer setChallengeFinished={setChallengeFinished}/>
-      {componentChallenge}
+      { activeChallenge && 
+      <>
+        <h1>Contenedor de visor de challenges</h1>
+        <Chronometer setChallengeFinished={setChallengeFinished}/>
+        {componentChallenge}
+      </>
+      }
     </div>
   )
 }
 
-export default ContainerChallenges
+export default BoardChallenges

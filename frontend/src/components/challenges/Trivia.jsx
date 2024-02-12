@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Trivia = () => {
+const Trivia = ({setActiveChallenge}) => {
   const [preguntaActual, setPreguntaActual] = useState('');
   const [opciones, setOpciones] = useState([]);
   const [respuestaCorrecta, setRespuestaCorrecta] = useState('');
@@ -51,6 +51,7 @@ const Trivia = () => {
       </ul>
       <p>Puntaje: {puntaje}</p>
       <button onClick={reiniciarJuego}>Reiniciar Juego</button>
+      <button onClick={() => setActiveChallenge(false)}>Terminar</button>
     </div>
   );
 };

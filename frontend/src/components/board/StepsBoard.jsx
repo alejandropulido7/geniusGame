@@ -8,38 +8,8 @@ const StepsBoard = ({arrayPositions, flag, players}) => {
   const [posicionJugador, setPosicionJugador] = useState(1);
   
   useEffect(() => {
-    // renderOngoingChallenge(); //Se envia varias veces al recargar la pagina
-    socket.on("playerMoved", (player) => {
-      emitChallenge(player);
-    });
 
-    return () => {
-      socket.off('playerMoved');
-    }
   }, []);
-
-  const renderOngoingChallenge = () => {
-    const ongoingChallenge = localStorage.getItem('ongoingChallenge-GG');
-    if(ongoingChallenge){
-      const challenge = JSON.parse(ongoingChallenge);
-      socket.emit('renderChallenge', challenge);
-    }
-  }
-
-  const emitChallenge = (player) => {
-    const positionPlayerInArray = arrayPositions.find(position => flag === player.flagActive && position.position === player.positionActive);
-      console.log('positionPlayerInArray');
-      console.log(positionPlayerInArray);
-      if(positionPlayerInArray && positionPlayerInArray.challenge != ''){
-        const ongoingChallenge = {
-          challenge: positionPlayerInArray.challenge,
-          player: player
-        };
-        localStorage.setItem('ongoingChallenge-GG', JSON.stringify(ongoingChallenge));
-        socket.emit('renderChallenge', ongoingChallenge);
-      }
-    
-  }
 
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>
@@ -50,8 +20,7 @@ const StepsBoard = ({arrayPositions, flag, players}) => {
             style={{
               border: '1px solid #ccc',
               textAlign: 'center',
-              lineHeight: '50px',
-              background: position.position === posicionJugador ? 'lightblue' : 'white',
+              lineHeight: '50px'
             }}
           >
             <p>{position.position}</p>
@@ -59,8 +28,9 @@ const StepsBoard = ({arrayPositions, flag, players}) => {
             {
               players.map(player => {
                 if(player.positionActive === position.position && flag == player.flagActive){                  
-                  return (<div key={player.teamName}>
-                    {player.teamName}
+                  return (
+                  <div key={player.teamName}>
+                    <p style={{background: 'green', padding: '2px', color: '#FFF'}}>{player.teamName}</p>
                   </div>);
                 }else{
                   return null

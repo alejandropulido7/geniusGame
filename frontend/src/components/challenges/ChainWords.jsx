@@ -5,7 +5,7 @@ const ChainWord = () => {
   const [nuevaPalabra, setNuevaPalabra] = useState('');
   const [historialPalabras, setHistorialPalabras] = useState([]);
 
-  const manejarNuevaPalabra = () => {
+  const manejarNuevaPalabra = ({setActiveChallenge}) => {
     if (nuevaPalabra && (!ultimaPalabra || nuevaPalabra.charAt(0).toLowerCase() === ultimaPalabra.slice(-1).toLowerCase())) {
       setHistorialPalabras([...historialPalabras, nuevaPalabra]);
       setUltimaPalabra(nuevaPalabra);
@@ -29,6 +29,7 @@ const ChainWord = () => {
         <input type="text" value={nuevaPalabra} onChange={(e) => setNuevaPalabra(e.target.value)} />
       </label>
       <button onClick={manejarNuevaPalabra}>Agregar Palabra</button>
+      <button onClick={() => setActiveChallenge(false)}>Terminar</button>
     </div>
   );
 };

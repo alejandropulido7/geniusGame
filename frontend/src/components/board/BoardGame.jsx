@@ -5,7 +5,7 @@ import StepsBoard from './StepsBoard';
 import socket from '../../config/socket';
 import {updateBoardPositions, getSession} from '../../services/sessionService';
 import {useParams, useNavigate} from 'react-router-dom';
-import ContainerChallenges from '../challenges/ContainerChallenges';
+import BoardChallenges from '../challenges/BoardChallenges';
 import DataGame from './DataGame';
 
 const BoardGame = () => {
@@ -18,28 +18,70 @@ const BoardGame = () => {
   const {idRoom} = useParams();
   const navigate = useNavigate();
   const [configBoard, setConfigBoard] = useState({
-      lenghtBoard: 10,
+      lenghtBoard: 17,
       quantityChallenges: 5
   });
+  let boardSteps = [];
    
 
   useEffect(() => { 
-    getSessionCreated(idRoom);       
+    getSessionCreated(idRoom);   
 
-    socket.on('throwDice', (playersUpdated) => {
-      console.log(playersPositions)
-      setPlayersPositions(playersUpdated)
+    socket.on('throwDice', (data) => {      
+      stepByStep(data);
     });
     
+
     return () => {
       socket.off('throwDice');
-      setFlagPositions([]);
     }
   }, []);
 
   socket.on('playerJoinedRoom', (playersInSession) => {
     setPlayersPositions(playersInSession);
-  });  
+  }); 
+
+
+  const stepByStep = (data) => {
+    
+    const playersInSession = data.players;
+    const playerModified = {...data.playermoved};
+    let step = playerModified.prev_position;      
+    const playerWithChallenge = validateIfPositionHaveChallenge(playerModified);
+
+    const intervalo = setInterval(() => {
+      if(step < playerModified.positionActive){
+        step = step + 1;
+        playerModified.step = step;
+        console.log('Intervalo ejecutándose: '+playerModified.step);
+        const playerNewPosition = playersInSession.map(player => player.teamName == playerModified.teamName ? {...player, prev_position: playerModified.prev_position, positionActive: step, step} : player);
+        setPlayersPositions(playerNewPosition);
+      } else {
+        clearInterval(intervalo);
+        if(playerWithChallenge && playerWithChallenge.challenge != ''){
+          setTimeout(() => {
+            socket.emit('renderChallenge', playerWithChallenge);
+          }, 700);
+        }
+      }
+    }, 700);
+  }
+
+  const validateIfPositionHaveChallenge = (playerModified) => {
+    const flagBoard = boardSteps.find(board => board.flag == playerModified.flagActive);
+    let playerChallenge = {};
+    if(flagBoard){
+      playerChallenge = flagBoard.positions.find(position => position.position == playerModified.positionActive);
+    }
+    let ongoingChallenge = {};
+    if(playerChallenge){
+      ongoingChallenge = {
+        challenge: playerChallenge.challenge,
+        player: playerModified
+      };
+    }
+    return ongoingChallenge;
+  }
 
   const getSessionCreated = async (idRoom) => {        
       getSession(idRoom)
@@ -47,11 +89,12 @@ const BoardGame = () => {
           if(sessionCreated){
               setSession(sessionCreated);
               setGameStarted(sessionCreated.gameStarted);
-              const boardPositions = sessionCreated.json_boardPositions;
+              let boardPositions = sessionCreated.json_boardPositions;
               if( boardPositions != ''){
                 setFlagPositions(JSON.parse(boardPositions));
+                boardSteps = JSON.parse(boardPositions);
               } else {
-                inizializeSteps(idRoom);  
+                boardPositions = inizializeSteps(idRoom);  
               } 
               socket.emit('createNewGame', {
                   gameId: sessionCreated.id, 
@@ -74,13 +117,14 @@ const BoardGame = () => {
     flags.map( flag => {
       addflagPositions.push({flag: flag, positions: generateNewSteps(newPositions)});
     }); 
+    let savePositions = '';
     if(addflagPositions.length > 0) {
-      console.log('addflagPositions GENERADA');
-      console.log(addflagPositions);
       setFlagPositions(addflagPositions); 
-      const savePositions = JSON.stringify(addflagPositions);
+      boardSteps = addflagPositions;
+      savePositions = JSON.stringify(addflagPositions);
       await updateBoardPositions(savePositions, idRoom);
     } 
+    return savePositions;
   };
 
   const generateNewSteps = (array) => {
@@ -91,7 +135,6 @@ const BoardGame = () => {
       }
       return positionsChallenges;
   }
-
 
   return (
     <div>
@@ -104,7 +147,7 @@ const BoardGame = () => {
           return <StepsBoard key={flagPosition.flag} arrayPositions={flagPosition.positions} flag={flagPosition.flag} players={playersPositions}/>
         })} 
       </div>}
-      <ContainerChallenges setActiveChallenge={setIsChallengeActive}/>
+      <BoardChallenges activeChallenge={isChallengeActive} setActiveChallenge={setIsChallengeActive}/>
     </div>
   );
 };
