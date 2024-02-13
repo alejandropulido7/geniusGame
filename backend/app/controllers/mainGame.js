@@ -29,6 +29,8 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("renderChallenge", renderChallenge)
 
+    gameSocket.on("resultChallenge", resultChallenge)
+
 
 }
 
@@ -134,7 +136,36 @@ function throwDice (dataTeam) {
 function renderChallenge(data) {
     if(data.challenge != ""){
         console.log(data);
-        io.sockets.in(data.player.gameId).emit('renderChallenge', data);
+        const playersNoChallenge = players.filter(player => player.teamName != data.player.teamName);
+        const ramdomPlayerIndex = Math.floor(Math.random() * playersNoChallenge.length);
+        io.sockets.in(data.player.gameId).emit('renderChallenge', {
+            challenge: data.challenge,
+            player: data.player,
+            playerOpponent: playersNoChallenge[ramdomPlayerIndex]
+        });
+    }
+}
+
+function resultChallenge(data){
+
+    console.log(data);
+    if(!data.challengePassed){
+        const foundPlayer = players.find(player => player.socketId == data.playerId);
+        if(foundPlayer){
+            const playersNewPosition = players.map(player => player.teamName == foundPlayer.teamName ? {...player, positionActive: foundPlayer.prev_position} : player);
+            updatePositionTeamFromSocket(foundPlayer.teamName, foundPlayer.gameId, foundPlayer.flagActive, foundPlayer.prev_position, foundPlayer.prev_position)
+            .then(() => {
+                players = playersNewPosition;
+                io.sockets.in(gameId).emit('playerJoinedRoom', players);  
+                io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{challengePassed: false});
+            })
+            .catch(err => {
+                console.error(err)
+            });
+
+        }
+    } else {
+        io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{challengePassed: true});
     }
 }
 

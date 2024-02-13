@@ -6,6 +6,7 @@ import OtherPlayers from './OtherPlayers';
 import { Link, useNavigate } from 'react-router-dom';
 import {getTeamByName} from '../../services/teamService';
 import {getSession} from '../../services/sessionService';
+import BoardChallenges from '../challenges/BoardChallenges';
 
 const BoardPlayer = () => {
 
@@ -17,6 +18,7 @@ const BoardPlayer = () => {
     const [prevPosition, setPrevPosition] = useState(1);
     const [diceResult, setDiceResult] = useState(0);
     const [youTurn, setYouTurn] = useState(false);
+    const [isChallengeActive, setIsChallengeActive] = useState(false);
     const navigate = useNavigate();
 
     const getTeamCreated = (idRoom) => {
@@ -47,18 +49,29 @@ const BoardPlayer = () => {
 
     useEffect(() => {
 
+        socket.on('turnOf', (player) => {
+            if(player.socketId == socket.id){
+                setYouTurn(true);
+            } else {
+                setYouTurn(false);
+            }
+        });
+
+        socket.on('resultChallenge', (data) => {      
+            setIsChallengeActive(false);
+        });
+
         setCodeSesion(idRoom); 
-        getTeamCreated(idRoom);             
+        getTeamCreated(idRoom);  
+        
+        return () => {
+            socket.off('turnOf');
+            socket.off('resultChallenge');
+        }
                
     },[]);
 
-    socket.on('turnOf', (player) => {
-        if(player.socketId == socket.id){
-            setYouTurn(true);
-        } else {
-            setYouTurn(false);
-        }
-    })
+    
 
     const throwDice = () => {
         const randomNumber = Math.floor(Math.random() * 6) + 1;
@@ -77,17 +90,20 @@ const BoardPlayer = () => {
 
     return (
         <div>
-            <h3>{codeSesion}</h3>
-            <h3>Your name: {teamName}</h3>
-            <h4>Board: {flagActive}</h4>
-                {/* <OtherPlayers/> */}
-            { youTurn && 
+            { !isChallengeActive && 
             <div>
-                <button onClick={throwDice}>Lanzar Dado</button>
-            </div>
-            }
-            <p>Resultado dado: {diceResult}</p>
-            
+                <h3>{codeSesion}</h3>
+                <h3>Your name: {teamName}</h3>
+                <h4>Board: {flagActive}</h4>
+                    {/* <OtherPlayers/> */}
+                { youTurn && 
+                <div>
+                    <button onClick={throwDice}>Lanzar Dado</button>
+                </div>
+                }
+                <p>Resultado dado: {diceResult}</p>
+            </div>}
+            <BoardChallenges activeChallenge={isChallengeActive} setActiveChallenge={setIsChallengeActive}/>
         </div>
     )
 }

@@ -13,6 +13,7 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
   const [challengeFinished, setChallengeFinished] = useState(false);
   const [componentChallenge, setComponentChallenge] = useState(null);
   const [dataChallengeActive, setDataChallengeActive] = useState({});
+  const [renderIn, setRenderIn] = useState(null);
 
   useEffect(() => {
     socket.on('renderChallenge', (dataChallenge) => {
@@ -21,28 +22,36 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
       if(dataChallenge.challenge != ''){
         setActiveChallenge(true);
         setDataChallengeActive(dataChallenge);
-        
+        if(dataChallenge.player.socketId == socket.id){
+          setRenderIn('PLAYER');
+          return
+        } else if(dataChallenge.playerOpponent.socketId == socket.id){
+          setRenderIn('OPPONENT_INTERACTIVE');
+          return
+        } else {
+          setRenderIn('ADMIN');
+        }
       }
     });
 
     switch (dataChallengeActive.challenge) {
       case ACTING:
-        setComponentChallenge(<ActingAndWhistle setActiveChallenge={setActiveChallenge}/>)
+        setComponentChallenge(<ActingAndWhistle renderIn={renderIn}/>)
         break;
       case WHISTLE_SONG:
-        setComponentChallenge(<ActingAndWhistle setActiveChallenge={setActiveChallenge}/>)
+        setComponentChallenge(<ActingAndWhistle />)
         break;
       case WORD_CHAIN:
-        setComponentChallenge(<ChainWord setActiveChallenge={setActiveChallenge}/>)
+        setComponentChallenge(<ChainWord />)
         break;
       case PICTIONARY:
-        setComponentChallenge(<Pictionary setActiveChallenge={setActiveChallenge}/>)
+        setComponentChallenge(<Pictionary />)
         break;
       case TRIVIA:
-        setComponentChallenge(<Trivia setActiveChallenge={setActiveChallenge}/>)
+        setComponentChallenge(<Trivia />)
         break;
       case HUNGED:
-        setComponentChallenge(<Hunged setActiveChallenge={setActiveChallenge}/>)
+        setComponentChallenge(<Hunged />)
         break;  
       case BACK_HOME:
         setComponentChallenge(<div><h1>BACK HOME</h1><button onClick={() => setActiveChallenge(false)}>Terminar</button></div>)

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {FLAGS } from '../../utils/constants'
-import {CHALLENGES_IN_BOARD, getRandomObject} from '../../utils/constants'
+import {CHALLENGES_IN_BOARD, getRandomObject, ACTING} from '../../utils/constants'
 import StepsBoard from './StepsBoard';
 import socket from '../../config/socket';
 import {updateBoardPositions, getSession} from '../../services/sessionService';
@@ -31,9 +31,13 @@ const BoardGame = () => {
       stepByStep(data);
     });
     
+    socket.on('resultChallenge', (data) => {      
+      setIsChallengeActive(false);
+    });
 
     return () => {
       socket.off('throwDice');
+      socket.off('resultChallenge');
     }
   }, []);
 
@@ -76,7 +80,8 @@ const BoardGame = () => {
     let ongoingChallenge = {};
     if(playerChallenge){
       ongoingChallenge = {
-        challenge: playerChallenge.challenge,
+        // challenge: playerChallenge.challenge,
+        challenge: ACTING,
         player: playerModified
       };
     }
@@ -94,7 +99,7 @@ const BoardGame = () => {
                 setFlagPositions(JSON.parse(boardPositions));
                 boardSteps = JSON.parse(boardPositions);
               } else {
-                boardPositions = inizializeSteps(idRoom);  
+                inizializeSteps(idRoom);  
               } 
               socket.emit('createNewGame', {
                   gameId: sessionCreated.id, 
@@ -117,14 +122,12 @@ const BoardGame = () => {
     flags.map( flag => {
       addflagPositions.push({flag: flag, positions: generateNewSteps(newPositions)});
     }); 
-    let savePositions = '';
     if(addflagPositions.length > 0) {
       setFlagPositions(addflagPositions); 
       boardSteps = addflagPositions;
-      savePositions = JSON.stringify(addflagPositions);
+      const savePositions = JSON.stringify(addflagPositions);
       await updateBoardPositions(savePositions, idRoom);
     } 
-    return savePositions;
   };
 
   const generateNewSteps = (array) => {
