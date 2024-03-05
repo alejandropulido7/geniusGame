@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import socket from '../../config/socket';
+import {Outlet, useParams, useNavigate} from 'react-router-dom'
 
 const ActingAndWhistle = ({renderIn}) => {
 
@@ -7,6 +8,7 @@ const ActingAndWhistle = ({renderIn}) => {
   const [word, setWord] = useState('');
   const [wordReady, setWordReady] = useState(false);
   const [render, setRender] = useState(null);
+  const {renderInScreen} = useParams();
 
   const manejarPresionado = () => {
     setMostrarPalabra(true);
@@ -18,23 +20,33 @@ const ActingAndWhistle = ({renderIn}) => {
 
   useEffect(() => {
 
+    console.log(renderInScreen);
+  
+    socket.on('actingAndWhistle', (data) => {
+      setWord(data.word);
+      setWordReady(data.wordReady)
+    });
+
+    console.log('renderView');
+    console.log(renderIn);
     switch (renderIn) {
       case 'ADMIN':
         setRender(<Admin mostrarPalabra={mostrarPalabra} word={word} wordReady={wordReady}/>)
       break;
       case 'PLAYER':
-        setRender(<PlayerChallenge setMostrarPalabra={mostrarPalabra}/>)
+        setRender(<PlayerChallenge/>)
       break;
       case 'OPPONENT_INTERACTIVE':
-        setRender(<OpponentInteractive setWord={setWord} setWordReady={setWordReady}/>)
+        setRender(<OpponentInteractive wordReady={wordReady}/>)
       break;
-    }
+    }    
 
-  },[]);
+  },[word, wordReady, renderIn]);
   
 
   return (
     <div>
+      <h1>Acting</h1>
       {renderIn != 'ADMIN' && 
       <div>
         {wordReady && 
@@ -44,7 +56,7 @@ const ActingAndWhistle = ({renderIn}) => {
           onTouchStart={manejarPresionado}
           onTouchEnd={manejarSuelto}
         >
-          Presionar y Soltar
+          Watch the word
         </button>}
         {mostrarPalabra && wordReady && <p>{word}</p>}
         {(!wordReady || word=='') && <p>Waiting for the word...</p>}
@@ -55,7 +67,7 @@ const ActingAndWhistle = ({renderIn}) => {
   );
 };
 
-const PlayerChallenge = ({setMostrarPalabra}) => {
+const PlayerChallenge = () => {
 
   const emitResult = () => {
     socket.emit('resultChallenge', {playerId: socket.id, challengePassed: true});
@@ -63,38 +75,40 @@ const PlayerChallenge = ({setMostrarPalabra}) => {
 
   return (
     <div>
-      <button onClick={() => setMostrarPalabra(true)}>Challenge done!</button>
       <button onClick={emitResult}>Terminar</button>
     </div>
   )
 }
 
 
-const OpponentInteractive = ({setWordReady, setWord}) => {
+const OpponentInteractive = ({wordReady}) => {
+
+  const [word, setWord] = useState('');
+
+  const emitWordChallenge = () => {
+    socket.emit('actingAndWhistle', {word, wordReady: true, socketId: socket.id});
+    socket.emit('startChallenge', {socketId: socket.id});
+  }
 
   return (
     <>
-      {
-        !hideOpponentOptions && 
-        <div>
-          <input type="text" placeholder='Type a phrase or word to your opponent' onChange={(e) => setWord(e.target.value)}/>
-          <button onClick={() => setWordReady(true)}>Sent word</button>
-        </div>
-      }
-      <Common/>
+      { !wordReady && <div>
+        <input type="text" placeholder='Type a phrase or word to your opponent' onChange={(e) => setWord(e.target.value)}/>
+        <button onClick={emitWordChallenge}>Sent word</button>
+      </div>}
     </>
   )
 }
 
 const Admin = ({mostrarPalabra, wordReady, word}) => {
 
-  const hideWord = '_'.repeat(word.length);
+  const hideWord = ' _ '.repeat(word.length);
 
   return (
     <div>
       <p>{hideWord}</p>
       {mostrarPalabra && wordReady && <p>{word}</p>}
-      {(!wordReady || word=='') && <p>Waiting for the word...</p>}
+      {!wordReady && <p>Waiting for the word...</p>}
     </div>
   )
 }

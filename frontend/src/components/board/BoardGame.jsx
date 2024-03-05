@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {FLAGS } from '../../utils/constants'
 import {CHALLENGES_IN_BOARD, getRandomObject, ACTING} from '../../utils/constants'
 import StepsBoard from './StepsBoard';
@@ -7,6 +7,8 @@ import {updateBoardPositions, getSession} from '../../services/sessionService';
 import {useParams, useNavigate} from 'react-router-dom';
 import BoardChallenges from '../challenges/BoardChallenges';
 import DataGame from './DataGame';
+import ChallengeState from '../../context/challenges/ChallengeState';
+import { ChallengeContext } from '../../context/challenges/ChallengeContext';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
@@ -16,15 +18,17 @@ const BoardGame = () => {
   const [isChallengeActive, setIsChallengeActive] = useState(false);
   const [flags, setFlags] = useState(FLAGS);
   const {idRoom} = useParams();
-  const navigate = useNavigate();
   const [configBoard, setConfigBoard] = useState({
       lenghtBoard: 17,
       quantityChallenges: 5
   });
   let boardSteps = [];
+  const {activeChallenge, setActiveChallenge, setDataChallenge } = useContext(ChallengeContext);
    
 
   useEffect(() => { 
+    console.log('activeChallenge')
+    console.log(activeChallenge)
     getSessionCreated(idRoom);   
 
     socket.on('throwDice', (data) => {      
@@ -33,13 +37,14 @@ const BoardGame = () => {
     
     socket.on('resultChallenge', (data) => {      
       setIsChallengeActive(false);
+      setActiveChallenge(false);
     });
 
     return () => {
       socket.off('throwDice');
       socket.off('resultChallenge');
     }
-  }, []);
+  }, [activeChallenge]);
 
   socket.on('playerJoinedRoom', (playersInSession) => {
     setPlayersPositions(playersInSession);
@@ -64,6 +69,8 @@ const BoardGame = () => {
         clearInterval(intervalo);
         if(playerWithChallenge && playerWithChallenge.challenge != ''){
           setTimeout(() => {
+            setActiveChallenge(true);
+            setDataChallenge(playerWithChallenge);
             socket.emit('renderChallenge', playerWithChallenge);
           }, 700);
         }

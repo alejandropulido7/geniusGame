@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import {Outlet, useParams, useNavigate} from 'react-router-dom'
 import Chronometer from './Chronometer';
 import {ACTING, BACK_HOME, WORD_CHAIN, HUNGED, PICTIONARY, TRIVIA, WHISTLE_SONG} from '../../utils/constants'
 import Hunged from './Hunged';
@@ -7,6 +8,8 @@ import ChainWord from './ChainWords';
 import Pictionary from './Pictionary';
 import Trivia from './Trivia';
 import socket from '../../config/socket';
+import {getCookie} from '../../utils/cookies';
+import { ChallengeContext } from '../../context/challenges/ChallengeContext';
 
 const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
 
@@ -14,22 +17,30 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
   const [componentChallenge, setComponentChallenge] = useState(null);
   const [dataChallengeActive, setDataChallengeActive] = useState({});
   const [renderIn, setRenderIn] = useState(null);
+  const [pathChallenge, setPathChallenge] = useState('');
+  const {challenge} = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     socket.on('renderChallenge', (dataChallenge) => {
       console.log('dataChallenge');
-      console.log(dataChallenge);      
+      console.log(dataChallenge);     
       if(dataChallenge.challenge != ''){
         setActiveChallenge(true);
         setDataChallengeActive(dataChallenge);
-        if(dataChallenge.player.socketId == socket.id){
-          setRenderIn('PLAYER');
-          return
-        } else if(dataChallenge.playerOpponent.socketId == socket.id){
-          setRenderIn('OPPONENT_INTERACTIVE');
-          return
-        } else {
-          setRenderIn('ADMIN');
+        switch (socket.id) {
+          case dataChallenge.player.socketId:
+            console.log('render player: '+socket.id);
+            setRenderIn('PLAYER');
+          break;
+          case dataChallenge.playerOpponent.socketId:
+            console.log('render opponent: '+socket.id);
+            setRenderIn('OPPONENT_INTERACTIVE'); 
+          break;
+          case dataChallenge.board:
+            console.log('render admin: '+socket.id);
+            setRenderIn('ADMIN');
+          break;
         }
       }
     });
@@ -63,18 +74,18 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
 
     return () => {
       socket.off('renderChallenge');
+      
     }
   }, [dataChallengeActive])
 
-  
 
   return (
     <div>
       { activeChallenge && 
       <>
-        <h1>Contenedor de visor de challenges</h1>
-        <Chronometer setChallengeFinished={setChallengeFinished}/>
-        {componentChallenge}
+        <h2>Pasa el reto para poder avanzar</h2>
+        {renderIn=='ADMIN' && <Chronometer data={dataChallengeActive}/>}
+        {componentChallenge}        
       </>
       }
     </div>

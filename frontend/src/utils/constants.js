@@ -1,6 +1,6 @@
 const PICTIONARY = 'pictionary';
 const WORD_CHAIN = 'word_chain'; //Palabras encadenadas por la ultima letra
-const HUNGED = 'hanged';
+const HUNGED = 'hunged';
 const TRIVIA = 'trivia';
 const ACTING = "acting";
 const WHISTLE_SONG = "whistle_song" //silbar cancion que el oponente ponga

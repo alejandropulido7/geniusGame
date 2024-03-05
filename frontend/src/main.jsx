@@ -12,6 +12,8 @@ import Hunged from './components/challenges/Hunged.jsx';
 import Pictionary from './components/challenges/Pictionary.jsx';
 import ChainWord from './components/challenges/ChainWords.jsx';
 import ActingAndWhistle from './components/challenges/ActingAndWhistle.jsx';
+import BoardChallenges from './components/challenges/BoardChallenges.jsx';
+import ChallengeState from './context/challenges/ChallengeState.jsx';
 
 
 
@@ -20,13 +22,21 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path='/' Component={AppBoard}/>
         <Route path='/room' Component={ConfigGame}/>
-        <Route path='/room/:idRoom' Component={BoardGame}/>
+        <Route path='/room/:idRoom' element={<ChallengeState><BoardGame/></ChallengeState>}/>
+        {/* <Route path='/room/:idRoom/challenge' Component={BoardChallenges}>
+          <Route path='hunged' Component={Hunged}/>
+          <Route path='pictionary' Component={Pictionary}/>
+          <Route path='chainWord' Component={ChainWord}/>
+          <Route path='acting/:renderInScreen' Component={ActingAndWhistle}/>
+        </Route> */}
         <Route path='/player' Component={AppTeam}/>
         <Route path='/player/:idRoom' Component={BoardPlayer}/>
-        <Route path='/hunged' Component={Hunged}/>
-        <Route path='/pictionary' Component={Pictionary}/>
-        <Route path='/chainWord' Component={ChainWord}/>
-        <Route path='/acting' Component={ActingAndWhistle}/>
+        {/* <Route path='/player/:idRoom/challenge' Component={BoardChallenges} element={<ChallengeState></ChallengeState>}>
+          <Route path='hunged' Component={Hunged}/>
+          <Route path='pictionary' Component={Pictionary}/>
+          <Route path='chainWord' Component={ChainWord}/>
+          <Route path='acting' Component={ActingAndWhistle}/>
+        </Route> */}
       </Routes>    
     </BrowserRouter>,
 )

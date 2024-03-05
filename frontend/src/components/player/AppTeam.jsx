@@ -1,4 +1,4 @@
-import React, { useState  } from 'react'
+import React, { useState } from 'react'
 import {setCookie, getCookie, hasCookie} from '../../utils/cookies'
 import { Link, useNavigate } from 'react-router-dom';
 import {getSession} from '../../services/sessionService'

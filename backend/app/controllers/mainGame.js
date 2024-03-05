@@ -31,6 +31,10 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("resultChallenge", resultChallenge)
 
+    gameSocket.on("actingAndWhistle", actingAndWhistle)
+
+    gameSocket.on("startChallenge", startChallenge)
+
 
 }
 
@@ -42,7 +46,13 @@ function createNewGame(data) {
 
     console.log('romm created');
     console.log(this.id);
-    boards.push({gameId: data.gameId, mySocketId: this.id});
+    const foundBoard = boards.find(board => board.gameId == data.gameId);
+    if(foundBoard){
+        const boardUpdated = boards.map(board => board.gameId == data.gameId ? {...board, mySocketId: this.id} : board);
+        boards = boardUpdated;
+    } else {
+        boards.push({gameId: data.gameId, mySocketId: this.id});
+    }
 
     // Join the Room and wait for the other player
     this.join(data.gameId)
@@ -137,9 +147,14 @@ function renderChallenge(data) {
     if(data.challenge != ""){
         console.log(data);
         const playersNoChallenge = players.filter(player => player.teamName != data.player.teamName);
+        const socketBoard = boards.find(board => board.gameId == data.player.gameId);
+        console.log('boards');
+        console.log(boards);
+        console.log(socketBoard);
         const ramdomPlayerIndex = Math.floor(Math.random() * playersNoChallenge.length);
         io.sockets.in(data.player.gameId).emit('renderChallenge', {
             challenge: data.challenge,
+            board: socketBoard ? socketBoard.mySocketId : '0',
             player: data.player,
             playerOpponent: playersNoChallenge[ramdomPlayerIndex]
         });
@@ -149,23 +164,37 @@ function renderChallenge(data) {
 function resultChallenge(data){
 
     console.log(data);
-    if(!data.challengePassed){
-        const foundPlayer = players.find(player => player.socketId == data.playerId);
-        if(foundPlayer){
+    const foundPlayer = players.find(player => player.socketId == data.playerId);
+    if(foundPlayer){
+        if(!data.challengePassed){
             const playersNewPosition = players.map(player => player.teamName == foundPlayer.teamName ? {...player, positionActive: foundPlayer.prev_position} : player);
             updatePositionTeamFromSocket(foundPlayer.teamName, foundPlayer.gameId, foundPlayer.flagActive, foundPlayer.prev_position, foundPlayer.prev_position)
             .then(() => {
                 players = playersNewPosition;
-                io.sockets.in(gameId).emit('playerJoinedRoom', players);  
+                io.sockets.in(foundPlayer.gameId).emit('playerJoinedRoom', players);  
                 io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{challengePassed: false});
             })
             .catch(err => {
                 console.error(err)
             });
 
+        } else {
+            io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{challengePassed: true});
         }
-    } else {
-        io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{challengePassed: true});
+    } 
+}
+
+function actingAndWhistle(data){
+    const foundPlayer = players.find(player => player.socketId == data.socketId);
+    if(foundPlayer){
+        io.sockets.in(foundPlayer.gameId).emit('actingAndWhistle', data);
+    }
+}
+
+function startChallenge(data){
+    const foundPlayer = players.find(player => player.socketId == data.socketId);
+    if(foundPlayer){
+        io.sockets.in(foundPlayer.gameId).emit('startChallenge', data);
     }
 }
 
