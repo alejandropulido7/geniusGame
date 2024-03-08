@@ -6,3 +6,12 @@ export const ChallengeContext = createContext({
     setDataChallenge: (data)=>{},
     setActiveChallenge: (data)=>{}
 });
+
+export const ChainWordsContext = createContext({
+    lastWord: '',
+    newWord: '',
+    arrayWords: [],
+    setLastWord: (data) => {},
+    setNewWord: (data) => {},
+    setArrayWords: (data) => {}
+});

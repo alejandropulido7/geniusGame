@@ -88,7 +88,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: ACTING,
+        challenge: 'word_chain',
         player: playerModified
       };
     }

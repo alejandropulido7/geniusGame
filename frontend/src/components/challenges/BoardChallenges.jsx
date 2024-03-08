@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react'
 import {Outlet, useParams, useNavigate} from 'react-router-dom'
 import Chronometer from './Chronometer';
-import {ACTING, BACK_HOME, WORD_CHAIN, HUNGED, PICTIONARY, TRIVIA, WHISTLE_SONG} from '../../utils/constants'
+import {ACTING, BACK_HOME, WORD_CHAIN, HUNGED, PICTIONARY, TRIVIA, WHISTLE_SONG, OPTIONS_CHALLENGES, RENDER_CHALLENGE} from '../../utils/constants'
 import Hunged from './Hunged';
-import ActingAndWhistle from './ActingAndWhistle';
-import ChainWord from './ChainWords';
+import ActingAndWhistle from './actingAndWhistle/ActingAndWhistle';
+import ChainWord from './chainWords/ChainWords';
 import Pictionary from './Pictionary';
 import Trivia from './Trivia';
 import socket from '../../config/socket';
 import {getCookie} from '../../utils/cookies';
 import { ChallengeContext } from '../../context/challenges/ChallengeContext';
+import ChainWordChallengeState from '../../context/challenges/ChainWordsChallengeState';
 
 const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
 
@@ -21,39 +22,49 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
   const {challenge} = useParams();
   const navigate = useNavigate();
 
+  // if(localStorage.getItem('challengeActive-GG') != undefined){
+  //   setDataChallengeActive({challenge: localStorage.getItem('challengeActive-GG')});
+  // }
+  // if(localStorage.getItem('renderIn-GG') != undefined){
+  //   setDataChallengeActive({challenge: localStorage.getItem('renderIn-GG')});
+  // }
+
   useEffect(() => {
+
+    console.log(localStorage.getItem('challengeActive-GG'))
+    console.log(localStorage.getItem('renderIn-GG'))
+
     socket.on('renderChallenge', (dataChallenge) => {
       console.log('dataChallenge');
       console.log(dataChallenge);     
       if(dataChallenge.challenge != ''){
         setActiveChallenge(true);
         setDataChallengeActive(dataChallenge);
+        localStorage.setItem('challengeActive-GG', dataChallenge.challenge);
         switch (socket.id) {
           case dataChallenge.player.socketId:
-            console.log('render player: '+socket.id);
-            setRenderIn('PLAYER');
+            setRenderIn(RENDER_CHALLENGE.player);
           break;
           case dataChallenge.playerOpponent.socketId:
-            console.log('render opponent: '+socket.id);
-            setRenderIn('OPPONENT_INTERACTIVE'); 
+            setRenderIn(RENDER_CHALLENGE.opponent); 
           break;
           case dataChallenge.board:
-            console.log('render admin: '+socket.id);
-            setRenderIn('ADMIN');
+            setRenderIn(RENDER_CHALLENGE.admin);
           break;
         }
+        localStorage.setItem('renderIn-GG', renderIn);
       }
     });
 
     switch (dataChallengeActive.challenge) {
       case ACTING:
-        setComponentChallenge(<ActingAndWhistle renderIn={renderIn}/>)
+        setComponentChallenge(<ActingAndWhistle renderIn={renderIn} title={OPTIONS_CHALLENGES.acting.title} description={OPTIONS_CHALLENGES.acting.description}/>)
         break;
       case WHISTLE_SONG:
-        setComponentChallenge(<ActingAndWhistle />)
+        setComponentChallenge(<ActingAndWhistle renderIn={renderIn} title={OPTIONS_CHALLENGES.whistle_song.title} description={OPTIONS_CHALLENGES.whistle_song.description}/>)
         break;
       case WORD_CHAIN:
-        setComponentChallenge(<ChainWord />)
+        setComponentChallenge(<ChainWordChallengeState><ChainWord renderIn={renderIn}/></ChainWordChallengeState>)
         break;
       case PICTIONARY:
         setComponentChallenge(<Pictionary />)

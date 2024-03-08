@@ -6,6 +6,8 @@ const Chronometer = ({data}) => {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
+    console.log('data-crono');
+    console.log(data);
 
     let interval = null;
     socket.on('startChallenge', (dataStart) => {
@@ -22,7 +24,7 @@ const Chronometer = ({data}) => {
       setMessage('No pasaste el reto, retornaras a la posicion anterior');
       setTimeout(() => {
         socket.emit('resultChallenge', {playerId: data.player.socketId, challengePassed: false});
-      }, 1000);
+      }, 3000);
     }
 
     return () => {

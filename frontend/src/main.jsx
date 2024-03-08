@@ -10,8 +10,8 @@ import AppTeam from './components/player/AppTeam.jsx';
 import BoardGame from './components/board/BoardGame.jsx';
 import Hunged from './components/challenges/Hunged.jsx';
 import Pictionary from './components/challenges/Pictionary.jsx';
-import ChainWord from './components/challenges/ChainWords.jsx';
-import ActingAndWhistle from './components/challenges/ActingAndWhistle.jsx';
+import ChainWord from './components/challenges/chainWords/ChainWords.jsx';
+import ActingAndWhistle from './components/challenges/actingAndWhistle/ActingAndWhistle.jsx';
 import BoardChallenges from './components/challenges/BoardChallenges.jsx';
 import ChallengeState from './context/challenges/ChallengeState.jsx';
 
