@@ -3,9 +3,16 @@ import socket from '../../config/socket';
 
 const DataGame = ({session, playersPositions, startGame, setStartGame}) => {
 
+    const [errorMessage, setErrorMessage] = useState('');
+
     const readyToPlay = () => {
-        setStartGame(true);
-        socket.emit('startGame');
+        setErrorMessage('');
+        if(playersPositions.length > 1){
+            setStartGame(true);
+            socket.emit('startGame');
+        } else {
+            setErrorMessage('No hay suficientes equipos para jugar (min. 2)')
+        }
       }
 
 
@@ -25,7 +32,8 @@ const DataGame = ({session, playersPositions, startGame, setStartGame}) => {
                         </div>
                     )
                 })
-            }      
+            }
+            {errorMessage && <p>{errorMessage}</p>}  
         </div>
     )
 }

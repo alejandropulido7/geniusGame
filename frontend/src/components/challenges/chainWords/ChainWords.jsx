@@ -1,44 +1,54 @@
 import React, { useContext, useEffect, useState } from 'react';
 import socket from '../../../config/socket';
-import KeyboardCW from './KeyboardCW';
 import PlayerChallengeCW from './PlayerChallengeCW';
-import { ChainWordsContext } from '../../../context/challenges/ChallengeContext';
+import { ChainWordsContext } from '../../../context/challenges/GlobalContext';
 import {RENDER_CHALLENGE} from '../../../utils/constants'
 import OpponentInteractiveCW from './OpponentInteractiveCW';
+import AdminCW from './AdminCW';
 
-const ChainWord = ({renderIn}) => {
-  const [ultimaPalabra, setUltimaPalabra] = useState('');
-  const [nuevaPalabra, setNuevaPalabra] = useState('');
-  const [historialPalabras, setHistorialPalabras] = useState([]);
+const ChainWord = ({renderIn, dataPlayer}) => {
 
-  const {lastWord, arrayWords} = useContext(ChainWordsContext);
+  const {lastWord, arrayWords, setLastWord, setArrayWords} = useContext(ChainWordsContext);
   const [render, setRender] = useState(null);
-
+  const [showOponnent, setShowOpponent] = useState(false);
+  const [topic, setTopic] = useState('');
+  
   
   useEffect(() => {
-    console.log('lastWord: '+lastWord);
+    socket.on('chainWords', (data) => {
+      setLastWord(data.lastWord);
+      setArrayWords(data.wordList);
+      setTopic(data.topic);
+    });
+
     switch (renderIn) {
       case RENDER_CHALLENGE.admin:
-        setRender(<h1>Oponent</h1>)
+        setRender(<AdminCW arrayWords={arrayWords}/>)
       break;
       case RENDER_CHALLENGE.player:
-        setRender(<PlayerChallengeCW/>)
+        setRender(<PlayerChallengeCW lastWord={lastWord} dataPlayer={dataPlayer}/>)
       break;
       case RENDER_CHALLENGE.opponent:
-        setRender(<OpponentInteractiveCW/>)
+        setShowOpponent(true);
+        setRender(<OpponentInteractiveCW lastWord={lastWord}/>)
       break;
     }  
-  },[lastWord,renderIn])
+
+    return () => {
+      socket.off('chainWords');
+      socket.off('validateChallenge');
+    }
+
+  },[lastWord,renderIn]);
+
 
   return (
     <div>
-      <h1>Palabras Encadenadas</h1>
-      <p>Última Palabra: {lastWord || 'Ninguna'}</p>
-      <ul>
-        {arrayWords.map((palabra, index) => (
-          <li key={index}>{palabra}</li>
-        ))}
-      </ul>
+      <h1>Palabras Encadenadas</h1>      
+      {!showOponnent && <div>
+        <p>Tema: {topic || 'Esperando oponente'}</p>
+        {lastWord ? <p>Última Palabra: {lastWord}</p> : <p>Esperando a que el oponente envie la primera palabra...</p>}
+      </div>}
       {render}
     </div>
   );

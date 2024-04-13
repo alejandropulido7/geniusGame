@@ -1,5 +1,5 @@
 import React, {useReducer} from 'react'
-import { ChainWordsContext } from './ChallengeContext';
+import { ChainWordsContext } from './GlobalContext';
 
 
 
@@ -27,7 +27,6 @@ const ChainWordChallengeState = ({children}) => {
     const [state, dispatchChainWord] = useReducer(chainWordReducer, initialState);
 
     const setLastWord = (data) => {
-        console.log('llega a lastWord')
         dispatchChainWord({
             type: 'SET_LASTWORD',
             payload:  data

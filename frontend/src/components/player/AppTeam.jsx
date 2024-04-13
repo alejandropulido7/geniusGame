@@ -25,7 +25,7 @@ const AppTeam = () => {
         createTeam(sessionId, teamName, jsonPlayers, '', flagSelected)
           .then((team) => {
             if(!team.error){                           
-              navigate(sessionId);
+              navigate('../player/'+sessionId);
             } else {
               setError(team.error);
             }

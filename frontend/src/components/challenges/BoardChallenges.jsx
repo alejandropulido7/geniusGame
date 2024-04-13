@@ -2,15 +2,14 @@ import React, { useState, useEffect, useContext } from 'react'
 import {Outlet, useParams, useNavigate} from 'react-router-dom'
 import Chronometer from './Chronometer';
 import {ACTING, BACK_HOME, WORD_CHAIN, HUNGED, PICTIONARY, TRIVIA, WHISTLE_SONG, OPTIONS_CHALLENGES, RENDER_CHALLENGE} from '../../utils/constants'
-import Hunged from './Hunged';
+import Hunged from './hunged/Hunged';
 import ActingAndWhistle from './actingAndWhistle/ActingAndWhistle';
 import ChainWord from './chainWords/ChainWords';
 import Pictionary from './Pictionary';
 import Trivia from './Trivia';
 import socket from '../../config/socket';
-import {getCookie} from '../../utils/cookies';
-import { ChallengeContext } from '../../context/challenges/ChallengeContext';
 import ChainWordChallengeState from '../../context/challenges/ChainWordsChallengeState';
+import HungedChallengeState from '../../context/challenges/HungedChallengeState';
 
 const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
 
@@ -22,17 +21,15 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
   const {challenge} = useParams();
   const navigate = useNavigate();
 
-  // if(localStorage.getItem('challengeActive-GG') != undefined){
-  //   setDataChallengeActive({challenge: localStorage.getItem('challengeActive-GG')});
-  // }
-  // if(localStorage.getItem('renderIn-GG') != undefined){
-  //   setDataChallengeActive({challenge: localStorage.getItem('renderIn-GG')});
-  // }
 
   useEffect(() => {
 
-    console.log(localStorage.getItem('challengeActive-GG'))
-    console.log(localStorage.getItem('renderIn-GG'))
+    if(localStorage.getItem('dataChallenge-GG')){
+      setDataChallengeActive(JSON.parse(localStorage.getItem('dataChallenge-GG')));
+    }
+    if(localStorage.getItem('renderIn-GG')){
+      setRenderIn(localStorage.getItem('renderIn-GG'));
+    }
 
     socket.on('renderChallenge', (dataChallenge) => {
       console.log('dataChallenge');
@@ -40,19 +37,22 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
       if(dataChallenge.challenge != ''){
         setActiveChallenge(true);
         setDataChallengeActive(dataChallenge);
-        localStorage.setItem('challengeActive-GG', dataChallenge.challenge);
+        localStorage.setItem('dataChallenge-GG', JSON.stringify(dataChallenge));
         switch (socket.id) {
           case dataChallenge.player.socketId:
             setRenderIn(RENDER_CHALLENGE.player);
+            localStorage.setItem('renderIn-GG', RENDER_CHALLENGE.player);
           break;
           case dataChallenge.playerOpponent.socketId:
             setRenderIn(RENDER_CHALLENGE.opponent); 
+            localStorage.setItem('renderIn-GG', RENDER_CHALLENGE.opponent);
           break;
           case dataChallenge.board:
             setRenderIn(RENDER_CHALLENGE.admin);
+            localStorage.setItem('renderIn-GG', RENDER_CHALLENGE.admin);
           break;
         }
-        localStorage.setItem('renderIn-GG', renderIn);
+        
       }
     });
 
@@ -64,7 +64,7 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
         setComponentChallenge(<ActingAndWhistle renderIn={renderIn} title={OPTIONS_CHALLENGES.whistle_song.title} description={OPTIONS_CHALLENGES.whistle_song.description}/>)
         break;
       case WORD_CHAIN:
-        setComponentChallenge(<ChainWordChallengeState><ChainWord renderIn={renderIn}/></ChainWordChallengeState>)
+        setComponentChallenge(<ChainWordChallengeState><ChainWord renderIn={renderIn} dataPlayer={dataChallengeActive.player}/></ChainWordChallengeState>)
         break;
       case PICTIONARY:
         setComponentChallenge(<Pictionary />)
@@ -73,7 +73,7 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
         setComponentChallenge(<Trivia />)
         break;
       case HUNGED:
-        setComponentChallenge(<Hunged />)
+        setComponentChallenge(<HungedChallengeState><Hunged renderIn={renderIn}/></HungedChallengeState>)
         break;  
       case BACK_HOME:
         setComponentChallenge(<div><h1>BACK HOME</h1><button onClick={() => setActiveChallenge(false)}>Terminar</button></div>)
@@ -85,7 +85,7 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
 
     return () => {
       socket.off('renderChallenge');
-      
+      localStorage.clear();
     }
   }, [dataChallengeActive])
 

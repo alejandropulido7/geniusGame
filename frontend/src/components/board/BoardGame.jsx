@@ -7,8 +7,7 @@ import {updateBoardPositions, getSession} from '../../services/sessionService';
 import {useParams, useNavigate} from 'react-router-dom';
 import BoardChallenges from '../challenges/BoardChallenges';
 import DataGame from './DataGame';
-import ChallengeState from '../../context/challenges/ChallengeState';
-import { ChallengeContext } from '../../context/challenges/ChallengeContext';
+import { GlobalContext } from '../../context/challenges/GlobalContext';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
@@ -23,7 +22,7 @@ const BoardGame = () => {
       quantityChallenges: 5
   });
   let boardSteps = [];
-  const {activeChallenge, setActiveChallenge, setDataChallenge } = useContext(ChallengeContext);
+  const {activeChallenge, setActiveChallenge, setDataChallenge } = useContext(GlobalContext);
    
 
   useEffect(() => { 
@@ -38,11 +37,16 @@ const BoardGame = () => {
     socket.on('resultChallenge', (data) => {      
       setIsChallengeActive(false);
       setActiveChallenge(false);
+      localStorage.clear();
     });
 
     return () => {
       socket.off('throwDice');
       socket.off('resultChallenge');
+      setFlagPositions([]);
+      setSession({});
+      setPlayersPositions([]);
+      setGameStarted(false);
     }
   }, [activeChallenge]);
 
@@ -88,7 +92,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: 'word_chain',
+        challenge: 'hunged',
         player: playerModified
       };
     }

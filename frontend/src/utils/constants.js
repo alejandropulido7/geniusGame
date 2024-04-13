@@ -14,6 +14,9 @@ const OPTIONS_CHALLENGES = {
   whistle_song: {
     title: 'Whistle the song that they give you',
     description: 'When your partners guess the song, click on Finish'
+  },
+  word_chain: {
+    topics: ['Paises', 'Comida', 'Frutas', 'Emociones', 'Nombres femeninos', 'Nombres masculinos', 'Deportes', 'Artistas musicales', 'Canciones']
   }
 }
 const RENDER_CHALLENGE = {

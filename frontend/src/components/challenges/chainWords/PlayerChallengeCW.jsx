@@ -1,40 +1,107 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import socket from '../../../config/socket';
-import { ChainWordsContext } from '../../../context/challenges/ChallengeContext';
+import { ChainWordsContext } from '../../../context/challenges/GlobalContext';
 import KeyboardCW from './KeyboardCW'
+import { getTeamByName } from '../../../services/teamService';
 
-const PlayerChallengeCW = () => {
+const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
 
-    const {newWord, lastWord, arrayWords, setArrayWords, setLastWord, setNewWord} = useContext(ChainWordsContext);
-    const [newWordKeyboard, setNewWordKeyboard] = useState('');
+    const {newWord, arrayWords, setNewWord} = useContext(ChainWordsContext);
+    const [teamPlayers, setTeamPlayers] = useState([]);
+    const [teammate, setTeammate] = useState('');
+    const [indexTeammate, setIndexTeammate] = useState(0);
+    const [finishChallenge, setFinishChallenge] = useState(false);
+    const [showKeyboard, setShowKeyboard] = useState(false);
+    const [showNotPassChallenge, setShowNotPassChallenge] = useState(false);
+    const [previousPosition, setPreviousPosition] = useState(0);
+    const [opponentValidation, setOpponentValidation] = useState(false);
 
+    useEffect(() => {
 
-    const [ultimaPalabra, setUltimaPalabra] = useState('');
-    const [nuevaPalabra, setNuevaPalabra] = useState('');
-    const [historialPalabras, setHistorialPalabras] = useState([]);
+      socket.on('startChallenge', (data) => {
+        setShowKeyboard(true);
+      });
+
+      socket.on('notPassChallenge', (data) => {
+        if(data.socketId == socket.id){
+          setShowNotPassChallenge(true);
+          setShowKeyboard(false);
+          setPreviousPosition(data.prev_position);
+        }
+      })
+
+      getTeamByName(dataPlayer.teamName, dataPlayer.gameId)
+      .then(team => {
+        const players = JSON.parse(team.players);
+        console.log(players);
+        setTeamPlayers(players);
+        setTeammate(players[indexTeammate]);
+      });
+
+      return () => {
+        socket.off('resultChallenge');        
+      }
+    },[]);
 
     const manageNewWord = () => {
       if (newWord && (!lastWord || newWord.charAt(0).toLowerCase() === lastWord.slice(-1).toLowerCase())) {
-        setArrayWords([...arrayWords, newWord]);
-        setLastWord(newWord);
+        const wordList = [...arrayWords];
+        wordList.push(newWord);
         setNewWord('');
-        // setHistorialPalabras([...historialPalabras, nuevaPalabra]);
-        // setUltimaPalabra(nuevaPalabra);
-        // setNuevaPalabra('');
+        socket.emit('chainWords', {lastWord: newWord, wordList, socketId: socket.id});
+        if(wordList.length == teamPlayers.length){
+          setFinishChallenge(true);
+        } else {
+          const newIndex = indexTeammate + 1;
+          setTeammate(teamPlayers[newIndex]);
+          setIndexTeammate(newIndex);
+        }       
       } else {
         alert('La palabra no cumple con las reglas del juego.');
       }
     };
 
-    const emitResult = () => {
-      socket.emit('resultChallenge', {playerId: socket.id, challengePassed: true});
+    const stopChallenge = () => {
+      setOpponentValidation(true);
+      console.log('dataplayer', dataPlayer);
+      socket.emit('stopChallenge', {socketId: socket.id});
+    }
+
+    const notPassChallenge = () => {
+      socket.emit('resultChallenge', {playerId: socket.id, challengePassed: false});
     }
   
     return (
       <div>
-        <KeyboardCW texto={newWord} setTexto={setNewWord}/>
-        <button onClick={manageNewWord}>Agregar Palabra</button>
-        <button onClick={emitResult}>Terminar</button>
+        {!finishChallenge 
+        ? <div>
+            <h4>Turno de {teammate}</h4>
+            {showKeyboard && 
+            <div>
+              <KeyboardCW texto={newWord} setTexto={setNewWord}/>
+              <button onClick={manageNewWord}>Agregar Palabra</button>
+            </div>}
+          </div> 
+        : 
+        <div>
+          {!opponentValidation 
+          ?
+          <div>
+            <p>Haz clic en Finalizar antes de que se acabe el tiempo!</p>
+            <button onClick={stopChallenge}>Finish</button>
+          </div>
+          :
+          <div>
+            <p>Esperando validacion del oponente</p>
+          </div>}
+        </div>}
+        {
+          showNotPassChallenge && 
+          <div>
+            <p>No pasaste el reto, te vamos a devolver a la posicion {previousPosition}</p>
+            <button onClick={notPassChallenge}>OK</button>
+          </div>
+        }
       </div>
     )
   }

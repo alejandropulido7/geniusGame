@@ -11,7 +11,7 @@ const port = process.env.PORT || 5000;
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
-    cookie: true,
+    // cookie: true,
     cors: { origin: '*'}
 });
 
@@ -21,6 +21,7 @@ syncDatabase();
 
 io.on('connection', async (socket) => {
     console.log('Nuevo dispositivo conectado');
+    console.log(socket.handshake.auth)
     mainGame(io, socket); 
     // socket.to('df').
 });

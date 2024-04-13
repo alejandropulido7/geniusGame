@@ -1,9 +1,9 @@
 import React, {useReducer} from 'react'
-import { ChallengeContext } from './ChallengeContext';
+import { GlobalContext } from './GlobalContext';
 
 
 
-const ChallengeState = ({children}) => {
+const GlobalState = ({children}) => {
     
     const initialState = {
         dataChallenge: {},
@@ -11,20 +11,20 @@ const ChallengeState = ({children}) => {
     }
 
     const challengeReducer = (state, action)=>{
-        if(action.type === 'DATA_CHALLENGE') {
-            return { ...state, dataChallenge: action.payload};
-        }
-        if(action.type === 'ACTIVE_CHALLENGE') {
-            return { ...state, activeChallenge: action.payload};
-        }
-        return state;        
+
+        switch (action.type) {
+            case 'DATA_CHALLENGE':
+                return { ...state, dataChallenge: action.payload};
+            case 'ACTIVE_CHALLENGE':
+                return { ...state, activeChallenge: action.payload};        
+            default:
+                return state;
+        }       
     }
 
     const [state, dispatch] = useReducer(challengeReducer, initialState);
 
     const setDataChallenge = (data) => {   
-        console.log('dispatch')
-        console.log(data)     
         dispatch({
             type: 'DATA_CHALLENGE',
             payload: data
@@ -39,15 +39,15 @@ const ChallengeState = ({children}) => {
     }
 
     return (
-        <ChallengeContext.Provider value={{
+        <GlobalContext.Provider value={{
             activeChallenge: state.activeChallenge,
             dataChallenge: state.dataChallenge,
             setDataChallenge,
             setActiveChallenge
         }}>
             {children}
-        </ChallengeContext.Provider>
+        </GlobalContext.Provider>
     )
 }
 
-export default ChallengeState
+export default GlobalState

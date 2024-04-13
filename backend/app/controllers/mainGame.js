@@ -33,7 +33,17 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("actingAndWhistle", actingAndWhistle)
 
+    gameSocket.on("chainWords", chainWords)
+
+    gameSocket.on("hunged", hunged)
+
     gameSocket.on("startChallenge", startChallenge)
+
+    gameSocket.on("stopChallenge", stopChallenge)
+
+    gameSocket.on("validateChallenge", validateChallenge)
+
+    gameSocket.on("notPassChallenge", notPassChallenge)
 
 
 }
@@ -90,7 +100,6 @@ function joinPlayerGame(dataPlayer) {
     console.log(players)
     currentSocket.join(gameId);
 
-    // io.sockets.in(gameId).emit('playerJoinedRoom', players.filter(player => player.gameId == gameId));
     io.sockets.in(gameId).emit('playerJoinedRoom', players);
     io.sockets.in(gameId).emit('otherPlayersJoinedRoom', players);
 
@@ -145,12 +154,8 @@ function throwDice (dataTeam) {
 
 function renderChallenge(data) {
     if(data.challenge != ""){
-        console.log(data);
         const playersNoChallenge = players.filter(player => player.teamName != data.player.teamName);
         const socketBoard = boards.find(board => board.gameId == data.player.gameId);
-        console.log('boards');
-        console.log(boards);
-        console.log(socketBoard);
         const ramdomPlayerIndex = Math.floor(Math.random() * playersNoChallenge.length);
         io.sockets.in(data.player.gameId).emit('renderChallenge', {
             challenge: data.challenge,
@@ -158,6 +163,13 @@ function renderChallenge(data) {
             player: data.player,
             playerOpponent: playersNoChallenge[ramdomPlayerIndex]
         });
+    }
+}
+
+function notPassChallenge (data) {
+    const foundPlayer = players.find(player => player.socketId == data.playerId);
+    if(foundPlayer){
+        io.sockets.in(foundPlayer.gameId).emit('notPassChallenge', foundPlayer);
     }
 }
 
@@ -185,16 +197,48 @@ function resultChallenge(data){
 }
 
 function actingAndWhistle(data){
-    const foundPlayer = players.find(player => player.socketId == data.socketId);
-    if(foundPlayer){
-        io.sockets.in(foundPlayer.gameId).emit('actingAndWhistle', data);
-    }
+    emitDataOtherScreen('actingAndWhistle', data);
+}
+
+function chainWords(data){
+    emitDataOtherScreen('chainWords', data);
+}
+
+function hunged(data){
+    emitDataOtherScreen('hunged', data);
 }
 
 function startChallenge(data){
     const foundPlayer = players.find(player => player.socketId == data.socketId);
     if(foundPlayer){
         io.sockets.in(foundPlayer.gameId).emit('startChallenge', data);
+    }
+}
+
+function stopChallenge(data){
+    const foundPlayer = players.find(player => player.socketId == data.socketId);
+    if(foundPlayer){
+        io.sockets.in(foundPlayer.gameId).emit('stopChallenge', foundPlayer);
+    }
+}
+
+function validateChallenge(data){
+    const foundPlayer = players.find(player => player.socketId == data.socketId);
+    const playersOpponents = players.filter(player => player.socketId != data.socketId);
+    if(foundPlayer && playersOpponents.length > 0){
+        console.log('playersOpponents', playersOpponents);
+        console.log('foundPlayer', foundPlayer);
+        io.sockets.in(foundPlayer.gameId).emit('validateChallenge', {
+            player: foundPlayer,
+            opponent: playersOpponents[0]
+        });
+    }
+}
+
+function emitDataOtherScreen(nameEmit, data) {
+    const foundPlayer = players.find(player => player.socketId == data.socketId);
+    if(foundPlayer){
+        io.sockets.in(foundPlayer.gameId).emit(nameEmit, data);
     }
 }
 

@@ -1,25 +1,59 @@
-import React, { useContext, useState } from 'react'
-import { ChainWordsContext } from '../../../context/challenges/ChallengeContext';
+import React, { useEffect, useState } from 'react';
 import socket from '../../../config/socket'
+import {OPTIONS_CHALLENGES, getRandomObject} from '../../../utils/constants'
+import ValidateChallenge from '../ValidateChallenge';
 
-const OpponentInteractiveCW = () => {
+const OpponentInteractiveCW = ({lastWord}) => {
 
     const [word, setWord] = useState('');
-    const {lastWord, setLastWord} = useContext(ChainWordsContext)
-  
+    const [topic, setTopic] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    
+
     const emitWordChallenge = () => {
-    //   socket.emit('actingAndWhistle', {word, wordReady: true, socketId: socket.id});
-        setLastWord(word);
+      setErrorMessage('');
+      if(word != '' && topic != ''){
+        socket.emit('chainWords', {lastWord: word, wordList: [], socketId: socket.id, topic});
         socket.emit('startChallenge', {socketId: socket.id});
+      } else {
+        setErrorMessage('Debes escribir la palabra y escoger el tema');
+      }
     }
-  
+
+    const topicChanged = (event) => {
+      const value = event.target.value;
+      if(value != ''){
+        setTopic(event.target.value);
+      }
+    };
+
     return (
-      <>
-        { lastWord=='' && <div>
-          <input type="text" placeholder='Type a word to your opponent' onChange={(e) => setWord(e.target.value)}/>
+      <div>       
+        { lastWord == '' ?
+        <div>
+          <p>Envia la primera palabra a tu oponente y selecciona un tema</p>
+          <input type="text" placeholder='Escribe una palabra segun el tema' onChange={(e) => setWord(e.target.value)}/>
           <button onClick={emitWordChallenge}>Sent word</button>
-        </div>}
-      </>
+          <select value={topic} onChange={topicChanged}>
+            <option value="">Selecciona un tema..</option>
+            {
+              OPTIONS_CHALLENGES.word_chain.topics.map(topicMap => {
+                return (
+                  <option key={topicMap} value={topicMap}>{topicMap}</option>
+                );
+              })
+            }
+          </select>
+          {errorMessage && <p>{errorMessage}</p>}
+        </div>
+        : 
+        <div>
+          <p>Tema: {topic}</p>
+          <p>Ultima palabra: {lastWord}</p>
+        </div>
+        }
+        <ValidateChallenge/>
+      </div>
     )
   }
 

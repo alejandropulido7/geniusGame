@@ -3,7 +3,7 @@ import React from 'react'
 const PlayerChallengeAW = () => {
 
     const emitResult = () => {
-      socket.emit('resultChallenge', {playerId: socket.id, challengePassed: true});
+      socket.emit('stopChallenge', {socketId: socket.id});
     }
   
     return (

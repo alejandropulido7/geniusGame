@@ -33,11 +33,9 @@ const ConfigGame = () => {
     };
 
     const handleSubmit = async () => {
-
-        
         const sessionCreated = await createSession(idGame, socket.id, configGame);
         if(sessionCreated){
-            navigate(idGame);
+            navigate('../room/'+idGame);
         }
     }
 

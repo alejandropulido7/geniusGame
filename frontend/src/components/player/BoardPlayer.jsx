@@ -69,7 +69,7 @@ const BoardPlayer = () => {
             socket.off('resultChallenge');
         }
                
-    },[]);
+    },[isChallengeActive]);
 
     
 
