@@ -2,6 +2,10 @@ import React, {useContext, useEffect, useState} from 'react'
 import { HungedContext } from '../../../context/challenges/GlobalContext';
 import socket from '../../../config/socket';
 import { RENDER_CHALLENGE } from '../../../utils/constants';
+import { getTeamByName } from '../../../services/teamService';
+import { useParams } from 'react-router-dom';
+import { getCookie } from '../../../utils/cookies';
+
 
 const PlayerChallengeH = ({secretWord}) => {
 
@@ -12,18 +16,17 @@ const PlayerChallengeH = ({secretWord}) => {
     const [showKeyboard, setShowKeyboard] = useState(true);
     const [showNotPassChallenge, setShowNotPassChallenge] = useState(false);
     const [previousPosition, setPreviousPosition] = useState(0);
-    
-    // const {secretWord, 
-    //     setWordShowed, 
-    //     missedAttemps, setMissedAttemps, 
-    //     lettersGuessed, setLettersGuessed, 
-    //     gameFinished, setGameFinished} = useContext(HungedContext);
+    const {idRoom} = useParams();
 
     const manejarIntento = (letra) => {
         if (!gameFinished && !lettersGuessed.includes(letra)) {
-            
+
+            let attempsUpdate = missedAttemps;
+            let gameFinishedCopy = gameFinished;
+
             if (!secretWord.includes(letra)) {
-                setMissedAttemps((prevIntentos) => prevIntentos - 1);
+                attempsUpdate = attempsUpdate - 1;
+                setMissedAttemps(attempsUpdate);
             }
             const lettersGuessedCopy = [...lettersGuessed];
             lettersGuessedCopy.push(letra);
@@ -38,24 +41,32 @@ const PlayerChallengeH = ({secretWord}) => {
     
             if (!newWordShowed.includes('_')) {
                 setGameFinished(true);
+                gameFinishedCopy = true;
             }
     
-            if (missedAttemps === 0) {
-                setGameFinished(true);
+            if (attempsUpdate === 0) {
+                getTeamByName(getCookie('teamName-GG'), idRoom)
+                .then((data) => {
+                    setPreviousPosition(data.prev_position);
+                })
+                setShowNotPassChallenge(true);
+                setShowKeyboard(false);
+                gameFinishedCopy = true;
+            }
+
+            socket.emit('hunged', {gameFinished: gameFinishedCopy,
+                wordShowed: newWordShowed, 
+                missedAttemps: attempsUpdate,
+                socketId: socket.id, 
+                sendedBy: RENDER_CHALLENGE.player });
+            if(gameFinishedCopy) {
+                socket.emit('stopChallenge', {socketId: socket.id});
             }
         }
       };
 
     useEffect(() => {
-        socket.emit('hunged', {gameFinished,
-            wordShowed, 
-            missedAttemps,
-            socketId: socket.id, 
-            sendedBy: RENDER_CHALLENGE.player });
-        if(gameFinished) {
-            socket.emit('stopChallenge', {socketId: socket.id});
-        }
-
+        
         socket.on('notPassChallenge', (data) => {
             if(data.socketId == socket.id){
               setShowNotPassChallenge(true);
@@ -63,7 +74,7 @@ const PlayerChallengeH = ({secretWord}) => {
               setPreviousPosition(data.prev_position);
             }
           })
-    }, [gameFinished, wordShowed, missedAttemps]);
+    }, []);
 
 
     const resultChallenge = (passChallenge) => {

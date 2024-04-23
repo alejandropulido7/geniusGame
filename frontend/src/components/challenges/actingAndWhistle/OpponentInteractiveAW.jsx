@@ -1,5 +1,5 @@
 import React from 'react'
-import ValidateChallenge from '../ValidateChallenge';
+import ValidateChallenge from '../common/ValidateChallenge';
 
 const OpponentInteractiveAW = ({wordReady}) => {
 

@@ -6,6 +6,26 @@ const Chronometer = ({data}) => {
   const [message, setMessage] = useState('');
   const [showTime, setShowTime] = useState(true);
 
+
+  useEffect(() => {
+    if(localStorage.getItem('timeChallenge-GG') != null){
+      if(JSON.parse(localStorage.getItem('timeChallenge-GG')).seconds != null){
+        setSeconds(JSON.parse(localStorage.getItem('timeChallenge-GG')).seconds);
+      }
+      if(JSON.parse(localStorage.getItem('timeChallenge-GG')).message != null){
+        setMessage(JSON.parse(localStorage.getItem('timeChallenge-GG')).message);
+      }
+      if(JSON.parse(localStorage.getItem('timeChallenge-GG')).showWord != null){
+        setShowTime(JSON.parse(localStorage.getItem('hunged-GG')).showTime);
+      }
+    } 
+
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('timeChallenge-GG', JSON.stringify({seconds, message, showTime}));
+  }, [seconds, message, showTime]);
+
   useEffect(() => {
     let interval = null;
     socket.on('startChallenge', (dataStart) => {

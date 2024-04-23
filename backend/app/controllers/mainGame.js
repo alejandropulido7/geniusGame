@@ -25,6 +25,8 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("throwDice", throwDice)
 
+    gameSocket.on("turnOf", turnOf)
+
     gameSocket.on("startGame", startGame)
 
     gameSocket.on("renderChallenge", renderChallenge)
@@ -105,10 +107,11 @@ function joinPlayerGame(dataPlayer) {
 
 }
 
-function throwDice (dataTeam) {
-    const gameId = dataTeam.gameId;
-    round.push(dataTeam)
-    const playersNoThrow = players.filter(player => player.teamName != dataTeam.teamName);
+function turnOf(dataTeam){
+    console.log('dataTeam', dataTeam);
+    const gameId = dataTeam.player.gameId;
+    round.push(dataTeam.player);
+    const playersNoThrow = players.filter(player => player.teamName != dataTeam.player.teamName);
     if(playersNoThrow.length != 0){
         updateTurnOfTeamFromSocket(gameId, true, playersNoThrow[0].teamName)
         .then(() => {
@@ -129,6 +132,32 @@ function throwDice (dataTeam) {
             console.error(err);
         });
     }
+}
+
+function throwDice (dataTeam) {
+    const gameId = dataTeam.gameId;
+    // round.push(dataTeam)
+    // const playersNoThrow = players.filter(player => player.teamName != dataTeam.teamName);
+    // if(playersNoThrow.length != 0){
+    //     updateTurnOfTeamFromSocket(gameId, true, playersNoThrow[0].teamName)
+    //     .then(() => {
+    //         io.sockets.in(gameId).emit('turnOf', playersNoThrow[0]);            
+    //     })
+    //     .catch(err => {
+    //         console.error("Update turn to throw");
+    //         console.error(err);
+    //     });
+    // } else {        
+    //     updateTurnOfTeamFromSocket(gameId, true, round[0].teamName)
+    //     .then(() => {
+    //         io.sockets.in(gameId).emit('turnOf', round[0]);
+    //         round = [];           
+    //     })
+    //     .catch(err => {
+    //         console.error("Update turn to throw");
+    //         console.error(err);
+    //     });
+    // }
 
     const playerMoved = players.find(player => player.teamName === dataTeam.teamName);
     if(playerMoved != undefined){
@@ -184,14 +213,14 @@ function resultChallenge(data){
             .then(() => {
                 players = playersNewPosition;
                 io.sockets.in(foundPlayer.gameId).emit('playerJoinedRoom', players);  
-                io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{challengePassed: false});
+                io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{player: foundPlayer, challengePassed: false});
             })
             .catch(err => {
                 console.error(err)
             });
 
         } else {
-            io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{challengePassed: true});
+            io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{player: foundPlayer, challengePassed: true});
         }
     } 
 }
@@ -205,6 +234,7 @@ function chainWords(data){
 }
 
 function hunged(data){
+    console.log('hunged', data);
     emitDataOtherScreen('hunged', data);
 }
 

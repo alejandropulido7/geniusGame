@@ -10,61 +10,53 @@ import Trivia from './Trivia';
 import socket from '../../config/socket';
 import ChainWordChallengeState from '../../context/challenges/ChainWordsChallengeState';
 import HungedChallengeState from '../../context/challenges/HungedChallengeState';
+import { GlobalContext } from '../../context/challenges/GlobalContext';
 
-const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
+const BoardChallenges = () => {
 
-  const [challengeFinished, setChallengeFinished] = useState(false);
   const [componentChallenge, setComponentChallenge] = useState(null);
-  const [dataChallengeActive, setDataChallengeActive] = useState({});
-  const [renderIn, setRenderIn] = useState(null);
-  const [pathChallenge, setPathChallenge] = useState('');
-  const {challenge} = useParams();
-  const navigate = useNavigate();
+  // const [renderIn, setRenderIn] = useState(null);
+  const {activeChallenge, setActiveChallenge, dataChallenge, setDataChallenge, renderPlayer, setRenderPlayer} = useContext(GlobalContext);
+
 
 
   useEffect(() => {
 
-    if(localStorage.getItem('dataChallenge-GG')){
-      setDataChallengeActive(JSON.parse(localStorage.getItem('dataChallenge-GG')));
-    }
-    if(localStorage.getItem('renderIn-GG')){
-      setRenderIn(localStorage.getItem('renderIn-GG'));
-    }
+    console.log('dataChallenge', dataChallenge);     
 
-    socket.on('renderChallenge', (dataChallenge) => {
-      console.log('dataChallenge');
-      console.log(dataChallenge);     
-      if(dataChallenge.challenge != ''){
+    socket.on('renderChallenge', (dataChallengeSocket) => {
+      if(dataChallengeSocket.challenge != ''){
         setActiveChallenge(true);
-        setDataChallengeActive(dataChallenge);
-        localStorage.setItem('dataChallenge-GG', JSON.stringify(dataChallenge));
+        setDataChallenge(dataChallengeSocket);
+        localStorage.setItem('activeChallenge-GG', true);
+        localStorage.setItem('dataChallenge-GG', JSON.stringify(dataChallengeSocket));
         switch (socket.id) {
-          case dataChallenge.player.socketId:
-            setRenderIn(RENDER_CHALLENGE.player);
+          case dataChallengeSocket.player.socketId:
             localStorage.setItem('renderIn-GG', RENDER_CHALLENGE.player);
+            setRenderPlayer(RENDER_CHALLENGE.player);
           break;
-          case dataChallenge.playerOpponent.socketId:
-            setRenderIn(RENDER_CHALLENGE.opponent); 
+          case dataChallengeSocket.playerOpponent.socketId:
             localStorage.setItem('renderIn-GG', RENDER_CHALLENGE.opponent);
+            setRenderPlayer(RENDER_CHALLENGE.opponent); 
           break;
-          case dataChallenge.board:
-            setRenderIn(RENDER_CHALLENGE.admin);
+          case dataChallengeSocket.board:
             localStorage.setItem('renderIn-GG', RENDER_CHALLENGE.admin);
+            setRenderPlayer(RENDER_CHALLENGE.admin);
           break;
         }
         
       }
     });
 
-    switch (dataChallengeActive.challenge) {
+    switch (dataChallenge.challenge) {
       case ACTING:
-        setComponentChallenge(<ActingAndWhistle renderIn={renderIn} title={OPTIONS_CHALLENGES.acting.title} description={OPTIONS_CHALLENGES.acting.description}/>)
+        setComponentChallenge(<ActingAndWhistle renderIn={renderPlayer} title={OPTIONS_CHALLENGES.acting.title} description={OPTIONS_CHALLENGES.acting.description}/>)
         break;
       case WHISTLE_SONG:
-        setComponentChallenge(<ActingAndWhistle renderIn={renderIn} title={OPTIONS_CHALLENGES.whistle_song.title} description={OPTIONS_CHALLENGES.whistle_song.description}/>)
+        setComponentChallenge(<ActingAndWhistle renderIn={renderPlayer} title={OPTIONS_CHALLENGES.whistle_song.title} description={OPTIONS_CHALLENGES.whistle_song.description}/>)
         break;
       case WORD_CHAIN:
-        setComponentChallenge(<ChainWordChallengeState><ChainWord renderIn={renderIn} dataPlayer={dataChallengeActive.player}/></ChainWordChallengeState>)
+        setComponentChallenge(<ChainWordChallengeState><ChainWord renderIn={renderPlayer} dataPlayer={dataChallenge.player}/></ChainWordChallengeState>)
         break;
       case PICTIONARY:
         setComponentChallenge(<Pictionary />)
@@ -73,7 +65,7 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
         setComponentChallenge(<Trivia />)
         break;
       case HUNGED:
-        setComponentChallenge(<HungedChallengeState><Hunged renderIn={renderIn}/></HungedChallengeState>)
+        setComponentChallenge(<HungedChallengeState><Hunged renderIn={renderPlayer}/></HungedChallengeState>)
         break;  
       case BACK_HOME:
         setComponentChallenge(<div><h1>BACK HOME</h1><button onClick={() => setActiveChallenge(false)}>Terminar</button></div>)
@@ -85,9 +77,8 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
 
     return () => {
       socket.off('renderChallenge');
-      localStorage.clear();
     }
-  }, [dataChallengeActive])
+  }, [dataChallenge])
 
 
   return (
@@ -95,7 +86,7 @@ const BoardChallenges = ({activeChallenge, setActiveChallenge}) => {
       { activeChallenge && 
       <>
         <h2>Pasa el reto para poder avanzar</h2>
-        {renderIn=='ADMIN' && <Chronometer data={dataChallengeActive}/>}
+        {renderPlayer == 'ADMIN' && <Chronometer data={dataChallenge}/>}
         {componentChallenge}        
       </>
       }

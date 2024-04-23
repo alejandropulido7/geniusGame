@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {useParams} from 'react-router-dom';
 import socket from '../../config/socket';
-import { getCookie } from '../../utils/cookies';
-import OtherPlayers from './OtherPlayers';
+import { getCookie, deleteCookie } from '../../utils/cookies';
 import { Link, useNavigate } from 'react-router-dom';
 import {getTeamByName} from '../../services/teamService';
 import {getSession} from '../../services/sessionService';
 import BoardChallenges from '../challenges/BoardChallenges';
+import { GlobalContext } from '../../context/challenges/GlobalContext';
 
 const BoardPlayer = () => {
 
@@ -18,8 +18,8 @@ const BoardPlayer = () => {
     const [prevPosition, setPrevPosition] = useState(1);
     const [diceResult, setDiceResult] = useState(0);
     const [youTurn, setYouTurn] = useState(false);
-    const [isChallengeActive, setIsChallengeActive] = useState(false);
     const navigate = useNavigate();
+    const {activeChallenge, setActiveChallenge} = useContext(GlobalContext);
 
     const getTeamCreated = (idRoom) => {
         const nameTeamCookie = getCookie('teamName-GG');
@@ -58,7 +58,8 @@ const BoardPlayer = () => {
         });
 
         socket.on('resultChallenge', (data) => {      
-            setIsChallengeActive(false);
+            setActiveChallenge(false);
+            localStorage.clear();
         });
 
         setCodeSesion(idRoom); 
@@ -69,13 +70,14 @@ const BoardPlayer = () => {
             socket.off('resultChallenge');
         }
                
-    },[isChallengeActive]);
+    },[activeChallenge]);
 
     
 
     const throwDice = () => {
         const randomNumber = Math.floor(Math.random() * 6) + 1;
         setDiceResult(randomNumber);
+        setYouTurn(false);
         socket.emit('throwDice', {
             gameId: codeSesion,
             teamName,
@@ -90,7 +92,7 @@ const BoardPlayer = () => {
 
     return (
         <div>
-            { !isChallengeActive && 
+            { !activeChallenge && 
             <div>
                 <h3>{codeSesion}</h3>
                 <h3>Your name: {teamName}</h3>
@@ -103,7 +105,7 @@ const BoardPlayer = () => {
                 }
                 <p>Resultado dado: {diceResult}</p>
             </div>}
-            <BoardChallenges activeChallenge={isChallengeActive} setActiveChallenge={setIsChallengeActive}/>
+            <BoardChallenges/>
         </div>
     )
 }

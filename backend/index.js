@@ -21,7 +21,7 @@ syncDatabase();
 
 io.on('connection', async (socket) => {
     console.log('Nuevo dispositivo conectado');
-    console.log(socket.handshake.auth)
+    console.log(socket.handshake.auth);
     mainGame(io, socket); 
     // socket.to('df').
 });

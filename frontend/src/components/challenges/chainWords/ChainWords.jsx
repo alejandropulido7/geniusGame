@@ -12,7 +12,19 @@ const ChainWord = ({renderIn, dataPlayer}) => {
   const [render, setRender] = useState(null);
   const [showOponnent, setShowOpponent] = useState(false);
   const [topic, setTopic] = useState('');
+
+  useEffect(() => {
+    if(localStorage.getItem('chainWords-GG') != null){
+        setLastWord(JSON.parse(localStorage.getItem('chainWords-GG')).lastWord);
+        setArrayWords(JSON.parse(localStorage.getItem('chainWords-GG')).arrayWords);
+        setShowOpponent(JSON.parse(localStorage.getItem('chainWords-GG')).showOponnent);
+        setTopic(JSON.parse(localStorage.getItem('chainWords-GG')).topic);
+    }
+  },[])
   
+  useEffect(() => {
+    localStorage.setItem('chainWords-GG', JSON.stringify({lastWord, arrayWords, showOponnent, topic}));
+  },[lastWord, arrayWords, showOponnent, topic])
   
   useEffect(() => {
     socket.on('chainWords', (data) => {

@@ -6,8 +6,9 @@ import { GlobalContext } from './GlobalContext';
 const GlobalState = ({children}) => {
     
     const initialState = {
-        dataChallenge: {},
-        activeChallenge: false
+        dataChallenge: JSON.parse(localStorage.getItem('dataChallenge-GG')) || {},
+        activeChallenge: localStorage.getItem('activeChallenge-GG') || false,
+        renderPlayer: localStorage.getItem('renderIn-GG') || ''
     }
 
     const challengeReducer = (state, action)=>{
@@ -16,7 +17,9 @@ const GlobalState = ({children}) => {
             case 'DATA_CHALLENGE':
                 return { ...state, dataChallenge: action.payload};
             case 'ACTIVE_CHALLENGE':
-                return { ...state, activeChallenge: action.payload};        
+                return { ...state, activeChallenge: action.payload};
+            case 'RENDER_CHALLENGE':
+                return { ...state, renderPlayer: action.payload};          
             default:
                 return state;
         }       
@@ -38,12 +41,21 @@ const GlobalState = ({children}) => {
         })
     }
 
+    const setRenderPlayer = (data) => {        
+        dispatch({
+            type: 'RENDER_CHALLENGE',
+            payload: data
+        })
+    }
+
     return (
         <GlobalContext.Provider value={{
             activeChallenge: state.activeChallenge,
             dataChallenge: state.dataChallenge,
+            renderPlayer: state.renderPlayer,
             setDataChallenge,
-            setActiveChallenge
+            setActiveChallenge,
+            setRenderPlayer
         }}>
             {children}
         </GlobalContext.Provider>

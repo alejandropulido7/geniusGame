@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import socket from '../../../config/socket'
 import {OPTIONS_CHALLENGES, getRandomObject} from '../../../utils/constants'
-import ValidateChallenge from '../ValidateChallenge';
+import ValidateChallenge from '../common/ValidateChallenge';
 
 const OpponentInteractiveCW = ({lastWord}) => {
 

@@ -14,10 +14,16 @@ const Hunged = ({renderIn}) => {
     const [gameFinished, setGameFinished] = useState(false);
     const [render, setRender] = useState(null);
 
-    // const {setSecretWord,
-    // wordShowed, setWordShowed, 
-    // missedAttemps, 
-    // gameFinished} = useContext(HungedContext);
+    useEffect(() => {
+      if(localStorage.getItem('hunged-GG') != null){
+          setSecretWord(JSON.parse(localStorage.getItem('hunged-GG')).secretWord);
+          setWordShowed(JSON.parse(localStorage.getItem('hunged-GG')).wordShowed);
+          setMissedAttemps(JSON.parse(localStorage.getItem('hunged-GG')).missedAttemps);
+          setGameFinished(JSON.parse(localStorage.getItem('hunged-GG')).gameFinished);
+      }     
+
+    },[])
+
 
   useEffect(() => {
 
@@ -46,6 +52,9 @@ const Hunged = ({renderIn}) => {
         setRender(<OpponentInteractiveH/>)
       break;
     } 
+
+    localStorage.setItem('hunged-GG', JSON.stringify({secretWord, wordShowed, missedAttemps, gameFinished}));
+
   }, [renderIn, secretWord, wordShowed, missedAttemps, gameFinished]);
 
   const sendedByOpponent = (data) => {

@@ -3,8 +3,10 @@ import { createContext } from "react";
 export const GlobalContext = createContext({
     activeChallenge: false,
     dataChallenge: {},
+    renderPlayer: '',
     setDataChallenge: (data)=>{},
-    setActiveChallenge: (data)=>{}
+    setActiveChallenge: (data)=>{},
+    setRenderPlayer: (data)=>{}
 });
 
 export const ChainWordsContext = createContext({

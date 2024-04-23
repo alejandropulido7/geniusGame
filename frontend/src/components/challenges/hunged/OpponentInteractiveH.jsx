@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import socket from '../../../config/socket';
 import { RENDER_CHALLENGE } from '../../../utils/constants';
 
@@ -26,8 +26,25 @@ const OpponentInteractiveH = () => {
         setShowWord(false);
     };
 
+    useEffect(() => {
+        if(localStorage.getItem('hunged-Opponet-GG') != null){
+          if(JSON.parse(localStorage.getItem('hunged-Opponet-GG')).word != null){
+            setWord(JSON.parse(localStorage.getItem('hunged-Opponet-GG')).word);
+          }
+          if(JSON.parse(localStorage.getItem('hunged-Opponet-GG')).wordReady != null){
+            setWordReady(JSON.parse(localStorage.getItem('hunged-Opponet-GG')).wordReady);
+          }
+        }     
+  
+      },[])
+
+    useEffect(() => {
+        localStorage.setItem('hunged-Opponet-GG', JSON.stringify({word, wordReady}));
+    },[word, wordReady])
+
     return (
         <>
+            
             {!wordReady ? 
             <div>
                 <input type="text" placeholder='Escribe una palabra' onChange={(e) => validateWord(e.target.value)}/>
@@ -35,7 +52,7 @@ const OpponentInteractiveH = () => {
             </div>
             : 
             <div>
-                {showWord && <p>{word}</p>}
+                
                 <button
                     onMouseDown={manageHold}
                     onMouseUp={manageUnhold}
@@ -46,6 +63,7 @@ const OpponentInteractiveH = () => {
                 </button>
             </div>
             }
+            {showWord && <p>{word}</p>}
         </>
     )
 }
