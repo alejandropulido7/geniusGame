@@ -8,7 +8,18 @@ const OpponentInteractiveCW = ({lastWord}) => {
     const [word, setWord] = useState('');
     const [topic, setTopic] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+
+    useEffect(() => {
+      if(localStorage.getItem('chainWords-Opp-GG') != null){
+        setWord(JSON.parse(localStorage.getItem('chainWords-Opp-GG')).word);
+        setTopic(JSON.parse(localStorage.getItem('chainWords-Opp-GG')).topic);
+        setErrorMessage(JSON.parse(localStorage.getItem('chainWords-Opp-GG')).errorMessage);
+    } 
+    },[])
     
+    useEffect(() => {
+      localStorage.setItem('chainWords-Opp-GG', JSON.stringify({word, topic, errorMessage}));
+    },[word, topic, errorMessage])
 
     const emitWordChallenge = () => {
       setErrorMessage('');

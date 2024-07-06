@@ -3,7 +3,6 @@ import {Outlet, useParams, useNavigate} from 'react-router-dom'
 import Chronometer from './Chronometer';
 import {ACTING, BACK_HOME, WORD_CHAIN, HUNGED, PICTIONARY, TRIVIA, WHISTLE_SONG, OPTIONS_CHALLENGES, RENDER_CHALLENGE} from '../../utils/constants'
 import Hunged from './hunged/Hunged';
-import ActingAndWhistle from './actingAndWhistle/ActingAndWhistle';
 import ChainWord from './chainWords/ChainWords';
 import Pictionary from './Pictionary';
 import Trivia from './Trivia';
@@ -11,18 +10,18 @@ import socket from '../../config/socket';
 import ChainWordChallengeState from '../../context/challenges/ChainWordsChallengeState';
 import HungedChallengeState from '../../context/challenges/HungedChallengeState';
 import { GlobalContext } from '../../context/challenges/GlobalContext';
+import Acting from './acting/Acting';
+import Whistle from './whistle/Whistle';
 
 const BoardChallenges = () => {
 
   const [componentChallenge, setComponentChallenge] = useState(null);
-  // const [renderIn, setRenderIn] = useState(null);
   const {activeChallenge, setActiveChallenge, dataChallenge, setDataChallenge, renderPlayer, setRenderPlayer} = useContext(GlobalContext);
 
 
 
   useEffect(() => {
 
-    console.log('dataChallenge', dataChallenge);     
 
     socket.on('renderChallenge', (dataChallengeSocket) => {
       if(dataChallengeSocket.challenge != ''){
@@ -50,10 +49,10 @@ const BoardChallenges = () => {
 
     switch (dataChallenge.challenge) {
       case ACTING:
-        setComponentChallenge(<ActingAndWhistle renderIn={renderPlayer} title={OPTIONS_CHALLENGES.acting.title} description={OPTIONS_CHALLENGES.acting.description}/>)
+        setComponentChallenge(<Acting renderIn={renderPlayer}/>)
         break;
       case WHISTLE_SONG:
-        setComponentChallenge(<ActingAndWhistle renderIn={renderPlayer} title={OPTIONS_CHALLENGES.whistle_song.title} description={OPTIONS_CHALLENGES.whistle_song.description}/>)
+        setComponentChallenge(<Whistle renderIn={renderPlayer}/>)
         break;
       case WORD_CHAIN:
         setComponentChallenge(<ChainWordChallengeState><ChainWord renderIn={renderPlayer} dataPlayer={dataChallenge.player}/></ChainWordChallengeState>)

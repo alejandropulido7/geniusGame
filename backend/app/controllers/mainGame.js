@@ -1,6 +1,7 @@
 const detectMobileDevice = require('../utils/detectDevice');
 const {updatePositionTeamFromSocket} = require('./teams');
-const {updateTurnOfTeamFromSocket} = require('./sessions')
+const {updateTurnOfTeamFromSocket} = require('./sessions');
+const RoomStore = require('../classes/RoomStore');
 
 var io
 var gameSocket
@@ -33,7 +34,9 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("resultChallenge", resultChallenge)
 
-    gameSocket.on("actingAndWhistle", actingAndWhistle)
+    gameSocket.on("acting", acting)
+
+    gameSocket.on("whistle", whistle)
 
     gameSocket.on("chainWords", chainWords)
 
@@ -52,22 +55,17 @@ const initializeGame = (sio, socket) => {
 
 
 function createNewGame(data) {
-    this.emit('createNewGame', {gameId: data.gameId, mySocketId: this.id});
-    lenght_board = data.lenghtBoard;
-    quantity_challenges = data.quantityChallenges;
 
-    console.log('romm created');
-    console.log(this.id);
-    const foundBoard = boards.find(board => board.gameId == data.gameId);
-    if(foundBoard){
-        const boardUpdated = boards.map(board => board.gameId == data.gameId ? {...board, mySocketId: this.id} : board);
-        boards = boardUpdated;
-    } else {
-        boards.push({gameId: data.gameId, mySocketId: this.id});
+    const room = {
+        gameId: data.gameId, 
+        mySocketId: this.id,
+        lenght_board: data.lenghtBoard,
+        quantity_challenges: data.quantityChallenges
     }
-
+    RoomStore.createNewRoom(room);
+    this.emit('createNewGame', room);
     // Join the Room and wait for the other player
-    this.join(data.gameId)
+    this.join(room.gameId)
 }
 
 function startGame() {
@@ -136,28 +134,6 @@ function turnOf(dataTeam){
 
 function throwDice (dataTeam) {
     const gameId = dataTeam.gameId;
-    // round.push(dataTeam)
-    // const playersNoThrow = players.filter(player => player.teamName != dataTeam.teamName);
-    // if(playersNoThrow.length != 0){
-    //     updateTurnOfTeamFromSocket(gameId, true, playersNoThrow[0].teamName)
-    //     .then(() => {
-    //         io.sockets.in(gameId).emit('turnOf', playersNoThrow[0]);            
-    //     })
-    //     .catch(err => {
-    //         console.error("Update turn to throw");
-    //         console.error(err);
-    //     });
-    // } else {        
-    //     updateTurnOfTeamFromSocket(gameId, true, round[0].teamName)
-    //     .then(() => {
-    //         io.sockets.in(gameId).emit('turnOf', round[0]);
-    //         round = [];           
-    //     })
-    //     .catch(err => {
-    //         console.error("Update turn to throw");
-    //         console.error(err);
-    //     });
-    // }
 
     const playerMoved = players.find(player => player.teamName === dataTeam.teamName);
     if(playerMoved != undefined){
@@ -211,22 +187,25 @@ function resultChallenge(data){
             const playersNewPosition = players.map(player => player.teamName == foundPlayer.teamName ? {...player, positionActive: foundPlayer.prev_position} : player);
             updatePositionTeamFromSocket(foundPlayer.teamName, foundPlayer.gameId, foundPlayer.flagActive, foundPlayer.prev_position, foundPlayer.prev_position)
             .then(() => {
-                players = playersNewPosition;
-                io.sockets.in(foundPlayer.gameId).emit('playerJoinedRoom', players);  
-                io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{player: foundPlayer, challengePassed: false});
+                players = playersNewPosition;  
+                io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{player: foundPlayer, challengePassed: false, players});
             })
             .catch(err => {
                 console.error(err)
             });
 
         } else {
-            io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{player: foundPlayer, challengePassed: true});
+            io.sockets.in(foundPlayer.gameId).emit('resultChallenge',{player: foundPlayer, challengePassed: true, players});
         }
     } 
 }
 
-function actingAndWhistle(data){
-    emitDataOtherScreen('actingAndWhistle', data);
+function acting(data){
+    emitDataOtherScreen('acting', data);
+}
+
+function whistle(data){
+    emitDataOtherScreen('whistle', data);
 }
 
 function chainWords(data){

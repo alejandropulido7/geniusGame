@@ -1,17 +1,16 @@
 import React from 'react'
 
-const AdminAW = ({mostrarPalabra, wordReady, word}) => {
+const AdminW = ({wordReady, word}) => {
 
     const hideWord = ' _ '.repeat(word.length);
   
     return (
       <div>
         <p>{hideWord}</p>
-        {mostrarPalabra && wordReady && <p>{word}</p>}
         {!wordReady && <p>Waiting for the word...</p>}
       </div>
     )
   }
   
 
-export default AdminAW
+export default AdminW

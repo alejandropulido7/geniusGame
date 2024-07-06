@@ -1,4 +1,4 @@
-const Session = require('../models/session');
+const Session = require('../data-models/session');
 
 function createSesion(req, res) {
 

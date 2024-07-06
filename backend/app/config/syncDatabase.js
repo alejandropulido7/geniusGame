@@ -1,7 +1,7 @@
 const sequelize = require('./db');
-const Session = require('../models/session');
-const Player = require('../models/player');
-const Team = require('../models/team');
+const Session = require('../data-models/session');
+const Player = require('../data-models/player');
+const Team = require('../data-models/team');
 
 async function syncDatabase() {
     try {

@@ -34,8 +34,9 @@ const BoardGame = () => {
     socket.on('resultChallenge', (data) => {    
       setDataChallenge({});
       setActiveChallenge(false);
-      socket.emit('turnOf', data);
+      setPlayersPositions(data.players);
       localStorage.clear();
+      socket.emit('turnOf', data);
     });
 
     return () => {
@@ -43,7 +44,6 @@ const BoardGame = () => {
       socket.off('resultChallenge');
       setFlagPositions([]);
       setSession({});
-      setPlayersPositions([]);
       setGameStarted(false);
     }
   }, [activeChallenge]);
@@ -91,7 +91,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: 'hunged',
+        challenge: 'acting',
         player: playerModified
       };
     }

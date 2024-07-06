@@ -6,7 +6,7 @@ import { getTeamByName } from '../../../services/teamService';
 
 const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
 
-    const {newWord, arrayWords, setNewWord} = useContext(ChainWordsContext);
+    const {newWord, arrayWords, setNewWord, setArrayWords} = useContext(ChainWordsContext);
     const [teamPlayers, setTeamPlayers] = useState([]);
     const [teammate, setTeammate] = useState('');
     const [indexTeammate, setIndexTeammate] = useState(0);
@@ -15,6 +15,48 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
     const [showNotPassChallenge, setShowNotPassChallenge] = useState(false);
     const [previousPosition, setPreviousPosition] = useState(0);
     const [opponentValidation, setOpponentValidation] = useState(false);
+
+    useEffect(() => {
+      useEffect(() => {
+        if(localStorage.getItem('chainWords-GG') != null){
+            setNewWord(JSON.parse(localStorage.getItem('chainWords-GG')).newWord);
+            setArrayWords(JSON.parse(localStorage.getItem('chainWords-GG')).arrayWords);
+            setTeamPlayers(JSON.parse(localStorage.getItem('chainWords-GG')).teamPlayers);
+            setTeammate(JSON.parse(localStorage.getItem('chainWords-GG')).teammate);
+            setIndexTeammate(JSON.parse(localStorage.getItem('chainWords-GG')).indexTeammate);
+            setFinishChallenge(JSON.parse(localStorage.getItem('chainWords-GG')).finishChallenge);
+            setShowKeyboard(JSON.parse(localStorage.getItem('chainWords-GG')).showKeyboard);
+            setShowNotPassChallenge(JSON.parse(localStorage.getItem('chainWords-GG')).showNotPassChallenge);
+            setPreviousPosition(JSON.parse(localStorage.getItem('chainWords-GG')).previousPosition);
+            setOpponentValidation(JSON.parse(localStorage.getItem('chainWords-GG')).opponentValidation);
+        }     
+  
+      },[])
+    },[])
+
+    useEffect(() => {
+      localStorage.setItem('chainWords-GG', JSON.stringify({
+        newWord,
+        arrayWords,
+        teamPlayers,
+        teammate,
+        indexTeammate,
+        finishChallenge,
+        showKeyboard,
+        showNotPassChallenge,
+        previousPosition,
+        opponentValidation}));
+
+    },[newWord,
+      arrayWords,
+      teamPlayers,
+      teammate,
+      indexTeammate,
+      finishChallenge,
+      showKeyboard,
+      showNotPassChallenge,
+      previousPosition,
+      opponentValidation])
 
     useEffect(() => {
 

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import socket from '../../../config/socket';
 import { RENDER_CHALLENGE } from '../../../utils/constants';
+import HideWord from '../common/HideWord';
 
 const OpponentInteractiveH = () => {
 
     const [word, setWord] = useState('');
     const [wordReady, setWordReady] = useState(false);
-    const [showWord, setShowWord] = useState(false);
 
     const validateWord = (text) => {
         setWord(text.trim());
@@ -18,22 +18,10 @@ const OpponentInteractiveH = () => {
         socket.emit('startChallenge', {socketId: socket.id});
       }
 
-    const manageHold = () => {
-        setShowWord(true);
-    };
-
-    const manageUnhold = () => {
-        setShowWord(false);
-    };
-
     useEffect(() => {
         if(localStorage.getItem('hunged-Opponet-GG') != null){
-          if(JSON.parse(localStorage.getItem('hunged-Opponet-GG')).word != null){
             setWord(JSON.parse(localStorage.getItem('hunged-Opponet-GG')).word);
-          }
-          if(JSON.parse(localStorage.getItem('hunged-Opponet-GG')).wordReady != null){
             setWordReady(JSON.parse(localStorage.getItem('hunged-Opponet-GG')).wordReady);
-          }
         }     
   
       },[])
@@ -51,19 +39,8 @@ const OpponentInteractiveH = () => {
                 <button onClick={emitHungedChallenge}>Enviar palabra</button>
             </div>
             : 
-            <div>
-                
-                <button
-                    onMouseDown={manageHold}
-                    onMouseUp={manageUnhold}
-                    onTouchStart={manageHold}
-                    onTouchEnd={manageUnhold}
-                >
-                Watch the word
-                </button>
-            </div>
+            <HideWord word={word}/>
             }
-            {showWord && <p>{word}</p>}
         </>
     )
 }

@@ -23,7 +23,9 @@ const Chronometer = ({data}) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('timeChallenge-GG', JSON.stringify({seconds, message, showTime}));
+    if(seconds >= 0){
+      localStorage.setItem('timeChallenge-GG', JSON.stringify({seconds, message, showTime}));
+    }
   }, [seconds, message, showTime]);
 
   useEffect(() => {

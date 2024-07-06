@@ -18,6 +18,37 @@ const PlayerChallengeH = ({secretWord}) => {
     const [previousPosition, setPreviousPosition] = useState(0);
     const {idRoom} = useParams();
 
+    useEffect(() => {
+        if(localStorage.getItem('hunged-pl-GG') != null){
+              setWordShowed(JSON.parse(localStorage.getItem('hunged-pl-GG')).wordShowed);
+              setMissedAttemps(JSON.parse(localStorage.getItem('hunged-pl-GG')).missedAttemps);
+              setLettersGuessed(JSON.parse(localStorage.getItem('hunged-pl-GG')).lettersGuessed);
+              setGameFinished(JSON.parse(localStorage.getItem('hunged-pl-GG')).gameFinished);
+              setShowKeyboard(JSON.parse(localStorage.getItem('hunged-pl-GG')).showKeyboard);
+              setShowNotPassChallenge(JSON.parse(localStorage.getItem('hunged-pl-GG')).showNotPassChallenge);
+              setPreviousPosition(JSON.parse(localStorage.getItem('hunged-pl-GG')).previousPosition);
+        }     
+
+    },[])
+  
+      useEffect(() => {
+        localStorage.setItem('hunged-pl-GG', JSON.stringify({
+            wordShowed,
+            missedAttemps,
+            lettersGuessed,
+            gameFinished,
+            showKeyboard,
+            showNotPassChallenge,
+            previousPosition}));
+  
+      },[wordShowed,
+        missedAttemps,
+        lettersGuessed,
+        gameFinished,
+        showKeyboard,
+        showNotPassChallenge,
+        previousPosition])
+
     const manejarIntento = (letra) => {
         if (!gameFinished && !lettersGuessed.includes(letra)) {
 

@@ -1,4 +1,4 @@
-const Team = require('../models/team')
+const Team = require('../data-models/team')
 
 function createTeam(req, res) {
 
