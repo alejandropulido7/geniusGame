@@ -1,7 +1,7 @@
 // roomStore.js
 class RoomStore {
     constructor() {
-        this.rooms = new Map(); // Map<room, Set<user>>
+        this.rooms = new Map(); // Map<room, Map<id,user>>
         this.detailRooms = new Map(); //Map<room, details>
         this.userRooms = new Map(); // Map<user, room>
     }
@@ -10,15 +10,29 @@ class RoomStore {
         const idRoom = room.gameId;
         if (!this.rooms.get(idRoom)) {
             this.detailRooms.set(idRoom, room);
-            this.rooms.set(idRoom, new Set());
+            this.rooms.set(idRoom, new Map());
         }
     }
 
     addUserToRoom(room, user) {
         if (this.rooms.has(room)) {
-            this.rooms.get(room).add(user);
-            this.userRooms.set(user, room);
+            const users = this.rooms.get(room);           
+            if (!users.has(user.idTeam)) {
+                this.rooms.get(room).set(user.idTeam, user);
+                this.userRooms.set(user, room);
+            }
         }        
+    }
+
+    modifyUser(room, playerId, newUserData) {
+        if (this.rooms.has(room)) {
+            const users = this.rooms.get(room);
+            if (users.has(playerId)) {
+                const user = users.get(playerId);
+                const updatedUser = { ...user, ...newUserData };
+                users.set(playerId, updatedUser);
+            }
+        }
     }
 
     removeUserFromRoom(user) {
@@ -34,7 +48,7 @@ class RoomStore {
     }
 
     getUsersInRoom(room) {
-        return this.rooms.has(room) ? Array.from(this.rooms.get(room)) : [];
+        return this.rooms.has(room) ? Array.from(this.rooms.get(room).values()) : [];
     }
 
     getUserRoom(user) {

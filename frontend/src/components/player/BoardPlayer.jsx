@@ -31,6 +31,7 @@ const BoardPlayer = () => {
             setPrevPosition(teamCreatedinSession.prev_position)
             setPositionActive(teamCreatedinSession.position_active);
             socket.emit('joinPlayerGame', {
+                idTeam: teamCreatedinSession.id_team,
                 gameId: teamCreatedinSession.id_session,
                 teamName: teamCreatedinSession.name_team,
                 flagActive: teamCreatedinSession.flag_active,

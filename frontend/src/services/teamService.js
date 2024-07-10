@@ -1,10 +1,13 @@
 import axios from 'axios';
 
 
-async function createTeam(id_session, name_team, players, avatar, flag_active) {
+async function createTeam(payload) {
+
+    const {id_session, id_team, name_team, players, avatar, flag_active} = payload;
     try {
         const response = await axios.post(`http://localhost:5000/api/teams`, {
             id_session,
+            id_team,
             name_team,
             players,
             avatar,

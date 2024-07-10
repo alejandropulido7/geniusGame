@@ -3,7 +3,8 @@ const express = require('express');
 const http = require('http');
 const {Server} = require('socket.io')
 const syncDatabase = require('./app/config/syncDatabase');
-const mainGame = require('./app/controllers/mainGame')
+const mainGame = require('./app/controllers/mainGame');
+const socketHandlers = require('./app/controllers/socketHandlers')
 
 const cors = require('cors');
 
@@ -18,13 +19,8 @@ const io = new Server(server, {
 
 syncDatabase();
 
-
-io.on('connection', async (socket) => {
-    console.log('Nuevo dispositivo conectado');
-    console.log(socket.handshake.auth);
-    mainGame(io, socket);
-    // socket.to('df').
-});
+/*Manage all client request via socket*/
+socketHandlers(io);
 
 app.use(express.json());
 app.use(cors({

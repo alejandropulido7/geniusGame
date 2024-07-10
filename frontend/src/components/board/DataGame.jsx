@@ -9,7 +9,7 @@ const DataGame = ({session, playersPositions, startGame, setStartGame}) => {
         setErrorMessage('');
         if(playersPositions.length > 1){
             setStartGame(true);
-            socket.emit('startGame');
+            socket.emit('startGame', session.id);
         } else {
             setErrorMessage('No hay suficientes equipos para jugar (min. 2)')
         }

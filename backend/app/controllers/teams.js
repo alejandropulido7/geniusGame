@@ -8,12 +8,14 @@ function createTeam(req, res) {
     Team.findOne({
         where: {
             name_team: req.body.name_team,
-            id_session: req.body.id_session
+            id_session: req.body.id_session,
+            id_team: req.body.id_team
         }
     }).then(team => {
         if(team == null){
             Team.create({
                 name_team: req.body.name_team,
+                id_team: req.body.id_team,
                 avatar: req.body.avatar,
                 score_game: 0,
                 status: true,

@@ -6,6 +6,7 @@ import {createTeam} from '../../services/teamService'
 import AddPlayerToTeam from './AddPlayerToTeam';
 import { FLAGS } from '../../utils/constants';
 import socket from '../../config/socket';
+import generateUniqueId from 'generate-unique-id';
 
 const AppTeam = () => {
 
@@ -16,13 +17,21 @@ const AppTeam = () => {
   const [flagSelected, setFlagSelected] = useState('');
   const navigate = useNavigate();
 
-  const getSessionCreated = async () => {
+  const getSessionCreated = async (idTeam) => {
+
         
     const sessionCreated = await getSession(sessionId);
     if(sessionCreated){
         const jsonPlayers = JSON.stringify(players);
-        console.log(jsonPlayers);
-        createTeam(sessionId, teamName, jsonPlayers, '', flagSelected)
+        const payload = {
+          id_session: sessionId,
+          id_team: idTeam,
+          name_team: teamName,
+          players: jsonPlayers,
+          avatar: '',
+          flag_active: flagSelected
+        }
+        createTeam(payload)
           .then((team) => {
             if(!team.error){                           
               navigate('../player/'+sessionId);
@@ -47,15 +56,25 @@ const AppTeam = () => {
     setError('');
     if(validateFields()){
       if(error == '') {
+        const idTeam = generateUUID();
+        setCookie('idTeam-GG', idTeam, 1);
         socket.emit('joinPlayerGame', {
+          idTeam,
           gameId: sessionId,
           teamName: teamName,
           flagActive: flagSelected,
           positionActive: 1
         });
-        getSessionCreated();
+        getSessionCreated(idTeam);
       }
     };
+  }
+
+  const generateUUID = () => {
+    return generateUniqueId({
+      length: 10,
+      useLetters: true
+    });
   }
 
   const validateFields = () => {

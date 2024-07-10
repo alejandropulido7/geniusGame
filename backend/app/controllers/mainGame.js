@@ -68,8 +68,8 @@ function createNewGame(data) {
     this.join(room.gameId)
 }
 
-function startGame() {
-    const player = players[0];
+function startGame(gameId) {
+    const player = RoomStore.getUsersInRoom(gameId)[0];
     updateTurnOfTeamFromSocket(player.gameId, true, player.teamName)
     .then(() => {
         io.sockets.in(player.gameId).emit('turnOf', player);
@@ -81,7 +81,6 @@ function startGame() {
 
 function joinPlayerGame(dataPlayer) {
 
-    const currentSocket = this;
     const gameId = dataPlayer.gameId;
     const room = io.sockets.adapter.rooms.get(gameId);
     dataPlayer.socketId = this.id;    
@@ -91,17 +90,12 @@ function joinPlayerGame(dataPlayer) {
         return
     }
 
-    if(players.find(player => player.teamName == dataPlayer.teamName)){ 
-        this.emit('status' , "This name player already exist on the room." );
-    } else if(dataPlayer.teamName !== ''){
-        players.push(dataPlayer);
-    }
+    RoomStore.addUserToRoom(gameId, dataPlayer);
     
-    console.log(players)
-    currentSocket.join(gameId);
-
-    io.sockets.in(gameId).emit('playerJoinedRoom', players);
-    io.sockets.in(gameId).emit('otherPlayersJoinedRoom', players);
+    gameSocket.join(gameId);
+    const playersInRoom = RoomStore.getUsersInRoom(gameId);
+    io.sockets.in(gameId).emit('playerJoinedRoom', playersInRoom);
+    io.sockets.in(gameId).emit('otherPlayersJoinedRoom', playersInRoom);
 
 }
 
