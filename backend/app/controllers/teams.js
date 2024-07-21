@@ -62,8 +62,21 @@ function getTeamByName(req, res) {
     });
 }
 
+function getTeamById(req, res) {
+    console.log(req.query);
+    Team.findOne({
+        where: {
+            id_team: req.query.id_team,
+            id_session: req.query.id_session
+        }
+    }).then(team => {
+        res.status(200).json(team)
+    }).catch(err => {
+        return res.status(400).json(['An error occurred: '+err]);
+    });
+}
+
 function updatePositionTeam(req, res) {
-    console.log(res.body)
     Team.update({
         flag_active: req.body.flag_active,
         position_active: req.body.position_active
@@ -81,7 +94,6 @@ function updatePositionTeam(req, res) {
 }
 
 function updatePositionTeamFromSocket(name_team, id_session, flag_active, position_active, prev_position) {
-    console.log('//entra actualizar')
     return Team.update({
         flag_active: flag_active,
         position_active: position_active,
@@ -95,4 +107,4 @@ function updatePositionTeamFromSocket(name_team, id_session, flag_active, positi
     });
 }
 
-module.exports = {createTeam, getTeam, getTeamByName, updatePositionTeam, updatePositionTeamFromSocket}
+module.exports = {createTeam, getTeam, getTeamByName, updatePositionTeam, updatePositionTeamFromSocket, getTeamById}

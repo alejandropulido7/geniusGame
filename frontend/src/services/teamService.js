@@ -31,6 +31,16 @@ async function getTeam(idTeam) {
     }
 }
 
+async function getTeamById(id_team, id_session) {
+    try {
+        const response = await axios.get(`http://localhost:5000/api/teams/byId?id_team=${id_team}&id_session=${id_session}`); // Reemplaza con la URL de tu backend
+        return response.data;
+    } catch (error) {
+        console.error('Error:', error.message);
+        console.log(error);
+    }
+}
+
 async function getTeamByName(name_team, id_session) {
     try {
         const response = await axios.get(`http://localhost:5000/api/teams/byName?name_team=${name_team}&id_session=${id_session}`); // Reemplaza con la URL de tu backend
@@ -55,4 +65,4 @@ async function updatePositionTeam(name_team, id_session, flag_active, position_a
     }
 }
 
-export {getTeam, createTeam, getTeamByName, updatePositionTeam}
+export {getTeam, createTeam, getTeamByName, updatePositionTeam, getTeamById}

@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import socket from '../../config/socket';
 import { getCookie, deleteCookie } from '../../utils/cookies';
 import { Link, useNavigate } from 'react-router-dom';
-import {getTeamByName} from '../../services/teamService';
+import {getTeamById} from '../../services/teamService';
 import {getSession} from '../../services/sessionService';
 import BoardChallenges from '../challenges/BoardChallenges';
 import { GlobalContext } from '../../context/challenges/GlobalContext';
@@ -11,7 +11,8 @@ import { GlobalContext } from '../../context/challenges/GlobalContext';
 const BoardPlayer = () => {
 
     const [codeSesion, setCodeSesion] = useState('');
-    const [teamName, setTeamName] = useState('');    
+    const [teamName, setTeamName] = useState(''); 
+    const [idTeam, setIdTeam] = useState('');   
     const {idRoom} = useParams();
     const [flagActive, setFlagActive] = useState('');
     const [positionActive, setPositionActive] = useState(1);
@@ -23,9 +24,11 @@ const BoardPlayer = () => {
 
     const getTeamCreated = (idRoom) => {
         const nameTeamCookie = getCookie('teamName-GG');
-        getTeamByName(nameTeamCookie, idRoom)
+        const idTeamCookie = getCookie('idTeam-GG'); 
+        getTeamById(idTeamCookie, idRoom)
         .then((teamCreatedinSession) => {
             setTeamName(nameTeamCookie);
+            setIdTeam(idTeamCookie);
             console.log(teamCreatedinSession);
             setFlagActive(teamCreatedinSession.flag_active);
             setPrevPosition(teamCreatedinSession.prev_position)
@@ -80,6 +83,7 @@ const BoardPlayer = () => {
         setDiceResult(randomNumber);
         setYouTurn(false);
         socket.emit('throwDice', {
+            idTeam,
             gameId: codeSesion,
             teamName,
             diceValue: randomNumber,

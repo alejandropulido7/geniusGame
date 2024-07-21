@@ -14,46 +14,67 @@ class RoomStore {
         }
     }
 
+    getRoomDetails(room){
+        return this.detailRooms.get(room);
+    }
+
     addUserToRoom(room, user) {
         if (this.rooms.has(room)) {
             const users = this.rooms.get(room);           
             if (!users.has(user.idTeam)) {
-                this.rooms.get(room).set(user.idTeam, user);
-                this.userRooms.set(user, room);
+                this.rooms.get(room).set(user.idTeam, user);                
+            } else {
+                const newSocketId = users.get(user.idTeam).socketId;
+                this.userRooms.delete(newSocketId);
             }
+            this.userRooms.set(user.socketId, room);
         }        
     }
 
-    modifyUser(room, playerId, newUserData) {
+    modifyUser(room, newUserData) {
+        const userId =  newUserData.idTeam;
         if (this.rooms.has(room)) {
             const users = this.rooms.get(room);
-            if (users.has(playerId)) {
-                const user = users.get(playerId);
+            if (users.has(userId)) {
+                const user = users.get(userId);
                 const updatedUser = { ...user, ...newUserData };
-                users.set(playerId, updatedUser);
+                users.set(userId, updatedUser);
             }
         }
     }
 
-    removeUserFromRoom(user) {
-        const room = this.userRooms.get(user);
-        if (room) {
-            const users = this.rooms.get(room);
-            users.delete(user);
-            if (users.size === 0) {
-                this.rooms.delete(room);
+    removeUserFromRoom(idSocketToRemove) {
+        let idRoom = undefined;
+        if (this.userRooms.has(idSocketToRemove)) {
+            idRoom = this.userRooms.get(idSocketToRemove);
+            const room = this.rooms.get(idRoom);
+            const arrayUsers = Array.from(room.values());
+            const userToRemove = arrayUsers.find(player => player.socketId == idSocketToRemove);
+            if(userToRemove){
+                room.delete(userToRemove.idTeam);
             }
-            this.userRooms.delete(user);
         }
+        return idRoom;
     }
 
     getUsersInRoom(room) {
         return this.rooms.has(room) ? Array.from(this.rooms.get(room).values()) : [];
     }
 
-    getUserRoom(user) {
-        return this.userRooms.get(user);
+    getUserRoom(room, idTeam) {
+        const players = this.rooms.has(room) ? this.rooms.get(room) : undefined;
+        let playerFinded = undefined;
+        if(players && players.has(idTeam)){
+            playerFinded = players.get(idTeam);
+        }
+        return playerFinded;
     }
+
+    getOpponentsOfUser(room, idTeam){
+        const users = getUsersInRoom(room);
+        return users.filter(player => player.idTeam != idTeam);
+    }
+
 }
 
 // Export a single instance of RoomStore
