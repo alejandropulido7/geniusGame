@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {getTeamByName} from '../../../services/teamService';
 
-const ChooseTeamMember = ({setMember}) => {
+const ChooseTeamMember = ({member, setMember}) => {
 
     const [opponentMembers, setOpponentMembers] = useState([]);
 
@@ -28,7 +28,7 @@ const ChooseTeamMember = ({setMember}) => {
   return (
     <div>
       <h3>Quien quieres que resuelta el reto?</h3>
-      <select value={""} onChange={playerTeamChanged}>
+      <select value={member} onChange={playerTeamChanged}>
             <option value="">Selecciona a la victima..</option>
             {
               opponentMembers.map(member => {
@@ -37,7 +37,7 @@ const ChooseTeamMember = ({setMember}) => {
                 );
               })
             }
-          </select>      
+      </select>      
     </div>
   )
 }

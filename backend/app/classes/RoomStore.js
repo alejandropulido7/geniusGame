@@ -8,10 +8,10 @@ class RoomStore {
 
     createNewRoom(room){
         const idRoom = room.gameId;
-        if (!this.rooms.get(idRoom)) {
-            this.detailRooms.set(idRoom, room);
+        if (!this.rooms.has(idRoom)) {
             this.rooms.set(idRoom, new Map());
-        }
+        } 
+        this.detailRooms.set(idRoom, room);
     }
 
     getRoomDetails(room){
@@ -24,34 +24,50 @@ class RoomStore {
             if (!users.has(user.idTeam)) {
                 this.rooms.get(room).set(user.idTeam, user);                
             } else {
-                const newSocketId = users.get(user.idTeam).socketId;
-                this.userRooms.delete(newSocketId);
+                this.modifyUser(room, user);
             }
-            this.userRooms.set(user.socketId, room);
+            this.userRooms.set(user.socketId, room); 
+            console.log('addUserToRoom', this.rooms.get(room));
+            console.log('this.userRooms-addUserToRoom', this.userRooms);
         }        
+    }
+
+    getRoomByIdSocket(id){
+        return this.userRooms.has(id) ? this.userRooms.get(id) : '';
+    }
+
+    getUserBySocket(room, idSocket){
+        let userFound = undefined;
+        if(this.rooms.has(room)){
+            const users = this.rooms.get(room);
+            userFound = users.find(user => user.socketId == idSocket);
+        }
+        return userFound;
     }
 
     modifyUser(room, newUserData) {
         const userId =  newUserData.idTeam;
         if (this.rooms.has(room)) {
             const users = this.rooms.get(room);
+            console.log('modifyUserAntes', users.get(userId));
             if (users.has(userId)) {
-                const user = users.get(userId);
-                const updatedUser = { ...user, ...newUserData };
-                users.set(userId, updatedUser);
+                users.set(userId, newUserData);
             }
+            console.log('modifyUserDespues', users.get(userId));
         }
     }
 
     removeUserFromRoom(idSocketToRemove) {
         let idRoom = undefined;
+        
         if (this.userRooms.has(idSocketToRemove)) {
             idRoom = this.userRooms.get(idSocketToRemove);
             const room = this.rooms.get(idRoom);
             const arrayUsers = Array.from(room.values());
             const userToRemove = arrayUsers.find(player => player.socketId == idSocketToRemove);
             if(userToRemove){
-                room.delete(userToRemove.idTeam);
+                room.delete(userToRemove.idTeam); 
+                this.userRooms.delete(idSocketToRemove);               
             }
         }
         return idRoom;

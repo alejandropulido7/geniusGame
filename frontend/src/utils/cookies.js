@@ -20,5 +20,4 @@ function hasCookie(name) {
 }
 
 
-
 export {setCookie, getCookie, deleteCookie, hasCookie};

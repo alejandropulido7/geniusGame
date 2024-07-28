@@ -21,6 +21,7 @@ const BoardGame = () => {
       quantityChallenges: 5
   });
   let boardSteps = [];
+  const navigate = useNavigate();
   const {activeChallenge, setActiveChallenge, setDataChallenge } = useContext(GlobalContext);
    
 
@@ -101,23 +102,23 @@ const BoardGame = () => {
   const getSessionCreated = async (idRoom) => {        
       getSession(idRoom)
       .then(sessionCreated => {
-          if(sessionCreated){
-              setSession(sessionCreated);
-              setGameStarted(sessionCreated.gameStarted);
-              let boardPositions = sessionCreated.json_boardPositions;
-              if( boardPositions != ''){
-                setFlagPositions(JSON.parse(boardPositions));
-              } else {
-                inizializeSteps(idRoom);  
-              } 
-              socket.emit('createNewGame', {
-                  gameId: sessionCreated.id, 
-                  lenghtBoard: configBoard.lenghtBoard, 
-                  quantityChallenges: configBoard.quantityChallenges
-              });
+          setSession(sessionCreated);
+          setGameStarted(sessionCreated.gameStarted);
+          let boardPositions = sessionCreated.json_boardPositions;
+          if( boardPositions != ''){
+            setFlagPositions(JSON.parse(boardPositions));
           } else {
-              navigate('../room');
-          }
+            inizializeSteps(idRoom);  
+          } 
+          socket.emit('createNewGame', {
+              gameId: sessionCreated.id, 
+              idSocket: socket.id,
+              lenghtBoard: configBoard.lenghtBoard, 
+              quantityChallenges: configBoard.quantityChallenges
+          });
+      }).catch(()=>{
+          localStorage.clear();
+          navigate('../room');
       });      
   }
   

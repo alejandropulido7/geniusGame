@@ -34,6 +34,7 @@ const BoardPlayer = () => {
             setPrevPosition(teamCreatedinSession.prev_position)
             setPositionActive(teamCreatedinSession.position_active);
             socket.emit('joinPlayerGame', {
+                socketId: socket.id,
                 idTeam: teamCreatedinSession.id_team,
                 gameId: teamCreatedinSession.id_session,
                 teamName: teamCreatedinSession.name_team,
@@ -47,6 +48,9 @@ const BoardPlayer = () => {
                 }
             })
         }).catch(()=>{
+            localStorage.clear();
+            deleteCookie('idTeam-GG')
+            deleteCookie('teamName-GG');
             navigate('../player')
         });
     }
@@ -54,6 +58,8 @@ const BoardPlayer = () => {
     useEffect(() => {
 
         socket.on('turnOf', (player) => {
+            console.log('turnOf', player);
+            console.log('socket.id', socket.id);
             if(player.socketId == socket.id){
                 setYouTurn(true);
             } else {

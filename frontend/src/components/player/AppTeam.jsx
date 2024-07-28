@@ -59,6 +59,7 @@ const AppTeam = () => {
         const idTeam = generateUUID();
         setCookie('idTeam-GG', idTeam, 1);
         socket.emit('joinPlayerGame', {
+          socketId: socket.id,
           idTeam,
           gameId: sessionId,
           teamName: teamName,

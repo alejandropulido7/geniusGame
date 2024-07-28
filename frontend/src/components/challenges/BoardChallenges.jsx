@@ -24,6 +24,8 @@ const BoardChallenges = () => {
 
 
     socket.on('renderChallenge', (dataChallengeSocket) => {
+      console.log('dataChallengeSocket', dataChallengeSocket);
+      console.log('socketId', socket.id);
       if(dataChallengeSocket.challenge != ''){
         setActiveChallenge(true);
         setDataChallenge(dataChallengeSocket);

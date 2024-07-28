@@ -15,6 +15,8 @@ const OpponentInteractiveA = ({wordReady}) => {
   
     const emitWordChallenge = () => {
       setFinalWord(word);
+      const data = {word, wordReady: true, oponentMember, socketId: socket.id};
+      console.log(data);
       socket.emit('acting', {word, wordReady: true, oponentMember, socketId: socket.id});
       socket.emit('startChallenge', {socketId: socket.id});
     }
@@ -25,7 +27,7 @@ const OpponentInteractiveA = ({wordReady}) => {
         ?
           <div>
             <input type="text" placeholder='Escribe una palabra o frase' onChange={(e) => setWord(e.target.value)}/>
-            <ChooseTeamMember setMember={setOponentMember}/>
+            <ChooseTeamMember setMember={setOponentMember} member={oponentMember}/>
             <button onClick={emitWordChallenge}>Sent word</button>
           </div>
         :
