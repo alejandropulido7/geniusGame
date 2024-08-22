@@ -10,8 +10,10 @@ class TurnsGame {
         this.turns.get(room).push(user);
     }
 
-    getUsersHaveNotThrown(usersInRoom){
-        return usersInRoom.filter(user => this.turns.get(user.gameId).includes(user));
+    getUsersHaveNotThrown(room, usersInRoom){
+        const alreadyThrown = this.turns.get(room);
+
+        return usersInRoom.filter(user => !alreadyThrown.some(userThrown => user.idTeam == userThrown.idTeam));
     }
 
     getUsersHaveThrown(room){

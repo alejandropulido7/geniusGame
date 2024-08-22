@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from 'react'
 import {getTeamByName} from '../../../services/teamService';
+import {getSession} from '../../../services/sessionService';
+import {useParams} from 'react-router-dom';
 
 const ChooseTeamMember = ({member, setMember}) => {
 
     const [opponentMembers, setOpponentMembers] = useState([]);
+    const {idRoom} = useParams();
 
     useEffect(() => {
 
-        if(localStorage.getItem('dataChallenge-GG') != null){
-  
-          const data = JSON.parse(localStorage.getItem('dataChallenge-GG'));
-          getTeamByName(data.player.teamName, data.player.gameId)
-          .then(opponent => {
-            setOpponentMembers(JSON.parse(opponent.players));
-          })
-          
-        } 
+      getSession(idRoom)
+        .then((session) => {
+            const data = JSON.parse(session.challenge_participants);
+            getTeamByName(data.player.teamName, idRoom)
+              .then(opponent => {
+                setOpponentMembers(JSON.parse(opponent.players));
+              });
+        });
+
       },[]);
 
       const playerTeamChanged = (event) => {

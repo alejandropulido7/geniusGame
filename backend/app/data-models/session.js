@@ -22,6 +22,20 @@ const Session = sequelize.define('Session', {
   },
   json_boardPositions: {
     type: DataTypes.TEXT
+  },
+  challenge_active: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
+  },
+  challenge_name: {
+    type: DataTypes.TEXT
+  },
+  challenge_participants: {
+    type: DataTypes.TEXT
+  },
+  challenge_passed: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: false
   }
 });
 

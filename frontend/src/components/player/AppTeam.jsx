@@ -6,7 +6,7 @@ import {createTeam} from '../../services/teamService'
 import AddPlayerToTeam from './AddPlayerToTeam';
 import { FLAGS } from '../../utils/constants';
 import socket from '../../config/socket';
-import generateUniqueId from 'generate-unique-id';
+import {generateUUID} from '../../utils/shared'
 
 const AppTeam = () => {
 
@@ -17,8 +17,7 @@ const AppTeam = () => {
   const [flagSelected, setFlagSelected] = useState('');
   const navigate = useNavigate();
 
-  const getSessionCreated = async (idTeam) => {
-
+  const createTeamInRoom = async (idTeam) => {
         
     const sessionCreated = await getSession(sessionId);
     if(sessionCreated){
@@ -33,7 +32,16 @@ const AppTeam = () => {
         }
         createTeam(payload)
           .then((team) => {
-            if(!team.error){                           
+            if(!team.error){  
+              setCookie('idDevice-GG', idTeam, 1);
+              socket.emit('joinPlayerGame', {
+                socketId: socket.id,
+                idTeam: payload.id_team,
+                gameId: payload.id_session,
+                teamName: payload.name_team,
+                flagActive: payload.flag_active,
+                positionActive: 1
+              });                         
               navigate('../player/'+sessionId);
             } else {
               setError(team.error);
@@ -52,30 +60,14 @@ const AppTeam = () => {
   };
 
   const entrySessionGame = () => {  
-    setCookie('teamName-GG', teamName, 1);  
     setError('');
     if(validateFields()){
       if(error == '') {
-        const idTeam = generateUUID();
-        setCookie('idTeam-GG', idTeam, 1);
-        socket.emit('joinPlayerGame', {
-          socketId: socket.id,
-          idTeam,
-          gameId: sessionId,
-          teamName: teamName,
-          flagActive: flagSelected,
-          positionActive: 1
-        });
-        getSessionCreated(idTeam);
+        setCookie('teamName-GG', teamName, 1);  
+        const idTeam = generateUUID(10);
+        createTeamInRoom(idTeam);        
       }
     };
-  }
-
-  const generateUUID = () => {
-    return generateUniqueId({
-      length: 10,
-      useLetters: true
-    });
   }
 
   const validateFields = () => {

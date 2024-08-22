@@ -9,15 +9,6 @@ export const GlobalContext = createContext({
     setRenderPlayer: (data)=>{}
 });
 
-export const ChainWordsContext = createContext({
-    lastWord: '',
-    newWord: '',
-    arrayWords: [],
-    setLastWord: (data) => {},
-    setNewWord: (data) => {},
-    setArrayWords: (data) => {}
-});
-
 export const HungedContext = createContext({
     secretWord: '',
     wordShowed: '',

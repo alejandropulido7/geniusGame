@@ -16,10 +16,31 @@ function createSesion(req, res) {
     }); 
 }
 
-function updateBoardPositions(req, res) {
+function updateChallengingInfo(id_session, challenge_active, challenge_name, challenge_participants) {
+    return Session.update({
+        challenge_active,
+        challenge_name,
+        challenge_participants
+    },
+    {
+        where: {
+            id: id_session
+        }
+    });
+}
 
-    console.log('boardPositions: '+req.body.boardPositions);
-    console.log('session_id: '+req.body.session_id);
+function updateChallengePassed(id_session, challenge_passed) {
+    return Session.update({
+        challenge_passed
+    },
+    {
+        where: {
+            id: id_session
+        }
+    });
+}
+
+function updateBoardPositions(req, res) {
     Session.update(
         {
             json_boardPositions: req.body.boardPositions
@@ -63,4 +84,9 @@ function updateTurnOfTeamFromSocket(id_session, gameStarted, name_team) {
 }
 
 
-module.exports = {createSesion, getSesion, updateBoardPositions, updateTurnOfTeamFromSocket};
+module.exports = {createSesion, 
+    getSesion, 
+    updateBoardPositions, 
+    updateTurnOfTeamFromSocket, 
+    updateChallengingInfo,
+    updateChallengePassed};

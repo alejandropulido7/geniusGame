@@ -19,6 +19,19 @@ const Whistle = ({renderIn}) => {
   const [render, setRender] = useState(null);
 
   useEffect(() => {
+    if(localStorage.getItem('whistle-GG') != null){
+        const properties = JSON.parse(localStorage.getItem('whistle-GG'));
+        setWord(prev => properties.word??prev);
+        setWordReady(prev => properties.wordReady??prev)
+    }
+  },[])
+
+  useEffect(() => {
+    localStorage.setItem('whistle-GG', JSON.stringify({word, wordReady}));
+  },[word, wordReady])
+
+
+  useEffect(() => {
   
     socket.on('whistle', (data) => {
       setWord(data.word);

@@ -17,10 +17,10 @@ const ValidateChallenge = () => {
         return () => {
           socket.off('stopChallenge');        
         }
-      },[]);
+      },[dataOpponent]);
 
     const sendResultChallenge = (result) => {
-        socket.emit('resultChallenge', {playerId: dataOpponent.socketId, challengePassed: result});
+        socket.emit('resultChallenge', {player: dataOpponent, challengePassed: result});
       }
 
   return (

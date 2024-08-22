@@ -4,6 +4,7 @@ import generateUniqueId from 'generate-unique-id';
 import {setCookie, getCookie } from '../../utils/cookies'
 import {createSession, getSession} from '../../services/sessionService'
 import { Link, useNavigate } from 'react-router-dom';
+import {generateUUID} from '../../utils/shared';
 
 const ConfigGame = () => {
 
@@ -33,7 +34,9 @@ const ConfigGame = () => {
     };
 
     const handleSubmit = async () => {
-        const sessionCreated = await createSession(idGame, socket.id, configGame);
+        const idHost = generateUUID(12);
+        setCookie('idDevice-GG', idHost, 1);
+        const sessionCreated = await createSession(idGame, idHost, configGame);
         if(sessionCreated){
             navigate('../room/'+idGame);
         }

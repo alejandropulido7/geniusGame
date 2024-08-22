@@ -1,24 +1,25 @@
 import React, { useContext, useEffect, useState } from 'react';
 import socket from '../../../config/socket';
 import PlayerChallengeCW from './PlayerChallengeCW';
-import { ChainWordsContext } from '../../../context/challenges/GlobalContext';
 import {RENDER_CHALLENGE} from '../../../utils/constants'
 import OpponentInteractiveCW from './OpponentInteractiveCW';
 import AdminCW from './AdminCW';
 
 const ChainWord = ({renderIn, dataPlayer}) => {
 
-  const {lastWord, arrayWords, setLastWord, setArrayWords} = useContext(ChainWordsContext);
+  const {lastWord, setLastWord} = useState('');
+  const [arrayWords, setArrayWords] = useState([]);
   const [render, setRender] = useState(null);
   const [showOponnent, setShowOpponent] = useState(false);
   const [topic, setTopic] = useState('');
 
   useEffect(() => {
     if(localStorage.getItem('chainWords-GG') != null){
-        setLastWord(JSON.parse(localStorage.getItem('chainWords-GG')).lastWord);
-        setArrayWords(JSON.parse(localStorage.getItem('chainWords-GG')).arrayWords);
-        setShowOpponent(JSON.parse(localStorage.getItem('chainWords-GG')).showOponnent);
-        setTopic(JSON.parse(localStorage.getItem('chainWords-GG')).topic);
+        const properties = JSON.parse(localStorage.getItem('chainWords-GG'));
+        setLastWord(prev => properties.lastWord??prev);
+        setArrayWords(prev => properties.arrayWords??prev);
+        setShowOpponent(prev => properties.showOponnent??prev);
+        setTopic(prev => properties.topic??prev);
     }
   },[])
   

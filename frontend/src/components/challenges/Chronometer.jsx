@@ -9,15 +9,10 @@ const Chronometer = ({data}) => {
 
   useEffect(() => {
     if(localStorage.getItem('timeChallenge-GG') != null){
-      if(JSON.parse(localStorage.getItem('timeChallenge-GG')).seconds != null){
-        setSeconds(JSON.parse(localStorage.getItem('timeChallenge-GG')).seconds);
-      }
-      if(JSON.parse(localStorage.getItem('timeChallenge-GG')).message != null){
-        setMessage(JSON.parse(localStorage.getItem('timeChallenge-GG')).message);
-      }
-      if(JSON.parse(localStorage.getItem('timeChallenge-GG')).showWord != null){
-        setShowTime(JSON.parse(localStorage.getItem('hunged-GG')).showTime);
-      }
+      const time = JSON.parse(localStorage.getItem('timeChallenge-GG'));
+      setSeconds(prev => time.second??prev);
+      setMessage(prev => time.message??prev);
+      setShowTime(prev => time.showTime??prev);
     } 
 
   }, []);
@@ -46,7 +41,7 @@ const Chronometer = ({data}) => {
 
     if(seconds == 0){
       setShowTime(false);
-      socket.emit('notPassChallenge', {playerId: data.player.socketId});
+      socket.emit('notPassChallenge', data.participants.player);
     }
 
     return () => {
@@ -58,7 +53,7 @@ const Chronometer = ({data}) => {
 
   return (
     <div>
-      {showTime ? <h4>Tiempo restante para {data.player.teamName}: {seconds} segundos</h4> : <h4>Se acabo el tiempo, en espera de que el jugador del reto confirme desde su pantalla</h4>}
+      {showTime ? <h4>Tiempo restante para {data.participants.player.teamName}: {seconds} segundos</h4> : <h4>Se acabo el tiempo, en espera de que el jugador del reto confirme desde su pantalla</h4>}
       {message != '' && <h4>{message}</h4>}
     </div>
   );

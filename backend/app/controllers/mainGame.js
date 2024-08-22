@@ -1,11 +1,12 @@
 const detectMobileDevice = require('../utils/detectDevice');
 const {updatePositionTeamFromSocket} = require('./teams');
-const {updateTurnOfTeamFromSocket} = require('./sessions');
+const {updateTurnOfTeamFromSocket, updateChallengingInfo, updateChallengePassed} = require('./sessions');
 const RoomStore = require('../classes/RoomStore');
 const TurnsGame = require('../classes/TurnsGame');
+const GameState = require('../classes/GameState');
 
-var io
-var gameSocket
+var io;
+var gameSocket;
 // gamesInSession stores an array of all active socket connections
 var players = [];
 var boards = [];
@@ -43,6 +44,8 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("hunged", hunged)
 
+    gameSocket.on("pictionary", pictionary)
+
     gameSocket.on("startChallenge", startChallenge)
 
     gameSocket.on("stopChallenge", stopChallenge)
@@ -59,13 +62,14 @@ function createNewGame(data) {
 
     const room = {
         gameId: data.gameId, 
+        idDevice: data.idDevice,
         mySocketId: data.idSocket,
         lenght_board: data.lenghtBoard,
         quantity_challenges: data.quantityChallenges
     }
     RoomStore.createNewRoom(room);
+    GameState.createGameStatus(room.gameId);
     this.emit('createNewGame', room);
-    // Join the Room and wait for the other player
     this.join(room.gameId)
 }
 
@@ -73,13 +77,14 @@ function startGame(gameId) {
     const player = RoomStore.getUsersInRoom(gameId)[0];
     console.log(player);
     updateTurnOfTeamFromSocket(player.gameId, true, player.teamName)
-    .then(() => {
-        io.sockets.in(player.gameId).emit('turnOf', player);
+    .then((result) => {
+        console.log('ResultStartGame', result);
+        io.sockets.in(gameId).emit('turnOf', player);
     })
     .catch(err => {
-        console.error(err);
+        console.error(err); 
     });
-}
+} 
 
 function joinPlayerGame(dataPlayer) {
 
@@ -105,7 +110,7 @@ function turnOf(dataTeam){
     const gameId = dataTeam.player.gameId;
     TurnsGame.addUserHasThrown(gameId, dataTeam.player);
     const usersInRoom = RoomStore.getUsersInRoom(gameId);
-    const playersNotThrown = TurnsGame.getUsersHaveNotThrown(usersInRoom);
+    const playersNotThrown = TurnsGame.getUsersHaveNotThrown(gameId, usersInRoom);
     const usersThrown = TurnsGame.getUsersHaveThrown(gameId);
     let turnOf = {};
 
@@ -127,10 +132,8 @@ function turnOf(dataTeam){
 }
 
 function throwDice (dataTeam) {
-    console.log("dataTeam", dataTeam)
     const gameId = dataTeam.gameId;
     const playerMoved = RoomStore.getUserRoom(gameId, dataTeam.idTeam);
-    console.log("playerMoved", playerMoved)
 
     if(playerMoved != undefined){
         const newPosition = playerMoved.positionActive + dataTeam.diceValue;
@@ -141,9 +144,6 @@ function throwDice (dataTeam) {
             playerMovedModified.positionActive = newPosition;
             RoomStore.modifyUser(gameId, playerMovedModified);
             const players = RoomStore.getUsersInRoom(gameId);
-            console.log('players', players);
-            // const prev_position = playerMoved.positionActive;
-            // const playerNewPosition = players.map(player => player.teamName == playerMoved.teamName ? {...player, prev_position: prev_position, positionActive: newPosition} : player);
             updatePositionTeamFromSocket(dataTeam.teamName, dataTeam.gameId, dataTeam.flagActive, newPosition, playerMoved.positionActive)
             .then(() => {
                 io.sockets.in(gameId).emit('throwDice', {playermoved: playerMovedModified, players });  
@@ -158,53 +158,74 @@ function throwDice (dataTeam) {
 
 function renderChallenge(data) {
     const gameId = data.player.gameId;
-    const players = RoomStore.getUsersInRoom(gameId);
-    console.log('dataRenderChallenge', data);
-    console.log('playersRenderChallenge', players); 
+    const players = RoomStore.getUsersInRoom(gameId); 
+    const challenge_name = data.challenge;
 
-    if(data.challenge != ""){
+    if(challenge_name != ""){
         const playersNoChallenge = players.filter(player => player.idTeam != data.player.idTeam);
-        console.log('playersNoChallengeRenderChallenge', playersNoChallenge);
-        const socketBoard = RoomStore.getRoomDetails(gameId);   
-        console.log('socketBoardRenderChallenge', socketBoard);    
+        const socketBoard = RoomStore.getRoomDetails(gameId);      
         const ramdomPlayerIndex = Math.floor(Math.random() * playersNoChallenge.length);
 
-        io.sockets.in(gameId).emit('renderChallenge', {
-            challenge: data.challenge,
-            board: socketBoard ? socketBoard.mySocketId : '0',
+        const participants = {
+            board: socketBoard ? socketBoard.idDevice : '0',
             player: data.player,
             playerOpponent: playersNoChallenge[ramdomPlayerIndex]
-        });
+        }
+
+        const dataRenderChallenge = {
+            challenge: challenge_name,
+            participants
+        };
+        const participantsJson = JSON.stringify(participants);
+        updateChallengingInfo(gameId, true, challenge_name, participantsJson)
+            .then(() => {
+                io.sockets.in(gameId).emit('renderChallenge', dataRenderChallenge);
+            }).catch((error) => { 
+                io.sockets.in(gameId).emit('status', error);
+            });
     }
 }
 
 function notPassChallenge (data) {
+    console.log(data);
     const gameId = data.gameId;
     const foundPlayer = RoomStore.getUserRoom(gameId, data.idTeam);
     if(foundPlayer){
-        io.sockets.in(gameId).emit('notPassChallenge', foundPlayer);
+        updateChallengePassed(gameId, false)
+            .then(() => {
+                io.sockets.in(gameId).emit('notPassChallenge', foundPlayer);
+            })
+            .catch((error) => {
+                io.sockets.in(gameId).emit('status', error);
+            })
+        
     }
 }
 
 function resultChallenge(data){
 
-    const gameId = data.gameId;
-    const foundPlayer = RoomStore.getUserRoom(gameId, data.idTeam);
+    const gameId = data.player.gameId;
+    const foundPlayer = RoomStore.getUserRoom(gameId, data.player.idTeam);
     const challengePassed = data.challengePassed;
 
     if(foundPlayer){
         if(!challengePassed){
             let playerModified = {...foundPlayer};
-            playerModified.positionActive = foundPlayer.prev_position;
+            playerModified.prev_position = foundPlayer.prev_position??1;
+            playerModified.positionActive = playerModified.prev_position;
             RoomStore.modifyUser(gameId, playerModified);
-            // const playersNewPosition = players.map(player => player.teamName == foundPlayer.teamName ? {...player, positionActive: foundPlayer.prev_position} : player);
-            updatePositionTeamFromSocket(foundPlayer.teamName, foundPlayer.gameId, foundPlayer.flagActive, foundPlayer.prev_position, foundPlayer.prev_position)
+            const players = RoomStore.getUsersInRoom(gameId);
+            updatePositionTeamFromSocket(playerModified.teamName, gameId, playerModified.flagActive, playerModified.positionActive, playerModified.prev_position)
                 .then(() => {
-                    players = RoomStore.getUsersInRoom(gameId);  
-                    io.sockets.in(gameId).emit('resultChallenge',{player: foundPlayer, challengePassed, players});
+                    updateChallengingInfo(gameId, false, null, null)
+                    .then(() => {
+                        io.sockets.in(gameId).emit('resultChallenge',{player: foundPlayer, challengePassed, players});
+                    }).catch((error) => {
+                        io.sockets.in(gameId).emit('status', error);
+                    })
                 })
                 .catch(err => {
-                    console.error(err)
+                    io.sockets.in(gameId).emit('status', err);
                 });
         } else {
             io.sockets.in(gameId).emit('resultChallenge',{player: foundPlayer, challengePassed, players});
@@ -228,15 +249,20 @@ function hunged(data){
     emitDataOtherScreen('hunged', data);
 }
 
-function startChallenge(idSocket){
-    const gameId = RoomStore.getRoomByIdSocket(idSocket);
-    const data = RoomStore.getUsersInRoom(gameId);
-    io.sockets.in(gameId).emit('startChallenge', data);
+function pictionary(data){
+    const nameEmit = data.function;
+    emitDataOtherScreen('pictionary-'+nameEmit, data.data);
 }
 
-function stopChallenge(idSocket){
-    const gameId = RoomStore.getRoomByIdSocket(idSocket);
-    const foundPlayer = RoomStore.getUserBySocket(gameId, idSocket);
+function startChallenge(data){
+    const gameId = RoomStore.getRoomByIdSocket(data.socketId);
+    const user = RoomStore.getUserBySocket(gameId, data.socketId);
+    io.sockets.in(gameId).emit('startChallenge', user);
+}
+
+function stopChallenge(data){
+    const gameId = RoomStore.getRoomByIdSocket(data.socketId);
+    const foundPlayer = RoomStore.getUserBySocket(gameId, data.socketId);
     if(gameId && foundPlayer){
         io.sockets.in(gameId).emit('stopChallenge', foundPlayer);
     }
@@ -256,7 +282,7 @@ function validateChallenge(data){
 }
 
 function emitDataOtherScreen(nameEmit, data) {
-    const gameId = RoomStore.getRoomByIdSocket(data.socketId);
+    const gameId = RoomStore.getRoomByIdSocket(data.socketId); 
     io.sockets.in(gameId).emit(nameEmit, data);
 }
 

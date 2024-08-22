@@ -6,7 +6,7 @@ class RoomStore {
         this.userRooms = new Map(); // Map<user, room>
     }
 
-    createNewRoom(room){
+    createNewRoom(room){ 
         const idRoom = room.gameId;
         if (!this.rooms.has(idRoom)) {
             this.rooms.set(idRoom, new Map());
@@ -22,13 +22,14 @@ class RoomStore {
         if (this.rooms.has(room)) {
             const users = this.rooms.get(room);           
             if (!users.has(user.idTeam)) {
-                this.rooms.get(room).set(user.idTeam, user);                
+                const userFound = users.has(user.idTeam);
+                if(userFound.teamName != user.teamName){
+                    this.rooms.get(room).set(user.idTeam, user);                
+                }
             } else {
                 this.modifyUser(room, user);
             }
             this.userRooms.set(user.socketId, room); 
-            console.log('addUserToRoom', this.rooms.get(room));
-            console.log('this.userRooms-addUserToRoom', this.userRooms);
         }        
     }
 
@@ -39,7 +40,7 @@ class RoomStore {
     getUserBySocket(room, idSocket){
         let userFound = undefined;
         if(this.rooms.has(room)){
-            const users = this.rooms.get(room);
+            const users = this.getUsersInRoom(room);
             userFound = users.find(user => user.socketId == idSocket);
         }
         return userFound;
@@ -49,11 +50,10 @@ class RoomStore {
         const userId =  newUserData.idTeam;
         if (this.rooms.has(room)) {
             const users = this.rooms.get(room);
-            console.log('modifyUserAntes', users.get(userId));
             if (users.has(userId)) {
                 users.set(userId, newUserData);
             }
-            console.log('modifyUserDespues', users.get(userId));
+            
         }
     }
 

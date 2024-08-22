@@ -18,6 +18,18 @@ const Acting = ({renderIn}) => {
   const [render, setRender] = useState(null);
 
   useEffect(() => {
+    if(localStorage.getItem('acting-GG') != null){
+        const properties = JSON.parse(localStorage.getItem('acting-GG'));
+        setWord(prev => properties.word??prev);
+        setWordReady(prev => properties.wordReady??prev)
+    }
+  },[])
+
+  useEffect(() => {
+    localStorage.setItem('acting-GG', JSON.stringify({word, wordReady}));
+  },[word, wordReady])
+
+  useEffect(() => {
   
     socket.on('acting', (data) => {
       setWord(data.word);

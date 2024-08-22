@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import socket from '../../../config/socket';
-import { ChainWordsContext } from '../../../context/challenges/GlobalContext';
 import KeyboardCW from './KeyboardCW'
 import { getTeamByName } from '../../../services/teamService';
 
 const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
 
-    const {newWord, arrayWords, setNewWord, setArrayWords} = useContext(ChainWordsContext);
+    // const {lastWord, setLastWord} = useState('');
+    const [arrayWords, setArrayWords] = useState([]);
     const [teamPlayers, setTeamPlayers] = useState([]);
     const [teammate, setTeammate] = useState('');
     const [indexTeammate, setIndexTeammate] = useState(0);
@@ -17,25 +17,23 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
     const [opponentValidation, setOpponentValidation] = useState(false);
 
     useEffect(() => {
-      useEffect(() => {
-        if(localStorage.getItem('chainWords-GG') != null){
-            setNewWord(JSON.parse(localStorage.getItem('chainWords-GG')).newWord);
-            setArrayWords(JSON.parse(localStorage.getItem('chainWords-GG')).arrayWords);
-            setTeamPlayers(JSON.parse(localStorage.getItem('chainWords-GG')).teamPlayers);
-            setTeammate(JSON.parse(localStorage.getItem('chainWords-GG')).teammate);
-            setIndexTeammate(JSON.parse(localStorage.getItem('chainWords-GG')).indexTeammate);
-            setFinishChallenge(JSON.parse(localStorage.getItem('chainWords-GG')).finishChallenge);
-            setShowKeyboard(JSON.parse(localStorage.getItem('chainWords-GG')).showKeyboard);
-            setShowNotPassChallenge(JSON.parse(localStorage.getItem('chainWords-GG')).showNotPassChallenge);
-            setPreviousPosition(JSON.parse(localStorage.getItem('chainWords-GG')).previousPosition);
-            setOpponentValidation(JSON.parse(localStorage.getItem('chainWords-GG')).opponentValidation);
-        }     
-  
-      },[])
-    },[])
+      const properties = JSON.parse(localStorage.getItem('chainWords-player-GG'));
+      if(properties != null){
+        setNewWord(properties.newWord);
+        setArrayWords(properties.arrayWords);
+        setTeamPlayers(properties.teamPlayers);
+        setTeammate(properties.teammate);
+        setIndexTeammate(properties.indexTeammate);
+        setFinishChallenge(properties.finishChallenge);
+        setShowKeyboard(properties.showKeyboard);
+        setShowNotPassChallenge(properties.showNotPassChallenge);
+        setPreviousPosition(properties.previousPosition);
+        setOpponentValidation(properties.opponentValidation);
+      } 
+    },[]);
 
     useEffect(() => {
-      localStorage.setItem('chainWords-GG', JSON.stringify({
+      localStorage.setItem('chainWords-player-GG', JSON.stringify({
         newWord,
         arrayWords,
         teamPlayers,

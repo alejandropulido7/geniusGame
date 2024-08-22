@@ -24,7 +24,7 @@ const BoardPlayer = () => {
 
     const getTeamCreated = (idRoom) => {
         const nameTeamCookie = getCookie('teamName-GG');
-        const idTeamCookie = getCookie('idTeam-GG'); 
+        const idTeamCookie = getCookie('idDevice-GG'); 
         getTeamById(idTeamCookie, idRoom)
         .then((teamCreatedinSession) => {
             setTeamName(nameTeamCookie);
@@ -41,42 +41,47 @@ const BoardPlayer = () => {
                 flagActive: teamCreatedinSession.flag_active,
                 positionActive: teamCreatedinSession.position_active
             });
+
             getSession(idRoom)
             .then((sessionCreated) => {
                 if(sessionCreated.turnOf == nameTeamCookie){
                     setYouTurn(true);
                 }
-            })
+            });            
         }).catch(()=>{
             localStorage.clear();
-            deleteCookie('idTeam-GG')
+            deleteCookie('idDevice-GG')
             deleteCookie('teamName-GG');
             navigate('../player')
         });
     }
 
     useEffect(() => {
-
+        const idTeam = getCookie('idDevice-GG');
         socket.on('turnOf', (player) => {
-            console.log('turnOf', player);
             console.log('socket.id', socket.id);
-            if(player.socketId == socket.id){
+            if(idTeam && player.idTeam == idTeam){
+                console.log('turnOf', 'ENTRA EN TRUE');
                 setYouTurn(true);
             } else {
+                console.log('turnOf', 'ENTRA EN FALSE');
                 setYouTurn(false);
             }
         });
 
+    }, [youTurn]);
+
+    useEffect(() => {        
+
         socket.on('resultChallenge', (data) => {      
             setActiveChallenge(false);
             localStorage.clear();
-        });
+        }); 
 
         setCodeSesion(idRoom); 
-        getTeamCreated(idRoom);  
+        getTeamCreated(idRoom);
         
         return () => {
-            socket.off('turnOf');
             socket.off('resultChallenge');
         }
                

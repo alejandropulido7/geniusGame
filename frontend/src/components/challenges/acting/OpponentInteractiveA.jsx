@@ -11,13 +11,22 @@ const OpponentInteractiveA = ({wordReady}) => {
     const [oponentMember, setOponentMember] = useState('');
     
     useEffect(() => {
-    },[]);    
+      if(localStorage.getItem('acting-opp-GG') != null){
+          const properties = JSON.parse(localStorage.getItem('acting-opp-GG'));
+          setWord(prev => properties.word??prev);
+          setFinalWord(prev => properties.finalWord??prev);
+          setOponentMember(prev => properties.oponentMember??prev);
+      }
+    },[]);
+  
+    useEffect(() => {
+      localStorage.setItem('acting-opp-GG', JSON.stringify({word, finalWord, oponentMember}));
+    },[word, finalWord, oponentMember]);  
   
     const emitWordChallenge = () => {
       setFinalWord(word);
       const data = {word, wordReady: true, oponentMember, socketId: socket.id};
-      console.log(data);
-      socket.emit('acting', {word, wordReady: true, oponentMember, socketId: socket.id});
+      socket.emit('acting', data);
       socket.emit('startChallenge', {socketId: socket.id});
     }
   

@@ -6,9 +6,13 @@ import { GlobalContext } from './GlobalContext';
 const GlobalState = ({children}) => {
     
     const initialState = {
-        dataChallenge: JSON.parse(localStorage.getItem('dataChallenge-GG')) || {},
-        activeChallenge: localStorage.getItem('activeChallenge-GG') || false,
-        renderPlayer: localStorage.getItem('renderIn-GG') || ''
+        // dataChallenge: JSON.parse(localStorage.getItem('dataChallenge-GG')) || {},
+        // activeChallenge: localStorage.getItem('activeChallenge-GG') || false,
+        // renderPlayer: localStorage.getItem('renderIn-GG') || ''
+
+        dataChallenge: {},
+        activeChallenge: false,
+        renderPlayer: ''
     }
 
     const challengeReducer = (state, action)=>{

@@ -73,7 +73,6 @@ const BoardGame = () => {
         if(playerWithChallenge && playerWithChallenge.challenge != ''){
           setTimeout(() => {
             setActiveChallenge(true);
-            localStorage.setItem('activeChallenge-GG', true);
             setDataChallenge(playerWithChallenge);
             socket.emit('renderChallenge', playerWithChallenge);
           }, 700);
@@ -92,7 +91,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: 'acting',
+        challenge: 'pictionary',
         player: playerModified
       };
     }
@@ -112,6 +111,7 @@ const BoardGame = () => {
           } 
           socket.emit('createNewGame', {
               gameId: sessionCreated.id, 
+              idDevice: sessionCreated.idHost,
               idSocket: socket.id,
               lenghtBoard: configBoard.lenghtBoard, 
               quantityChallenges: configBoard.quantityChallenges
