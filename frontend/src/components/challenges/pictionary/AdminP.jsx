@@ -2,28 +2,27 @@ import React, { useEffect, useRef, useState } from 'react';
 import socket from '../../../config/socket';
 import ChallengeNotPassed from '../common/ChallengeNotPassed';
 
-const AdminP = ({wordReady, word}) => {
-    const canvasRefBoard = useRef(null);
+const AdminP = ({word}) => {
+    const canvasRefBoard = useRef();
     const [contextBoard, setContextBoard] = useState(null);
     const [gameFinished, setGameFinished] = useState(false);
 
     const hideWord = ' _ '.repeat(word?.length);
 
-    useEffect(() => {
-        setCanvasBoard();
-    }, []);
-
-    const setCanvasBoard = () => {
-        if(wordReady){
+    useEffect(() => {        
+        if(word != ''){
             const canvasBoard = canvasRefBoard.current;
-            const ctxBoard = canvasBoard.getContext('2d');
-            setContextBoard(ctxBoard);
+            if(canvasBoard){
+                const ctxBoard = canvasBoard.getContext('2d');
+                setContextBoard(ctxBoard);
+            }
         }
-    }
+    }, [word]);
 
     useEffect(() => {
         socket.on('pictionary-startDraw', (data) => {
             const canvasBoard = canvasRefBoard.current;
+            if (!canvasBoard) return;
             const ctxBoard = canvasBoard.getContext('2d');
 
             ctxBoard.beginPath();
@@ -32,6 +31,7 @@ const AdminP = ({wordReady, word}) => {
         
         socket.on('pictionary-draw', (data) => {
             const canvasBoard = canvasRefBoard.current;
+            if (!canvasBoard) return;
             const ctxBoard = canvasBoard.getContext('2d');
 
             ctxBoard.lineTo(data.offsetX, data.offsetY);
@@ -41,6 +41,7 @@ const AdminP = ({wordReady, word}) => {
 
         socket.on('pictionary-stopDraw', (data) => {
             const canvasBoard = canvasRefBoard.current;
+            if (!canvasBoard) return;
             const ctxBoard = canvasBoard.getContext('2d');
 
             ctxBoard.closePath();
@@ -48,17 +49,30 @@ const AdminP = ({wordReady, word}) => {
 
         socket.on('pictionary-eraseEverything', (data) => {
             const canvasBoard = canvasRefBoard.current;
+            if (!canvasBoard) return;
             const ctxBoard = canvasBoard.getContext('2d');
 
             ctxBoard.clearRect(0, 0, canvasBoard.width, canvasBoard.height);
         });
 
-    },[])
+    },[word]);
+
+    useEffect(() => {
+        return () => {
+            socket.off('pictionary-startDraw');
+            socket.off('pictionary-draw');
+            socket.off('pictionary-stopDraw');
+            socket.off('pictionary-eraseEverything');
+        };
+    }, []);
 
 
     return (
         <div>
-            {!wordReady 
+            <div>
+                <ChallengeNotPassed gameFinished={gameFinished} setGameFinished={setGameFinished} showButton={false}/>
+            </div>
+            {word == '' 
             ?
             <div>
                 <p>{hideWord}</p>
@@ -75,10 +89,7 @@ const AdminP = ({wordReady, word}) => {
                     style={{ border: '1px solid #ccc' }}
                 /> 
             </div>
-            }
-            <div>
-                <ChallengeNotPassed gameFinished={gameFinished} setGameFinished={setGameFinished} showButton={false}/>
-            </div>
+            }            
         </div>
     )
 }

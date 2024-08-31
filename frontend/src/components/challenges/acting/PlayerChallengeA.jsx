@@ -33,7 +33,7 @@ const PlayerChallengeA = ({word}) => {
         <div>
           { showButton 
             ?
-            <div><button onClick={emitResult}>Terminar</button></div>
+            <div><button className='btn' onClick={emitResult}>Terminar</button></div>
             :
             <div>En proceso de revision...</div>
           }          

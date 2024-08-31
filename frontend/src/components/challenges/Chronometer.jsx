@@ -5,6 +5,7 @@ const Chronometer = ({data}) => {
   const [seconds, setSeconds] = useState(60);
   const [message, setMessage] = useState('');
   const [showTime, setShowTime] = useState(true);
+  const [player, setPlayer] = useState(null);
 
 
   useEffect(() => {
@@ -25,7 +26,9 @@ const Chronometer = ({data}) => {
 
   useEffect(() => {
     let interval = null;
-    socket.on('startChallenge', (dataStart) => {
+    socket.on('startChallenge', (dataPlayer) => {
+      console.log("dataPlayer-CRONO", dataPlayer);
+      setPlayer(dataPlayer);
       interval = setInterval(() => {
         if (seconds > 0) {
           setSeconds((prevSeconds) => prevSeconds - 1);
@@ -49,11 +52,11 @@ const Chronometer = ({data}) => {
       setMessage('');   
     }
 
-  }, [seconds]);
+  }, [seconds, data]);
 
   return (
     <div>
-      {showTime ? <h4>Tiempo restante para {data.participants.player.teamName}: {seconds} segundos</h4> : <h4>Se acabo el tiempo, en espera de que el jugador del reto confirme desde su pantalla</h4>}
+      {showTime ? <h4>Tiempo restante: {seconds} segundos</h4> : <h4>Se acabo el tiempo, en espera de que el jugador del reto confirme desde su pantalla</h4>}
       {message != '' && <h4>{message}</h4>}
     </div>
   );

@@ -18,7 +18,7 @@ const PlayerChallengeP = ({word, memberTeam}) => {
             const ctx = canvas.getContext('2d');
             setContext(ctx);
         }
-    }, []);
+    }, [word]);
     
     const empezarDibujo = (event) => {
         const { offsetX, offsetY } = obtenerCoordenadas(event);
@@ -76,15 +76,20 @@ const PlayerChallengeP = ({word, memberTeam}) => {
     return (
         <div>
             <div>
-                { !gameFinished && word == '' 
-                ? 
+                { !gameFinished && showButton 
+                ?
                 <div>
-                    <p>Esperando al oponente...</p>
-                </div>
-                : 
-                <div>
+                    { word == '' 
+                    ? 
                     <div>
-                        <h1>{{memberTeam}} debe hacer el dibujo</h1>
+                        <p>Esperando al oponente...</p>
+                    </div>
+                    : 
+                    <div>
+                        <h1>{memberTeam} debe hacer el dibujo</h1>
+                        <div>
+                            <HideWord word={word}/>
+                        </div>
                         <canvas
                             ref={canvasRef}
                             width={500}
@@ -99,28 +104,26 @@ const PlayerChallengeP = ({word, memberTeam}) => {
                             onTouchEnd={terminarDibujo}
                         />
                         <div>
-                            <button onClick={() => cambiarColor('red')}>Rojo</button>
-                            <button onClick={() => cambiarColor('green')}>Verde</button>
-                            <button onClick={() => cambiarColor('blue')}>Azul</button>
-                            <button onClick={() => cambiarColor('white')}>Borrar</button>
-                            <button onClick={borrarTodo}>Borrar todo</button>
+                            <button className='btn' onClick={() => cambiarColor('red')}>Rojo</button>
+                            <button className='btn' onClick={() => cambiarColor('green')}>Verde</button>
+                            <button className='btn' onClick={() => cambiarColor('blue')}>Azul</button>
+                            <button className='btn' onClick={() => cambiarColor('white')}>Borrar</button>
+                            <button className='btn' onClick={borrarTodo}>Borrar todo</button>
                         </div>
+                        {showButton && <div><button className='btn' onClick={finishChallenge}>Terminar</button></div>}                         
                     </div>
-                    { showButton 
-                        ?
-                        <div><button onClick={finishChallenge}>Terminar</button></div>
-                        :
-                        <div>En proceso de revision...</div>
-                    }  
-                    <div>
-                        <HideWord word={word}/>
-                    </div>        
-                </div>                
-                }
-                <div>
-                    <ChallengeNotPassed gameFinished={gameFinished} setGameFinished={setGameFinished} showButton={true}/>
+                    }
                 </div>
-                                
+                :
+                <div>
+                    <div>                        
+                        { !showButton && <div>En proceso de revision...</div> }                               
+                    </div>
+                    <div>
+                        <ChallengeNotPassed gameFinished={gameFinished} setGameFinished={setGameFinished} showButton={true}/>
+                    </div>                    
+                </div>
+                }  
             </div>
         </div>
     )

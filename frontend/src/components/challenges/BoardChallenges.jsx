@@ -13,7 +13,7 @@ import Whistle from './whistle/Whistle';
 import { getCookie } from '../../utils/cookies';
 import {getSession} from '../../services/sessionService';
 
-const BoardChallenges = () => {
+const BoardChallenges = ({setOpenModal}) => {
 
   const [componentChallenge, setComponentChallenge] = useState(null);
   const {activeChallenge, setActiveChallenge, dataChallenge, setDataChallenge, renderPlayer, setRenderPlayer} = useContext(GlobalContext);
@@ -43,6 +43,7 @@ const BoardChallenges = () => {
       console.log('idDevice', getCookie('idDevice-GG'));
       console.log('dataChallengeSocket', dataChallengeSocket);
       console.log('socketId', socket.id);
+      setOpenModal(false);
       if(dataChallengeSocket.challenge != ''){
         setActiveChallenge(true);
         setDataChallenge(dataChallengeSocket);

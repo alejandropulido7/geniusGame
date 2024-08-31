@@ -23,7 +23,7 @@ const Pictionary = ({renderIn}) => {
 
     switch (renderIn) {
       case RENDER_CHALLENGE.admin:
-        setRender(<AdminP word={word} wordReady={wordReady}/>)
+        setRender(<AdminP word={word}/>)
       break;
       case RENDER_CHALLENGE.player:
         setRender(<PlayerChallengeP word={word} memberTeam={memberTeam}/>);
@@ -41,7 +41,7 @@ const Pictionary = ({renderIn}) => {
   return (
     <div>
       <div>
-        <h1>Actua la pelicula o serie</h1>
+        <h1>Pictionary</h1>
         <p>Descripcion</p>
         {render}
       </div>

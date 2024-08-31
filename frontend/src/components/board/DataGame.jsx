@@ -4,6 +4,7 @@ import socket from '../../config/socket';
 const DataGame = ({session, playersPositions, startGame, setStartGame}) => {
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [activeStartGame, setActiveStartGame] = useState(false);
 
     const readyToPlay = () => {
         setErrorMessage('');
@@ -15,6 +16,12 @@ const DataGame = ({session, playersPositions, startGame, setStartGame}) => {
         }
       }
 
+    useEffect(() => {
+        if(playersPositions.length > 1){
+            setActiveStartGame(true);
+        }
+    }, [playersPositions]);
+
 
     return (
         <div>
@@ -22,8 +29,8 @@ const DataGame = ({session, playersPositions, startGame, setStartGame}) => {
             <h4>{session.id}</h4>
             <p>Minutes to answer: {session.min_to_answer}</p>
             </div>
-            { !startGame && <button onClick={readyToPlay}>Ready to play</button>}
-            <h1>Tablero de Escalera</h1>
+            { !startGame && activeStartGame && <button className='btn' onClick={readyToPlay}>Ready to play</button>}
+            <h1 className='text-red-600 text-3xl font-bold underline'>Tablero de Escalera</h1>
             {
                 playersPositions.map((player) => {
                     return (

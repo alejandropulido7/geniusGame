@@ -43,12 +43,12 @@ const OpponentInteractiveCW = ({lastWord}) => {
         { lastWord == '' ?
         <div>
           <p>Envia la primera palabra a tu oponente y selecciona un tema</p>
-          <input type="text" placeholder='Escribe una palabra segun el tema' onChange={(e) => setWord(e.target.value)}/>
+          <input className='input' type="text" placeholder='Escribe una palabra segun el tema' onChange={(e) => setWord(e.target.value)}/>
           <button onClick={emitWordChallenge}>Sent word</button>
           <select value={topic} onChange={topicChanged}>
             <option value="">Selecciona un tema..</option>
             {
-              OPTIONS_CHALLENGES.word_chain.topics.map(topicMap => {
+              OPTIONS_CHALLENGES.get('word_chain').topics.map(topicMap => {
                 return (
                   <option key={topicMap} value={topicMap}>{topicMap}</option>
                 );

@@ -57,18 +57,18 @@ const ConfigGame = () => {
                 </div>
                 <div>
                     <label>Minutes to answer the challenges: </label>
-                    <input type='number' name='min_to_answer' value={configGame.min_to_answer} onChange={handleInputChange}/>
+                    <input className='input' type='number' name='min_to_answer' value={configGame.min_to_answer} onChange={handleInputChange}/>
                 </div>
                 <p>{configGame.min_to_answer}</p>
-                <button onClick={handleSubmit}>Start new game</button>
-                <button onClick={() => setIsPreviousGame(true)} >Join to previous game</button>
+                <button className='btn' onClick={handleSubmit}>Start new game</button>
+                <button className='btn' onClick={() => setIsPreviousGame(true)} >Join to previous game</button>
             </div>
             :
             <div>
-                <button onClick={() => setIsPreviousGame(false)}>Start new game</button>
+                <button className='btn' onClick={() => setIsPreviousGame(false)}>Start new game</button>
                 <div>
                     <label>Type session code: </label>
-                    <input name='sessionCode' onChange={(e)=>entryPreviousSession(e.target.value)}/>
+                    <input className='input' name='sessionCode' onChange={(e)=>entryPreviousSession(e.target.value)}/>
                 </div>
             </div>
             }

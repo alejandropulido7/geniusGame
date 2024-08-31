@@ -51,15 +51,15 @@ const KeyboardCW = ({texto, setTexto}) => {
           {letters.map((fila, indiceFila) => (
             <div key={indiceFila}>
               {desordenarFila(fila).map((letra, indiceColumna) => (
-                <button key={indiceColumna} onClick={() => agregarTexto(letra)}>
+                <button className='btn' key={indiceColumna} onClick={() => agregarTexto(letra)}>
                   {letra}
                 </button>
               ))}
             </div>
           ))}
           <div>
-            <button onClick={borrarUltimoCaracter}>Borrar</button>
-            <button onClick={limpiarTexto}>Limpiar</button>
+            <button className='btn' onClick={borrarUltimoCaracter}>Borrar</button>
+            <button className='btn' onClick={limpiarTexto}>Limpiar</button>
           </div>
         </div>
       );

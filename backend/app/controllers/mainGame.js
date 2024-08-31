@@ -34,6 +34,8 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("renderChallenge", renderChallenge)
 
+    gameSocket.on("openModalConfirmation", openModalConfirmation)
+
     gameSocket.on("resultChallenge", resultChallenge)
 
     gameSocket.on("acting", acting)
@@ -53,6 +55,8 @@ const initializeGame = (sio, socket) => {
     gameSocket.on("validateChallenge", validateChallenge)
 
     gameSocket.on("notPassChallenge", notPassChallenge)
+
+    gameSocket.on("openModalRoulette", openModalRoulette);
 
 
 }
@@ -90,7 +94,7 @@ function joinPlayerGame(dataPlayer) {
 
     const gameId = dataPlayer.gameId;
     const room = io.sockets.adapter.rooms.get(gameId);
-    dataPlayer.socketId = this.id;    
+    dataPlayer.socketId = this.id;
 
     if (room === undefined) {
         this.emit('status' , "This game session does not exist." );
@@ -138,7 +142,13 @@ function throwDice (dataTeam) {
     if(playerMoved != undefined){
         const newPosition = playerMoved.positionActive + dataTeam.diceValue;
         const room = RoomStore.getRoomDetails(gameId);
+        let isLastStep = false;
+        let shouldMove = false;
         if(newPosition <= room.lenght_board){
+            shouldMove = true;
+            if(newPosition == room.lenght_board){
+                isLastStep = true;
+            }
             let playerMovedModified = {...playerMoved};
             playerMovedModified.prev_position = playerMoved.positionActive;
             playerMovedModified.positionActive = newPosition;
@@ -146,12 +156,13 @@ function throwDice (dataTeam) {
             const players = RoomStore.getUsersInRoom(gameId);
             updatePositionTeamFromSocket(dataTeam.teamName, dataTeam.gameId, dataTeam.flagActive, newPosition, playerMoved.positionActive)
             .then(() => {
-                io.sockets.in(gameId).emit('throwDice', {playermoved: playerMovedModified, players });  
+                io.sockets.in(gameId).emit('throwDice', {playermoved: playerMovedModified, players, isLastStep, shouldMove });  
             })
             .catch(err => {
                 console.error(err)
             });
-
+        } else {
+            io.sockets.in(gameId).emit('throwDice', {playermoved: playerMoved, shouldMove }); 
         }
     }
 }
@@ -183,13 +194,26 @@ function renderChallenge(data) {
             }).catch((error) => { 
                 io.sockets.in(gameId).emit('status', error);
             });
-    }
+    } 
 }
 
+function openModalConfirmation(data){
+    console.log('openModalConfirmation', data);
+    const gameId = data.player.gameId;
+    io.sockets.in(gameId).emit('openModalConfirmation', data); 
+}
+
+function openModalRoulette(data){
+    const gameId = data.data.player.gameId;
+    const nameEmit = data.function;
+    io.sockets.in(gameId).emit('openModalRoulette-'+nameEmit, data.data); 
+}
+
+
 function notPassChallenge (data) {
-    console.log(data);
     const gameId = data.gameId;
     const foundPlayer = RoomStore.getUserRoom(gameId, data.idTeam);
+    console.error('notPassChallenge', foundPlayer);
     if(foundPlayer){
         updateChallengePassed(gameId, false)
             .then(() => {
@@ -202,7 +226,7 @@ function notPassChallenge (data) {
     }
 }
 
-function resultChallenge(data){
+function resultChallenge(data){ 
 
     const gameId = data.player.gameId;
     const foundPlayer = RoomStore.getUserRoom(gameId, data.player.idTeam);
@@ -211,7 +235,7 @@ function resultChallenge(data){
     if(foundPlayer){
         if(!challengePassed){
             let playerModified = {...foundPlayer};
-            playerModified.prev_position = foundPlayer.prev_position??1;
+            playerModified.prev_position = foundPlayer.prev_position;
             playerModified.positionActive = playerModified.prev_position;
             RoomStore.modifyUser(gameId, playerModified);
             const players = RoomStore.getUsersInRoom(gameId);
@@ -228,10 +252,12 @@ function resultChallenge(data){
                     io.sockets.in(gameId).emit('status', err);
                 });
         } else {
+            //TODO: Hacer logica de cuando gana una bandera, recibir tambien la bandera como parametro para saber cual agregarle
             io.sockets.in(gameId).emit('resultChallenge',{player: foundPlayer, challengePassed, players});
         }        
     } 
 }
+
 
 function acting(data){
     emitDataOtherScreen('acting', data);

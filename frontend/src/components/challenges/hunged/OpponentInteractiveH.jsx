@@ -35,8 +35,8 @@ const OpponentInteractiveH = () => {
             
             {!wordReady ? 
             <div>
-                <input type="text" placeholder='Escribe una palabra' onChange={(e) => validateWord(e.target.value)}/>
-                <button onClick={emitHungedChallenge}>Enviar palabra</button>
+                <input className='input' type="text" placeholder='Escribe una palabra' onChange={(e) => validateWord(e.target.value)}/>
+                <button className='btn' onClick={emitHungedChallenge}>Enviar palabra</button>
             </div>
             : 
             <HideWord word={word}/>

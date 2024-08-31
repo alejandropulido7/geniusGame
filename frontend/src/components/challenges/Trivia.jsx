@@ -50,8 +50,8 @@ const Trivia = ({setActiveChallenge}) => {
         ))}
       </ul>
       <p>Puntaje: {puntaje}</p>
-      <button onClick={reiniciarJuego}>Reiniciar Juego</button>
-      <button onClick={() => setActiveChallenge(false)}>Terminar</button>
+      <button className='btn' onClick={reiniciarJuego}>Reiniciar Juego</button>
+      <button className='btn' onClick={() => setActiveChallenge(false)}>Terminar</button>
     </div>
   );
 };

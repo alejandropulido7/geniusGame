@@ -108,7 +108,7 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
     }
 
     const notPassChallenge = () => {
-      socket.emit('resultChallenge', {playerId: socket.id, challengePassed: false});
+      socket.emit('resultChallenge', {player: dataPlayer, challengePassed: false});
     }
   
     return (
@@ -119,7 +119,7 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
             {showKeyboard && 
             <div>
               <KeyboardCW texto={newWord} setTexto={setNewWord}/>
-              <button onClick={manageNewWord}>Agregar Palabra</button>
+              <button className='btn' onClick={manageNewWord}>Agregar Palabra</button>
             </div>}
           </div> 
         : 
@@ -128,7 +128,7 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
           ?
           <div>
             <p>Haz clic en Finalizar antes de que se acabe el tiempo!</p>
-            <button onClick={stopChallenge}>Finish</button>
+            <button className='btn' onClick={stopChallenge}>Finish</button>
           </div>
           :
           <div>
@@ -139,7 +139,7 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
           showNotPassChallenge && 
           <div>
             <p>No pasaste el reto, te vamos a devolver a la posicion {previousPosition}</p>
-            <button onClick={notPassChallenge}>OK</button>
+            <button className='btn' onClick={notPassChallenge}>OK</button>
           </div>
         }
       </div>

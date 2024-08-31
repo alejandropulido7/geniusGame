@@ -27,8 +27,8 @@ const ValidateChallenge = () => {
     <>
     {validOpponent && <div>
         <p>El equipo {dataOpponent.teamName} si logra pasar el reto?</p>
-        <button onClick={() => sendResultChallenge(true)}>SI</button>
-        <button onClick={() => sendResultChallenge(false)}>NO</button>
+        <button className='btn' onClick={() => sendResultChallenge(true)}>SI</button>
+        <button className='btn' onClick={() => sendResultChallenge(false)}>NO</button>
     </div>}
     </>
   )

@@ -18,6 +18,7 @@ const HideWord = ({word}) => {
         { word != '' &&      
         <div>
             <button
+                className='btn'
                 onMouseDown={manageHold}
                 onMouseUp={manageUnhold}
                 onTouchStart={manageHold}

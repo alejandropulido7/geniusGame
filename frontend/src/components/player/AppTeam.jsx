@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import {setCookie, getCookie, hasCookie} from '../../utils/cookies'
+import React, { useEffect, useState } from 'react'
+import {setCookie, deleteCookie, hasCookie} from '../../utils/cookies'
 import { Link, useNavigate } from 'react-router-dom';
 import {getSession} from '../../services/sessionService'
 import {createTeam} from '../../services/teamService'
@@ -16,6 +16,11 @@ const AppTeam = () => {
   const [error, setError] = useState('');
   const [flagSelected, setFlagSelected] = useState('');
   const navigate = useNavigate();
+
+  useEffect(() => {
+    deleteCookie('idDevice-GG');
+    deleteCookie('teamName-GG');
+  },[]);
 
   const createTeamInRoom = async (idTeam) => {
         
@@ -40,7 +45,8 @@ const AppTeam = () => {
                 gameId: payload.id_session,
                 teamName: payload.name_team,
                 flagActive: payload.flag_active,
-                positionActive: 1
+                positionActive: 1,
+                prev_position: 1
               });                         
               navigate('../player/'+sessionId);
             } else {
@@ -94,17 +100,18 @@ const AppTeam = () => {
   return (
     <div>
       <h1>Join in a Room</h1>
-      <div>
+      <div className='flex gap-4'>
           <label>Type room code: </label>
-          <input type='number' name='sessionId' onChange={(e)=>setSessionId(e.target.value)}/>
+          <input className='input' type='number' name='sessionId' onChange={(e)=>setSessionId(e.target.value)}/>
       </div>
-      <div>
+      <div className='flex gap-4'>
           <label>Team name: </label>
-          <input name='teamName' onChange={(e)=>setTeamName(e.target.value)}/>
+          <input className='input' name='teamName' onChange={(e)=>setTeamName(e.target.value)}/>
       </div>
       <AddPlayerToTeam players={players} setPlayers={setPlayers}/>
-      <div>
-          <select value={flagSelected} onChange={handleFlag}>
+      <div className='flex gap-4'>
+          <label>Bandera inicial: </label>
+          <select className='select' value={flagSelected} onChange={handleFlag}>
               <option value="">Seleccione...</option>
               {FLAGS.map (flag => {
                   return <option key={flag} value={flag}>{flag}</option>
@@ -117,7 +124,7 @@ const AppTeam = () => {
             }
       </div>     
       
-      <button onClick={entrySessionGame}>Start game</button>
+      <button className='btn' onClick={entrySessionGame}>Start game</button>
     </div>
   )
 }

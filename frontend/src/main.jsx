@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider, BrowserRouter, Routes, Route } fro
 import BoardPlayer from './components/player/BoardPlayer.jsx';
 import AppTeam from './components/player/AppTeam.jsx';
 import BoardGame from './components/board/BoardGame.jsx';
+import Roulette from './components/challenges/common/Roulette.jsx';
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,11 @@ const router = createBrowserRouter([
       {
         path: "player/:idRoom",
         element: <BoardPlayer />,
-      }           
+      },
+      {
+        path: "ruleta",
+        element: <Roulette />,
+      }            
     ],
   },
 ]); 

@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import socket from '../../../config/socket';
-import {Outlet, useParams, useNavigate} from 'react-router-dom'
-import {RENDER_CHALLENGE} from '../../../utils/constants'
-import PlayerChallengeAW from './PlayerChallengeA';
-import OpponentInteractiveAW from './OpponentInteractiveA';
-import OthersPlayersAW from './OthersPlayersA';
 import AdminA from './AdminA';
 import PlayerChallengeA from './PlayerChallengeA';
 import OpponentInteractiveA from './OpponentInteractiveA';
 import OthersPlayersA from './OthersPlayersA';
+import {RENDER_CHALLENGE} from '../../../utils/constants'
 
 
 const Acting = ({renderIn}) => {

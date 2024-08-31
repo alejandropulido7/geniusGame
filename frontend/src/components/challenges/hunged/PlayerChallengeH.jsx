@@ -5,6 +5,7 @@ import { RENDER_CHALLENGE } from '../../../utils/constants';
 import { getTeamByName } from '../../../services/teamService';
 import { useParams } from 'react-router-dom';
 import { getCookie } from '../../../utils/cookies';
+import ChallengeNotPassed from '../common/ChallengeNotPassed';
 
 
 const PlayerChallengeH = ({secretWord}) => {
@@ -17,6 +18,8 @@ const PlayerChallengeH = ({secretWord}) => {
     const [showNotPassChallenge, setShowNotPassChallenge] = useState(false);
     const [previousPosition, setPreviousPosition] = useState(0);
     const {idRoom} = useParams();
+    const [dataPlayer, setDataPlayer] = useState(null);
+
 
     useEffect(() => {
         if(localStorage.getItem('hunged-pl-GG') != null){
@@ -97,11 +100,11 @@ const PlayerChallengeH = ({secretWord}) => {
       };
 
     useEffect(() => {
-        
         socket.on('notPassChallenge', (data) => {
             if(data.socketId == socket.id){
               setShowNotPassChallenge(true);
               setShowKeyboard(false);
+              setDataPlayer(data);
               setPreviousPosition(data.prev_position);
             }
           })
@@ -109,25 +112,25 @@ const PlayerChallengeH = ({secretWord}) => {
 
 
     const resultChallenge = (passChallenge) => {
-        socket.emit('resultChallenge', {playerId: socket.id, challengePassed: passChallenge});
+        socket.emit('resultChallenge', {player: dataPlayer, challengePassed: passChallenge});
     }
 
     return (
         <div>
             {(!gameFinished && secretWord && showKeyboard) &&
                 'abcdefghijklmnopqrstuvwxyz'.split('').map((letra) => (
-                <button key={letra} onClick={() => manejarIntento(letra)} disabled={lettersGuessed.includes(letra)}>
+                <button className='btn' key={letra} onClick={() => manejarIntento(letra)} disabled={lettersGuessed.includes(letra)}>
                     {letra}
                 </button>
             ))}
             {gameFinished && 
             <div>
-                <button onClick={() => resultChallenge(true)}>Terminar</button>
+                <button className='btn' onClick={() => resultChallenge(true)}>Terminar</button>
             </div>}
             {showNotPassChallenge && 
             <div>
                 <p>No pasaste el reto, te vamos a devolver a la posicion {previousPosition}</p>
-                <button onClick={() => resultChallenge(false)}>OK</button>
+                <button className='btn' onClick={() => resultChallenge(false)}>OK</button>
             </div>
             }
         </div>

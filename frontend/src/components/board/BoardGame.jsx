@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {FLAGS } from '../../utils/constants'
+import {FLAGS, OPTIONS_CHALLENGES } from '../../utils/constants'
 import {CHALLENGES_IN_BOARD, getRandomObject, ACTING} from '../../utils/constants'
 import StepsBoard from './StepsBoard';
 import socket from '../../config/socket';
@@ -8,6 +8,9 @@ import {useParams, useNavigate} from 'react-router-dom';
 import BoardChallenges from '../challenges/BoardChallenges';
 import DataGame from './DataGame';
 import { GlobalContext } from '../../context/challenges/GlobalContext';
+import Modal from '../common/modal/Modal';
+import InfoModal from '../common/modal/InfoModal';
+import Roulette from '../challenges/common/Roulette';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
@@ -23,19 +26,27 @@ const BoardGame = () => {
   let boardSteps = [];
   const navigate = useNavigate();
   const {activeChallenge, setActiveChallenge, setDataChallenge } = useContext(GlobalContext);
+  const [openModal, setOpenModal] = useState(false);
+  const [openModalRoulette, setOpenModalRoulette] = useState(false);
+  const [infoModal, setInfoModal] = useState({});
    
 
   useEffect(() => { 
     getSessionCreated(idRoom);   
 
-    socket.on('throwDice', (data) => {      
-      stepByStep(data);
+    socket.on('throwDice', (data) => {   
+      if(data.shouldMove){
+        stepByStep(data);
+      } else {
+        socket.emit('turnOf', {player: data.playermoved}); 
+      }
     });
     
     socket.on('resultChallenge', (data) => {    
       setDataChallenge({});
       setActiveChallenge(false);
       setPlayersPositions(data.players);
+      setOpenModal(false);
       localStorage.clear();
       socket.emit('turnOf', data);
     });
@@ -60,23 +71,33 @@ const BoardGame = () => {
     const playerModified = {...data.playermoved};
     let step = playerModified.prev_position;      
     const playerWithChallenge = validateIfPositionHaveChallenge(playerModified);
+    const isLastStep = data.isLastStep;
 
     const intervalo = setInterval(() => {
       if(step < playerModified.positionActive){
         step = step + 1;
         playerModified.step = step;
-        console.log('Intervalo ejecutándose: '+playerModified.step);
         const playerNewPosition = playersInSession.map(player => player.teamName == playerModified.teamName ? {...player, prev_position: playerModified.prev_position, positionActive: step, step} : player);
         setPlayersPositions(playerNewPosition);
       } else {
         clearInterval(intervalo);
-        if(playerWithChallenge && playerWithChallenge.challenge != ''){
+        if((playerWithChallenge && playerWithChallenge.challenge != '') || isLastStep){
+          if(isLastStep){
+            // playerWithChallenge.challenge = getRandomObject(CHALLENGES_IN_BOARD);
+            socket.emit('openModalRoulette', { function: 'rendering', data: playerWithChallenge});
+            setOpenModalRoulette(true);
+          }
           setTimeout(() => {
             setActiveChallenge(true);
             setDataChallenge(playerWithChallenge);
-            socket.emit('renderChallenge', playerWithChallenge);
+            socket.emit('openModalConfirmation', playerWithChallenge);
+            const infoModal = OPTIONS_CHALLENGES.get(playerWithChallenge.challenge);
+            setInfoModal(infoModal);
+            setOpenModal(true);
           }, 700);
-        }
+        } else {
+          socket.emit('turnOf', {player: playerWithChallenge.player});          
+        }       
       }
     }, 700);
   }
@@ -91,7 +112,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: 'pictionary',
+        challenge: '',
         player: playerModified
       };
     }
@@ -143,10 +164,10 @@ const BoardGame = () => {
   const generateNewSteps = (array) => {
     let positionsChallenges = [...array]
     for (let index = 0; index < configBoard.quantityChallenges; index++) {
-        const random = Math.floor(Math.random() * configBoard.lenghtBoard) + 1;
-        positionsChallenges = positionsChallenges.map(item => item.position == random && (random > 1 && random != configBoard.lenghtBoard) ? {...item, challenge: getRandomObject(CHALLENGES_IN_BOARD)} : item);
-      }
-      return positionsChallenges;
+      const random = Math.floor(Math.random() * configBoard.lenghtBoard) + 1;
+      positionsChallenges = positionsChallenges.map(item => item.position == random && (random > 1 && random != configBoard.lenghtBoard) ? {...item, challenge: getRandomObject(CHALLENGES_IN_BOARD).id} : item);
+    }
+    return positionsChallenges;
   }
 
   return (
@@ -155,12 +176,19 @@ const BoardGame = () => {
           <h3>Game configuration</h3>
       </div>
       <DataGame playersPositions={playersPositions} session={session} startGame={gameStarted} setStartGame={setGameStarted}/>
-      { !activeChallenge && <div>
+      { !activeChallenge && 
+      <div className='flex flex-wrap'>
         { flagPositions.map(flagPosition => {
           return <StepsBoard key={flagPosition.flag} arrayPositions={flagPosition.positions} flag={flagPosition.flag} players={playersPositions}/>
         })} 
       </div>}
-      <BoardChallenges/>
+      <BoardChallenges setOpenModal={setOpenModal}/>
+      <Modal open={openModal} onClose={setOpenModal}>
+        <InfoModal title={infoModal.title} description={infoModal.description}/>
+      </Modal>
+      <Modal open={openModalRoulette} onClose={setOpenModalRoulette}>
+        <Roulette/>
+      </Modal>
     </div>
   );
 };

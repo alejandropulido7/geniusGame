@@ -33,7 +33,7 @@ const OpponentInteractiveW = ({wordReady}) => {
         { !wordReady 
         ?
           <div>
-            <input type="text" placeholder='Escribe una palabra o frase' onChange={(e) => setWord(e.target.value)}/>
+            <input className='input' type="text" placeholder='Escribe una palabra o frase' onChange={(e) => setWord(e.target.value)}/>
             <ChooseTeamMember setMember={setOponentMember} member={oponentMember}/>
             <button onClick={emitWordChallenge}>Sent word</button>
           </div>
