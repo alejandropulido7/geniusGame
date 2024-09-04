@@ -40,7 +40,7 @@ const AddPlayerToTeam = ({players, setPlayers}) => {
       <div>        
         <ul style={{listStyle: 'none'}}>
           {players.map((player, index) => (
-            <li key={index}>
+            <li className='flex justify-around items-center m-1 p-1 bg-slate-100 rounded-md' key={index}>
               {player}
               <button className='btn' onClick={() => removePlayer(index)}>X</button>
             </li>

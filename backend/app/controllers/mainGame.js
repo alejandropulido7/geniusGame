@@ -1,5 +1,5 @@
 const detectMobileDevice = require('../utils/detectDevice');
-const {updatePositionTeamFromSocket} = require('./teams');
+const {updatePositionTeamFromSocket, addFlagToTeam} = require('./teams');
 const {updateTurnOfTeamFromSocket, updateChallengingInfo, updateChallengePassed} = require('./sessions');
 const RoomStore = require('../classes/RoomStore');
 const TurnsGame = require('../classes/TurnsGame');
@@ -8,11 +8,11 @@ const GameState = require('../classes/GameState');
 var io;
 var gameSocket;
 // gamesInSession stores an array of all active socket connections
-var players = [];
-var boards = [];
-var round = [];
-var lenght_board = 0;
-var quantity_challenges = 0;
+// var players = [];
+// var boards = [];
+// var round = [];
+// var lenght_board = 0;
+// var quantity_challenges = 0;
 
 
 const initializeGame = (sio, socket) => {
@@ -58,6 +58,8 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("openModalRoulette", openModalRoulette);
 
+    gameSocket.on("changeFlag", changeFlag); 
+
 
 }
  
@@ -73,35 +75,39 @@ function createNewGame(data) {
     }
     RoomStore.createNewRoom(room);
     GameState.createGameStatus(room.gameId);
-    this.emit('createNewGame', room);
+    // gameSocket.join(room.gameId);
+    // io.sockets.in(room.gameId).emit('createNewGame', room);
+
+    // this.emit('createNewGame', room);
     this.join(room.gameId)
+
+    // gameSocket.emit('createNewGame', room);
 }
 
-function startGame(gameId) {
+async function startGame(gameId) {
     const player = RoomStore.getUsersInRoom(gameId)[0];
     console.log(player);
-    updateTurnOfTeamFromSocket(player.gameId, true, player.teamName)
-    .then((result) => {
-        console.log('ResultStartGame', result);
+    const updateTurn = await updateTurnOfTeamFromSocket(player.gameId, true, player.teamName);
+    io.sockets.in(gameId).emit('prueba', "HABLALOOOOOOOOOOOOO");
+    if(updateTurn == 1){
         io.sockets.in(gameId).emit('turnOf', player);
-    })
-    .catch(err => {
-        console.error(err); 
-    });
+    } else {
+        io.sockets.in(gameId).emit('status', "Error actualizando el turno");
+    }
 } 
 
 function joinPlayerGame(dataPlayer) {
 
     const gameId = dataPlayer.gameId;
     const room = io.sockets.adapter.rooms.get(gameId);
-    dataPlayer.socketId = this.id;
 
     if (room === undefined) {
         this.emit('status' , "This game session does not exist." );
+        io.sockets.in(gameId).emit('sessionDontExist', playersInRoom);
         return
     }
  
-    RoomStore.addUserToRoom(gameId, dataPlayer);
+    RoomStore.addUserToRoom(gameId, dataPlayer); 
     
     gameSocket.join(gameId);
     const playersInRoom = RoomStore.getUsersInRoom(gameId);
@@ -226,7 +232,7 @@ function notPassChallenge (data) {
     }
 }
 
-function resultChallenge(data){ 
+async function resultChallenge(data){ 
 
     const gameId = data.player.gameId;
     const foundPlayer = RoomStore.getUserRoom(gameId, data.player.idTeam);
@@ -243,7 +249,7 @@ function resultChallenge(data){
                 .then(() => {
                     updateChallengingInfo(gameId, false, null, null)
                     .then(() => {
-                        io.sockets.in(gameId).emit('resultChallenge',{player: foundPlayer, challengePassed, players});
+                        io.sockets.in(gameId).emit('resultChallenge', {player: foundPlayer, challengePassed, players});
                     }).catch((error) => {
                         io.sockets.in(gameId).emit('status', error);
                     })
@@ -252,10 +258,52 @@ function resultChallenge(data){
                     io.sockets.in(gameId).emit('status', err);
                 });
         } else {
-            //TODO: Hacer logica de cuando gana una bandera, recibir tambien la bandera como parametro para saber cual agregarle
-            io.sockets.in(gameId).emit('resultChallenge',{player: foundPlayer, challengePassed, players});
+            const isLastStep = foundPlayer.isLastStep;
+            if(isLastStep){
+                const validateWinGame = await addFlagToTeam( foundPlayer.idTeam, gameId, foundPlayer.flagActive);
+                if(!validateWinGame){
+                    io.sockets.in(gameId).emit('openModalChoiceNewFlag', foundPlayer);
+                } else {
+                    io.sockets.in(gameId).emit('winGame', foundPlayer);
+                }
+            } else { 
+                io.sockets.in(gameId).emit('resultChallenge', {player: foundPlayer, challengePassed, players});
+            }
         }        
     } 
+}
+
+async function changeFlag(data) {
+    const gameId = data.player.gameId;
+    const foundPlayer = RoomStore.getUserRoom(gameId, data.player.idTeam);
+    if(foundPlayer){
+        let playerModified = {...foundPlayer};
+        playerModified.flagActive = data.newFlag;
+        playerModified.positionActive = 1;
+        playerModified.prev_position = 1;
+        RoomStore.modifyUser(gameId, playerModified);
+        const players = RoomStore.getUsersInRoom(gameId);
+
+        const updateTeam = await updatePositionTeamFromSocket(playerModified.teamName, 
+            gameId, 
+            playerModified.flagActive, 
+            playerModified.positionActive, 
+            playerModified.prev_position);
+        
+        if(updateTeam == 1){
+            const updateChallenge = await updateChallengingInfo(gameId, false, null, null);
+            if(updateChallenge == 1){
+                console.log('changeFlag', {player: foundPlayer, challengePassed: true, players})
+                io.sockets.in(gameId).emit('changeFlag', {player: foundPlayer, challengePassed: true, players});
+            } else {
+                io.sockets.in(gameId).emit('status', "Error al actualizar los datos del challenge");
+            }
+        } else {
+            io.sockets.in(gameId).emit('status', "Error al actualizar las posiciones del equipo");
+        }
+    }
+
+    
 }
 
 
@@ -289,8 +337,13 @@ function startChallenge(data){
 function stopChallenge(data){
     const gameId = RoomStore.getRoomByIdSocket(data.socketId);
     const foundPlayer = RoomStore.getUserBySocket(gameId, data.socketId);
+    const roomDetails = RoomStore.getRoomDetails(gameId);
+    if(roomDetails){
+        const isLastStep = foundPlayer.positionActive == roomDetails.lenght_board ? true : false;
+        foundPlayer.isLastStep = isLastStep;
+    }
     if(gameId && foundPlayer){
-        io.sockets.in(gameId).emit('stopChallenge', foundPlayer);
+        io.sockets.in(gameId).emit('stopChallenge', foundPlayer); 
     }
 }
 

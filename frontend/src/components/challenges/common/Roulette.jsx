@@ -23,7 +23,7 @@ const Roulette = () => {
         socket.on('openModalRoulette-stopRoulette', (data) => {  
             setIsSpinning(false);
             setStopRotation(true);
-            setDataRenderChallenge(data);    
+            setDataRenderChallenge(data);
         });
 
     }, []);
@@ -41,23 +41,15 @@ const Roulette = () => {
             const winningIndex = Math.floor((360 - finalRotation + segmentAngle / 2) % 360 / segmentAngle);
             setResult(options[winningIndex].name);
             const dataResult = {...dataRenderChallenge};
-            dataResult.challenge = options[winningIndex].id;
-            socket.emit('renderChallenge', dataResult);
+            // dataResult.challenge = options[winningIndex].id;
+            dataResult.challenge = 'acting';
+            dataResult.isLastStep = true;
+            socket.emit('openModalConfirmation', dataResult);
             setStopRotation(false);
         }
 
         return () => clearInterval(interval);
     }, [isSpinning, stopRotation, rotation, options]);
-
-    // const startSpinning = () => {
-    //     setIsSpinning(true);
-    //     setResult(null);
-    // };
-
-    // const stopSpinning = () => {
-    //     setIsSpinning(false);
-    //     setStopRotation(true);
-    // };
 
     return (
         <div className="flex flex-col items-center justify-center h-screen">

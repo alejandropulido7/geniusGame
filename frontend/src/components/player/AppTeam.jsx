@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import {setCookie, deleteCookie, hasCookie} from '../../utils/cookies'
 import { Link, useNavigate } from 'react-router-dom';
 import {getSession} from '../../services/sessionService'
@@ -7,6 +7,7 @@ import AddPlayerToTeam from './AddPlayerToTeam';
 import { FLAGS } from '../../utils/constants';
 import socket from '../../config/socket';
 import {generateUUID} from '../../utils/shared'
+import {GlobalContext} from '../../context/challenges/GlobalContext'
 
 const AppTeam = () => {
 
@@ -16,10 +17,15 @@ const AppTeam = () => {
   const [error, setError] = useState('');
   const [flagSelected, setFlagSelected] = useState('');
   const navigate = useNavigate();
+  const {setActiveChallenge} = useContext(GlobalContext);
 
   useEffect(() => {
     deleteCookie('idDevice-GG');
     deleteCookie('teamName-GG');
+
+    return () => {
+      setActiveChallenge(false);
+    }
   },[]);
 
   const createTeamInRoom = async (idTeam) => {
@@ -39,15 +45,15 @@ const AppTeam = () => {
           .then((team) => {
             if(!team.error){  
               setCookie('idDevice-GG', idTeam, 1);
-              socket.emit('joinPlayerGame', {
-                socketId: socket.id,
-                idTeam: payload.id_team,
-                gameId: payload.id_session,
-                teamName: payload.name_team,
-                flagActive: payload.flag_active,
-                positionActive: 1,
-                prev_position: 1
-              });                         
+              // socket.emit('joinPlayerGame', {
+              //   socketId: socket.id,
+              //   idTeam: payload.id_team,
+              //   gameId: payload.id_session,
+              //   teamName: payload.name_team,
+              //   flagActive: payload.flag_active,
+              //   positionActive: 1,
+              //   prev_position: 1
+              // });                         
               navigate('../player/'+sessionId);
             } else {
               setError(team.error);

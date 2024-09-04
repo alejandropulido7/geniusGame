@@ -1,9 +1,7 @@
-const Team = require('../data-models/team')
+const Team = require('../data-models/team');
+const {FLAGS} = require('../utils/constant');
 
 function createTeam(req, res) {
-
-    console.log(req.body.name_team)
-    console.log(req.body.id_session)
 
     Team.findOne({
         where: {
@@ -20,7 +18,9 @@ function createTeam(req, res) {
                 status: true,
                 players: req.body.players,
                 id_session: req.body.id_session,
-                flag_active: req.body.flag_active
+                flag_active: req.body.flag_active,
+                prev_position: 1,
+                position_active: 1
             }).then(team => {
                 res.status(200).json(team)
             }).catch(err => {
@@ -106,4 +106,60 @@ function updatePositionTeamFromSocket(name_team, id_session, flag_active, positi
     });
 }
 
-module.exports = {createTeam, getTeam, getTeamByName, updatePositionTeam, updatePositionTeamFromSocket, getTeamById}
+async function addFlagToTeam(id_team, id_session, flag) {
+
+    const teamFound = await Team.findOne({
+        where: {
+            id_team,
+            id_session
+        }
+    }).then(team => {
+        return team;
+    }).catch(err => {
+        return null;
+    });
+
+
+    let flagsObtained = [];
+    if(teamFound){
+        const flagsFound = JSON.parse(teamFound.flags_obtained);
+        if(flagsFound != null){
+            flagsObtained = flagsFound;
+        }
+    }
+    flagsObtained.push(flag);
+    const payloadFlags = JSON.stringify(flagsObtained);
+
+    const updateFlag = await Team.update({
+        flags_obtained: payloadFlags
+    },
+    {
+        where: {
+            id_team,
+            id_session
+        }
+    });
+
+    let countFlags = 0;
+
+    if(updateFlag == 1){
+        FLAGS.forEach(flag => {
+            flagsObtained.forEach(flagGained => {
+                if(flag == flagGained){
+                    countFlags ++;
+                }
+            });
+        });
+    }
+    const winGame = countFlags == 4 ? true : false;
+
+    return winGame;
+}
+
+module.exports = {createTeam, 
+    getTeam, 
+    getTeamByName, 
+    updatePositionTeam, 
+    updatePositionTeamFromSocket, 
+    getTeamById, 
+    addFlagToTeam}

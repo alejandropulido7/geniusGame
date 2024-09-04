@@ -1,10 +1,10 @@
-import pictionary from '../assets/challenges/pictionary.png';
-import hunged from '../assets/challenges/hunged.png';
-import acting from '../assets/challenges/acting.png';
-import word_chain from '../assets/challenges/word_chain.png';
-import trivia from '../assets/challenges/trivia.png';
-import whistle from '../assets/challenges/whistle.png';
-import home from '../assets/challenges/home.png';
+import pictionary from '../assets/challenges/pictionary.svg';
+import hunged from '../assets/challenges/hunged.svg';
+import acting from '../assets/challenges/acting.svg';
+import word_chain from '../assets/challenges/word_chain.svg';
+import trivia from '../assets/challenges/trivia.svg';
+import whistle from '../assets/challenges/whistle.svg';
+import home from '../assets/challenges/home.svg';
 
 const PICTIONARY = 'pictionary';
 const WORD_CHAIN = 'word_chain'; //Palabras encadenadas por la ultima letra

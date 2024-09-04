@@ -2,7 +2,8 @@ import React from 'react'
 
 const Modal = ({open, onClose, children}) => {
   return (
-    <div className={`fixed inset-0 flex justify-center items-center transition-colors 
+    <>
+    {open && <div className={`fixed inset-0 flex justify-center items-center transition-colors 
     ${open ? 'visible bg-black/20' : 'invisible'}  
     `}>
         <div className={`bg-white rounded-xl shadow p-6 transition-all 
@@ -12,7 +13,8 @@ const Modal = ({open, onClose, children}) => {
                 text-gray-400 bg-white hover:bg-gray-50 hover:text-gray-600'>X</button>
             {children}
         </div>      
-    </div>
+    </div>}
+    </>
   )
 }
 

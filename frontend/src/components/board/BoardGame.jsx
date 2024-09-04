@@ -11,6 +11,7 @@ import { GlobalContext } from '../../context/challenges/GlobalContext';
 import Modal from '../common/modal/Modal';
 import InfoModal from '../common/modal/InfoModal';
 import Roulette from '../challenges/common/Roulette';
+import Winner from '../challenges/common/Winner';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
@@ -20,7 +21,7 @@ const BoardGame = () => {
   const [flags, setFlags] = useState(FLAGS);
   const {idRoom} = useParams();
   const [configBoard, setConfigBoard] = useState({
-      lenghtBoard: 17,
+      lenghtBoard: 6,
       quantityChallenges: 5
   });
   let boardSteps = [];
@@ -28,11 +29,24 @@ const BoardGame = () => {
   const {activeChallenge, setActiveChallenge, setDataChallenge } = useContext(GlobalContext);
   const [openModal, setOpenModal] = useState(false);
   const [openModalRoulette, setOpenModalRoulette] = useState(false);
+  const [openModalChoiceNewFlag, setOpenModalChoiceNewFlag] = useState(false);
+  const [infoChoiceNewFlag, setInfoChoiceNewFlag] = useState({});
   const [infoModal, setInfoModal] = useState({});
-   
+  const [gameFinished, setGameFinished] = useState(false);
+  const [winner, setWinner] = useState({});
 
-  useEffect(() => { 
-    getSessionCreated(idRoom);   
+  useEffect(() => {
+    socket.on('winGame', (data) => {  
+      setGameFinished(true);  
+      setWinner(data)
+    });
+  },[gameFinished, winner]);
+
+  useEffect(() => {
+    getSessionCreated(idRoom); 
+  },[activeChallenge]);
+
+  useEffect(() => {      
 
     socket.on('throwDice', (data) => {   
       if(data.shouldMove){
@@ -42,7 +56,25 @@ const BoardGame = () => {
       }
     });
     
-    socket.on('resultChallenge', (data) => {    
+    socket.on('resultChallenge', (data) => { 
+      console.log('resultChallenge', data)  
+      setOpenModalChoiceNewFlag(false); 
+      setDataChallenge({});
+      setActiveChallenge(false);
+      setPlayersPositions(data.players);
+      setOpenModal(false);
+      localStorage.clear();
+      socket.emit('turnOf', data);
+    });
+
+    socket.on('openModalChoiceNewFlag', (data) => {
+      setOpenModalChoiceNewFlag(true);
+      setInfoChoiceNewFlag(data);
+    });
+
+    socket.on('changeFlag', (data) => { 
+      console.log('changeFlag', data)  
+      setOpenModalChoiceNewFlag(false); 
       setDataChallenge({});
       setActiveChallenge(false);
       setPlayersPositions(data.players);
@@ -54,11 +86,12 @@ const BoardGame = () => {
     return () => {
       socket.off('throwDice');
       socket.off('resultChallenge');
+      socket.off('changeFlag');
       setFlagPositions([]);
       setSession({});
       setGameStarted(false);
     }
-  }, [activeChallenge]);
+  }, [openModalChoiceNewFlag]);
 
   socket.on('playerJoinedRoom', (playersInSession) => {
     setPlayersPositions(playersInSession);
@@ -82,19 +115,20 @@ const BoardGame = () => {
       } else {
         clearInterval(intervalo);
         if((playerWithChallenge && playerWithChallenge.challenge != '') || isLastStep){
+          playerWithChallenge.isLastStep = isLastStep;
           if(isLastStep){
-            // playerWithChallenge.challenge = getRandomObject(CHALLENGES_IN_BOARD);
             socket.emit('openModalRoulette', { function: 'rendering', data: playerWithChallenge});
             setOpenModalRoulette(true);
+          } else {
+            setTimeout(() => {
+              setActiveChallenge(true);
+              setDataChallenge(playerWithChallenge);
+              socket.emit('openModalConfirmation', playerWithChallenge);
+              const infoModal = OPTIONS_CHALLENGES.get(playerWithChallenge.challenge);
+              setInfoModal(infoModal);
+              setOpenModal(true);
+            }, 700);
           }
-          setTimeout(() => {
-            setActiveChallenge(true);
-            setDataChallenge(playerWithChallenge);
-            socket.emit('openModalConfirmation', playerWithChallenge);
-            const infoModal = OPTIONS_CHALLENGES.get(playerWithChallenge.challenge);
-            setInfoModal(infoModal);
-            setOpenModal(true);
-          }, 700);
         } else {
           socket.emit('turnOf', {player: playerWithChallenge.player});          
         }       
@@ -172,22 +206,35 @@ const BoardGame = () => {
 
   return (
     <div>
-      <div>
-          <h3>Game configuration</h3>
-      </div>
-      <DataGame playersPositions={playersPositions} session={session} startGame={gameStarted} setStartGame={setGameStarted}/>
-      { !activeChallenge && 
-      <div className='flex flex-wrap'>
-        { flagPositions.map(flagPosition => {
-          return <StepsBoard key={flagPosition.flag} arrayPositions={flagPosition.positions} flag={flagPosition.flag} players={playersPositions}/>
-        })} 
-      </div>}
-      <BoardChallenges setOpenModal={setOpenModal}/>
+      {
+        !gameFinished 
+        ?
+        <div>
+          <div>
+              <h3>Game configuration</h3>
+          </div>
+          <DataGame playersPositions={playersPositions} session={session} startGame={gameStarted} setStartGame={setGameStarted}/>
+          { !activeChallenge && 
+          <div className='flex flex-wrap'>
+            { flagPositions.map(flagPosition => {
+              return <StepsBoard key={flagPosition.flag} arrayPositions={flagPosition.positions} flag={flagPosition.flag} players={playersPositions}/>
+            })} 
+          </div>}
+          <BoardChallenges setOpenModal={setOpenModal} setOpenModalRoulette={setOpenModalRoulette}/>
+        </div>
+        :
+        <Winner winner={winner}/>
+      }
+
       <Modal open={openModal} onClose={setOpenModal}>
         <InfoModal title={infoModal.title} description={infoModal.description}/>
       </Modal>
       <Modal open={openModalRoulette} onClose={setOpenModalRoulette}>
         <Roulette/>
+      </Modal>
+      <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
+        <h3>Wow! el equipo {infoChoiceNewFlag.teamName} ha ganado la bandera {infoChoiceNewFlag.flagActive}</h3>
+        <p>Esperando a que elija su proxima bandera...</p>
       </Modal>
     </div>
   );
