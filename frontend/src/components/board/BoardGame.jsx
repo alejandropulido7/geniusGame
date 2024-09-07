@@ -12,21 +12,23 @@ import Modal from '../common/modal/Modal';
 import InfoModal from '../common/modal/InfoModal';
 import Roulette from '../challenges/common/Roulette';
 import Winner from '../challenges/common/Winner';
+import Menu from '../Menu';
+import './Board.css';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
-  const [session, setSession] = useState({})
+  // const [session, setSession] = useState({});
   const [playersPositions, setPlayersPositions] = useState([]);
   const [gameStarted, setGameStarted] = useState(false); 
   const [flags, setFlags] = useState(FLAGS);
   const {idRoom} = useParams();
   const [configBoard, setConfigBoard] = useState({
-      lenghtBoard: 6,
-      quantityChallenges: 5
+      lenghtBoard: 10,
+      quantityChallenges: 7
   });
   let boardSteps = [];
   const navigate = useNavigate();
-  const {activeChallenge, setActiveChallenge, setDataChallenge } = useContext(GlobalContext);
+  const {activeChallenge, setActiveChallenge, setDataChallenge, session, setSession } = useContext(GlobalContext);
   const [openModal, setOpenModal] = useState(false);
   const [openModalRoulette, setOpenModalRoulette] = useState(false);
   const [openModalChoiceNewFlag, setOpenModalChoiceNewFlag] = useState(false);
@@ -55,6 +57,11 @@ const BoardGame = () => {
         socket.emit('turnOf', {player: data.playermoved}); 
       }
     });
+
+    socket.on('renderChallenge', (data) => {
+      setOpenModalRoulette(false);
+      setOpenModal(false);
+    });
     
     socket.on('resultChallenge', (data) => { 
       console.log('resultChallenge', data)  
@@ -72,24 +79,11 @@ const BoardGame = () => {
       setInfoChoiceNewFlag(data);
     });
 
-    socket.on('changeFlag', (data) => { 
-      console.log('changeFlag', data)  
-      setOpenModalChoiceNewFlag(false); 
-      setDataChallenge({});
-      setActiveChallenge(false);
-      setPlayersPositions(data.players);
-      setOpenModal(false);
-      localStorage.clear();
-      socket.emit('turnOf', data);
-    });
-
     return () => {
       socket.off('throwDice');
       socket.off('resultChallenge');
-      socket.off('changeFlag');
       setFlagPositions([]);
       setSession({});
-      setGameStarted(false);
     }
   }, [openModalChoiceNewFlag]);
 
@@ -146,7 +140,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: '',
+        challenge: 'back_home',
         player: playerModified
       };
     }
@@ -157,7 +151,6 @@ const BoardGame = () => {
       getSession(idRoom)
       .then(sessionCreated => {
           setSession(sessionCreated);
-          setGameStarted(sessionCreated.gameStarted);
           let boardPositions = sessionCreated.json_boardPositions;
           if( boardPositions != ''){
             setFlagPositions(JSON.parse(boardPositions));
@@ -185,7 +178,7 @@ const BoardGame = () => {
       newPositions.push({position: position, challenge: ''});
     });
     flags.map( flag => {
-      addflagPositions.push({flag: flag, positions: generateNewSteps(newPositions)});
+      addflagPositions.push({flag: flag.id, positions: generateNewSteps(newPositions)});
     }); 
     if(addflagPositions.length > 0) {
       setFlagPositions(addflagPositions); 
@@ -204,23 +197,34 @@ const BoardGame = () => {
     return positionsChallenges;
   }
 
+  const classNameSteps = (index) => {
+    switch (index) {
+      case 0:
+        return 'row top';
+      case 1:
+        return 'column-reverse left';
+      case 2:
+        return 'row-reverse bottom';
+      case 3:
+        return 'column right';
+      default:
+        break;
+    }
+  }
+
   return (
-    <div>
+    <div className='board-container px-20'>
       {
         !gameFinished 
         ?
         <div>
-          <div>
-              <h3>Game configuration</h3>
-          </div>
-          <DataGame playersPositions={playersPositions} session={session} startGame={gameStarted} setStartGame={setGameStarted}/>
-          { !activeChallenge && 
-          <div className='flex flex-wrap'>
-            { flagPositions.map(flagPosition => {
-              return <StepsBoard key={flagPosition.flag} arrayPositions={flagPosition.positions} flag={flagPosition.flag} players={playersPositions}/>
+          <div className='steps-container'>
+            { flagPositions.map((flagPosition, index) => {
+              return <StepsBoard stlyeClass={classNameSteps(index)} key={flagPosition.flag} arrayPositions={flagPosition.positions} flag={flagPosition.flag} players={playersPositions}/>
             })} 
-          </div>}
-          <BoardChallenges setOpenModal={setOpenModal} setOpenModalRoulette={setOpenModalRoulette}/>
+            <DataGame/>
+            <BoardChallenges setOpenModal={setOpenModal} setOpenModalRoulette={setOpenModalRoulette}/>
+          </div>
         </div>
         :
         <Winner winner={winner}/>

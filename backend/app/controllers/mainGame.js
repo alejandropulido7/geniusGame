@@ -4,15 +4,10 @@ const {updateTurnOfTeamFromSocket, updateChallengingInfo, updateChallengePassed}
 const RoomStore = require('../classes/RoomStore');
 const TurnsGame = require('../classes/TurnsGame');
 const GameState = require('../classes/GameState');
+const {updatePositions} = require('../controllers/socketHandlers/commonOperations')
 
 var io;
 var gameSocket;
-// gamesInSession stores an array of all active socket connections
-// var players = [];
-// var boards = [];
-// var round = [];
-// var lenght_board = 0;
-// var quantity_challenges = 0;
 
 
 const initializeGame = (sio, socket) => {
@@ -48,6 +43,8 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("pictionary", pictionary)
 
+    gameSocket.on("backHome", backHome)
+
     gameSocket.on("startChallenge", startChallenge)
 
     gameSocket.on("stopChallenge", stopChallenge)
@@ -79,9 +76,7 @@ function createNewGame(data) {
     // io.sockets.in(room.gameId).emit('createNewGame', room);
 
     // this.emit('createNewGame', room);
-    this.join(room.gameId)
-
-    // gameSocket.emit('createNewGame', room);
+    this.join(room.gameId);
 }
 
 async function startGame(gameId) {
@@ -103,8 +98,8 @@ function joinPlayerGame(dataPlayer) {
 
     if (room === undefined) {
         this.emit('status' , "This game session does not exist." );
-        io.sockets.in(gameId).emit('sessionDontExist', playersInRoom);
-        return
+        io.sockets.in(gameId).emit('sessionDontExist', false);
+        return 
     }
  
     RoomStore.addUserToRoom(gameId, dataPlayer); 
@@ -243,25 +238,28 @@ async function resultChallenge(data){
             let playerModified = {...foundPlayer};
             playerModified.prev_position = foundPlayer.prev_position;
             playerModified.positionActive = playerModified.prev_position;
-            RoomStore.modifyUser(gameId, playerModified);
-            const players = RoomStore.getUsersInRoom(gameId);
-            updatePositionTeamFromSocket(playerModified.teamName, gameId, playerModified.flagActive, playerModified.positionActive, playerModified.prev_position)
-                .then(() => {
-                    updateChallengingInfo(gameId, false, null, null)
-                    .then(() => {
-                        io.sockets.in(gameId).emit('resultChallenge', {player: foundPlayer, challengePassed, players});
-                    }).catch((error) => {
-                        io.sockets.in(gameId).emit('status', error);
-                    })
-                })
-                .catch(err => {
-                    io.sockets.in(gameId).emit('status', err);
-                });
+            // RoomStore.modifyUser(gameId, playerModified);
+            // const players = RoomStore.getUsersInRoom(gameId);
+            // updatePositionTeamFromSocket(playerModified.teamName, gameId, playerModified.flagActive, playerModified.positionActive, playerModified.prev_position)
+            //     .then(() => {
+            //         updateChallengingInfo(gameId, false, null, null)
+            //         .then(() => {
+            //             io.sockets.in(gameId).emit('resultChallenge', {player: foundPlayer, challengePassed, players});
+            //         }).catch((error) => {
+            //             io.sockets.in(gameId).emit('status', error);
+            //         })
+            //     })
+            //     .catch(err => {
+            //         io.sockets.in(gameId).emit('status', err);
+            //     });
+            updatePositions(playerModified, io);
         } else {
             const isLastStep = foundPlayer.isLastStep;
+            const players = RoomStore.getUsersInRoom(gameId);
             if(isLastStep){
                 const validateWinGame = await addFlagToTeam( foundPlayer.idTeam, gameId, foundPlayer.flagActive);
-                if(!validateWinGame){
+                foundPlayer.flagsObtained = validateWinGame.flagsObtained;
+                if(!validateWinGame.winGame){
                     io.sockets.in(gameId).emit('openModalChoiceNewFlag', foundPlayer);
                 } else {
                     io.sockets.in(gameId).emit('winGame', foundPlayer);
@@ -281,26 +279,27 @@ async function changeFlag(data) {
         playerModified.flagActive = data.newFlag;
         playerModified.positionActive = 1;
         playerModified.prev_position = 1;
-        RoomStore.modifyUser(gameId, playerModified);
-        const players = RoomStore.getUsersInRoom(gameId);
+        // RoomStore.modifyUser(gameId, playerModified);
+        // const players = RoomStore.getUsersInRoom(gameId);
 
-        const updateTeam = await updatePositionTeamFromSocket(playerModified.teamName, 
-            gameId, 
-            playerModified.flagActive, 
-            playerModified.positionActive, 
-            playerModified.prev_position);
+        // const updateTeam = await updatePositionTeamFromSocket(playerModified.teamName, 
+        //     gameId, 
+        //     playerModified.flagActive, 
+        //     playerModified.positionActive, 
+        //     playerModified.prev_position);
         
-        if(updateTeam == 1){
-            const updateChallenge = await updateChallengingInfo(gameId, false, null, null);
-            if(updateChallenge == 1){
-                console.log('changeFlag', {player: foundPlayer, challengePassed: true, players})
-                io.sockets.in(gameId).emit('changeFlag', {player: foundPlayer, challengePassed: true, players});
-            } else {
-                io.sockets.in(gameId).emit('status', "Error al actualizar los datos del challenge");
-            }
-        } else {
-            io.sockets.in(gameId).emit('status', "Error al actualizar las posiciones del equipo");
-        }
+        // if(updateTeam == 1){
+        //     const updateChallenge = await updateChallengingInfo(gameId, false, null, null);
+        //     if(updateChallenge == 1){
+        //         console.log('changeFlag', {player: foundPlayer, challengePassed: true, players})
+        //         io.sockets.in(gameId).emit('changeFlag', {player: foundPlayer, challengePassed: true, players});
+        //     } else {
+        //         io.sockets.in(gameId).emit('status', "Error al actualizar los datos del challenge");
+        //     }
+        // } else {
+        //     io.sockets.in(gameId).emit('status', "Error al actualizar las posiciones del equipo");
+        // }
+        updatePositions(playerModified, io);
     }
 
     
@@ -326,6 +325,19 @@ function hunged(data){
 function pictionary(data){
     const nameEmit = data.function;
     emitDataOtherScreen('pictionary-'+nameEmit, data.data);
+}
+
+function backHome(data) {
+    console.log('backHome', data);
+    const gameId = data.player.gameId;
+    const foundPlayer = RoomStore.getUserRoom(gameId, data.player.idTeam);
+
+    if(foundPlayer){
+        let playerModified = {...foundPlayer};
+        playerModified.positionActive = 1;
+        playerModified.prev_position = 1;
+        updatePositions(playerModified, io);
+    }
 }
 
 function startChallenge(data){

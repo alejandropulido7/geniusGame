@@ -1,0 +1,31 @@
+.board-player-container {
+    display: grid;
+    grid-template-areas:
+      ". top ."
+      ". center ."
+      ". bottom .";
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    gap: 10px;
+    height: 100vh;
+  }
+
+  .board-player-top {
+    grid-area: top;
+  }
+  
+  .board-player-left {
+    grid-area: left;
+  }
+  
+  .board-player-bottom {
+    grid-area: bottom;
+  }
+  
+  .board-player-right {
+    grid-area: right;
+  }
+
+  .board-player-center {
+    grid-area: center;
+  }

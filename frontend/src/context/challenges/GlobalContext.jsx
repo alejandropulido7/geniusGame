@@ -4,6 +4,8 @@ export const GlobalContext = createContext({
     activeChallenge: false,
     dataChallenge: {},
     renderPlayer: '',
+    session: {}, 
+    setSession: (data)=>{},
     setDataChallenge: (data)=>{},
     setActiveChallenge: (data)=>{},
     setRenderPlayer: (data)=>{}

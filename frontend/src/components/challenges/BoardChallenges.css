@@ -1,0 +1,30 @@
+.challenges-container {
+    display: grid;
+    grid-template-areas:
+      "left top right"
+      ". center ."
+      "left bottom right";
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    gap: 10px;
+  }
+
+  .challenges-top {
+    grid-area: top;
+  }
+  
+  .challenges-left {
+    grid-area: left;
+  }
+  
+  .challenges-bottom {
+    grid-area: bottom;
+  }
+  
+  .challenges-right {
+    grid-area: right;
+  }
+
+  .challenges-center {
+    grid-area: center;
+  }

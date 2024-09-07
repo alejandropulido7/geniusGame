@@ -1,0 +1,107 @@
+.board-container{
+  background-color: black;
+  /* max-width: 1440px; */
+  margin: auto;
+}
+
+/*BOX STEPS*/
+.steps-container {
+    display: grid;
+    grid-template-areas:
+      "left top right"
+      "left center right"
+      "left bottom right";
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    gap: 10px;
+    height: 100vh;
+  }
+  
+  .row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .row-reverse {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+  
+  .column-reverse {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+  }
+  
+  .top {
+    grid-area: top;
+  }
+  
+  .left {
+    grid-area: left;
+  }
+  
+  .bottom {
+    grid-area: bottom;
+  }
+  
+  .right {
+    grid-area: right;
+  }
+
+  .steps-center-container {
+    grid-area: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: #FFCC00; */
+    /* background-color: #FFF; */
+    padding: 20px;
+    border-radius: 15px;
+    margin: auto;
+    width: 85%;
+    height: 85%;
+  }
+
+  .data-game-container {
+    display: grid;
+    grid-template-areas:
+      ". top ."
+      ". center ."
+      ". bottom .";
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto 1fr auto;
+    gap: 40px;
+  }
+
+  .data-game-center{
+    grid-area: center;
+    margin: auto;
+  }
+
+  .data-game-bottom {
+    grid-area: bottom;
+    width: 50%;
+  }
+
+  .data-game-title{
+    background-image: url("../../assets/images/dataGame/title-bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: block;
+    width: 500px;
+    margin: auto;
+  }
+
+  .data-game-players{
+    height: 25vh;
+  }

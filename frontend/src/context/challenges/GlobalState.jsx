@@ -1,18 +1,18 @@
-import React, {useReducer} from 'react'
+import React, {useEffect, useReducer} from 'react'
 import { GlobalContext } from './GlobalContext';
+import {getSession} from '../../services/sessionService';
+import {useParams, useNavigate} from 'react-router-dom';
 
 
 
 const GlobalState = ({children}) => {
+    const {idRoom} = useParams();
     
     const initialState = {
-        // dataChallenge: JSON.parse(localStorage.getItem('dataChallenge-GG')) || {},
-        // activeChallenge: localStorage.getItem('activeChallenge-GG') || false,
-        // renderPlayer: localStorage.getItem('renderIn-GG') || ''
-
         dataChallenge: {},
         activeChallenge: false,
-        renderPlayer: ''
+        renderPlayer: '',
+        session: {}
     }
 
     const challengeReducer = (state, action)=>{
@@ -23,7 +23,9 @@ const GlobalState = ({children}) => {
             case 'ACTIVE_CHALLENGE':
                 return { ...state, activeChallenge: action.payload};
             case 'RENDER_CHALLENGE':
-                return { ...state, renderPlayer: action.payload};          
+                return { ...state, renderPlayer: action.payload};
+            case 'RENDER_SESSION':
+                return { ...state, session: action.payload};       
             default:
                 return state;
         }       
@@ -52,14 +54,23 @@ const GlobalState = ({children}) => {
         })
     }
 
+    const setSession = (data) => {        
+        dispatch({
+            type: 'RENDER_SESSION',
+            payload: data
+        })
+    }
+
     return (
         <GlobalContext.Provider value={{
             activeChallenge: state.activeChallenge,
             dataChallenge: state.dataChallenge,
             renderPlayer: state.renderPlayer,
+            session: state.session,
             setDataChallenge,
             setActiveChallenge,
-            setRenderPlayer
+            setRenderPlayer,
+            setSession
         }}>
             {children}
         </GlobalContext.Provider>

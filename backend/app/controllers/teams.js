@@ -152,8 +152,12 @@ async function addFlagToTeam(id_team, id_session, flag) {
         });
     }
     const winGame = countFlags == 4 ? true : false;
+    const result = {
+        winGame,
+        flagsObtained
+    };
 
-    return winGame;
+    return result;
 }
 
 module.exports = {createTeam, 

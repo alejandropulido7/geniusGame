@@ -52,9 +52,13 @@ const Acting = ({renderIn}) => {
 
   return (
     <div>
-      <h1>Actua la pelicula o serie</h1>
-      <p>Descripcion</p>
-      {render}
+      <div className='challenge-top'>
+        <h1>Actua la pelicula o serie</h1>
+        <p>Descripcion</p>
+      </div>
+      <div className='challenge-center'>
+        {render}
+      </div>
     </div>
   );
 };

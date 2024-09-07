@@ -1,10 +1,16 @@
+@font-face {
+    font-family: 'joti-one';
+    src: url('./assets/fonts/JotiOne-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer components{
     .btn {
-        @apply flex gap-2 items-center justify-center py-2 px-4 bg-blue-400 m-1 font-semibold shadow-md rounded-lg hover:bg-gray-600 hover:text-gray-50
+        @apply flex gap-2 items-center justify-center py-2 px-4 m-1 font-semibold m-auto border-2
     }
     .input{
         @apply block px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring
@@ -12,8 +18,22 @@
     .select {
         @apply block px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md focus:border-blue-500 focus:outline-none focus:ring
     }
+    body {
+        @apply font-sans;
+    }
 }
 
+#root{
+    padding: 0;    
+    text-align: center;
+}
+
+.btn-wood{
+    background-image: url("./assets/images/common/button.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
 
 @keyframes spin {
     from {

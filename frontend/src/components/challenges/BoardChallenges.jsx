@@ -12,6 +12,8 @@ import Acting from './acting/Acting';
 import Whistle from './whistle/Whistle';
 import { getCookie } from '../../utils/cookies';
 import {getSession} from '../../services/sessionService';
+import './BoardChallenges.css'
+import BackHome from './back-home/BackHome';
 
 const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
 
@@ -47,9 +49,7 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
       setOpenModalRoulette(false);
       if(dataChallengeSocket.challenge != ''){
         setActiveChallenge(true);
-        setDataChallenge(dataChallengeSocket);
-        // localStorage.setItem('activeChallenge-GG', true);
-        // localStorage.setItem('dataChallenge-GG', JSON.stringify(dataChallengeSocket));    
+        setDataChallenge(dataChallengeSocket); 
         renderDevice(dataChallengeSocket);
       }
     });
@@ -74,7 +74,7 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
         setComponentChallenge(<Hunged renderIn={renderPlayer}/>)
         break;  
       case BACK_HOME:
-        setComponentChallenge(<div><h1>BACK HOME</h1><button onClick={() => setActiveChallenge(false)}>Terminar</button></div>)
+        setComponentChallenge(<BackHome/>)
         break; 
       default:
         setComponentChallenge(null)
@@ -92,15 +92,12 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
     console.warn('renderDevice' , dataChallenge)
     switch (idDevice) {
       case data.participants.player.idTeam:
-        // localStorage.setItem('renderIn-GG', RENDER_CHALLENGE.player);
         setRenderPlayer(RENDER_CHALLENGE.player);
       break;
       case data.participants.playerOpponent.idTeam:
-        // localStorage.setItem('renderIn-GG', RENDER_CHALLENGE.opponent);
         setRenderPlayer(RENDER_CHALLENGE.opponent); 
       break;
       case data.participants.board:
-        // localStorage.setItem('renderIn-GG', RENDER_CHALLENGE.admin);
         setRenderPlayer(RENDER_CHALLENGE.admin);
       break;
     }
@@ -108,15 +105,17 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
 
 
   return (
-    <div>
+    <>
       { activeChallenge && 
-      <>
-        <h2>Pasa el reto para poder avanzar</h2>
-        {renderPlayer == 'ADMIN' && <Chronometer data={dataChallenge}/>}
-        {componentChallenge}        
-      </>
+      <div className='steps-center-container bg-white'>
+        <div className='challenges-container'>
+          {/* <h2>Pasa el reto para poder avanzar</h2> */}
+          {renderPlayer == 'ADMIN' && <Chronometer data={dataChallenge}/>}
+          {componentChallenge}        
+        </div>
+      </div>
       }
-    </div>
+    </>
   )
 }
 

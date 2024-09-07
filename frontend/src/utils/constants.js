@@ -1,10 +1,13 @@
-import pictionary from '../assets/challenges/pictionary.svg';
-import hunged from '../assets/challenges/hunged.svg';
-import acting from '../assets/challenges/acting.svg';
-import word_chain from '../assets/challenges/word_chain.svg';
-import trivia from '../assets/challenges/trivia.svg';
-import whistle from '../assets/challenges/whistle.svg';
-import home from '../assets/challenges/home.svg';
+/*Challenges images */
+import pictionary from '../assets/images/challenges/pictionary.png';
+import hunged from '../assets/images/challenges/hunged.png';
+import acting from '../assets/images/challenges/acting.png';
+import word_chain from '../assets/images/challenges/word_chain.png';
+import trivia from '../assets/images/challenges/trivia.png';
+import whistle from '../assets/images/challenges/whistle.png';
+import home from '../assets/images/challenges/home.png';
+
+/*Flags images */
 
 const PICTIONARY = 'pictionary';
 const WORD_CHAIN = 'word_chain'; //Palabras encadenadas por la ultima letra
@@ -13,7 +16,12 @@ const TRIVIA = 'trivia';
 const ACTING = "acting";
 const WHISTLE_SONG = "whistle_song" //silbar cancion que el oponente ponga
 const BACK_HOME = 'back_home';
-const FLAGS = ['blue', 'red', 'purple', 'green'];
+const FLAGS = [
+  {id: 'blue', name: 'Azul', color: '#4047C1', shadow: '#1C2893'}, 
+  {id: 'red', name: 'Rojo', color: '#B71515', shadow: '#7F1111'}, 
+  {id: 'purple', name: 'Morado', color: '#7015B7', shadow: '#50108E'}, 
+  {id: 'green', name: 'Verde', color: '#0A854B', shadow: '#066334'}
+];
 
 const OPTIONS_CHALLENGES = new Map();
 OPTIONS_CHALLENGES.set(WORD_CHAIN, {
@@ -39,7 +47,7 @@ OPTIONS_CHALLENGES.set(PICTIONARY, {
 });
 OPTIONS_CHALLENGES.set(BACK_HOME, {
   title: 'Devolverse al inicio',
-  description: 'Intenta adivinar la palabra que uno de tus oponentes te ponga'
+  description: '😣😣😣'
 });
 
 const RENDER_CHALLENGE = {
@@ -67,6 +75,10 @@ const getRandomObject = (arrayDeObjetos) => {
     return arrayDeObjetos[indiceAleatorio];
   }
 
+const findFlagProperties = (flag) => {
+  return FLAGS.find(flagFound => flagFound.id == flag);
+}
+
 export {CHALLENGES_IN_BOARD, 
   PICTIONARY, 
   WORD_CHAIN, 
@@ -78,5 +90,6 @@ export {CHALLENGES_IN_BOARD,
   getRandomObject, 
   FLAGS, 
   OPTIONS_CHALLENGES, 
-  RENDER_CHALLENGE}
+  RENDER_CHALLENGE,
+  findFlagProperties}
 

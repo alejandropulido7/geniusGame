@@ -120,7 +120,7 @@ const AppTeam = () => {
           <select className='select' value={flagSelected} onChange={handleFlag}>
               <option value="">Seleccione...</option>
               {FLAGS.map (flag => {
-                  return <option key={flag} value={flag}>{flag}</option>
+                  return <option key={flag.id} value={flag.id}>{flag.name}</option>
               })}
           </select>
       </div>

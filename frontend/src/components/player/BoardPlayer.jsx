@@ -8,8 +8,9 @@ import {getSession} from '../../services/sessionService';
 import BoardChallenges from '../challenges/BoardChallenges';
 import { GlobalContext } from '../../context/challenges/GlobalContext';
 import Modal from '../common/modal/Modal';
-import {CHALLENGES_IN_BOARD, FLAGS} from '../../utils/constants';
+import {CHALLENGES_IN_BOARD, FLAGS, findFlagProperties, BACK_HOME} from '../../utils/constants';
 import Winner from '../challenges/common/Winner';
+import './BoardPlayer.css'
 
 const BoardPlayer = () => {
 
@@ -43,7 +44,6 @@ const BoardPlayer = () => {
         .then((teamCreatedinSession) => {
             setTeamName(nameTeamCookie);
             setIdTeam(idTeamCookie);
-            console.log(teamCreatedinSession);
             setFlagActive(teamCreatedinSession.flag_active);
             setPrevPosition(teamCreatedinSession.prev_position)
             setPositionActive(teamCreatedinSession.position_active);
@@ -54,12 +54,12 @@ const BoardPlayer = () => {
                 teamName: teamCreatedinSession.name_team,
                 flagActive: teamCreatedinSession.flag_active,
                 positionActive: teamCreatedinSession.position_active,
-                prev_position: teamCreatedinSession.prev_position
+                prev_position: teamCreatedinSession.prev_position,
+                flagsObtained: JSON.parse(teamCreatedinSession.flags_obtained)
             });
 
             getSession(idRoom)
             .then((sessionCreated) => {
-                console.log('sessionCreated', sessionCreated)
                 if(sessionCreated.turnOf === nameTeamCookie){
                     setYouTurn(true);
                 } else {
@@ -88,26 +88,26 @@ const BoardPlayer = () => {
             setGameFinished(true);  
             setWinner(data);
         });
-    },[gameFinished, winner])
-
-    socket.on('playerJoinedRoom', () => {
-        console.log('-----------------playerJoinedRoom------------------')
-    });
+    },[gameFinished, winner]);
 
     useEffect(() => {   
         
         socket.on('sessionDontExist', () => {
             navigate('../player');
         });
-        
-        
+
+        socket.on('renderChallenge', (data) => {
+            setOpenModalRoulette(false);
+            setOpenModal(false);
+          });
 
         socket.on('resultChallenge', (data) => {
-            console.log('resultChallenge', data);
+            setOpenModalChoiceNewFlag(false);
+            setInfoChoiceNewFlag({});
             setActiveChallenge(false);
             setOpenModal(false);
             localStorage.clear();
-        }); 
+        });
 
         socket.on('openModalConfirmation', (data) => {  
             const idTeam = getCookie('idDevice-GG'); 
@@ -142,26 +142,16 @@ const BoardPlayer = () => {
         }); 
 
         socket.on('openModalChoiceNewFlag', (data) => {
-            console.log('openModalChoiceNewFlag', {idTeamCookie, data});
             if(idTeamCookie && data.idTeam == idTeamCookie){
                 setOpenModalChoiceNewFlag(true);
                 setInfoChoiceNewFlag(data);
             }
         });
 
-        socket.on('changeFlag', (data) => {
-            console.log('changeFlag', data)   
-            setOpenModalChoiceNewFlag(false);
-            setInfoChoiceNewFlag({});
-            
-            setActiveChallenge(false);
-            setOpenModal(false);
-            localStorage.clear();
-        }); 
+        
         
         return () => {
             socket.off('resultChallenge');
-            socket.off('changeFlag');
             socket.off('openModalConfirmation');
             socket.off('openModalRoulette-rendering');
             socket.off('turnOf');
@@ -218,36 +208,71 @@ const BoardPlayer = () => {
         setOpenModalChoiceNewFlag(false);
     };
 
+    const findFlagProp = () => {
+        const props = findFlagProperties(flagActive);
+        return props!=null ? props : ''
+    }
+
+    const backHome = () => {
+        setOpenModalRoulette(false);
+        socket.emit('backHome', dataRenderChallenge);
+    };
+
+    // const flagsMissing = () => {
+    //     const flagsToShow = infoChoiceNewFlag.flagsObtained.every(flagObtained => FLAGS.filter(flag => flag.id == flagObtained));
+    //     return flagsToShow;
+    // }
+
     return (
         <div>
-            { !gameFinished
-            ?
-            <div>
-                { !activeChallenge && 
-                <div>
-                    <h3>{codeSesion}</h3>
-                    <h3>Your name: {teamName}</h3>
-                    <h4>Board: {flagActive}</h4>
-                    { youTurn && 
-                    <div>
-                        <button className='btn' onClick={throwDice}>Lanzar Dado</button>
-                    </div>
-                    }
-                    <p>Resultado dado: {diceResult}</p>
-                </div>}
-                <BoardChallenges setOpenModal={setOpenModal} setOpenModalRoulette={setOpenModalRoulette}/>
+            <div className={`board-player-container p-10 h-auto m-auto`}
+                style={{backgroundColor: `${findFlagProp().color}`}}>
+                { !gameFinished
+                ?
+                <div className='bg-white p-10 board-player-center rounded-md'>
+                    { !activeChallenge && 
+                    <div className='flex flex-col justify-between h-full'>
+                        <div className='flex gap-5'>
+                            <h3>Sesion: {codeSesion}</h3>
+                            <h3>Tu equipo: {teamName}</h3>
+                            <h4>Ruta: {flagActive}</h4>
+                        </div>                        
+                        { youTurn && 
+                        <div className='w-60 m-auto'>
+                            <button className='btn btn-wood w-full' onClick={throwDice}>Lanzar Dado</button>                            
+                        </div>
+                        }
+                        {diceResult != 0 &&
+                        <div>
+                            <p>Resultado dado: {diceResult}</p>
+                        </div>}
+                        {!youTurn &&
+                        <div>
+                            <p>Espera tu turno...</p>
+                        </div>}
+                    </div>}
+                    <BoardChallenges setOpenModal={setOpenModal} setOpenModalRoulette={setOpenModalRoulette}/>
+                </div>
+                :
+                <Winner winner={winner}/>
+                }                
             </div>
-            :
-            <Winner winner={winner}/>
-            }
 
 
             <Modal open={openModal} onClose={setOpenModal}>
-                <h3>Aceptas el reto de {findNameChallenge(dataRenderChallenge.challenge)}?</h3>
-                <div className='flex gap-4'>
-                    <button className='btn' onClick={() => activateChallenge(true)}>Si</button>
-                    <button className='btn' onClick={() => activateChallenge(false)}>No</button>
+                {(dataRenderChallenge.challenge != BACK_HOME) ?
+                <div>
+                    <h3>Aceptas el reto de {findNameChallenge(dataRenderChallenge.challenge)}?</h3>                    
+                    <div className='flex gap-4'>
+                        <button className='btn' onClick={() => activateChallenge(true)}>Si</button>
+                        <button className='btn' onClick={() => activateChallenge(false)}>No</button>
+                    </div>
                 </div>
+                :
+                <div>
+                    <h3>Te devolveremos al principio</h3>
+                    <button className='btn' onClick={backHome}>Ok 😥</button>
+                </div>}
             </Modal>
             <Modal open={openModalRoulette} onClose={setOpenModalRoulette}>
                 <h3>Gira la ruleta</h3>
@@ -271,12 +296,13 @@ const BoardPlayer = () => {
             </Modal>
             <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
                 <h3>Felicidades equipo {infoChoiceNewFlag.teamName}!! Has ganado la bandera {infoChoiceNewFlag.flagActive}.</h3>
+                {/* <p>{flagsMissing()}</p> */}
                 <p>Escoge la siguiente:</p>
                 <div className='flex gap-4'>
                     <select className='select' value={newFlagSelected} onChange={(event) => setNewFlagSelected(event.target.value)}>
                         <option value="">Seleccione...</option>
                         {FLAGS.map (flag => {
-                            return <option key={flag} value={flag}>{flag}</option>
+                            return <option key={flag.id} value={flag.id}>{flag.name}</option>
                         })}
                     </select>
                 </div>

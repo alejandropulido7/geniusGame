@@ -1,47 +1,88 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
+import {useParams} from 'react-router-dom';
 import socket from '../../config/socket';
+import {GlobalContext} from '../../context/challenges/GlobalContext';
 
-const DataGame = ({session, playersPositions, startGame, setStartGame}) => {
+const DataGame = () => {
 
-    const [errorMessage, setErrorMessage] = useState('');
+    const {idRoom} = useParams();
+    const [winner, setWinner] = useState('');
+    const [status, setStatus] = useState('Conectado');
+    const [players, setPlayers] = useState(null);
+    const {session, activeChallenge} = useContext(GlobalContext);
     const [activeStartGame, setActiveStartGame] = useState(false);
 
+    useEffect(() => {
+        socket.on('winGame', (data) => {
+            setWinner(data.teamName);
+        });
+
+        socket.on('status', (data) => {
+            setStatus(data);
+        });
+
+        return () => {
+            socket.off('winGame');
+        }
+    }, [session, activeChallenge]);
+
     const readyToPlay = () => {
-        setErrorMessage('');
-        if(playersPositions.length > 1){
-            setStartGame(true);
+        if(players.length > 1){
+            setActiveStartGame(false);
             socket.emit('startGame', session.id);
         } else {
-            setErrorMessage('No hay suficientes equipos para jugar (min. 2)')
+            setStatus('No hay suficientes equipos para jugar (min. 2)')
         }
       }
 
-    useEffect(() => {
-        if(playersPositions.length > 1){
+    socket.on('playerJoinedRoom', (playersInSession) => {
+        setPlayers(playersInSession);
+        if(playersInSession.length > 1){
             setActiveStartGame(true);
         }
-    }, [playersPositions]);
-
+    }); 
 
     return (
-        <div>
-            <div>
-            <h4>{session.id}</h4>
-            <p>Minutes to answer: {session.min_to_answer}</p>
-            </div>
-            { !startGame && activeStartGame && <button className='btn' onClick={readyToPlay}>Ready to play</button>}
-            <h1 className='text-red-600 text-3xl font-bold underline'>Tablero de Escalera</h1>
-            {
-                playersPositions.map((player) => {
-                    return (
-                        <div key={player.teamName}>
-                            <h3>{player.teamName} - {player.positionActive}</h3>
-                        </div>
-                    )
-                })
-            }
-            {errorMessage && <p>{errorMessage}</p>}  
-        </div>
+        <>            
+            {!activeChallenge && 
+            <div className='steps-center-container'
+                style={{backgroundColor: '#FFCC00'}}>           
+                {winner != '' && <div>El ganador es: {winner}</div>}
+            {idRoom && 
+            <div className='data-game-container '>
+                    <div className='data-game-title top w-full h-16'>
+                        <h1 className=' text-3xl text-white p-2 font-bold'>Board braker</h1>
+                    </div>
+                    <div className='data-game-center flex gap-5 '>
+                        {players && 
+                        <div className='data-game-players w-50 p-4 shadow-md bg-yellow-300 shadow-yellow-800'>
+                            <p>Equipos: </p>
+                            {
+                                players.map((player) => {
+                                    return (
+                                        <div key={player.teamName}>
+                                            <h3>{player.teamName} - {player.positionActive}</h3>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>}
+                        {session && 
+                        <div className='w-50 p-4 flex justify-between flex-col shadow-md shadow-yellow-800 border-0 bg-yellow-300 border-black'>
+                            <h4>Sesion {session.id}</h4>
+                            <p className='text-wrap'>{session.min_to_answer} minutos para responder retos</p>
+                            <div>
+                                <p>Estado: {status}</p>
+                            </div>
+                        </div>}                  
+                    </div>
+                    {session &&
+                    <div className='data-game-bottom m-auto '>
+                        { !session.gameStarted && activeStartGame && <button className='btn btn-wood text-white' onClick={readyToPlay}>Listo para jugar</button>}
+                    </div>}                
+            </div>}
+            </div>}
+        </>
     )
 }
 
