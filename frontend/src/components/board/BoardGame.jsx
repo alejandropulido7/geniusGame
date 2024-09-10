@@ -46,7 +46,7 @@ const BoardGame = () => {
 
   useEffect(() => {
     getSessionCreated(idRoom); 
-  },[activeChallenge]);
+  },[activeChallenge, playersPositions]);
 
   useEffect(() => {      
 
@@ -115,13 +115,11 @@ const BoardGame = () => {
             setOpenModalRoulette(true);
           } else {
             setTimeout(() => {
-              setActiveChallenge(true);
-              setDataChallenge(playerWithChallenge);
               socket.emit('openModalConfirmation', playerWithChallenge);
               const infoModal = OPTIONS_CHALLENGES.get(playerWithChallenge.challenge);
               setInfoModal(infoModal);
               setOpenModal(true);
-            }, 700);
+            }, 900);
           }
         } else {
           socket.emit('turnOf', {player: playerWithChallenge.player});          
@@ -140,7 +138,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: 'back_home',
+        challenge: 'trivia',
         player: playerModified
       };
     }

@@ -9,6 +9,7 @@ import BoardPlayer from './components/player/BoardPlayer.jsx';
 import AppTeam from './components/player/AppTeam.jsx';
 import BoardGame from './components/board/BoardGame.jsx';
 import Roulette from './components/challenges/common/Roulette.jsx';
+import Trivia from './components/challenges/trivia/Trivia.jsx';
 
 const router = createBrowserRouter([
   {
@@ -36,10 +37,10 @@ const router = createBrowserRouter([
         path: "player/:idRoom",
         element: <BoardPlayer />,
       },
-      {
-        path: "ruleta",
-        element: <Roulette />,
-      }            
+      // {
+      //   path: "trivia",
+      //   element: <Trivia />,
+      // }            
     ],
   },
 ]); 

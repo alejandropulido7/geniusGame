@@ -5,7 +5,7 @@ import {ACTING, BACK_HOME, WORD_CHAIN, HUNGED, PICTIONARY, TRIVIA, WHISTLE_SONG,
 import Hunged from './hunged/Hunged';
 import ChainWord from './chainWords/ChainWords';
 import Pictionary from './pictionary/Pictionary';
-import Trivia from './Trivia';
+import Trivia from './trivia/Trivia';
 import socket from '../../config/socket';
 import { GlobalContext } from '../../context/challenges/GlobalContext';
 import Acting from './acting/Acting';
@@ -68,7 +68,7 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
         setComponentChallenge(<Pictionary renderIn={renderPlayer}/>)
         break;
       case TRIVIA:
-        setComponentChallenge(<Trivia />)
+        setComponentChallenge(<Trivia renderIn={renderPlayer} dataTrivia={dataChallenge.trivia}/>)
         break;
       case HUNGED:
         setComponentChallenge(<Hunged renderIn={renderPlayer}/>)
@@ -108,7 +108,7 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
     <>
       { activeChallenge && 
       <div className='steps-center-container bg-white'>
-        <div className='challenges-container'>
+        <div className='challenges-container flex flex-col'>
           {/* <h2>Pasa el reto para poder avanzar</h2> */}
           {renderPlayer == 'ADMIN' && <Chronometer data={dataChallenge}/>}
           {componentChallenge}        

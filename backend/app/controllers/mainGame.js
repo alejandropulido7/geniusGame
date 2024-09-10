@@ -4,7 +4,8 @@ const {updateTurnOfTeamFromSocket, updateChallengingInfo, updateChallengePassed}
 const RoomStore = require('../classes/RoomStore');
 const TurnsGame = require('../classes/TurnsGame');
 const GameState = require('../classes/GameState');
-const {updatePositions} = require('../controllers/socketHandlers/commonOperations')
+const {updatePositions} = require('../controllers/socketHandlers/commonOperations');
+const {getConnectTrivia} = require('../controllers/trivia')
 
 var io;
 var gameSocket;
@@ -42,6 +43,8 @@ const initializeGame = (sio, socket) => {
     gameSocket.on("hunged", hunged)
 
     gameSocket.on("pictionary", pictionary)
+
+    gameSocket.on("trivia", trivia)
 
     gameSocket.on("backHome", backHome)
 
@@ -168,7 +171,7 @@ function throwDice (dataTeam) {
     }
 }
 
-function renderChallenge(data) {
+async function renderChallenge(data) {
     const gameId = data.player.gameId;
     const players = RoomStore.getUsersInRoom(gameId); 
     const challenge_name = data.challenge;
@@ -184,10 +187,14 @@ function renderChallenge(data) {
             playerOpponent: playersNoChallenge[ramdomPlayerIndex]
         }
 
-        const dataRenderChallenge = {
+        let dataRenderChallenge = {
             challenge: challenge_name,
             participants
         };
+        if(challenge_name == 'trivia'){ 
+           const dataTrivia = await getConnectTrivia(1);
+           dataRenderChallenge.trivia = dataTrivia;
+        }
         const participantsJson = JSON.stringify(participants);
         updateChallengingInfo(gameId, true, challenge_name, participantsJson)
             .then(() => {
@@ -311,7 +318,7 @@ function acting(data){
 }
 
 function whistle(data){
-    emitDataOtherScreen('whistle', data);
+    emitDataOtherScreen('whistle', data); 
 }
 
 function chainWords(data){
@@ -320,6 +327,21 @@ function chainWords(data){
 
 function hunged(data){
     emitDataOtherScreen('hunged', data);
+}
+
+function trivia(data){
+    const nameEmit = data.function;
+    const idSocket = data.data.socketId;
+    const gameId = RoomStore.getRoomByIdSocket(idSocket);
+    const foundPlayer = RoomStore.getUserBySocket(gameId, idSocket); 
+    const roomDetails = RoomStore.getRoomDetails(gameId);
+    if(roomDetails){
+        const isLastStep = foundPlayer.positionActive == roomDetails.lenght_board ? true : false;
+        foundPlayer.isLastStep = isLastStep;
+    }
+    if(gameId && foundPlayer){
+        io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, response: data.data.response}); 
+    }
 }
 
 function pictionary(data){

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const HideWord = ({word}) => {
+const HideWord = ({word, textButton = 'Ver la palabra secreta'}) => {
 
     const [showWord, setShowWord] = useState(false);
 
@@ -13,10 +13,9 @@ const HideWord = ({word}) => {
     };
 
   return (
-    <div>   
-        
+    <div>        
         { word != '' &&      
-        <div>
+        <div className='order-2'>
             <button
                 className='btn'
                 onMouseDown={manageHold}
@@ -24,11 +23,11 @@ const HideWord = ({word}) => {
                 onTouchStart={manageHold}
                 onTouchEnd={manageUnhold}
             >
-            Ver la palabra secreta
+            {textButton}
             </button>
         </div>
         }
-        <div>
+        <div className='order-1 py-2'>
             {showWord && <p>{word}</p>}
         </div>
         

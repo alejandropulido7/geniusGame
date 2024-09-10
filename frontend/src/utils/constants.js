@@ -9,6 +9,13 @@ import home from '../assets/images/challenges/home.png';
 
 /*Flags images */
 
+const colorsApp = new Map();
+colorsApp.set('blue', {color: '#4047C1', shadow: '#1C2893'});
+colorsApp.set('red', {color: '#B71515', shadow: '#7F1111'});
+colorsApp.set('purple', {color: '#7015B7', shadow: '#50108E'});
+colorsApp.set('green', {color: '#0A854B', shadow: '#066334'});
+
+
 const PICTIONARY = 'pictionary';
 const WORD_CHAIN = 'word_chain'; //Palabras encadenadas por la ultima letra
 const HUNGED = 'hunged';
@@ -17,10 +24,10 @@ const ACTING = "acting";
 const WHISTLE_SONG = "whistle_song" //silbar cancion que el oponente ponga
 const BACK_HOME = 'back_home';
 const FLAGS = [
-  {id: 'blue', name: 'Azul', color: '#4047C1', shadow: '#1C2893'}, 
-  {id: 'red', name: 'Rojo', color: '#B71515', shadow: '#7F1111'}, 
-  {id: 'purple', name: 'Morado', color: '#7015B7', shadow: '#50108E'}, 
-  {id: 'green', name: 'Verde', color: '#0A854B', shadow: '#066334'}
+  {id: 'blue', name: 'Azul', color: colorsApp.get('blue').color, shadow: colorsApp.get('blue').shadow}, 
+  {id: 'red', name: 'Rojo', color: colorsApp.get('red').color, shadow: colorsApp.get('red').shadow}, 
+  {id: 'purple', name: 'Morado', color: colorsApp.get('purple').color, shadow: colorsApp.get('purple').shadow}, 
+  {id: 'green', name: 'Verde', color: colorsApp.get('green').color, shadow: colorsApp.get('green').shadow}
 ];
 
 const OPTIONS_CHALLENGES = new Map();
@@ -48,6 +55,10 @@ OPTIONS_CHALLENGES.set(PICTIONARY, {
 OPTIONS_CHALLENGES.set(BACK_HOME, {
   title: 'Devolverse al inicio',
   description: '😣😣😣'
+});
+OPTIONS_CHALLENGES.set(TRIVIA, {
+  title: 'Juego de preguntas',
+  description: 'Responde la pregunta correctamente para poder avanzar'
 });
 
 const RENDER_CHALLENGE = {
@@ -91,5 +102,6 @@ export {CHALLENGES_IN_BOARD,
   FLAGS, 
   OPTIONS_CHALLENGES, 
   RENDER_CHALLENGE,
-  findFlagProperties}
+  findFlagProperties,
+  colorsApp}
 

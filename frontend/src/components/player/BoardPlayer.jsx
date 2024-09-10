@@ -36,7 +36,20 @@ const BoardPlayer = () => {
     const [winner, setWinner] = useState({});
     const [openModalChoiceNewFlag, setOpenModalChoiceNewFlag] = useState(false);
     const [infoChoiceNewFlag, setInfoChoiceNewFlag] = useState({});
+    const [reload, setReload] = useState(false);
 
+    
+    useEffect(() => {
+        const alreadyReloaded = localStorage.getItem('reloaded');
+        if (!alreadyReloaded) {
+          const timer = setTimeout(() => {
+            localStorage.setItem('reloaded', 'true');
+            window.location.reload();
+          }, 50);
+    
+          return () => clearTimeout(timer);
+        }
+      }, []);
     
 
     const getTeamCreated = (idRoom) => {        
@@ -232,7 +245,7 @@ const BoardPlayer = () => {
                 <div className='bg-white p-10 board-player-center rounded-md'>
                     { !activeChallenge && 
                     <div className='flex flex-col justify-between h-full'>
-                        <div className='flex gap-5'>
+                        <div className='flex justify-center gap-5'>
                             <h3>Sesion: {codeSesion}</h3>
                             <h3>Tu equipo: {teamName}</h3>
                             <h4>Ruta: {flagActive}</h4>
