@@ -1,4 +1,4 @@
-const Session = require('../data-models/session');
+const Session = require('../models/session');
 
 function createSesion(req, res) {
 
@@ -21,7 +21,7 @@ function updateChallengingInfo(id_session, challenge_active, challenge_name, cha
         challenge_active,
         challenge_name,
         challenge_participants
-    },
+    }, 
     {
         where: {
             id: id_session

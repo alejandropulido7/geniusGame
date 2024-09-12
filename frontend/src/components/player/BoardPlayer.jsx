@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import {getTeamById} from '../../services/teamService';
 import {getSession} from '../../services/sessionService';
 import BoardChallenges from '../challenges/BoardChallenges';
-import { GlobalContext } from '../../context/challenges/GlobalContext';
+import { GlobalContext } from '../../context/GlobalContext';
 import Modal from '../common/modal/Modal';
 import {CHALLENGES_IN_BOARD, FLAGS, findFlagProperties, BACK_HOME} from '../../utils/constants';
 import Winner from '../challenges/common/Winner';

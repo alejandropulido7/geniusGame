@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
+const User = require('./user');
 
 const Session = sequelize.define('Session', {
   id: {
@@ -38,5 +39,7 @@ const Session = sequelize.define('Session', {
     defaultValue: false
   }
 });
+
+Session.belongsTo(User, {foreignKey: 'id_user'})
 
 module.exports = Session;

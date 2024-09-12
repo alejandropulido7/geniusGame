@@ -7,12 +7,11 @@ import {updateBoardPositions, getSession} from '../../services/sessionService';
 import {useParams, useNavigate} from 'react-router-dom';
 import BoardChallenges from '../challenges/BoardChallenges';
 import DataGame from './DataGame';
-import { GlobalContext } from '../../context/challenges/GlobalContext';
+import { GlobalContext } from '../../context/GlobalContext';
 import Modal from '../common/modal/Modal';
 import InfoModal from '../common/modal/InfoModal';
 import Roulette from '../challenges/common/Roulette';
 import Winner from '../challenges/common/Winner';
-import Menu from '../Menu';
 import './Board.css';
 
 const BoardGame = () => {

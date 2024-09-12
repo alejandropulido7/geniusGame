@@ -4,7 +4,6 @@ import PlayerChallengeH from './PlayerChallengeH';
 import OpponentInteractiveH from './OpponentInteractiveH';
 import { RENDER_CHALLENGE } from '../../../utils/constants';
 import socket from '../../../config/socket';
-import { HungedContext } from '../../../context/challenges/GlobalContext';
 
 const Hunged = ({renderIn}) => {
 

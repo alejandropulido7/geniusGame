@@ -1,17 +1,17 @@
 import './App.css'
 import { Outlet } from 'react-router-dom';
-import GlobalState from './context/challenges/GlobalState';
-import Menu from './components/Menu';
-import BoardChallenges from './components/challenges/BoardChallenges';
+import GlobalState from './context/GlobalState';
+import AuthState from './context/AuthState';
 
 function App() {
 
   return (
     <div>
-        <GlobalState>
-          <Menu/>
-          <Outlet/>
-        </GlobalState>
+        <AuthState>
+          <GlobalState>
+              <Outlet/>
+          </GlobalState>
+        </AuthState>
     </div>
   )
 }

@@ -7,9 +7,9 @@ import AddPlayerToTeam from './AddPlayerToTeam';
 import { FLAGS } from '../../utils/constants';
 import socket from '../../config/socket';
 import {generateUUID} from '../../utils/shared'
-import {GlobalContext} from '../../context/challenges/GlobalContext'
+import {GlobalContext} from '../../context/GlobalContext'
 
-const AppTeam = () => {
+const ConfigTeam = () => {
 
   const [sessionId, setSessionId] = useState('');
   const [teamName, setTeamName] = useState('');
@@ -135,4 +135,4 @@ const AppTeam = () => {
   )
 }
 
-export default AppTeam
+export default ConfigTeam

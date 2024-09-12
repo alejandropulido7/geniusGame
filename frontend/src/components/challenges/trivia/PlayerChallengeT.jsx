@@ -11,7 +11,7 @@ const PlayerChallengeT = ({options, correctAnswer}) => {
   const [passChallenge, setPassChallenge] = useState(false);
 
   useEffect(() => {
-
+    socket.emit('startChallenge', {socketId: socket.id});
   },[options, correctAnswer])
 
   const manejarRespuesta = (response) => {

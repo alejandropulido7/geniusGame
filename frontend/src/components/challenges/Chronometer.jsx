@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import socket from '../../config/socket';
+import React, { useState, useEffect, useContext } from 'react';
+// import socket from '../../config/socket';
+import { AuthContext } from '../../context/GlobalContext';
+
 
 const Chronometer = ({data}) => {
   const [seconds, setSeconds] = useState(60);
   const [message, setMessage] = useState('');
   const [showTime, setShowTime] = useState(true);
   const [player, setPlayer] = useState(null);
-
+  const {socket} = useContext(AuthContext);
 
   useEffect(() => {
     if(localStorage.getItem('timeChallenge-GG') != null){
@@ -55,7 +57,7 @@ const Chronometer = ({data}) => {
   }, [seconds, data]);
 
   return (
-    <div>
+    <div className='bg-white text-xl rounded-md'>
       {showTime ? <h4>Tiempo restante: {seconds} segundos</h4> : <h4>Se acabo el tiempo, en espera de que el jugador del reto confirme desde su pantalla</h4>}
       {message != '' && <h4>{message}</h4>}
     </div>

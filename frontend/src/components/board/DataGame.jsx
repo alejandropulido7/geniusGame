@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {useParams} from 'react-router-dom';
 import socket from '../../config/socket';
-import {GlobalContext} from '../../context/challenges/GlobalContext';
+import {GlobalContext} from '../../context/GlobalContext';
 
 const DataGame = () => {
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {colorsApp} from '../../../utils/constants';
-import {getQuestionTrivia} from '../../../services/externalServices';
+import {getQuestionTrivia} from '../../../services/gameServices';
 import Modal from '../../common/modal/Modal';
 import AdminT from './AdminT';
 import PlayerChallengeT from './PlayerChallengeT';

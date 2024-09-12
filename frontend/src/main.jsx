@@ -6,43 +6,52 @@ import ConfigGame from './components/board/ConfigGame.jsx';
 import AppBoard from './components/board/AppBoard.jsx';
 import { createBrowserRouter, RouterProvider, BrowserRouter, Routes, Route } from 'react-router-dom'
 import BoardPlayer from './components/player/BoardPlayer.jsx';
-import AppTeam from './components/player/AppTeam.jsx';
+import AppTeam from './components/player/ConfigTeam.jsx';
 import BoardGame from './components/board/BoardGame.jsx';
 import Roulette from './components/challenges/common/Roulette.jsx';
 import Trivia from './components/challenges/trivia/Trivia.jsx';
+import MainScreen from './components/main/MainScreen.jsx';
+import ConfigTeam from './components/player/ConfigTeam.jsx';
+import AppPlayer from './components/player/AppPlayer.jsx';
+import AuthState from './context/AuthState.jsx';
+import PrivateUserRoute from './context/PrivateUserRoute.jsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <MainScreen />,
+    errorElement: <MainScreen />,    
+  },
+  {
+    path: "/board",
     element: <App />,
     errorElement: <App />,
     children: [
       {
-        path: "/",
-        element: <AppBoard />,
-      },
-      {
-        path: "room",
-        element: <ConfigGame />
-      },
-      {
-        path: "room/:idRoom",
-        element: <BoardGame />
-      },
-      {
-        path: "player",
-        element: <AppTeam />
-      },
-      {
-        path: "player/:idRoom",
-        element: <BoardPlayer />,
+        path: "/board",
+        element: <PrivateUserRoute><ConfigGame/></PrivateUserRoute> 
       },
       // {
-      //   path: "trivia",
-      //   element: <Trivia />,
-      // }            
+      //   path: "board/:idRoom",
+      //   element: <BoardGame />
+      // },       
     ],
   },
+  // {
+  //   path: "/player",
+  //   element: <AppPlayer />,
+  //   errorElement: <AppPlayer />,
+  //   children: [
+  //     {
+  //       path: "player",
+  //       element: <ConfigTeam />
+  //     },
+  //     {
+  //       path: "player/:idRoom",
+  //       element: <BoardPlayer />,
+  //     },           
+  //   ],
+  // }
 ]); 
 
 // ReactDOM.createRoot(document.getElementById('root')).render(

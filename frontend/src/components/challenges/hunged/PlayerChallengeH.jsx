@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from 'react'
-import { HungedContext } from '../../../context/challenges/GlobalContext';
 import socket from '../../../config/socket';
 import { RENDER_CHALLENGE } from '../../../utils/constants';
 import { getTeamByName } from '../../../services/teamService';

@@ -7,7 +7,7 @@ import ChainWord from './chainWords/ChainWords';
 import Pictionary from './pictionary/Pictionary';
 import Trivia from './trivia/Trivia';
 import socket from '../../config/socket';
-import { GlobalContext } from '../../context/challenges/GlobalContext';
+import { GlobalContext } from '../../context/GlobalContext';
 import Acting from './acting/Acting';
 import Whistle from './whistle/Whistle';
 import { getCookie } from '../../utils/cookies';

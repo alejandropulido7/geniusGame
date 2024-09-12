@@ -1,4 +1,4 @@
-const Team = require('../data-models/team');
+const Team = require('../models/team');
 const {FLAGS} = require('../utils/constant');
 
 function createTeam(req, res) {

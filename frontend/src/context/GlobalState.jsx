@@ -1,6 +1,6 @@
 import React, {useEffect, useReducer} from 'react'
 import { GlobalContext } from './GlobalContext';
-import {getSession} from '../../services/sessionService';
+import {getSession} from '../services/sessionService';
 import {useParams, useNavigate} from 'react-router-dom';
 
 
