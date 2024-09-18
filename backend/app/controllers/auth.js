@@ -99,38 +99,51 @@ const logout = async (req, res) => {
 }
 
 const validateUserToken = async (req, res) => {
-    const payload =  await validToken(req.params.token);
-    if(payload.id == '') return res.status(400).json({message: "Token not valid"});
-    const userFound = await User.findByPk(payload.id);
-    if(!userFound) return res.status(400).json({message: "User not found"});
-    res.send({
-        username: userFound.username,
-        email: userFound.email,
-    });
+    try {
+        const payload =  await validToken(req.params.token);
+        if(payload.id == '') return res.status(400).json({message: "Token not valid"});
+        const userFound = await User.findByPk(payload.id);
+        if(!userFound) return res.status(400).json({message: "User not found"});
+        res.send({
+            username: userFound.username,
+            email: userFound.email,
+        });
+    } catch (err) {
+        res.status(403).json({error: "Error validando token: "+err});
+    }
 }
 
 const validateSessionToken = async (req, res) => {
-    const payload =  await validToken(req.params.token);
-    if(payload.idRoom == '') return res.status(400).json({message: "Token not valid"});
-    const roomFound = await Session.findByPk(payload.idRoom);
-    if(!roomFound) return res.status(400).json({message: "Room not found"});
-    res.send({
-        idRoom: roomFound.id,
-        idHost: roomFound.idHost,
-        idUser: roomFound.id_user
-    });
+    try {
+        const payload =  await validToken(req.params.token);
+        if(payload.idRoom == '') return res.status(400).json({message: "Token not valid"});
+        const roomFound = await Session.findByPk(payload.idRoom);
+        if(!roomFound) return res.status(400).json({message: "Room not found"});
+        res.send({
+            idRoom: roomFound.id,
+            idHost: roomFound.idHost,
+            idUser: roomFound.id_user
+        });
+    } catch (err) {
+        res.status(403).json({error: "Error validando token: "+err});
+    }
 }
 
 const validatePlayerToken = async (req, res) => {
-    const payload =  await validToken(req.params.token);
-    if(payload.idRoom == '') return res.status(400).json({message: "Token not valid"});
-    const roomFound = await Session.findByPk(payload.idRoom);
-    if(!roomFound) return res.status(400).json({message: "Room not found"});
-    res.send({
-        idRoom: roomFound.id,
-        idHost: roomFound.idHost,
-        idUser: roomFound.id_user
-    });
+    try {
+        const payload =  await validToken(req.params.token);
+        if(payload.idRoom == '') return res.status(400).json({error: "Token not valid"});
+        const roomFound = await Session.findByPk(payload.idRoom);
+        if(!roomFound) return res.status(400).json({error: "Room not found"});
+        res.send({
+            idRoom: roomFound.id,
+            idHost: roomFound.idHost,
+            idUser: roomFound.id_user
+        });
+    } catch (err) {
+        res.status(403).json({error: "Error validando token: "+err});
+    }
+    
 }
 
 module.exports = {

@@ -1,9 +1,13 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Login from './Login';
 import ConnectRoom from './ConnectRoom';
 
 const MainScreen = () => {
     const [activeTab, setActiveTab] = useState('login');
+
+    useEffect(() => {
+        localStorage.clear();
+    })
     
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-100">

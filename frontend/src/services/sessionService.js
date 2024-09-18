@@ -1,12 +1,15 @@
 import axios from 'axios';
 
+// const token = localStorage.getItem('authToken');
 
-async function createSession(codeSession, idHost, configGame) {
+async function createSession(configGame, token) {
     try {
         const response = await axios.post(`http://localhost:5000/api/sessions`, {
-            codeSession,
-            idHost,
             configGame
+        }, {
+            headers: {
+                'token': token
+            }
         });
         return response.data;
     } catch (error) {

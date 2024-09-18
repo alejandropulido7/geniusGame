@@ -95,10 +95,13 @@ async function startGame(gameId) {
 } 
 
 function joinPlayerGame(dataPlayer) {
+    console.log('joinPlayerGame', dataPlayer)
+    console.log(RoomStore.getRoomDetails(dataPlayer.gameId));
 
     const gameId = dataPlayer.gameId;
     const room = io.sockets.adapter.rooms.get(gameId);
 
+    console.log(io.sockets.adapter.rooms)
     if (room === undefined) {
         this.emit('status' , "This game session does not exist." );
         io.sockets.in(gameId).emit('sessionDontExist', false);
@@ -109,6 +112,7 @@ function joinPlayerGame(dataPlayer) {
     
     gameSocket.join(gameId);
     const playersInRoom = RoomStore.getUsersInRoom(gameId);
+    
     io.sockets.in(gameId).emit('playerJoinedRoom', playersInRoom);
     io.sockets.in(gameId).emit('otherPlayersJoinedRoom', playersInRoom);
 

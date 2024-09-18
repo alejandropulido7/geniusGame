@@ -7,11 +7,9 @@ function App() {
 
   return (
     <div>
-        <AuthState>
-          <GlobalState>
-              <Outlet/>
-          </GlobalState>
-        </AuthState>
+        <GlobalState>
+            <Outlet/>
+        </GlobalState>
     </div>
   )
 }

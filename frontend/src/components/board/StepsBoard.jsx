@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import {FLAGS, findFlagProperties} from '../../utils/constants'
 import Box from './Box';
 import Flag from './Flag';
+import Piece from './Piece';
 
 const StepsBoard = ({arrayPositions, flag, players, stlyeClass}) => {
 
@@ -11,6 +12,9 @@ const StepsBoard = ({arrayPositions, flag, players, stlyeClass}) => {
     return findFlagProperties(flag);
   }
 
+  useEffect(() => {
+    console.log('players', players)
+  },[players])
 
   return (
     <>
@@ -24,11 +28,11 @@ const StepsBoard = ({arrayPositions, flag, players, stlyeClass}) => {
               <Flag color={colorFlag().color} shadow={colorFlag().shadow}/>
               }
               {
-                players.map(player => {
+                players.map((player, index) => {
                   if(player.positionActive === position.position && flag == player.flagActive){                  
                     return (
-                    <div className='absolute bg-white text-black' key={player.teamName}>
-                      {player.teamName}
+                    <div className={`absolute transition-all top-0 text-white`} key={player.teamName} style={{left: `${index*25}px`, rotate: `${index*10}deg`}}>
+                      <Piece color={player.propPiece.color} emoji={player.propPiece.emoji} h={60} w={60} teamName={player.teamName}/>
                     </div>);
                   }else{
                     return null

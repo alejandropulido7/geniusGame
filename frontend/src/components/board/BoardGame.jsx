@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import {FLAGS, OPTIONS_CHALLENGES } from '../../utils/constants'
 import {CHALLENGES_IN_BOARD, getRandomObject, ACTING} from '../../utils/constants'
 import StepsBoard from './StepsBoard';
-import socket from '../../config/socket';
+// import socket from '../../config/socket';
 import {updateBoardPositions, getSession} from '../../services/sessionService';
 import {useParams, useNavigate} from 'react-router-dom';
 import BoardChallenges from '../challenges/BoardChallenges';
@@ -13,6 +13,7 @@ import InfoModal from '../common/modal/InfoModal';
 import Roulette from '../challenges/common/Roulette';
 import Winner from '../challenges/common/Winner';
 import './Board.css';
+import { SocketContext } from '../../context/SocketProvider';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
@@ -35,61 +36,70 @@ const BoardGame = () => {
   const [infoModal, setInfoModal] = useState({});
   const [gameFinished, setGameFinished] = useState(false);
   const [winner, setWinner] = useState({});
+  const {socket} = useContext(SocketContext);
 
   useEffect(() => {
-    socket.on('winGame', (data) => {  
-      setGameFinished(true);  
-      setWinner(data)
-    });
-  },[gameFinished, winner]);
+    if(socket){
+      socket.on('winGame', (data) => {  
+        setGameFinished(true);  
+        setWinner(data)
+      });
+    }
+  },[gameFinished, winner, socket]);
 
   useEffect(() => {
     getSessionCreated(idRoom); 
-  },[activeChallenge, playersPositions]);
+  },[socket]);
 
   useEffect(() => {      
 
-    socket.on('throwDice', (data) => {   
-      if(data.shouldMove){
-        stepByStep(data);
-      } else {
-        socket.emit('turnOf', {player: data.playermoved}); 
+    if(socket){
+      socket.on('throwDice', (data) => {   
+        if(data.shouldMove){
+          stepByStep(data);
+        } else {
+          socket.emit('turnOf', {player: data.playermoved}); 
+        }
+      });
+  
+      socket.on('renderChallenge', (data) => {
+        setOpenModalRoulette(false);
+        setOpenModal(false);
+      });
+      
+      socket.on('resultChallenge', (data) => { 
+        console.log('resultChallenge', data)  
+        setOpenModalChoiceNewFlag(false); 
+        setDataChallenge({});
+        setActiveChallenge(false);
+        setPlayersPositions(data.players);
+        setOpenModal(false);
+        localStorage.clear();
+        socket.emit('turnOf', data);
+      });
+  
+      socket.on('openModalChoiceNewFlag', (data) => {
+        setOpenModalChoiceNewFlag(true);
+        setInfoChoiceNewFlag(data);
+      });
+  
+      socket.on('playerJoinedRoom', (playersInSession) => {
+        setPlayersPositions(playersInSession);
+      });
+
+      return () => {
+        socket.off('throwDice');
+        socket.off('resultChallenge');
       }
-    });
-
-    socket.on('renderChallenge', (data) => {
-      setOpenModalRoulette(false);
-      setOpenModal(false);
-    });
-    
-    socket.on('resultChallenge', (data) => { 
-      console.log('resultChallenge', data)  
-      setOpenModalChoiceNewFlag(false); 
-      setDataChallenge({});
-      setActiveChallenge(false);
-      setPlayersPositions(data.players);
-      setOpenModal(false);
-      localStorage.clear();
-      socket.emit('turnOf', data);
-    });
-
-    socket.on('openModalChoiceNewFlag', (data) => {
-      setOpenModalChoiceNewFlag(true);
-      setInfoChoiceNewFlag(data);
-    });
+    }
 
     return () => {
-      socket.off('throwDice');
-      socket.off('resultChallenge');
       setFlagPositions([]);
       setSession({});
     }
-  }, [openModalChoiceNewFlag]);
+  }, [socket, openModalChoiceNewFlag, playersPositions, flagPositions]);
 
-  socket.on('playerJoinedRoom', (playersInSession) => {
-    setPlayersPositions(playersInSession);
-  }); 
-
+  
 
   const stepByStep = (data) => {
     
@@ -128,7 +138,7 @@ const BoardGame = () => {
   }
 
   const validateIfPositionHaveChallenge = (playerModified) => {
-    const flagBoard = boardSteps.find(board => board.flag == playerModified.flagActive);
+    const flagBoard = flagPositions.find(board => board.flag == playerModified.flagActive);
     let playerChallenge = {};
     if(flagBoard){
       playerChallenge = flagBoard.positions.find(position => position.position == playerModified.positionActive);
@@ -137,61 +147,31 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: 'trivia',
+        challenge: '',
         player: playerModified
       };
     }
     return ongoingChallenge;
   }
 
-  const getSessionCreated = async (idRoom) => {        
+  const getSessionCreated = (idRoom) => {        
       getSession(idRoom)
       .then(sessionCreated => {
           setSession(sessionCreated);
           let boardPositions = sessionCreated.json_boardPositions;
-          if( boardPositions != ''){
-            setFlagPositions(JSON.parse(boardPositions));
-          } else {
-            inizializeSteps(idRoom);  
-          } 
-          socket.emit('createNewGame', {
-              gameId: sessionCreated.id, 
-              idDevice: sessionCreated.idHost,
-              idSocket: socket.id,
-              lenghtBoard: configBoard.lenghtBoard, 
-              quantityChallenges: configBoard.quantityChallenges
-          });
+          setFlagPositions(JSON.parse(boardPositions));
+          if(socket){
+            socket.emit('createNewGame', {
+                gameId: sessionCreated.id, 
+                idDevice: sessionCreated.idHost,
+                idSocket: socket.id,
+                lenghtBoard: sessionCreated.lenght_board, 
+                quantityChallenges: sessionCreated.amount_challenges
+            });
+          }
       }).catch(()=>{
-          localStorage.clear();
-          navigate('../room');
+          navigate('../../board');
       });      
-  }
-  
-  const inizializeSteps = async (idRoom) => {
-    const positionsBoard = Array.from({ length: configBoard.lenghtBoard }, (_, index) => index + 1);      
-    let newPositions = [];
-    let addflagPositions = [];
-    positionsBoard.forEach(position => {
-      newPositions.push({position: position, challenge: ''});
-    });
-    flags.map( flag => {
-      addflagPositions.push({flag: flag.id, positions: generateNewSteps(newPositions)});
-    }); 
-    if(addflagPositions.length > 0) {
-      setFlagPositions(addflagPositions); 
-      boardSteps = addflagPositions;
-      const savePositions = JSON.stringify(addflagPositions);
-      await updateBoardPositions(savePositions, idRoom);
-    } 
-  };
-
-  const generateNewSteps = (array) => {
-    let positionsChallenges = [...array]
-    for (let index = 0; index < configBoard.quantityChallenges; index++) {
-      const random = Math.floor(Math.random() * configBoard.lenghtBoard) + 1;
-      positionsChallenges = positionsChallenges.map(item => item.position == random && (random > 1 && random != configBoard.lenghtBoard) ? {...item, challenge: getRandomObject(CHALLENGES_IN_BOARD).id} : item);
-    }
-    return positionsChallenges;
   }
 
   const classNameSteps = (index) => {

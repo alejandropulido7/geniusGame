@@ -1,39 +1,49 @@
 const Team = require('../models/team');
 const {FLAGS} = require('../utils/constant');
+const {generateUUID} = require('../utils/shared');
+const {createAccessToken} = require('../utils/jwt')
 
-function createTeam(req, res) {
+async function createTeam(req, res) {
 
-    Team.findOne({
-        where: {
-            name_team: req.body.name_team,
-            id_session: req.body.id_session
-        }
-    }).then(team => {
-        if(team == null){
-            Team.create({
+    try {
+        
+        const teamAlreadyName = await Team.findOne({
+            where: {
                 name_team: req.body.name_team,
-                id_team: req.body.id_team,
-                avatar: req.body.avatar,
-                score_game: 0,
-                status: true,
-                players: req.body.players,
-                id_session: req.body.id_session,
-                flag_active: req.body.flag_active,
-                prev_position: 1,
-                position_active: 1
-            }).then(team => {
-                res.status(200).json(team)
-            }).catch(err => {
-                return res.status(400).json({error: 'An error occurred: '+err});
-            });
-        } else {
-            res.status(400).json({error:'Team already has been created'});
-        }
-    }).catch(err => {
-        return res.status(400).json({error:'An error occurred: '+err});
-    });
+                id_session: req.body.id_session
+            }
+        });
 
-    
+        if(teamAlreadyName) return res.status(400).json({error: 'Team already has been created'});
+
+        const idTeam = generateUUID(10);
+        const teamCreated = await Team.create({
+            name_team: req.body.name_team,
+            id_team: idTeam,
+            prop_piece: req.body.prop_piece,
+            score_game: 0,
+            status: true,
+            players: req.body.players,
+            id_session: req.body.id_session,
+            flag_active: req.body.flag_active,
+            prev_position: 1,
+            position_active: 1
+        });
+
+        if(!teamCreated) return res.status(400).json({error: 'Error creando el equipo '+req.body.name_team});
+
+        const token = await createAccessToken({
+            idTeam: teamCreated.id_team,
+            teamName: teamCreated.name_team,
+            prop_piece: teamCreated.prop_piece,
+            idRoom: teamCreated.id_session
+        });
+
+        res.status(200).json({idRoom: teamCreated.id_session, idTeam: teamCreated.id_team, teamName: teamCreated.name_team, token}); 
+        
+    } catch (err) {
+        return res.status(400).json({error: 'An error occurred: '+err});
+    }    
 }
 
 function getTeam(req, res) {

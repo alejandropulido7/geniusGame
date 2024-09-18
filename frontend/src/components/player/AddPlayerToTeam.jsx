@@ -26,23 +26,25 @@ const AddPlayerToTeam = ({players, setPlayers}) => {
 
   return (
     <>
-      <div className='flex gap-4'>
-        <label>Players in team</label>
-        <input
-          className='input' 
-          type="text"
-          value={newPLayer}
-          onChange={(e) => setNewPlayer(e.target.value)}
-          placeholder="Add player into your team"
-        />
-        <button className='btn' onClick={addPlayer}>Add</button>
+      <div className='flex justify-between'>
+        <label className='flex items-center'>Miembros:</label>
+        <div className='flex relative'>
+          <input
+            className='input' 
+            type="text"
+            value={newPLayer}
+            onChange={(e) => setNewPlayer(e.target.value)}
+            placeholder="Agrega miembros"
+          />
+          <button className='absolute right-0 top-4' onClick={addPlayer}>✅</button>
+        </div>
       </div>
       <div>        
         <ul style={{listStyle: 'none'}}>
           {players.map((player, index) => (
-            <li className='flex justify-around items-center m-1 p-1 bg-slate-100 rounded-md' key={index}>
+            <li className='flex justify-between items-center m-1 px-3 py-1 border-b-2 rounded-md' key={index}>
               {player}
-              <button className='btn' onClick={() => removePlayer(index)}>X</button>
+              <button onClick={() => removePlayer(index)}>❌</button>
             </li>
           ))}
         </ul>

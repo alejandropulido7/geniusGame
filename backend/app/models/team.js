@@ -16,7 +16,7 @@ const Team = sequelize.define('Team', {
         type: DataTypes.TEXT,
         allowNull: false
     },
-    avatar: {
+    prop_piece: {
         type: DataTypes.TEXT
     },
     players: {

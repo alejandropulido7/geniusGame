@@ -6,7 +6,7 @@ import Hunged from './hunged/Hunged';
 import ChainWord from './chainWords/ChainWords';
 import Pictionary from './pictionary/Pictionary';
 import Trivia from './trivia/Trivia';
-import socket from '../../config/socket';
+// import socket from '../../config/socket';
 import { GlobalContext } from '../../context/GlobalContext';
 import Acting from './acting/Acting';
 import Whistle from './whistle/Whistle';
@@ -14,15 +14,16 @@ import { getCookie } from '../../utils/cookies';
 import {getSession} from '../../services/sessionService';
 import './BoardChallenges.css'
 import BackHome from './back-home/BackHome';
+import { SocketContext } from '../../context/SocketProvider';
 
 const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
 
   const [componentChallenge, setComponentChallenge] = useState(null);
   const {activeChallenge, setActiveChallenge, dataChallenge, setDataChallenge, renderPlayer, setRenderPlayer} = useContext(GlobalContext);
   const {idRoom} = useParams();
+  const {socket} = useContext(SocketContext)
 
   useEffect(() => {
-
     getSession(idRoom)
       .then((session) => {
         if(session.challenge_active){
@@ -37,22 +38,28 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
         }
       });
 
-  },[]);
+  },[activeChallenge]);
 
   useEffect(() => {
 
-    socket.on('renderChallenge', (dataChallengeSocket) => {
-      console.log('idDevice', getCookie('idDevice-GG'));
-      console.log('dataChallengeSocket', dataChallengeSocket);
-      console.log('socketId', socket.id);
-      setOpenModal(false);
-      setOpenModalRoulette(false);
-      if(dataChallengeSocket.challenge != ''){
-        setActiveChallenge(true);
-        setDataChallenge(dataChallengeSocket); 
-        renderDevice(dataChallengeSocket);
+    if(socket){
+      socket.on('renderChallenge', (dataChallengeSocket) => {
+        console.log('idDevice', getCookie('idDevice-GG'));
+        console.log('dataChallengeSocket', dataChallengeSocket);
+        console.log('socketId', socket.id);
+        setOpenModal(false);
+        setOpenModalRoulette(false);
+        if(dataChallengeSocket.challenge != ''){
+          setActiveChallenge(true);
+          setDataChallenge(dataChallengeSocket); 
+          renderDevice(dataChallengeSocket);
+        }
+      });
+
+      return () => {
+        socket.off('renderChallenge');
       }
-    });
+    }
 
     switch (dataChallenge.challenge) {
       case ACTING:
@@ -80,11 +87,7 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
         setComponentChallenge(null)
         break;
     }
-
-    return () => {
-      socket.off('renderChallenge');
-    }
-  }, [dataChallenge, renderPlayer]);
+  }, [socket, dataChallenge, renderPlayer]);
 
 
   const renderDevice = (data) => {

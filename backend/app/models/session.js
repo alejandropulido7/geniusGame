@@ -12,7 +12,16 @@ const Session = sequelize.define('Session', {
     allowNull: false,
   },
   min_to_answer: {
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  lenght_board: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
+  amount_challenges: {
+    type: DataTypes.INTEGER,
+    allowNull: false
   },
   gameStarted: {
     type: DataTypes.BOOLEAN,

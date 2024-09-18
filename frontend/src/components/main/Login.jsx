@@ -13,7 +13,7 @@ const Login = () => {
     const userAuthenticated = await loginService(email, password);
     if(userAuthenticated){
       localStorage.setItem('authToken', userAuthenticated.token); // Llamada para guardar el token y conectar el socket
-      navigate('board');
+      navigate('/board');
     }
 
   };

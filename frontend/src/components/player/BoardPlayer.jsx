@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {useParams} from 'react-router-dom';
-import socket from '../../config/socket';
+// import socket from '../../config/socket';
 import { getCookie, deleteCookie } from '../../utils/cookies';
 import { Link, useNavigate } from 'react-router-dom';
 import {getTeamById} from '../../services/teamService';
@@ -11,6 +11,7 @@ import Modal from '../common/modal/Modal';
 import {CHALLENGES_IN_BOARD, FLAGS, findFlagProperties, BACK_HOME} from '../../utils/constants';
 import Winner from '../challenges/common/Winner';
 import './BoardPlayer.css'
+import { SocketContext } from '../../context/SocketProvider';
 
 const BoardPlayer = () => {
 
@@ -37,6 +38,7 @@ const BoardPlayer = () => {
     const [openModalChoiceNewFlag, setOpenModalChoiceNewFlag] = useState(false);
     const [infoChoiceNewFlag, setInfoChoiceNewFlag] = useState({});
     const [reload, setReload] = useState(false);
+    const {socket} = useContext(SocketContext);
 
     
     useEffect(() => {
@@ -55,21 +57,26 @@ const BoardPlayer = () => {
     const getTeamCreated = (idRoom) => {        
         getTeamById(idTeamCookie, idRoom)
         .then((teamCreatedinSession) => {
+            console.log(teamCreatedinSession)
             setTeamName(nameTeamCookie);
             setIdTeam(idTeamCookie);
             setFlagActive(teamCreatedinSession.flag_active);
             setPrevPosition(teamCreatedinSession.prev_position)
             setPositionActive(teamCreatedinSession.position_active);
-            socket.emit('joinPlayerGame', {
-                socketId: socket.id,
-                idTeam: teamCreatedinSession.id_team,
-                gameId: teamCreatedinSession.id_session,
-                teamName: teamCreatedinSession.name_team,
-                flagActive: teamCreatedinSession.flag_active,
-                positionActive: teamCreatedinSession.position_active,
-                prev_position: teamCreatedinSession.prev_position,
-                flagsObtained: JSON.parse(teamCreatedinSession.flags_obtained)
-            });
+            if(socket){
+                console.log('socket', 'correct')
+                socket.emit('joinPlayerGame', {
+                    socketId: socket.id,
+                    idTeam: teamCreatedinSession.id_team,
+                    gameId: teamCreatedinSession.id_session,
+                    teamName: teamCreatedinSession.name_team,
+                    flagActive: teamCreatedinSession.flag_active,
+                    positionActive: teamCreatedinSession.position_active,
+                    prev_position: teamCreatedinSession.prev_position,
+                    propPiece: JSON.parse(teamCreatedinSession.prop_piece),
+                    flagsObtained: JSON.parse(teamCreatedinSession.flags_obtained)
+                });
+            }
 
             getSession(idRoom)
             .then((sessionCreated) => {
@@ -84,7 +91,7 @@ const BoardPlayer = () => {
             localStorage.clear();
             deleteCookie('idDevice-GG')
             deleteCookie('teamName-GG');
-            navigate('../player');
+            navigate('../');
         });
     }
 
@@ -93,85 +100,92 @@ const BoardPlayer = () => {
         setTeamName(nameTeamCookie);
         setCodeSesion(idRoom); 
         getTeamCreated(idRoom);
-    }, [activeChallenge]);
+    }, [activeChallenge, socket]);
 
 
     useEffect(() => {
-        socket.on('winGame', (data) => {  
-            setGameFinished(true);  
-            setWinner(data);
-        });
+        
+        
     },[gameFinished, winner]);
 
     useEffect(() => {   
-        
-        socket.on('sessionDontExist', () => {
-            navigate('../player');
-        });
 
-        socket.on('renderChallenge', (data) => {
-            setOpenModalRoulette(false);
-            setOpenModal(false);
-          });
+        if(socket){
+            socket.on('winGame', (data) => {  
+                setGameFinished(true);  
+                setWinner(data);
+            });
+            
+            socket.on('sessionDontExist', () => {
+                navigate('../player');
+            });
 
-        socket.on('resultChallenge', (data) => {
-            setOpenModalChoiceNewFlag(false);
-            setInfoChoiceNewFlag({});
-            setActiveChallenge(false);
-            setOpenModal(false);
-            localStorage.clear();
-        });
-
-        socket.on('openModalConfirmation', (data) => {  
-            const idTeam = getCookie('idDevice-GG'); 
-            if(idTeam == data.player.idTeam){
-                setOpenModal(true);
-                setDataRenderChallenge(data);
+            socket.on('renderChallenge', (data) => {
                 setOpenModalRoulette(false);
-            }    
-        });
+                setOpenModal(false);
+            });
 
-        socket.on('openModalRoulette-rendering', (data) => {  
-            const idTeam = getCookie('idDevice-GG'); 
-            if(idTeam == data.player.idTeam){
-                setOpenModalRoulette(true);
-                setDataRenderChallenge(data);
-            }    
-        });
+            socket.on('resultChallenge', (data) => {
+                setOpenModalChoiceNewFlag(false);
+                setInfoChoiceNewFlag({});
+                setActiveChallenge(false);
+                setOpenModal(false);
+                localStorage.clear();
+            });
 
-        socket.on('turnOf', (player) => {
-            console.log('socket.id', socket.id);
-            if(idTeamCookie && player.idTeam == idTeamCookie){
-                console.log('turnOf', 'ENTRA EN TRUE');
-                setYouTurn(true);
-            } else {
-                console.log('turnOf', 'ENTRA EN FALSE');
-                setYouTurn(false);
+            socket.on('openModalConfirmation', (data) => {  
+                const idTeam = getCookie('idDevice-GG'); 
+                if(idTeam == data.player.idTeam){
+                    setOpenModal(true);
+                    setDataRenderChallenge(data);
+                    setOpenModalRoulette(false);
+                }    
+            });
+
+            socket.on('openModalRoulette-rendering', (data) => {  
+                const idTeam = getCookie('idDevice-GG'); 
+                if(idTeam == data.player.idTeam){
+                    setOpenModalRoulette(true);
+                    setDataRenderChallenge(data);
+                }    
+            });
+
+            socket.on('turnOf', (player) => {
+                console.log('socket.id', socket.id);
+                if(idTeamCookie && player.idTeam == idTeamCookie){
+                    console.log('turnOf', 'ENTRA EN TRUE');
+                    setYouTurn(true);
+                } else {
+                    console.log('turnOf', 'ENTRA EN FALSE');
+                    setYouTurn(false);
+                }
+            });    
+            
+            socket.on('prueba', (player) => {
+                console.log('prueba', player);
+            }); 
+
+            socket.on('openModalChoiceNewFlag', (data) => {
+                if(idTeamCookie && data.idTeam == idTeamCookie){
+                    setOpenModalChoiceNewFlag(true);
+                    setInfoChoiceNewFlag(data);
+                }
+            });
+
+            
+            
+            return () => {
+                socket.off('resultChallenge');
+                socket.off('openModalConfirmation');
+                socket.off('openModalRoulette-rendering');
+                socket.off('turnOf');
             }
-        });    
-        
-        socket.on('prueba', (player) => {
-            console.log('prueba', player);
-        }); 
-
-        socket.on('openModalChoiceNewFlag', (data) => {
-            if(idTeamCookie && data.idTeam == idTeamCookie){
-                setOpenModalChoiceNewFlag(true);
-                setInfoChoiceNewFlag(data);
-            }
-        });
-
-        
-        
+        }
         return () => {
-            socket.off('resultChallenge');
-            socket.off('openModalConfirmation');
-            socket.off('openModalRoulette-rendering');
-            socket.off('turnOf');
             setShowStartRoulette(true);
         }
                
-    },[activeChallenge]);
+    },[activeChallenge, socket]);
 
     
 
@@ -192,9 +206,9 @@ const BoardPlayer = () => {
     const activateChallenge = (activate) => {
         setOpenModalRoulette(false);
         if(activate){
-            socket.emit('renderChallenge', dataRenderChallenge);
+            socket?.emit('renderChallenge', dataRenderChallenge);
         } else {
-            socket.emit('resultChallenge', {player: dataRenderChallenge.player, challengePassed: activate});
+            socket?.emit('resultChallenge', {player: dataRenderChallenge.player, challengePassed: activate});
         }
     };
 
@@ -208,16 +222,16 @@ const BoardPlayer = () => {
 
     const startRoulette = () => {
         setShowStartRoulette(false);
-        socket.emit('openModalRoulette', {function: 'startRoulette', data: dataRenderChallenge});
+        socket?.emit('openModalRoulette', {function: 'startRoulette', data: dataRenderChallenge});
     }
 
     const stopRoulette = () => {
-        socket.emit('openModalRoulette', {function: 'stopRoulette', data: dataRenderChallenge});
+        socket?.emit('openModalRoulette', {function: 'stopRoulette', data: dataRenderChallenge});
     }
 
     const confirmNewFlag = () => {     
         console.log('confirmNewFlag', {infoChoiceNewFlag, newFlagSelected });
-        socket.emit('changeFlag', {player: infoChoiceNewFlag, newFlag: newFlagSelected});
+        socket?.emit('changeFlag', {player: infoChoiceNewFlag, newFlag: newFlagSelected});
         setOpenModalChoiceNewFlag(false);
     };
 
@@ -228,7 +242,7 @@ const BoardPlayer = () => {
 
     const backHome = () => {
         setOpenModalRoulette(false);
-        socket.emit('backHome', dataRenderChallenge);
+        socket?.emit('backHome', dataRenderChallenge);
     };
 
     // const flagsMissing = () => {

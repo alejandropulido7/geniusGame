@@ -30,6 +30,14 @@ const FLAGS = [
   {id: 'green', name: 'Verde', color: colorsApp.get('green').color, shadow: colorsApp.get('green').shadow}
 ];
 
+const PROP_PIECES = [
+  {id: 'beach', name: 'Playa', color: 'e9862a', emoji: '🌴'},
+  {id: 'travel', name: 'Viajes', color: 'fbff39', emoji: '✈'},
+  {id: 'eat', name: 'Comer', color: '6de212', emoji: '🍕'},
+  {id: 'christmas', name: 'Navidad', color: '40a1ff', emoji: '⛄'},
+  {id: 'sport', name: 'Deportes', color: '9f5bff', emoji: '⚽'}
+]
+
 const OPTIONS_CHALLENGES = new Map();
 OPTIONS_CHALLENGES.set(WORD_CHAIN, {
   title: 'Cadena de palabras',
@@ -103,5 +111,6 @@ export {CHALLENGES_IN_BOARD,
   OPTIONS_CHALLENGES, 
   RENDER_CHALLENGE,
   findFlagProperties,
-  colorsApp}
+  colorsApp,
+  PROP_PIECES}
 

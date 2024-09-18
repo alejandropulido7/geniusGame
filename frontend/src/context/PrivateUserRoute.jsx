@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom';
 import {validateUserToken} from '../services/authServices'
 
+const token = localStorage.getItem('authToken');
+
 const PrivateUserRoute = ({children}) => {
     const [redirectionHome, setRedirectionHome] = useState(null);
 
-    useEffect(() => {
-        const token = localStorage.getItem('authToken');
+    useEffect(() => {        
         if(token){
             validateUserToken(token)
             .then(session => {
@@ -21,7 +22,7 @@ const PrivateUserRoute = ({children}) => {
                 localStorage.removeItem('authToken');
             })
         }
-    },[])
+    },[token])
 
     return (
         <>

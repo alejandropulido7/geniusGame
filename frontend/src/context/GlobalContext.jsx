@@ -18,3 +18,4 @@ export const AuthContext = createContext({
     logout: (data) => {},
     setSocket: (data) => {},
 });
+

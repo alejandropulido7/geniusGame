@@ -20,7 +20,7 @@ const io = new Server(server, {
 syncDatabase();
 
 /*Manage all client request via socket*/
-socketHandlers(io);
+socketHandlers(io); 
 
 app.use(express.json());
 app.use(cors({

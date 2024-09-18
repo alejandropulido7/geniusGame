@@ -15,6 +15,8 @@ import ConfigTeam from './components/player/ConfigTeam.jsx';
 import AppPlayer from './components/player/AppPlayer.jsx';
 import AuthState from './context/AuthState.jsx';
 import PrivateUserRoute from './context/PrivateUserRoute.jsx';
+import { SocketProvider } from './context/SocketProvider.jsx';
+import Piece from './components/board/Piece.jsx';
 
 const router = createBrowserRouter([
   {
@@ -23,35 +25,39 @@ const router = createBrowserRouter([
     errorElement: <MainScreen />,    
   },
   {
+    path: "/piece",
+    element: <Piece teamName={'Equipo 1'} w={180} h={180}/>   
+  },
+  {
     path: "/board",
     element: <App />,
     errorElement: <App />,
     children: [
       {
         path: "/board",
-        element: <PrivateUserRoute><ConfigGame/></PrivateUserRoute> 
+        element: <PrivateUserRoute><ConfigGame/></PrivateUserRoute>
       },
-      // {
-      //   path: "board/:idRoom",
-      //   element: <BoardGame />
-      // },       
+      {
+        path: "/board/:idRoom",
+        element: <SocketProvider isBoard={true}><BoardGame /></SocketProvider>
+      },       
     ],
   },
-  // {
-  //   path: "/player",
-  //   element: <AppPlayer />,
-  //   errorElement: <AppPlayer />,
-  //   children: [
-  //     {
-  //       path: "player",
-  //       element: <ConfigTeam />
-  //     },
-  //     {
-  //       path: "player/:idRoom",
-  //       element: <BoardPlayer />,
-  //     },           
-  //   ],
-  // }
+  {
+    path: "/player",
+    element: <AppPlayer />,
+    errorElement: <AppPlayer />,
+    children: [
+      {
+        path: "/player/:tokenAdmin",
+        element: <ConfigTeam />
+      },
+      {
+        path: "/player/room/:idRoom",
+        element: <SocketProvider><BoardPlayer/></SocketProvider>,
+      },           
+    ],
+  }
 ]); 
 
 // ReactDOM.createRoot(document.getElementById('root')).render(
