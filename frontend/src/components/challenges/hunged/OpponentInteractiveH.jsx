@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import socket from '../../../config/socket';
+import React, { useEffect, useState, useContext } from 'react'
 import { RENDER_CHALLENGE } from '../../../utils/constants';
 import HideWord from '../common/HideWord';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const OpponentInteractiveH = () => {
 
     const [word, setWord] = useState('');
     const [wordReady, setWordReady] = useState(false);
+    const {socket} = useContext(SocketContext);
 
     const validateWord = (text) => {
         setWord(text.trim());
@@ -14,16 +15,16 @@ const OpponentInteractiveH = () => {
 
     const emitHungedChallenge = () => {
         setWordReady(true);
-        socket.emit('hunged', {secretWord: word, socketId: socket.id, sendedBy: RENDER_CHALLENGE.opponent });
-        socket.emit('startChallenge', {socketId: socket.id});
+        socket?.emit('hunged', {secretWord: word, socketId: socket?.id, sendedBy: RENDER_CHALLENGE.opponent });
+        socket?.emit('startChallenge', {socketId: socket?.id});
       }
 
     useEffect(() => {
-        if(localStorage.getItem('hunged-Opponet-GG') != null){
-            setWord(JSON.parse(localStorage.getItem('hunged-Opponet-GG')).word);
-            setWordReady(JSON.parse(localStorage.getItem('hunged-Opponet-GG')).wordReady);
-        }     
-  
+        const properties = JSON.parse(localStorage.getItem('hunged-Opponet-GG'));
+        if(properties != null){
+            setWord(properties.word);
+            setWordReady(properties.wordReady);
+        }  
       },[])
 
     useEffect(() => {

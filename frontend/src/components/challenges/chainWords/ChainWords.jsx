@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import socket from '../../../config/socket';
 import PlayerChallengeCW from './PlayerChallengeCW';
 import {RENDER_CHALLENGE} from '../../../utils/constants'
 import OpponentInteractiveCW from './OpponentInteractiveCW';
 import AdminCW from './AdminCW';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const ChainWord = ({renderIn, dataPlayer}) => {
 
@@ -12,6 +12,7 @@ const ChainWord = ({renderIn, dataPlayer}) => {
   const [render, setRender] = useState(null);
   const [showOponnent, setShowOpponent] = useState(false);
   const [topic, setTopic] = useState('');
+  const {socket} = useContext(SocketContext);
 
   useEffect(() => {
     if(localStorage.getItem('chainWords-GG') != null){
@@ -28,7 +29,7 @@ const ChainWord = ({renderIn, dataPlayer}) => {
   },[lastWord, arrayWords, showOponnent, topic])
   
   useEffect(() => {
-    socket.on('chainWords', (data) => {
+    socket?.on('chainWords', (data) => {
       setLastWord(data.lastWord);
       setArrayWords(data.wordList);
       setTopic(data.topic);
@@ -48,8 +49,8 @@ const ChainWord = ({renderIn, dataPlayer}) => {
     }  
 
     return () => {
-      socket.off('chainWords');
-      socket.off('validateChallenge');
+      socket?.off('chainWords');
+      socket?.off('validateChallenge');
     }
 
   },[lastWord,renderIn]);

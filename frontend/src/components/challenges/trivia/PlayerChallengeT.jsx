@@ -1,21 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import socket from '../../../config/socket';
-import { getCookie } from '../../../utils/cookies';
+import React, {useEffect, useState, useContext} from 'react';
 import {colorsApp} from '../../../utils/constants'
+import { SocketContext } from '../../../context/SocketProvider';
 
 const PlayerChallengeT = ({options, correctAnswer}) => {
 
-  const [openModal, setOpenModal] = useState(false);
-  const [descriptionModal, setDescriptionModal] = useState('');
-  const [buttonModal, setButtonModal] = useState('');
-  const [passChallenge, setPassChallenge] = useState(false);
+  const {socket} = useContext(SocketContext);
 
-  useEffect(() => {
-    socket.emit('startChallenge', {socketId: socket.id});
+  useEffect(() => {  
+    const triviaStarted = localStorage.getItem('triviaStarted');
+    if (!triviaStarted) {
+      localStorage.setItem('triviaStarted', 'true');
+      socket?.emit('startChallenge', {socketId: socket?.id});
+    }
   },[options, correctAnswer])
 
-  const manejarRespuesta = (response) => {
-    socket.emit('trivia', {function: 'regular', data: {response, socketId: socket.id}})
+  const handleResponse = (response) => {
+    socket?.emit('trivia', {function: 'regular', data: {response, socketId: socket?.id}})
   };
 
   const colorOptions = (index) => {
@@ -42,7 +42,7 @@ const PlayerChallengeT = ({options, correctAnswer}) => {
               className='p-5 text-white rounded-md cursor-pointer'
               style={{backgroundColor: colorOptions(index)}} 
               key={index} 
-              onClick={() => manejarRespuesta(answerOption)}>
+              onClick={() => handleResponse(answerOption)}>
               {answerOption}
             </li>
           ))}

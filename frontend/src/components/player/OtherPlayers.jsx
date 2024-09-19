@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
-import socket from '../../config/socket';
+import React, { useState, useContext, useEffect } from 'react'
+import { SocketContext } from '../../context/SocketProvider';
 
 const OtherPlayers = () => {
 
     const [otherPlayers, setOtherPlayers] = useState([]);
+    const {socket} = useContext(SocketContext);
 
-    socket.on('otherPlayersJoinedRoom', (players) => {
-        const otherplayers = players.filter(player => player.socketId != socket.id);
-        setOtherPlayers(otherplayers);
-    });
+    useEffect(() => {
+        socket?.on('otherPlayersJoinedRoom', (players) => {
+            const otherplayers = players.filter(player => player.socketId != socket?.id);
+            setOtherPlayers(otherplayers);
+        });
+    },[socket]);
 
 
     return (

@@ -1,23 +1,24 @@
-import React, {useState, useEffect} from 'react'
-import socket from '../../../config/socket';
+import React, {useState, useEffect, useContext} from 'react'
+import { SocketContext } from '../../../context/SocketProvider';
 
 const ChallengeNotPassed = ({showButton, gameFinished, setGameFinished}) => {
 
     const [previousPosition, setPreviousPosition] = useState(0);
     const [dataPlayer, setDataPlayer] = useState(null);
+    const {socket} = useContext(SocketContext);
 
     useEffect(() => {
         
-        socket.on('notPassChallenge', (data) => {
+        socket?.on('notPassChallenge', (data) => {
             console.log("ChallengeNotPassed", data);
             setGameFinished(true);
             setDataPlayer(data);
             setPreviousPosition(data.prev_position);
           })
-    }, [previousPosition]);
+    }, [socket, previousPosition]);
 
     const resultChallenge = (passChallenge) => {
-        socket.emit('resultChallenge', {player: dataPlayer, challengePassed: passChallenge});
+        socket?.emit('resultChallenge', {player: dataPlayer, challengePassed: passChallenge});
     }
 
   return (

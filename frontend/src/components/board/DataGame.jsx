@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {useParams, useResolvedPath} from 'react-router-dom';
-// import socket from '../../config/socket';
 import {GlobalContext} from '../../context/GlobalContext';
 import { SocketContext } from '../../context/SocketProvider';
 import AllowJoin from './AllowJoin';
@@ -40,7 +39,6 @@ const DataGame = () => {
     }, [socket, session, activeChallenge]);
 
     useEffect(() => {
-        // const path_complete = window.location.href;
         let path = `${window.location.protocol}//${window.location.hostname}${window.location.port ? `:${window.location.port}` : ''}`;
         path = `${path}/player/${token}`
         setUrlJoin(path);

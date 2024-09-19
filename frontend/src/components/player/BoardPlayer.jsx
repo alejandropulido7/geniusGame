@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react'
 import {useParams} from 'react-router-dom';
-// import socket from '../../config/socket';
 import { getCookie, deleteCookie } from '../../utils/cookies';
 import { Link, useNavigate } from 'react-router-dom';
 import {getTeamById} from '../../services/teamService';

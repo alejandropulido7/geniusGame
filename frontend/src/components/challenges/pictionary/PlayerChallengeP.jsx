@@ -1,7 +1,7 @@
-import React, {useEffect, useState, useRef} from 'react';
-import socket from '../../../config/socket';
+import React, {useEffect, useState, useRef, useContext} from 'react';
 import HideWord from '../common/HideWord'
 import ChallengeNotPassed from '../common/ChallengeNotPassed';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const PlayerChallengeP = ({word, memberTeam}) => {
 
@@ -11,6 +11,18 @@ const PlayerChallengeP = ({word, memberTeam}) => {
     const [dibujando, setDibujando] = useState(false);
     const [showButton, setShowButton] = useState(true);
     const [gameFinished, setGameFinished] = useState(false);
+    const {socket} = useContext(SocketContext);
+
+    useEffect(() => {
+        const properties = JSON.parse(localStorage.getItem('pictionary-pl-GG'));
+        if(properties != null){
+            setContext(properties.context);
+        }
+    },[])
+    
+    useEffect(() => {
+        localStorage.setItem('pictionary-pl-GG', JSON.stringify({context}))
+    },[context]);
 
     useEffect(() => {
         if(word != ''){
@@ -25,7 +37,7 @@ const PlayerChallengeP = ({word, memberTeam}) => {
         context.beginPath();
         context.moveTo(offsetX, offsetY);
 
-        socket.emit('pictionary', {function: 'startDraw', data: {offsetX, offsetY, socketId: socket.id}});
+        socket?.emit('pictionary', {function: 'startDraw', data: {offsetX, offsetY, socketId: socket?.id}});
 
         setDibujando(true);
     };
@@ -38,13 +50,13 @@ const PlayerChallengeP = ({word, memberTeam}) => {
         context.strokeStyle = color;
         context.stroke();
     
-        socket.emit('pictionary', {function: 'draw', data: {offsetX, offsetY, color, socketId: socket.id}});    
+        socket?.emit('pictionary', {function: 'draw', data: {offsetX, offsetY, color, socketId: socket?.id}});    
     };
 
     const terminarDibujo = () => {
         context.closePath();
 
-        socket.emit('pictionary', {function: 'stopDraw', data: {drawing: dibujando, socketId: socket.id}});
+        socket?.emit('pictionary', {function: 'stopDraw', data: {drawing: dibujando, socketId: socket?.id}});
         setDibujando(false);
     };
 
@@ -57,7 +69,7 @@ const PlayerChallengeP = ({word, memberTeam}) => {
         const ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        socket.emit('pictionary', {function: 'eraseEverything', data: {drawing: dibujando, socketId: socket.id}});
+        socket?.emit('pictionary', {function: 'eraseEverything', data: {drawing: dibujando, socketId: socket?.id}});
       };
 
     const obtenerCoordenadas = (event) => {
@@ -70,7 +82,7 @@ const PlayerChallengeP = ({word, memberTeam}) => {
     
     const finishChallenge = () => {
         setShowButton(false);
-        socket.emit('stopChallenge', {socketId: socket.id});
+        socket?.emit('stopChallenge', {socketId: socket?.id});
     }
 
     return (

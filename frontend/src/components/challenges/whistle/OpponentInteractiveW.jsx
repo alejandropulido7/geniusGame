@@ -1,17 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import ValidateChallenge from '../common/ValidateChallenge';
 import HideWord from '../common/HideWord';
-import socket from '../../../config/socket';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const OpponentInteractiveW = ({wordReady}) => {
 
     const [word, setWord] = useState('');
     const [finalWord, setFinalWord] = useState('');
     const [oponentMember, setOponentMember] = useState('');
+    const {socket} = useContext(SocketContext);
     
     useEffect(() => {
-      if(localStorage.getItem('whistle-opp-GG') != null){
-          const properties = JSON.parse(localStorage.getItem('whistle-opp-GG'));
+      const properties = JSON.parse(localStorage.getItem('whistle-opp-GG'));
+      if(properties != null){
           setWord(prev => properties.word??prev);
           setFinalWord(prev => properties.finalWord??prev);
           setOponentMember(prev => properties.oponentMember??prev);
@@ -24,8 +25,10 @@ const OpponentInteractiveW = ({wordReady}) => {
   
     const emitWordChallenge = () => {
       setFinalWord(word);
-      socket.emit('whistle', {word, wordReady: true, socketId: socket.id});
-      socket.emit('startChallenge', {socketId: socket.id});
+      if(socket){
+        socket.emit('whistle', {word, wordReady: true, socketId: socket.id});
+        socket.emit('startChallenge', {socketId: socket.id});
+      }
     }
   
     return (

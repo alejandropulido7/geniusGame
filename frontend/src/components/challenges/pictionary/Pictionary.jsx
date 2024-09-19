@@ -1,20 +1,33 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
 import AdminP from './AdminP';
 import PlayerChallengeP from './PlayerChallengeP';
 import OpponentInteractiveP from './OpponentInteractiveP';
 import OtherPlayersP from './OtherPlayersP';
 import {RENDER_CHALLENGE} from '../../../utils/constants';
-import socket from '../../../config/socket';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const Pictionary = ({renderIn}) => {
   const [word, setWord] = useState('');
   const [wordReady, setWordReady] = useState(false);
   const [render, setRender] = useState(null);
   const [memberTeam, setMemberTeam] = useState('');
+  const {socket} = useContext(SocketContext);
+
+  useEffect(() => {
+    const properties = JSON.parse(localStorage.getItem('pictionary-GG'));
+    if(properties != null){
+      setWord(properties.word);
+      setMemberTeam(properties.memberTeam);
+    }
+  },[])
+
+  useEffect(() => {
+    localStorage.setItem('pictionary-GG', JSON.stringify({word, memberTeam}))
+  },[word, memberTeam]);
 
   useEffect(() => {
 
-    socket.on('pictionary-data', (data) => {
+    socket?.on('pictionary-data', (data) => {
       console.log('pictionary-data', data)
       setWord(data.word);
       setWordReady(data.wordReady);
@@ -36,7 +49,7 @@ const Pictionary = ({renderIn}) => {
       break;
     }    
 
-  },[word, wordReady, renderIn]);
+  },[socket, word, wordReady, renderIn]);
 
   return (
     <div>

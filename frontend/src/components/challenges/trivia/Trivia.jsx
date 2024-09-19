@@ -1,13 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import {colorsApp} from '../../../utils/constants';
-import {getQuestionTrivia} from '../../../services/gameServices';
+import React, { useState, useEffect, useContext } from 'react';
 import Modal from '../../common/modal/Modal';
 import AdminT from './AdminT';
 import PlayerChallengeT from './PlayerChallengeT';
 import OpponentInteractiveT from './OpponentInteractiveT';
 import OthersPlayersT from './OthersPlayersT';
 import {RENDER_CHALLENGE} from '../../../utils/constants'
-import socket from '../../../config/socket';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const Trivia = ({renderIn, dataTrivia}) => {
   const [render, setRender] = useState(null);
@@ -21,6 +19,7 @@ const Trivia = ({renderIn, dataTrivia}) => {
   const [buttonModal, setButtonModal] = useState('');
   const [passChallenge, setPassChallenge] = useState(false);
   const [player, setPlayer] = useState({});
+  const {socket} = useContext(SocketContext);
 
   useEffect(() => {
     if(dataTrivia){
@@ -33,7 +32,7 @@ const Trivia = ({renderIn, dataTrivia}) => {
 
   useEffect(() => {
     
-    socket.on('trivia-regular', (data) => {
+    socket?.on('trivia-regular', (data) => {
       setPlayer(data.player);
       if (data.response === dataTrivia.correctAnswer) {
         setDescriptionModal('¡Respuesta correcta!');
@@ -68,10 +67,10 @@ const Trivia = ({renderIn, dataTrivia}) => {
       setOptions('');
       setCorrectAnswer('');
     }
-  }, [renderIn, dataTrivia]);
+  }, [socket, renderIn, dataTrivia]);
   
   const sendResult = () => {
-    socket.emit('resultChallenge', {player, challengePassed: passChallenge});
+    socket?.emit('resultChallenge', {player, challengePassed: passChallenge});
   }
 
   return (

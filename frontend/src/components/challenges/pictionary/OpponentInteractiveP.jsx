@@ -1,18 +1,19 @@
-import React, {useState, useEffect} from 'react';
-import socket from '../../../config/socket';
+import React, {useState, useEffect, useContext} from 'react';
 import ChooseTeamMember from '../common/ChooseTeamMember';
 import HideWord from '../common/HideWord';
 import ValidateChallenge from '../common/ValidateChallenge';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const OpponentInteractiveP = ({wordReady}) => {
 
   const [word, setWord] = useState('');
   const [finalWord, setFinalWord] = useState('');
   const [oponentMember, setOponentMember] = useState('');
+  const {socket} = useContext(SocketContext);
 
   useEffect(() => {
-    if(localStorage.getItem('pictionary-opp-GG') != null){
-        const properties = JSON.parse(localStorage.getItem('pictionary-opp-GG'));
+    const properties = JSON.parse(localStorage.getItem('pictionary-opp-GG'));
+    if(properties != null){
         setWord(prev => properties.word??prev);
         setFinalWord(prev => properties.finalWord??prev);
         setOponentMember(prev => properties.oponentMember??prev);
@@ -25,9 +26,11 @@ const OpponentInteractiveP = ({wordReady}) => {
 
   const emitWordChallenge = () => {
     setFinalWord(word);
-    const data = {word, wordReady: true, oponentMember, socketId: socket.id};
-    socket.emit('pictionary', {function: 'data', data});
-    socket.emit('startChallenge', {socketId: socket.id});
+    if(socket){
+      const data = {word, wordReady: true, oponentMember, socketId: socket.id};
+      socket.emit('pictionary', {function: 'data', data});
+      socket.emit('startChallenge', {socketId: socket.id});
+    }
   }
 
   return (

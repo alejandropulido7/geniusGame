@@ -1,11 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
-import socket from '../../../config/socket';
 import KeyboardCW from './KeyboardCW'
 import { getTeamByName } from '../../../services/teamService';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
 
-    // const {lastWord, setLastWord} = useState('');
     const [arrayWords, setArrayWords] = useState([]);
     const [teamPlayers, setTeamPlayers] = useState([]);
     const [teammate, setTeammate] = useState('');
@@ -15,6 +14,7 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
     const [showNotPassChallenge, setShowNotPassChallenge] = useState(false);
     const [previousPosition, setPreviousPosition] = useState(0);
     const [opponentValidation, setOpponentValidation] = useState(false);
+    const {socket} = useContext(SocketContext);
 
     useEffect(() => {
       const properties = JSON.parse(localStorage.getItem('chainWords-player-GG'));
@@ -58,12 +58,12 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
 
     useEffect(() => {
 
-      socket.on('startChallenge', (data) => {
+      socket?.on('startChallenge', (data) => {
         setShowKeyboard(true);
       });
 
-      socket.on('notPassChallenge', (data) => {
-        if(data.socketId == socket.id){
+      socket?.on('notPassChallenge', (data) => {
+        if(data.socketId == socket?.id){
           setShowNotPassChallenge(true);
           setShowKeyboard(false);
           setPreviousPosition(data.prev_position);
@@ -79,16 +79,16 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
       });
 
       return () => {
-        socket.off('resultChallenge');        
+        socket?.off('resultChallenge');        
       }
-    },[]);
+    },[socket]);
 
     const manageNewWord = () => {
       if (newWord && (!lastWord || newWord.charAt(0).toLowerCase() === lastWord.slice(-1).toLowerCase())) {
         const wordList = [...arrayWords];
         wordList.push(newWord);
         setNewWord('');
-        socket.emit('chainWords', {lastWord: newWord, wordList, socketId: socket.id});
+        socket?.emit('chainWords', {lastWord: newWord, wordList, socketId: socket?.id});
         if(wordList.length == teamPlayers.length){
           setFinishChallenge(true);
         } else {
@@ -104,11 +104,11 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
     const stopChallenge = () => {
       setOpponentValidation(true);
       console.log('dataplayer', dataPlayer);
-      socket.emit('stopChallenge', {socketId: socket.id});
+      socket?.emit('stopChallenge', {socketId: socket?.id});
     }
 
     const notPassChallenge = () => {
-      socket.emit('resultChallenge', {player: dataPlayer, challengePassed: false});
+      socket?.emit('resultChallenge', {player: dataPlayer, challengePassed: false});
     }
   
     return (

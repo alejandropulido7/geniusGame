@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-// import socket from '../../config/socket';
 import { AuthContext } from '../../context/GlobalContext';
 
 
@@ -28,7 +27,7 @@ const Chronometer = ({data}) => {
 
   useEffect(() => {
     let interval = null;
-    socket.on('startChallenge', (dataPlayer) => {
+    socket?.on('startChallenge', (dataPlayer) => {
       console.log("dataPlayer-CRONO", dataPlayer);
       setPlayer(dataPlayer);
       interval = setInterval(() => {
@@ -40,21 +39,21 @@ const Chronometer = ({data}) => {
       }, 1000);
     });
 
-    socket.on('stopChallenge', (dataStop) => {
+    socket?.on('stopChallenge', (dataStop) => {
       clearInterval(interval);
     });
 
     if(seconds == 0){
       setShowTime(false);
-      socket.emit('notPassChallenge', data.participants.player);
+      socket?.emit('notPassChallenge', data.participants.player);
     }
 
     return () => {
-      socket.off('startChallenge');   
+      socket?.off('startChallenge');   
       setMessage('');   
     }
 
-  }, [seconds, data]);
+  }, [socket, seconds, data]);
 
   return (
     <div className='bg-white text-xl rounded-md'>

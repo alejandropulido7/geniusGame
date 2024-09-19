@@ -1,14 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import ValidateChallenge from '../common/ValidateChallenge';
-import socket from '../../../config/socket';
 import HideWord from '../common/HideWord';
 import ChooseTeamMember from '../common/ChooseTeamMember';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const OpponentInteractiveA = ({wordReady}) => {
 
     const [word, setWord] = useState('');
     const [finalWord, setFinalWord] = useState('');
     const [oponentMember, setOponentMember] = useState('');
+    const {socket} = useContext(SocketContext);
     
     useEffect(() => {
       if(localStorage.getItem('acting-opp-GG') != null){
@@ -25,9 +26,9 @@ const OpponentInteractiveA = ({wordReady}) => {
   
     const emitWordChallenge = () => {
       setFinalWord(word);
-      const data = {word, wordReady: true, oponentMember, socketId: socket.id};
-      socket.emit('acting', data);
-      socket.emit('startChallenge', {socketId: socket.id});
+      const data = {word, wordReady: true, oponentMember, socketId: socket?.id};
+      socket?.emit('acting', data);
+      socket?.emit('startChallenge', {socketId: socket?.id});
     }
   
     return (

@@ -1,10 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react'
-import socket from '../../../config/socket';
 import { RENDER_CHALLENGE } from '../../../utils/constants';
 import { getTeamByName } from '../../../services/teamService';
 import { useParams } from 'react-router-dom';
 import { getCookie } from '../../../utils/cookies';
-import ChallengeNotPassed from '../common/ChallengeNotPassed';
+import { SocketContext } from '../../../context/SocketProvider';
 
 
 const PlayerChallengeH = ({secretWord}) => {
@@ -18,17 +17,19 @@ const PlayerChallengeH = ({secretWord}) => {
     const [previousPosition, setPreviousPosition] = useState(0);
     const {idRoom} = useParams();
     const [dataPlayer, setDataPlayer] = useState(null);
+    const {socket} = useContext(SocketContext);
 
 
     useEffect(() => {
-        if(localStorage.getItem('hunged-pl-GG') != null){
-              setWordShowed(JSON.parse(localStorage.getItem('hunged-pl-GG')).wordShowed);
-              setMissedAttemps(JSON.parse(localStorage.getItem('hunged-pl-GG')).missedAttemps);
-              setLettersGuessed(JSON.parse(localStorage.getItem('hunged-pl-GG')).lettersGuessed);
-              setGameFinished(JSON.parse(localStorage.getItem('hunged-pl-GG')).gameFinished);
-              setShowKeyboard(JSON.parse(localStorage.getItem('hunged-pl-GG')).showKeyboard);
-              setShowNotPassChallenge(JSON.parse(localStorage.getItem('hunged-pl-GG')).showNotPassChallenge);
-              setPreviousPosition(JSON.parse(localStorage.getItem('hunged-pl-GG')).previousPosition);
+        const properties = JSON.parse(localStorage.getItem('hunged-pl-GG'));
+        if(properties != null){
+              setWordShowed(properties.wordShowed);
+              setMissedAttemps(properties.missedAttemps);
+              setLettersGuessed(properties.lettersGuessed);
+              setGameFinished(properties.gameFinished);
+              setShowKeyboard(properties.showKeyboard);
+              setShowNotPassChallenge(properties.showNotPassChallenge);
+              setPreviousPosition(properties.previousPosition);
         }     
 
     },[])
@@ -87,31 +88,35 @@ const PlayerChallengeH = ({secretWord}) => {
                 gameFinishedCopy = true;
             }
 
-            socket.emit('hunged', {gameFinished: gameFinishedCopy,
-                wordShowed: newWordShowed, 
-                missedAttemps: attempsUpdate,
-                socketId: socket.id, 
-                sendedBy: RENDER_CHALLENGE.player });
-            if(gameFinishedCopy) {
-                socket.emit('stopChallenge', {socketId: socket.id});
+            if(socket){
+                socket.emit('hunged', {gameFinished: gameFinishedCopy,
+                    wordShowed: newWordShowed, 
+                    missedAttemps: attempsUpdate,
+                    socketId: socket.id, 
+                    sendedBy: RENDER_CHALLENGE.player });
+                if(gameFinishedCopy) {
+                    socket.emit('stopChallenge', {socketId: socket.id});
+                }
             }
         }
       };
 
     useEffect(() => {
-        socket.on('notPassChallenge', (data) => {
-            if(data.socketId == socket.id){
-              setShowNotPassChallenge(true);
-              setShowKeyboard(false);
-              setDataPlayer(data);
-              setPreviousPosition(data.prev_position);
-            }
-          })
-    }, []);
+        if(socket){
+            socket.on('notPassChallenge', (data) => {
+                if(data.socketId == socket.id){
+                  setShowNotPassChallenge(true);
+                  setShowKeyboard(false);
+                  setDataPlayer(data);
+                  setPreviousPosition(data.prev_position);
+                }
+              })
+        }
+    }, [socket]);
 
 
     const resultChallenge = (passChallenge) => {
-        socket.emit('resultChallenge', {player: dataPlayer, challengePassed: passChallenge});
+        socket?.emit('resultChallenge', {player: dataPlayer, challengePassed: passChallenge});
     }
 
     return (

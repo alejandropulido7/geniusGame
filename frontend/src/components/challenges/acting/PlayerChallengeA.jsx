@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import HideWord from '../common/HideWord';
-import socket from '../../../config/socket';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const PlayerChallengeA = ({word}) => {
 
     const [showButton, setShowButton] = useState(true);
+    const {socket} = useContext(SocketContext);
 
     const emitResult = () => {
       setShowButton(false);
-      socket.emit('stopChallenge', {socketId: socket.id});
+      socket?.emit('stopChallenge', {socketId: socket?.id});
     }
 
     useEffect(() => {

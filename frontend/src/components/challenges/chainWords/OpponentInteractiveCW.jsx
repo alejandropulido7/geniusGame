@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import socket from '../../../config/socket'
-import {OPTIONS_CHALLENGES, getRandomObject} from '../../../utils/constants'
+import React, { useEffect, useState, useContext } from 'react';
+import {OPTIONS_CHALLENGES} from '../../../utils/constants'
 import ValidateChallenge from '../common/ValidateChallenge';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const OpponentInteractiveCW = ({lastWord}) => {
 
     const [word, setWord] = useState('');
     const [topic, setTopic] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const {socket} = useContext(SocketContext);
 
     useEffect(() => {
       if(localStorage.getItem('chainWords-Opp-GG') != null){
@@ -24,8 +25,10 @@ const OpponentInteractiveCW = ({lastWord}) => {
     const emitWordChallenge = () => {
       setErrorMessage('');
       if(word != '' && topic != ''){
-        socket.emit('chainWords', {lastWord: word, wordList: [], socketId: socket.id, topic});
-        socket.emit('startChallenge', {socketId: socket.id});
+        if(socket){
+          socket.emit('chainWords', {lastWord: word, wordList: [], socketId: socket.id, topic});
+          socket.emit('startChallenge', {socketId: socket.id});
+        }
       } else {
         setErrorMessage('Debes escribir la palabra y escoger el tema');
       }

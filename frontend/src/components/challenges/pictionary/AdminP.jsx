@@ -1,11 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import socket from '../../../config/socket';
+import React, { useEffect, useRef, useState, useContext } from 'react';
 import ChallengeNotPassed from '../common/ChallengeNotPassed';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const AdminP = ({word}) => {
     const canvasRefBoard = useRef();
     const [contextBoard, setContextBoard] = useState(null);
     const [gameFinished, setGameFinished] = useState(false);
+    const {socket} = useContext(SocketContext);
 
     const hideWord = ' _ '.repeat(word?.length);
 
@@ -20,52 +21,52 @@ const AdminP = ({word}) => {
     }, [word]);
 
     useEffect(() => {
-        socket.on('pictionary-startDraw', (data) => {
-            const canvasBoard = canvasRefBoard.current;
-            if (!canvasBoard) return;
-            const ctxBoard = canvasBoard.getContext('2d');
 
-            ctxBoard.beginPath();
-            ctxBoard.moveTo(data.offsetX, data.offsetY);
-        });
-        
-        socket.on('pictionary-draw', (data) => {
-            const canvasBoard = canvasRefBoard.current;
-            if (!canvasBoard) return;
-            const ctxBoard = canvasBoard.getContext('2d');
+        if(socket){
+            socket.on('pictionary-startDraw', (data) => {
+                const canvasBoard = canvasRefBoard.current;
+                if (!canvasBoard) return;
+                const ctxBoard = canvasBoard.getContext('2d');
+    
+                ctxBoard.beginPath();
+                ctxBoard.moveTo(data.offsetX, data.offsetY);
+            });
+            
+            socket.on('pictionary-draw', (data) => {
+                const canvasBoard = canvasRefBoard.current;
+                if (!canvasBoard) return;
+                const ctxBoard = canvasBoard.getContext('2d');
+    
+                ctxBoard.lineTo(data.offsetX, data.offsetY);
+                ctxBoard.strokeStyle = data.color;
+                ctxBoard.stroke();
+            });
+    
+            socket.on('pictionary-stopDraw', (data) => {
+                const canvasBoard = canvasRefBoard.current;
+                if (!canvasBoard) return;
+                const ctxBoard = canvasBoard.getContext('2d');
+    
+                ctxBoard.closePath();
+            });
+    
+            socket.on('pictionary-eraseEverything', (data) => {
+                const canvasBoard = canvasRefBoard.current;
+                if (!canvasBoard) return;
+                const ctxBoard = canvasBoard.getContext('2d');
+    
+                ctxBoard.clearRect(0, 0, canvasBoard.width, canvasBoard.height);
+            });
+    
+            return () => {
+                socket.off('pictionary-startDraw');
+                socket.off('pictionary-draw');
+                socket.off('pictionary-stopDraw');
+                socket.off('pictionary-eraseEverything');
+            };
+        }
 
-            ctxBoard.lineTo(data.offsetX, data.offsetY);
-            ctxBoard.strokeStyle = data.color;
-            ctxBoard.stroke();
-        });
-
-        socket.on('pictionary-stopDraw', (data) => {
-            const canvasBoard = canvasRefBoard.current;
-            if (!canvasBoard) return;
-            const ctxBoard = canvasBoard.getContext('2d');
-
-            ctxBoard.closePath();
-        });
-
-        socket.on('pictionary-eraseEverything', (data) => {
-            const canvasBoard = canvasRefBoard.current;
-            if (!canvasBoard) return;
-            const ctxBoard = canvasBoard.getContext('2d');
-
-            ctxBoard.clearRect(0, 0, canvasBoard.width, canvasBoard.height);
-        });
-
-    },[word]);
-
-    useEffect(() => {
-        return () => {
-            socket.off('pictionary-startDraw');
-            socket.off('pictionary-draw');
-            socket.off('pictionary-stopDraw');
-            socket.off('pictionary-eraseEverything');
-        };
-    }, []);
-
+    },[socket, word]);
 
     return (
         <div>

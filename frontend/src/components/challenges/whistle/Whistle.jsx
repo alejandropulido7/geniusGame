@@ -1,15 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import socket from '../../../config/socket';
-import {Outlet, useParams, useNavigate} from 'react-router-dom'
+import React, { useEffect, useState, useContext } from 'react';
 import {RENDER_CHALLENGE} from '../../../utils/constants'
-import AdminAW from './AdminW';
-import PlayerChallengeAW from './PlayerChallengeW';
-import OpponentInteractiveAW from './OpponentInteractiveW';
-import OthersPlayersAW from './OthersPlayersW';
 import AdminW from './AdminW';
 import PlayerChallengeW from './PlayerChallengeW';
 import OpponentInteractiveW from './OpponentInteractiveW';
 import OthersPlayersW from './OthersPlayersW';
+import { SocketContext } from '../../../context/SocketProvider';
 
 
 const Whistle = ({renderIn}) => {
@@ -17,6 +12,7 @@ const Whistle = ({renderIn}) => {
   const [word, setWord] = useState('');
   const [wordReady, setWordReady] = useState(false);
   const [render, setRender] = useState(null);
+  const {socket} = useContext(SocketContext);
 
   useEffect(() => {
     if(localStorage.getItem('whistle-GG') != null){
@@ -33,7 +29,7 @@ const Whistle = ({renderIn}) => {
 
   useEffect(() => {
   
-    socket.on('whistle', (data) => {
+    socket?.on('whistle', (data) => {
       setWord(data.word);
       setWordReady(data.wordReady)
     });
@@ -53,7 +49,7 @@ const Whistle = ({renderIn}) => {
       break;
     }    
 
-  },[word, wordReady, renderIn]);
+  },[socket, word, wordReady, renderIn]);
   
 
   return (

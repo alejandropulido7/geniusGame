@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useContext} from 'react'
 import {CHALLENGES_IN_BOARD} from '../../../utils/constants';
-import socket from '../../../config/socket';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const Roulette = () => {
     const [isSpinning, setIsSpinning] = useState(false);
@@ -8,25 +8,27 @@ const Roulette = () => {
     const [stopRotation, setStopRotation] = useState(false);
     const [result, setResult] = useState(null);
     const [dataRenderChallenge, setDataRenderChallenge] = useState({});
+    const {socket} = useContext(SocketContext);
 
-    // const options = ['🍎', '🍌', '🍒', '🍇', '🍉', '🍍'];
     const options = CHALLENGES_IN_BOARD;
 
     useEffect(() => {
 
-        socket.on('openModalRoulette-startRoulette', (data) => {  
-            setIsSpinning(true);
-            setResult(null);
-            setDataRenderChallenge(data);    
-        });
+        if(socket){
+            socket.on('openModalRoulette-startRoulette', (data) => {  
+                setIsSpinning(true);
+                setResult(null);
+                setDataRenderChallenge(data);    
+            });
 
-        socket.on('openModalRoulette-stopRoulette', (data) => {  
-            setIsSpinning(false);
-            setStopRotation(true);
-            setDataRenderChallenge(data);
-        });
+            socket.on('openModalRoulette-stopRoulette', (data) => {  
+                setIsSpinning(false);
+                setStopRotation(true);
+                setDataRenderChallenge(data);
+            });
+        }
 
-    }, []);
+    }, [socket]);
 
     useEffect(() => {
         let interval;
@@ -44,7 +46,7 @@ const Roulette = () => {
             // dataResult.challenge = options[winningIndex].id;
             dataResult.challenge = 'acting';
             dataResult.isLastStep = true;
-            socket.emit('openModalConfirmation', dataResult);
+            socket?.emit('openModalConfirmation', dataResult);
             setStopRotation(false);
         }
 

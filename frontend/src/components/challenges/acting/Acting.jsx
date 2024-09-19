@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import socket from '../../../config/socket';
+import React, { useContext, useEffect, useState } from 'react';
 import AdminA from './AdminA';
 import PlayerChallengeA from './PlayerChallengeA';
 import OpponentInteractiveA from './OpponentInteractiveA';
 import OthersPlayersA from './OthersPlayersA';
 import {RENDER_CHALLENGE} from '../../../utils/constants'
+import { SocketContext } from '../../../context/SocketProvider';
 
 
 const Acting = ({renderIn}) => {
@@ -12,6 +12,7 @@ const Acting = ({renderIn}) => {
   const [word, setWord] = useState('');
   const [wordReady, setWordReady] = useState(false);
   const [render, setRender] = useState(null);
+  const {socket} = useContext(SocketContext)
 
   useEffect(() => {
     if(localStorage.getItem('acting-GG') != null){
@@ -27,7 +28,7 @@ const Acting = ({renderIn}) => {
 
   useEffect(() => {
   
-    socket.on('acting', (data) => {
+    socket?.on('acting', (data) => {
       setWord(data.word);
       setWordReady(data.wordReady)
     });

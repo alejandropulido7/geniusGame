@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import {FLAGS, OPTIONS_CHALLENGES } from '../../utils/constants'
-import {CHALLENGES_IN_BOARD, getRandomObject, ACTING} from '../../utils/constants'
 import StepsBoard from './StepsBoard';
-// import socket from '../../config/socket';
 import {updateBoardPositions, getSession} from '../../services/sessionService';
 import {useParams, useNavigate} from 'react-router-dom';
 import BoardChallenges from '../challenges/BoardChallenges';
@@ -17,10 +15,7 @@ import { SocketContext } from '../../context/SocketProvider';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
-  // const [session, setSession] = useState({});
   const [playersPositions, setPlayersPositions] = useState([]);
-  const [gameStarted, setGameStarted] = useState(false); 
-  const [flags, setFlags] = useState(FLAGS);
   const {idRoom} = useParams();
   const [configBoard, setConfigBoard] = useState({
       lenghtBoard: 10,

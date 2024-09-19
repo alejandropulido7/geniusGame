@@ -3,7 +3,7 @@ import AdminH from './AdminH';
 import PlayerChallengeH from './PlayerChallengeH';
 import OpponentInteractiveH from './OpponentInteractiveH';
 import { RENDER_CHALLENGE } from '../../../utils/constants';
-import socket from '../../../config/socket';
+import { SocketContext } from '../../../context/SocketProvider';
 
 const Hunged = ({renderIn}) => {
 
@@ -12,21 +12,22 @@ const Hunged = ({renderIn}) => {
     const [missedAttemps, setMissedAttemps] = useState(5);
     const [gameFinished, setGameFinished] = useState(false);
     const [render, setRender] = useState(null);
+    const {socket} = useContext(SocketContext);
 
     useEffect(() => {
-      if(localStorage.getItem('hunged-GG') != null){
-          setSecretWord(JSON.parse(localStorage.getItem('hunged-GG')).secretWord);
-          setWordShowed(JSON.parse(localStorage.getItem('hunged-GG')).wordShowed);
-          setMissedAttemps(JSON.parse(localStorage.getItem('hunged-GG')).missedAttemps);
-          setGameFinished(JSON.parse(localStorage.getItem('hunged-GG')).gameFinished);
-      }     
-
+      const properties = JSON.parse(localStorage.getItem('hunged-GG'));
+      if(properties != null){
+          setSecretWord(properties.secretWord);
+          setWordShowed(properties.wordShowed);
+          setMissedAttemps(properties.missedAttemps);
+          setGameFinished(properties.gameFinished);
+      }
     },[])
 
 
   useEffect(() => {
 
-    socket.on('hunged', (dataHunged) => {
+    socket?.on('hunged', (dataHunged) => {
       if(dataHunged.sendedBy == RENDER_CHALLENGE.opponent){
         sendedByOpponent(dataHunged);
       }
@@ -35,7 +36,7 @@ const Hunged = ({renderIn}) => {
       }
     });
 
-    socket.on('notPassChallenge', (data) => {
+    socket?.on('notPassChallenge', (data) => {
       setGameFinished(true);
       setMissedAttemps(0);
     })
@@ -54,7 +55,7 @@ const Hunged = ({renderIn}) => {
 
     localStorage.setItem('hunged-GG', JSON.stringify({secretWord, wordShowed, missedAttemps, gameFinished}));
 
-  }, [renderIn, secretWord, wordShowed, missedAttemps, gameFinished]);
+  }, [socket, renderIn, secretWord, wordShowed, missedAttemps, gameFinished]);
 
   const sendedByOpponent = (data) => {
     const secretWordModified = '_'.repeat(data.secretWord.length);

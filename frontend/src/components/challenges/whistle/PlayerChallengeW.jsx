@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
-import socket from '../../../config/socket';
+import React, { useState, useContext } from 'react'
+import { SocketContext } from '../../../context/SocketProvider';
 
 const PlayerChallengeW = ({word}) => {
 
     const [showButton, setShowButton] = useState(true);
+    const {socket} = useContext(SocketContext);
 
     const emitResult = () => {
       setShowButton(false);
-      socket.emit('stopChallenge', {socketId: socket.id});
+      if(socket){
+        socket.emit('stopChallenge', {socketId: socket.id});
+      }
     }
   
     return (
