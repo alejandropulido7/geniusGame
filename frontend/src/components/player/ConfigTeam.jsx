@@ -65,7 +65,7 @@ const ConfigTeam = () => {
               if(!team.error){  
                 setCookie('teamName-GG', team.teamName, 1);
                 setCookie('idDevice-GG', team.idTeam, 1);       
-                localStorage.setItem('authToken', team.token);                  
+                setCookie('token', team.token);                  
                 navigate('/player/room/'+team.idRoom);
               } else {
                 setError(team.error);

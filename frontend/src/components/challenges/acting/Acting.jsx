@@ -48,7 +48,7 @@ const Acting = ({renderIn}) => {
       break;
     }    
 
-  },[word, wordReady, renderIn]);
+  },[socket, word, wordReady, renderIn]);
   
 
   return (

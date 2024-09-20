@@ -150,12 +150,9 @@ const BoardPlayer = () => {
             });
 
             socket.on('turnOf', (player) => {
-                console.log('socket.id', socket.id);
                 if(idTeamCookie && player.idTeam == idTeamCookie){
-                    console.log('turnOf', 'ENTRA EN TRUE');
                     setYouTurn(true);
                 } else {
-                    console.log('turnOf', 'ENTRA EN FALSE');
                     setYouTurn(false);
                 }
             });    

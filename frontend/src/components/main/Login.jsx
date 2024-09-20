@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import {loginService} from '../../services/authServices';
 import {useNavigate} from 'react-router-dom'
+import { setCookie } from '../../utils/cookies';
 
 const Login = () => {
 
@@ -12,7 +13,7 @@ const Login = () => {
     e.preventDefault();
     const userAuthenticated = await loginService(email, password);
     if(userAuthenticated){
-      localStorage.setItem('authToken', userAuthenticated.token); // Llamada para guardar el token y conectar el socket
+      setCookie('token', userAuthenticated.token); // Llamada para guardar el token y conectar el socket
       navigate('/board');
     }
 

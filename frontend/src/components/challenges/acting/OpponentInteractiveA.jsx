@@ -44,7 +44,7 @@ const OpponentInteractiveA = ({wordReady}) => {
           <HideWord word={finalWord}/>  
         }
         <ValidateChallenge/>
-        {finalWord != '' && 
+        {finalWord == '' && 
         <div>
           <p>Aqui va el listado de peliculas o series sugeridos</p>
         </div>}

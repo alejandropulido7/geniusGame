@@ -37,10 +37,9 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
         }
       });
 
-  },[activeChallenge]);
+  },[]);
 
   useEffect(() => {
-
     if(socket){
       socket.on('renderChallenge', (dataChallengeSocket) => {
         console.log('idDevice', getCookie('idDevice-GG'));
@@ -54,11 +53,14 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
           renderDevice(dataChallengeSocket);
         }
       });
-
+  
       return () => {
         socket.off('renderChallenge');
       }
     }
+  },[socket])
+
+  useEffect(() => {
 
     switch (dataChallenge.challenge) {
       case ACTING:
@@ -86,12 +88,12 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
         setComponentChallenge(null)
         break;
     }
-  }, [socket, dataChallenge, renderPlayer]);
+  }, [dataChallenge, renderPlayer]);
 
 
   const renderDevice = (data) => {
     const idDevice = getCookie('idDevice-GG');
-    console.warn('renderDevice' , dataChallenge)
+    console.warn('renderDevice' , data)
     switch (idDevice) {
       case data.participants.player.idTeam:
         setRenderPlayer(RENDER_CHALLENGE.player);
@@ -110,7 +112,7 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
     <>
       { activeChallenge && 
       <div className='steps-center-container bg-white'>
-        <div className='challenges-container flex flex-col'>
+        <div className='flex flex-col'>
           {/* <h2>Pasa el reto para poder avanzar</h2> */}
           {renderPlayer == 'ADMIN' && <Chronometer data={dataChallenge}/>}
           {componentChallenge}        

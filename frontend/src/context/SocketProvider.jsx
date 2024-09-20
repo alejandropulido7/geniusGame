@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useReducer } from 'react';
 import { io } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
+import { deleteCookie, getCookie, setCookie } from '../utils/cookies';
 
 
 export const SocketContext = createContext({
@@ -49,7 +50,7 @@ export const SocketProvider = ({ children, isBoard=false }) => {
 
     useEffect(() => {
         
-        const token = localStorage.getItem('authToken');
+        const token = getCookie('token');
         if(token){          
             console.log('SocketContext')  
             const socket = io(backend, {
@@ -62,7 +63,7 @@ export const SocketProvider = ({ children, isBoard=false }) => {
             setToken(token);
             socket.on('connect_error', (error) => {
                 console.error('Error de conexión al socket:', error.message);
-                localStorage.removeItem('authToken');
+                deleteCookie('token');
                 setToken(null);
                 setSocket(null);
                 navigate('/');
@@ -74,14 +75,13 @@ export const SocketProvider = ({ children, isBoard=false }) => {
         
 
     const login = (userToken) => {
-        console.log(userToken)
         setToken(userToken);
-        localStorage.setItem('authToken', userToken);
+        setCookie('token', userToken);
     };
 
     const logout = () => {
         setToken(null);
-        localStorage.removeItem('authToken');
+        deleteCookie('token');
     };
 
 

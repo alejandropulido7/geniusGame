@@ -88,10 +88,6 @@ const BoardGame = () => {
       }
     }
 
-    return () => {
-      setFlagPositions([]);
-      setSession({});
-    }
   }, [socket, openModalChoiceNewFlag, playersPositions, flagPositions]);
 
   
@@ -142,7 +138,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: '',
+        challenge: 'acting',
         player: playerModified
       };
     }

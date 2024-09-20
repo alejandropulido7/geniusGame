@@ -54,29 +54,36 @@ const Roulette = () => {
     }, [isSpinning, stopRotation, rotation, options]);
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
+        <div className="flex flex-col items-center justify-center h-auto">
             <div className="relative rounded-full overflow-hidden">
                 <div
-                    className={`relative w-64 h-64 rounded-full border-4 border-gray-300 flex items-center justify-center transition-transform ease-linear z-10 `}
-                    style={{ transform: `rotate(${rotation}deg)` }}
-                >
+                    className={`relative rounded-full border-4 border-gray-300 flex items-center justify-center transition-transform ease-linear z-10 `}
+                    style={{ transform: `rotate(${rotation}deg)`, 
+                        width: '50vh', 
+                        height: '50vh' 
+                    }}>
                 
                     {options.map((option, index) => (
                         <div
                             key={index}
                             className="absolute text-3xl"
                             style={{
-                                transform: `rotate(${index * (360 / options.length)}deg) translate(90px) rotate(-${index * (360 / options.length)}deg)`,
-                            }}
-                        >
-                            <img width='25x' height='25px' src={option.icon}></img> 
+                                transform: `rotate(${index * (360 / options.length)}deg) translate(19vh) rotate(-${index * (360 / options.length)}deg)`
+                            }}>
+                            <img width='40x' height='40px' src={option.icon}></img> 
                         </div>
                     ))}                   
                 
                 </div>
                 <div className='absolute'>
-                    <div className='absolute w-40 h-36 bg-gray-300'
-                        style={{clipPath: 'polygon(100% 0, 30% 50%, 100% 100%)', transform: 'rotate(0deg)', left: '100px', top: '-200px'}}
+                    <div className='absolute bg-gray-300'
+                        style={{clipPath: 'polygon(100% 0, 30% 50%, 100% 100%)', 
+                            transform: 'rotate(0deg)', 
+                            left: '16vh', 
+                            top: '-40vh',
+                            width: '34vh', 
+                            height: '30vh'
+                        }}
                         >
                     </div>
                 </div>

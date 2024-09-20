@@ -26,12 +26,12 @@ const ConfigGame = () => {
     };
 
     const handleSubmit = async () => {
-        const token = localStorage.getItem('authToken');
+        const token = getCookie('token');
         const sessionCreated = await createSession(configGame, token);
         console.log(sessionCreated);
         if(sessionCreated){
             setCookie('idDevice-GG', sessionCreated.idHost, 1);
-            localStorage.setItem('authToken', sessionCreated.token);
+            setCookie('token', sessionCreated.token);
             navigate('/board/'+sessionCreated.idRoom);
         }
     }

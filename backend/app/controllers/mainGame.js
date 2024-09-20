@@ -95,13 +95,10 @@ async function startGame(gameId) {
 } 
 
 function joinPlayerGame(dataPlayer) {
-    console.log('joinPlayerGame', dataPlayer)
-    console.log(RoomStore.getRoomDetails(dataPlayer.gameId));
 
     const gameId = dataPlayer.gameId;
     const room = io.sockets.adapter.rooms.get(gameId);
 
-    console.log(io.sockets.adapter.rooms)
     if (room === undefined) {
         this.emit('status' , "This game session does not exist." );
         io.sockets.in(gameId).emit('sessionDontExist', false);
@@ -178,7 +175,7 @@ function throwDice (dataTeam) {
 async function renderChallenge(data) {
     const gameId = data.player.gameId;
     const players = RoomStore.getUsersInRoom(gameId); 
-    const challenge_name = data.challenge;
+    const challenge_name = data.challenge; 
 
     if(challenge_name != ""){
         const playersNoChallenge = players.filter(player => player.idTeam != data.player.idTeam);
@@ -290,26 +287,6 @@ async function changeFlag(data) {
         playerModified.flagActive = data.newFlag;
         playerModified.positionActive = 1;
         playerModified.prev_position = 1;
-        // RoomStore.modifyUser(gameId, playerModified);
-        // const players = RoomStore.getUsersInRoom(gameId);
-
-        // const updateTeam = await updatePositionTeamFromSocket(playerModified.teamName, 
-        //     gameId, 
-        //     playerModified.flagActive, 
-        //     playerModified.positionActive, 
-        //     playerModified.prev_position);
-        
-        // if(updateTeam == 1){
-        //     const updateChallenge = await updateChallengingInfo(gameId, false, null, null);
-        //     if(updateChallenge == 1){
-        //         console.log('changeFlag', {player: foundPlayer, challengePassed: true, players})
-        //         io.sockets.in(gameId).emit('changeFlag', {player: foundPlayer, challengePassed: true, players});
-        //     } else {
-        //         io.sockets.in(gameId).emit('status', "Error al actualizar los datos del challenge");
-        //     }
-        // } else {
-        //     io.sockets.in(gameId).emit('status', "Error al actualizar las posiciones del equipo");
-        // }
         updatePositions(playerModified, io);
     }
 

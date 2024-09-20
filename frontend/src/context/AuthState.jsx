@@ -2,6 +2,7 @@ import React, {useEffect, useReducer} from 'react'
 import { AuthContext } from './GlobalContext';
 import { io } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
+import { setCookie, getCookie, deleteCookie } from '../utils/cookies';
 
 const AuthState = ({children}) => {
 
@@ -40,7 +41,7 @@ const AuthState = ({children}) => {
     }
 
     useEffect(() => {
-        const token = localStorage.getItem('authToken');
+        const token = getCookie('token');
         if(token){            
             const socket = io(backend, {
                 auth: {token},
@@ -52,7 +53,7 @@ const AuthState = ({children}) => {
             setToken(token);
             socket.on('connect_error', (error) => {
                 console.error('Error de conexión al socket:', error.message);
-                localStorage.removeItem('authToken');
+                deleteCookie('token');
                 setToken(null);
                 setSocket(null);
                 navigate('/');
@@ -66,12 +67,12 @@ const AuthState = ({children}) => {
     const login = (userToken) => {
         console.log(userToken)
         setToken(userToken);
-        localStorage.setItem('authToken', userToken);
+        setCookie('token', userToken);
     };
 
     const logout = () => {
         setToken(null);
-        localStorage.removeItem('authToken');
+        deleteCookie('token');
     };
 
 

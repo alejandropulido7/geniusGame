@@ -5,15 +5,12 @@ import Flag from './Flag';
 import Piece from './Piece';
 
 const StepsBoard = ({arrayPositions, flag, players, stlyeClass}) => {
-
-  const [posicionJugador, setPosicionJugador] = useState(1);
   
   const colorFlag = () => {
     return findFlagProperties(flag);
   }
 
   useEffect(() => {
-    console.log('players', players)
   },[players])
 
   return (
