@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import {colorsApp, colorOptionsTrivia} from '../../../utils/constants';
 
-const AdminT = ({category, currentQuestion, options}) => {
+const AdminT_VS = ({category, currentQuestion, options}) => {
+
+  useEffect(() => {
+
+  }, [options, category, currentQuestion]);
 
   return (
     <div>
@@ -11,6 +15,7 @@ const AdminT = ({category, currentQuestion, options}) => {
       <div className='my-5'>
         <p className='p-8 bg-gray-300 border-2 rounded-md'>Pregunta: {currentQuestion}</p>
       </div> 
+      {options.length > 0 &&
       <div>
         <ul className='flex flex-wrap gap-2 justify-between'>
           {options.map((answerOption, index) => (
@@ -22,9 +27,9 @@ const AdminT = ({category, currentQuestion, options}) => {
             </li>
           ))}
         </ul> 
-      </div>       
+      </div> }      
     </div>
   )
 }
 
-export default AdminT
+export default AdminT_VS

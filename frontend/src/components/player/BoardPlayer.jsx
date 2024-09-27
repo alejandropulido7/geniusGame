@@ -56,14 +56,12 @@ const BoardPlayer = () => {
     const getTeamCreated = (idRoom) => {        
         getTeamById(idTeamCookie, idRoom)
         .then((teamCreatedinSession) => {
-            console.log(teamCreatedinSession)
             setTeamName(nameTeamCookie);
             setIdTeam(idTeamCookie);
             setFlagActive(teamCreatedinSession.flag_active);
             setPrevPosition(teamCreatedinSession.prev_position)
             setPositionActive(teamCreatedinSession.position_active);
             if(socket){
-                console.log('socket', 'correct')
                 socket.emit('joinPlayerGame', {
                     socketId: socket.id,
                     idTeam: teamCreatedinSession.id_team,
@@ -156,10 +154,6 @@ const BoardPlayer = () => {
                     setYouTurn(false);
                 }
             });    
-            
-            socket.on('prueba', (player) => {
-                console.log('prueba', player);
-            }); 
 
             socket.on('openModalChoiceNewFlag', (data) => {
                 if(idTeamCookie && data.idTeam == idTeamCookie){

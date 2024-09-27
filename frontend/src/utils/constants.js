@@ -15,6 +15,21 @@ colorsApp.set('red', {color: '#B71515', shadow: '#7F1111'});
 colorsApp.set('purple', {color: '#7015B7', shadow: '#50108E'});
 colorsApp.set('green', {color: '#0A854B', shadow: '#066334'});
 
+const colorOptionsTrivia = (index) => {
+  switch (index) {
+    case 0:        
+      return colorsApp.get('purple').color;
+    case 1:        
+      return colorsApp.get('red').color;
+    case 2:        
+      return colorsApp.get('green').color;
+    case 3:        
+      return colorsApp.get('blue').color;
+    default:
+      break;
+  }
+}
+
 
 const PICTIONARY = 'pictionary';
 const WORD_CHAIN = 'word_chain'; //Palabras encadenadas por la ultima letra
@@ -23,6 +38,7 @@ const TRIVIA = 'trivia';
 const ACTING = "acting";
 const WHISTLE_SONG = "whistle_song" //silbar cancion que el oponente ponga
 const BACK_HOME = 'back_home';
+const TRIVIA_VS = 'trivia_vs';
 const FLAGS = [
   {id: 'blue', name: 'Azul', color: colorsApp.get('blue').color, shadow: colorsApp.get('blue').shadow}, 
   {id: 'red', name: 'Rojo', color: colorsApp.get('red').color, shadow: colorsApp.get('red').shadow}, 
@@ -68,6 +84,10 @@ OPTIONS_CHALLENGES.set(TRIVIA, {
   title: 'Juego de preguntas',
   description: 'Responde la pregunta correctamente para poder avanzar'
 });
+OPTIONS_CHALLENGES.set(TRIVIA_VS, {
+  title: 'Reto de preguntas',
+  description: 'El que responda correctamente en el menor tiempo posible gana!'
+});
 
 const RENDER_CHALLENGE = {
   admin: 'ADMIN',
@@ -105,12 +125,14 @@ export {CHALLENGES_IN_BOARD,
   TRIVIA, 
   ACTING, 
   BACK_HOME, 
-  WHISTLE_SONG, 
+  WHISTLE_SONG,
+  TRIVIA_VS, 
   getRandomObject, 
   FLAGS, 
   OPTIONS_CHALLENGES, 
   RENDER_CHALLENGE,
   findFlagProperties,
   colorsApp,
-  PROP_PIECES}
+  PROP_PIECES,
+  colorOptionsTrivia}
 

@@ -37,11 +37,11 @@ async function getQuestionTrivia(req, res) {
 };
 
 
-async function getConnectTrivia(amount) {
+async function getConnectTrivia() {
     const randomIndex = Math.floor(Math.random() * triviaCategories.length);
     const categoryRequest = triviaCategories[randomIndex];
     try {
-        const response = await axios.get(`https://opentdb.com/api.php?amount=${amount}&type=multiple&category=${categoryRequest.id}`);
+        const response = await axios.get(`https://opentdb.com/api.php?amount=1&type=multiple&category=${categoryRequest.id}`);
         const data = response.data.results[0];
         
         let question = he.decode(data.question);

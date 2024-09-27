@@ -120,7 +120,7 @@ const ConfigTeam = () => {
   }
 
   return (
-    <div className='bg-emerald-500 p-3'>
+    <div className='bg-black p-3'>
       <div className='m-auto bg-white p-5 rounded-md' style={{width: '90%'}}>
         <div className='flex flex-col my-5'>
             <label>Sala: {sessionId} </label>
@@ -156,7 +156,7 @@ const ConfigTeam = () => {
               }
         </div>     
         
-        <button className='btn border-0 bg-emerald-500 text-white rounded-md' onClick={entrySessionGame}>Entrar</button>
+        <button className='btn border-0 bg-black text-white rounded-md' onClick={entrySessionGame}>Entrar</button>
         
       </div>
     </div>

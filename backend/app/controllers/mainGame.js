@@ -192,8 +192,8 @@ async function renderChallenge(data) {
             challenge: challenge_name,
             participants
         };
-        if(challenge_name == 'trivia'){ 
-           const dataTrivia = await getConnectTrivia(1);
+        if(challenge_name == 'trivia' || challenge_name == 'trivia_vs'){ 
+           const dataTrivia = await getConnectTrivia();
            dataRenderChallenge.trivia = dataTrivia;
         }
         const participantsJson = JSON.stringify(participants);
@@ -246,20 +246,6 @@ async function resultChallenge(data){
             let playerModified = {...foundPlayer};
             playerModified.prev_position = foundPlayer.prev_position;
             playerModified.positionActive = playerModified.prev_position;
-            // RoomStore.modifyUser(gameId, playerModified);
-            // const players = RoomStore.getUsersInRoom(gameId);
-            // updatePositionTeamFromSocket(playerModified.teamName, gameId, playerModified.flagActive, playerModified.positionActive, playerModified.prev_position)
-            //     .then(() => {
-            //         updateChallengingInfo(gameId, false, null, null)
-            //         .then(() => {
-            //             io.sockets.in(gameId).emit('resultChallenge', {player: foundPlayer, challengePassed, players});
-            //         }).catch((error) => {
-            //             io.sockets.in(gameId).emit('status', error);
-            //         })
-            //     })
-            //     .catch(err => {
-            //         io.sockets.in(gameId).emit('status', err);
-            //     });
             updatePositions(playerModified, io);
         } else {
             const isLastStep = foundPlayer.isLastStep;
@@ -289,10 +275,7 @@ async function changeFlag(data) {
         playerModified.prev_position = 1;
         updatePositions(playerModified, io);
     }
-
-    
 }
-
 
 function acting(data){
     emitDataOtherScreen('acting', data);
@@ -310,7 +293,7 @@ function hunged(data){
     emitDataOtherScreen('hunged', data);
 }
 
-function trivia(data){
+async function trivia(data){
     const nameEmit = data.function;
     const idSocket = data.data.socketId;
     const gameId = RoomStore.getRoomByIdSocket(idSocket);
@@ -321,7 +304,22 @@ function trivia(data){
         foundPlayer.isLastStep = isLastStep;
     }
     if(gameId && foundPlayer){
-        io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, response: data.data.response}); 
+        console.log('trivia', data);
+        console.log('foundPlayer', foundPlayer);
+        if(nameEmit == 'versus'){
+            TurnsGame.addTurnTrivia(gameId, foundPlayer.idTeam);
+            console.log('turnos',TurnsGame.getTurnsTrivia(gameId));
+            if(TurnsGame.isLastTurnTrivia(gameId)){
+                const newQuestion = await getConnectTrivia();
+                console.log(newQuestion);
+                io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, data: data.data, newQuestion});
+                TurnsGame.clearTurnsTrivia(gameId);
+            } else {
+                io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, data: data.data});
+            }
+        } else if(nameEmit == 'regular'){
+            io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, response: data.data.response}); 
+        }
     }
 }
 

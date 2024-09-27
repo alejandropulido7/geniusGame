@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import {Outlet, useParams, useNavigate} from 'react-router-dom'
 import Chronometer from './Chronometer';
-import {ACTING, BACK_HOME, WORD_CHAIN, HUNGED, PICTIONARY, TRIVIA, WHISTLE_SONG, OPTIONS_CHALLENGES, RENDER_CHALLENGE} from '../../utils/constants'
+import {ACTING, BACK_HOME, WORD_CHAIN, HUNGED, PICTIONARY, TRIVIA, WHISTLE_SONG, OPTIONS_CHALLENGES, RENDER_CHALLENGE, TRIVIA_VS} from '../../utils/constants'
 import Hunged from './hunged/Hunged';
 import ChainWord from './chainWords/ChainWords';
 import Pictionary from './pictionary/Pictionary';
@@ -14,6 +14,7 @@ import {getSession} from '../../services/sessionService';
 import './BoardChallenges.css'
 import BackHome from './back-home/BackHome';
 import { SocketContext } from '../../context/SocketProvider';
+import Trivia_VS from './trivia-versus/Trivia_VS';
 
 const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
 
@@ -42,9 +43,6 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
   useEffect(() => {
     if(socket){
       socket.on('renderChallenge', (dataChallengeSocket) => {
-        console.log('idDevice', getCookie('idDevice-GG'));
-        console.log('dataChallengeSocket', dataChallengeSocket);
-        console.log('socketId', socket.id);
         setOpenModal(false);
         setOpenModalRoulette(false);
         if(dataChallengeSocket.challenge != ''){
@@ -78,6 +76,9 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
       case TRIVIA:
         setComponentChallenge(<Trivia renderIn={renderPlayer} dataTrivia={dataChallenge.trivia}/>)
         break;
+      case TRIVIA_VS:
+        setComponentChallenge(<Trivia_VS renderIn={renderPlayer} dataTrivia={dataChallenge.trivia} playerPunisher={dataChallenge.participants.player}/>)
+        break;
       case HUNGED:
         setComponentChallenge(<Hunged renderIn={renderPlayer}/>)
         break;  
@@ -93,7 +94,6 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
 
   const renderDevice = (data) => {
     const idDevice = getCookie('idDevice-GG');
-    console.warn('renderDevice' , data)
     switch (idDevice) {
       case data.participants.player.idTeam:
         setRenderPlayer(RENDER_CHALLENGE.player);

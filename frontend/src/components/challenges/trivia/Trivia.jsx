@@ -31,10 +31,9 @@ const Trivia = ({renderIn, dataTrivia}) => {
   },[dataTrivia]);
 
   useEffect(() => {
-    
     socket?.on('trivia-regular', (data) => {
       setPlayer(data.player);
-      if (data.response === dataTrivia.correctAnswer) {
+      if (data.response === correctAnswer) {
         setDescriptionModal('¡Respuesta correcta!');
         setButtonModal('Avanzar');
         setPassChallenge(true);
@@ -44,20 +43,24 @@ const Trivia = ({renderIn, dataTrivia}) => {
         setPassChallenge(false);
       }
       setOpenModal(true);
-    })
+    });
+
+  },[socket, correctAnswer]);
+
+  useEffect(() => { 
 
     switch (renderIn) {
       case RENDER_CHALLENGE.admin:
-        setRender(<AdminT category={dataTrivia.category} options={dataTrivia.options} currentQuestion={dataTrivia.question}/>)
+        setRender(<AdminT category={category} options={options} currentQuestion={currentQuestion}/>)
       break;
       case RENDER_CHALLENGE.player:
-        setRender(<PlayerChallengeT options={dataTrivia.options} correctAnswer={dataTrivia.correctAnswer}/>);
+        setRender(<PlayerChallengeT options={options} correctAnswer={correctAnswer}/>);
       break;
       case RENDER_CHALLENGE.opponent:
-        setRender(<OpponentInteractiveT correctAnswer={dataTrivia.correctAnswer}/>);
+        setRender(<OpponentInteractiveT correctAnswer={correctAnswer}/>);
       break;
       default:
-        setRender(<OthersPlayersT correctAnswer={dataTrivia.correctAnswer}/>);
+        setRender(<OthersPlayersT correctAnswer={correctAnswer}/>);
       break;
     } 
 
@@ -67,7 +70,7 @@ const Trivia = ({renderIn, dataTrivia}) => {
       setOptions('');
       setCorrectAnswer('');
     }
-  }, [socket, renderIn, dataTrivia]);
+  }, [renderIn, category, options, currentQuestion, correctAnswer]);
   
   const sendResult = () => {
     socket?.emit('resultChallenge', {player, challengePassed: passChallenge});
