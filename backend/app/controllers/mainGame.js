@@ -309,13 +309,14 @@ async function trivia(data){
         if(nameEmit == 'versus'){
             TurnsGame.addTurnTrivia(gameId, foundPlayer.idTeam);
             console.log('turnos',TurnsGame.getTurnsTrivia(gameId));
-            if(TurnsGame.isLastTurnTrivia(gameId)){
+            const isLastTurnTrivia = TurnsGame.isLastTurnTrivia(gameId);
+            if(isLastTurnTrivia){
                 const newQuestion = await getConnectTrivia();
                 console.log(newQuestion);
-                io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, data: data.data, newQuestion});
+                io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, data: data.data, isLastTurnTrivia: true, newQuestion});
                 TurnsGame.clearTurnsTrivia(gameId);
             } else {
-                io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, data: data.data});
+                io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, data: data.data, isLastTurnTrivia: false});
             }
         } else if(nameEmit == 'regular'){
             io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, response: data.data.response}); 
