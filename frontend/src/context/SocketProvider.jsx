@@ -17,7 +17,7 @@ export const SocketProvider = ({ children, isBoard=false }) => {
     const backend = import.meta.env.VITE_BACKEND || 'http://localhost:5000';
     const navigate = useNavigate();
     const initialState = {
-        token: null,
+        token: getCookie('token'),
         socket: null,
     }
 

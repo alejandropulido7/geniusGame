@@ -39,7 +39,7 @@ const PlayerChallengeT_VS = ({options, round, isRunning, setIsRunning, correctAn
       {options.length > 0 && showOptions
       ?
       <div>
-        <div className="text-4xl font-mono">{Math.round(milliseconds/1000)} seg</div>
+        <div className="text-4xl font-mono">{(milliseconds/1000).toFixed(2)} seg</div>
         <div>
           <ul className='flex flex-col gap-2 justify-between'>
             {options.map((answerOption, index) => (

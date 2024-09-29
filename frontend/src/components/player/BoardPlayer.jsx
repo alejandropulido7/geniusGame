@@ -11,6 +11,7 @@ import {CHALLENGES_IN_BOARD, FLAGS, findFlagProperties, BACK_HOME} from '../../u
 import Winner from '../challenges/common/Winner';
 import './BoardPlayer.css'
 import { SocketContext } from '../../context/SocketProvider';
+import PreventBackButton from './PreventBackButton';
 
 const BoardPlayer = () => {
 
@@ -100,11 +101,6 @@ const BoardPlayer = () => {
     }, [activeChallenge, socket]);
 
 
-    useEffect(() => {
-        
-        
-    },[gameFinished, winner]);
-
     useEffect(() => {   
 
         if(socket){
@@ -175,7 +171,7 @@ const BoardPlayer = () => {
             setShowStartRoulette(true);
         }
                
-    },[activeChallenge, socket]);
+    },[activeChallenge, socket, gameFinished, winner]);
 
     
 
@@ -249,6 +245,7 @@ const BoardPlayer = () => {
                 <div className='bg-white p-10 board-player-center rounded-md'>
                     { !activeChallenge && 
                     <div className='flex flex-col justify-between h-full'>
+                        <div><PreventBackButton/></div>
                         <div className='flex justify-center gap-5'>
                             <h3>Sesion: {codeSesion}</h3>
                             <h3>Tu equipo: {teamName}</h3>

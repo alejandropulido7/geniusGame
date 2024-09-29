@@ -14,7 +14,17 @@ async function createTeam(req, res) {
             }
         });
 
-        if(teamAlreadyName) return res.status(400).json({error: 'Team already has been created'});
+        if(teamAlreadyName && teamAlreadyName.id_team != req.body.id_team){
+            return res.status(400).json({error: 'Team already has been created'});
+        } else if(teamAlreadyName && teamAlreadyName.id_team == req.body.id_team) {
+            const token = await createAccessToken({
+                idTeam: teamAlreadyName.id_team,
+                teamName: teamAlreadyName.name_team,
+                prop_piece: teamAlreadyName.prop_piece,
+                idRoom: teamAlreadyName.id_session
+            });    
+            return res.status(200).json({idRoom: teamAlreadyName.id_session, idTeam: teamAlreadyName.id_team, teamName: teamAlreadyName.name_team, token});
+        }
 
         const idTeam = generateUUID(10);
         const teamCreated = await Team.create({

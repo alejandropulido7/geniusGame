@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import {setCookie, deleteCookie, hasCookie} from '../../utils/cookies'
+import {setCookie, deleteCookie, hasCookie, getCookie} from '../../utils/cookies'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {getSession} from '../../services/sessionService'
 import {createTeam} from '../../services/teamService'
@@ -22,19 +22,17 @@ const ConfigTeam = () => {
   const {setActiveChallenge} = useContext(GlobalContext);
   const {tokenAdmin} = useParams();
   const [pieceChose, setPieceChose] = useState(null);
-  const [color, setColor] = useState("#cccccc");
+  const [color, setColor] = useState("#cacaca");
   const [emoji, setEmoji] = useState('😀');
+  const idTeamCookie = getCookie('idDevice-GG');
+  const teamNameCookie = getCookie('teamName-GG');
+
 
   useEffect(() => {
-    deleteCookie('idDevice-GG');
-    deleteCookie('teamName-GG');
-
-    return () => {
-      setActiveChallenge(false);
+    console.warn(flagSelected);
+    if(teamNameCookie){
+      setTeamName(teamNameCookie);
     }
-  },[]);
-
-  useEffect(() => {
     if(tokenAdmin){
       validateSessionToken(tokenAdmin)
         .then((session) => {
@@ -46,6 +44,10 @@ const ConfigTeam = () => {
     } else {
       navigate('/');
     }
+
+    return () => {
+      setActiveChallenge(false);
+    }
   },[]);
 
   const createTeamInRoom = async () => {    
@@ -55,6 +57,7 @@ const ConfigTeam = () => {
           const jsonPlayers = JSON.stringify(players);
           const payload = {
             id_session: sessionId,
+            id_team: idTeamCookie,
             name_team: teamName,
             players: jsonPlayers,
             prop_piece: JSON.stringify({color, emoji}),
@@ -127,7 +130,7 @@ const ConfigTeam = () => {
         </div>
         <div className='flex justify-between my-4'>
             <label className='flex items-center'>Nombre equipo: </label>
-            <input maxLength={17} className='input' name='teamName' onChange={(e)=>setTeamName(e.target.value)}/>
+            <input maxLength={17} className='input' name='teamName' value={teamName} onChange={(e)=>setTeamName(e.target.value)}/>
         </div>
         <div>
           <AddPlayerToTeam players={players} setPlayers={setPlayers}/>

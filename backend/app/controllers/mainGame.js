@@ -60,6 +60,8 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("changeFlag", changeFlag); 
 
+    gameSocket.on("exitGamePlayer", exitGamePlayer);
+
 
 }
  
@@ -377,6 +379,13 @@ function validateChallenge(data){
 function emitDataOtherScreen(nameEmit, data) {
     const gameId = RoomStore.getRoomByIdSocket(data.socketId); 
     io.sockets.in(gameId).emit(nameEmit, data);
+}
+
+function exitGamePlayer (idSocket) {
+    const idRoom = RoomStore.removeUserFromRoom(idSocket);
+    if(idRoom){
+        io.sockets.in(idRoom).emit('playerJoinedRoom', RoomStore.getUsersInRoom(idRoom));
+    }
 }
 
 function onDisconnect () {

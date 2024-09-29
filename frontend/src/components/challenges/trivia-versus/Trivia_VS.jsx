@@ -6,6 +6,8 @@ import OpponentInteractiveT from './OpponentInteractiveT_VS';
 import OthersPlayersT from './OthersPlayersT_VS';
 import {RENDER_CHALLENGE} from '../../../utils/constants'
 import { SocketContext } from '../../../context/SocketProvider';
+import PositionsTable from './PositionsTable';
+import { getCookie } from '../../../utils/cookies';
 
 const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
   const [render, setRender] = useState(null);
@@ -25,69 +27,81 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
   const [isRunningTrivia, setIsRunningTrivia] = useState(false);
 
   useEffect(() => {
+    const properties = JSON.parse(localStorage.getItem('trivia-vs-GG'));
+    if(properties != null){
+        setCategory(properties.category);
+        setOptions(properties.options);
+        setCurrentQuestion(properties.currentQuestion);
+        setCorrectAnswer(properties.correctAnswer);
+        setScorePlayers(properties.scorePlayers);
+        setRound(properties.round);
+        setIsRunningTrivia(properties.isRunningTrivia);
+        setWinner(properties.winner);
+        setOpenModal(properties.openModal);
+    }
+  },[])
+
+
+  useEffect(() => {
     socket?.on('trivia-versus', (data) => {
       let newTimesPlayers = playersHaveAnswered;
-      console.warn('data.data.response', data.data.response)
-      console.warn('dcorrectAnswer', correctAnswer);
 
       const countCorrectAnswers = data.data.response == data.data.correctAnswer ? 1 : 0;
       const dataPlayerAnswered = {player: data.player, round: data.data.round, timeResponse: data.data.milliseconds, rightAnswers: countCorrectAnswers};
       newTimesPlayers.push(dataPlayerAnswered);
-      // setScorePlayers(newTimesPlayers);
+      
 
+      let positionPlayer = {};
+      if(newTimesPlayers.length > 1){       
+        newTimesPlayers.forEach((playerElement) => {
+          const { player, round, timeResponse, rightAnswers } = playerElement;
 
-      // setDataTrivia(initialValuesTrivia);
-
-      // let positionPlayer = {};
-      // if(newTimesPlayers.length > 0){       
-      //   newTimesPlayers.forEach((playerElement) => {
-      //     const { player, round, timeResponse, rightAnswers } = playerElement;
-
-      //     if (!positionPlayer[player.teamName]) {
-      //       positionPlayer[player.teamName] = { timeResponse: 0, rightAnswers: 0, round: 0};
-      //     }
-
-      //     positionPlayer[player.teamName].round = round;
-      //     positionPlayer[player.teamName].timeResponse += timeResponse;
-      //     positionPlayer[player.teamName].rightAnswers += rightAnswers;
-      //   })
-      // }
-
-      // const tablePositions = Object.keys(positionPlayer).map((teamName) => ({
-      //   teamName,
-      //   timeResponse: positionPlayer[teamName].timeResponse,
-      //   rightAnswers: positionPlayer[teamName].rightAnswers
-      // }));
-
-      // console.warn(tablePositions);
-
-      newTimesPlayers.sort((a, b) => {
-        if(a.rightAnswers > b.rightAnswers){
-          return a;
-        } else if (a.rightAnswers == b.rightAnswers){
-          if(a.timeResponse < b.timeResponse){
-            return a;
-          } else {
-            return b;
+          if (!positionPlayer[player.teamName]) {
+            positionPlayer[player.teamName] = { timeResponse: 0, rightAnswers: 0, round: 0};
           }
-        } else {
-          return b;
+
+          positionPlayer[player.teamName].round = round;
+          positionPlayer[player.teamName].timeResponse += timeResponse;
+          positionPlayer[player.teamName].rightAnswers += rightAnswers;
+        })
+      }
+
+      const tablePositions = Object.keys(positionPlayer).map((teamName) => ({
+        teamName,
+        timeResponse: (positionPlayer[teamName].timeResponse / 1000).toFixed(2),
+        rightAnswers: positionPlayer[teamName].rightAnswers
+      }));
+
+      
+      const orderTable = tablePositions.sort((a, b) => {
+        if(a.rightAnswers !== b.rightAnswers){
+          return b.rightAnswers - a.rightAnswers;
         }
+        return a.timeResponse - b.timeResponse;
       });
-      setScorePlayers(newTimesPlayers);
-        
+      
+      console.log(orderTable);
+      
+
+      setScorePlayers(orderTable);
+
 
       if(data.data.round < 3){
-        if(data.newQuestion){
+        if(data.isLastTurnTrivia){
           
           setRound(prev => prev+1);    
           console.log('nueva pregunta', data.newQuestion);
           setDataTrivia(data.newQuestion);
           setIsRunningTrivia(true);
         }
-      } else if(newTimesPlayers.length == 6){
-        setWinner(newTimesPlayers[0]);
+      } else if(data.isLastTurnTrivia){
+        if(orderTable[0].rightAnswers == 0 && orderTable[1].rightAnswers == 0){
+          setWinner(null);
+        } else {
+          setWinner(orderTable[0].teamName);
+        }
         setOpenModal(true);
+        setIsRunningTrivia(true);
       }
     });
 
@@ -101,10 +115,11 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
       setIsRunningTrivia(true);
     }
 
-    console.warn('dcorrectAnswer-2', correctAnswer)
+    console.warn('dcorrectAnswer-2', correctAnswer);
+
     switch (renderIn) {
       case RENDER_CHALLENGE.admin:
-        setRender(<AdminT category={category} options={options} currentQuestion={currentQuestion}/>)
+        setRender(<AdminT category={category} options={options} currentQuestion={currentQuestion} scorePlayers={scorePlayers}/>)
       break;
       case RENDER_CHALLENGE.player:
         setRender(<PlayerChallengeT round={round} options={options} correctAnswer={correctAnswer} isRunning={isRunningTrivia} setIsRunning={setIsRunningTrivia}/>);
@@ -117,7 +132,13 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
       break;
     } 
 
-  }, [renderIn, category, options, currentQuestion, correctAnswer, scorePlayers, round]);
+    localStorage.setItem('trivia-vs-GG', JSON.stringify({category, options, currentQuestion, correctAnswer, scorePlayers, round, isRunningTrivia, winner, openModal}));
+
+    return () => {
+      localStorage.clear();
+    }
+
+  }, [renderIn, category, options, currentQuestion, correctAnswer, scorePlayers, round, isRunningTrivia, winner, openModal]);
 
   const setDataTrivia = (data_trivia) => {
     if(data_trivia){
@@ -142,29 +163,28 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
       <div>
         <p>Equipo retador: {playerPunisher.teamName}</p>
       </div>
-      {scorePlayers.length > 0 && 
-      <div>
-        {scorePlayers.map((player, index) => {
-          return <p key={index}>{index+1} - {player.player.teamName} - {player.round} - {player.timeResponse} - {player.rightAnswers}</p>
-        })}
-      </div>}
       <div className='w-full my-5'>
           <div className=''>
             {render}
           </div>
-      </div>
-      {(renderIn == RENDER_CHALLENGE.admin
-        || renderIn == RENDER_CHALLENGE.player
-      ) &&      
+      </div>      
       <Modal open={openModal} onClose={setOpenModal}>
-          <div>
-            <p className='text-center'>{descriptionModal}</p>
-            {!passChallenge && <p>La respuesta correcta era: {correctAnswer}</p>}
-            {renderIn == RENDER_CHALLENGE.player && 
-            <button onClick={sendResult} className='btn'>{buttonModal}</button>
+          <div className='flex justify-between flex-col'>
+            {renderIn == RENDER_CHALLENGE.admin && <PositionsTable positionTable={scorePlayers}/>}            
+            {(winner != null) &&
+              <div>
+                <p>El equipo ganador es: {winner}</p>
+                {winner == getCookie('teamName-GG') && <button onClick={sendResult} className='btn'>Avanzar</button>}
+              </div>
+            }
+            {(winner == null) &&
+              <div>
+                <p>No ha ganado ningun equipo, el equipo {playerPunisher.teamName} se devuelve a la casilla anterior </p>
+                {playerPunisher.idTeam == getCookie('idDevice-GG') && <button onClick={sendResult} className='btn'>Retroceder</button>}
+              </div>
             }
           </div>
-      </Modal>}   
+      </Modal>  
     </div>
   );
 };

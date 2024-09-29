@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import {colorsApp, colorOptionsTrivia} from '../../../utils/constants';
+import PositionsTable from './PositionsTable';
 
-const AdminT_VS = ({category, currentQuestion, options}) => {
+const AdminT_VS = ({category, currentQuestion, options, scorePlayers}) => {
 
   useEffect(() => {
 
@@ -9,6 +10,10 @@ const AdminT_VS = ({category, currentQuestion, options}) => {
 
   return (
     <div>
+      {scorePlayers.length > 0 && 
+      <div>
+        <PositionsTable positionTable={scorePlayers}/>
+      </div>}
       <div className='p-5 bg-black text-white'>
         <p>{category}</p>
       </div>
