@@ -16,6 +16,8 @@ const PlayerChallengeT_VS = ({options, round, isRunning, setIsRunning, correctAn
       intervalRef.current = setInterval(() => {
         setMilliseconds(prevMilliseconds => prevMilliseconds + 1);
       }, 10);
+    } else {
+      setShowOptions(false)
     }
 
     return () => {

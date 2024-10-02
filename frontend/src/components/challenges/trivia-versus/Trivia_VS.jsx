@@ -25,6 +25,7 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
   const [winner, setWinner] = useState(null);
   const [playersHaveAnswered, setPlayersHaveAnswered] = useState([]);
   const [isRunningTrivia, setIsRunningTrivia] = useState(false);
+  const [isLastTurnTrivia , setIsLastTurnTrivia] = useState(false);
 
   useEffect(() => {
     const properties = JSON.parse(localStorage.getItem('trivia-vs-GG'));
@@ -61,6 +62,7 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
           }
 
           positionPlayer[player.teamName].round = round;
+          positionPlayer[player.teamName].player = player;
           positionPlayer[player.teamName].timeResponse += timeResponse;
           positionPlayer[player.teamName].rightAnswers += rightAnswers;
         })
@@ -68,6 +70,7 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
 
       const tablePositions = Object.keys(positionPlayer).map((teamName) => ({
         teamName,
+        player: positionPlayer[teamName].player,
         timeResponse: (positionPlayer[teamName].timeResponse / 1000).toFixed(2),
         rightAnswers: positionPlayer[teamName].rightAnswers
       }));
@@ -78,44 +81,43 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
           return b.rightAnswers - a.rightAnswers;
         }
         return a.timeResponse - b.timeResponse;
-      });
-      
-      console.log(orderTable);
-      
+      });      
 
       setScorePlayers(orderTable);
 
 
       if(data.data.round < 3){
-        if(data.isLastTurnTrivia){
-          
+        if(data.isLastTurnTrivia == true){          
           setRound(prev => prev+1);    
           console.log('nueva pregunta', data.newQuestion);
           setDataTrivia(data.newQuestion);
           setIsRunningTrivia(true);
         }
-      } else if(data.isLastTurnTrivia){
+      } else if(data.isLastTurnTrivia == true){
         if(orderTable[0].rightAnswers == 0 && orderTable[1].rightAnswers == 0){
           setWinner(null);
         } else {
-          setWinner(orderTable[0].teamName);
+          console.log(orderTable[0])
+          setWinner(orderTable[0].player);
         }
         setOpenModal(true);
-        setIsRunningTrivia(true);
       }
     });
 
   },[socket]);
 
-
   useEffect(() => {
-
     if(round == 1){
+      console.log('ENTRA A ROUND 1')
       setDataTrivia(dataTrivia);
       setIsRunningTrivia(true);
     }
+  },[])
 
-    console.warn('dcorrectAnswer-2', correctAnswer);
+
+  useEffect(() => {
+
+    console.log('CORRECT ANSWER', correctAnswer);
 
     switch (renderIn) {
       case RENDER_CHALLENGE.admin:
@@ -149,8 +151,12 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
       }
   }
   
-  const sendResult = () => {
-    socket?.emit('resultChallenge', {player, challengePassed: passChallenge});
+  const nobodyWon = () => {
+    socket?.emit('resultChallenge', {player: playerPunisher, challengePassed: false});
+  }
+
+  const emitWinner = () => {
+    socket?.emit('stealFlag', {playerPunisher, winner});
   }
 
   return (
@@ -173,14 +179,14 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
             {renderIn == RENDER_CHALLENGE.admin && <PositionsTable positionTable={scorePlayers}/>}            
             {(winner != null) &&
               <div>
-                <p>El equipo ganador es: {winner}</p>
-                {winner == getCookie('teamName-GG') && <button onClick={sendResult} className='btn'>Avanzar</button>}
+                <p>El equipo ganador es: {winner.teamName}</p>
+                {winner == getCookie('teamName-GG') && <button onClick={emitWinner} className='btn'>Avanzar</button>}
               </div>
             }
             {(winner == null) &&
               <div>
                 <p>No ha ganado ningun equipo, el equipo {playerPunisher.teamName} se devuelve a la casilla anterior </p>
-                {playerPunisher.idTeam == getCookie('idDevice-GG') && <button onClick={sendResult} className='btn'>Retroceder</button>}
+                {playerPunisher.idTeam == getCookie('idDevice-GG') && <button onClick={nobodyWon} className='btn'>Retroceder</button>}
               </div>
             }
           </div>
