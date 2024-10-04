@@ -77,7 +77,7 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
         setComponentChallenge(<Trivia renderIn={renderPlayer} dataTrivia={dataChallenge.trivia}/>)
         break;
       case TRIVIA_VS:
-        setComponentChallenge(<Trivia_VS renderIn={renderPlayer} dataTrivia={dataChallenge.trivia} playerPunisher={dataChallenge.participants.player}/>)
+        setComponentChallenge(<Trivia_VS renderIn={renderPlayer} dataChallenge={dataChallenge}/>)
         break;
       case HUNGED:
         setComponentChallenge(<Hunged renderIn={renderPlayer}/>)

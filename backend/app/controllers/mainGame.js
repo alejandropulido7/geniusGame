@@ -175,19 +175,21 @@ function throwDice (dataTeam) {
 }
 
 async function renderChallenge(data) {
-    const gameId = data.player.gameId;
-    const players = RoomStore.getUsersInRoom(gameId); 
-    const challenge_name = data.challenge; 
+    const gameId = data.dataChallenge.player.gameId;
+    // const players = RoomStore.getUsersInRoom(gameId); 
+    const challenge_name = data.dataChallenge.challenge; 
+    console.log('renderChallenge', data);
 
     if(challenge_name != ""){
-        const playersNoChallenge = players.filter(player => player.idTeam != data.player.idTeam);
+        // const playersNoChallenge = players.filter(player => player.idTeam != data.dataChallenge.player.idTeam);
         const socketBoard = RoomStore.getRoomDetails(gameId);      
-        const ramdomPlayerIndex = Math.floor(Math.random() * playersNoChallenge.length);
+        // const ramdomPlayerIndex = Math.floor(Math.random() * playersNoChallenge.length);
 
         const participants = {
             board: socketBoard ? socketBoard.idDevice : '0',
-            player: data.player,
-            playerOpponent: playersNoChallenge[ramdomPlayerIndex]
+            player: data.dataChallenge.player,
+            // playerOpponent: playersNoChallenge[ramdomPlayerIndex]
+            playerOpponent: data.dataOpponent.opponentSelected
         }
 
         let dataRenderChallenge = {
@@ -197,6 +199,7 @@ async function renderChallenge(data) {
         if(challenge_name == 'trivia' || challenge_name == 'trivia_vs'){ 
            const dataTrivia = await getConnectTrivia();
            dataRenderChallenge.trivia = dataTrivia;
+           dataRenderChallenge.dataOpponent = data.dataOpponent;
         }
         const participantsJson = JSON.stringify(participants);
         updateChallengingInfo(gameId, true, challenge_name, participantsJson)
@@ -211,7 +214,9 @@ async function renderChallenge(data) {
 function openModalConfirmation(data){
     console.log('openModalConfirmation', data);
     const gameId = data.player.gameId;
-    io.sockets.in(gameId).emit('openModalConfirmation', data); 
+    const players = RoomStore.getUsersInRoom(gameId); 
+    const playersNoChallenge = players.filter(player => player.idTeam != data.player.idTeam);
+    io.sockets.in(gameId).emit('openModalConfirmation', {challenge: data, opponents: playersNoChallenge}); 
 }
 
 function openModalRoulette(data){

@@ -12,6 +12,7 @@ import Winner from '../challenges/common/Winner';
 import './BoardPlayer.css'
 import { SocketContext } from '../../context/SocketProvider';
 import PreventBackButton from './PreventBackButton';
+import AcceptChallenge from './AcceptChallenge';
 
 const BoardPlayer = () => {
 
@@ -37,7 +38,7 @@ const BoardPlayer = () => {
     const [winner, setWinner] = useState({});
     const [openModalChoiceNewFlag, setOpenModalChoiceNewFlag] = useState(false);
     const [infoChoiceNewFlag, setInfoChoiceNewFlag] = useState({});
-    const [reload, setReload] = useState(false);
+    const [opponentsChallenge, setOpponentsChallenge] = useState([]);
     const {socket} = useContext(SocketContext);
 
     
@@ -128,9 +129,10 @@ const BoardPlayer = () => {
 
             socket.on('openModalConfirmation', (data) => {  
                 const idTeam = getCookie('idDevice-GG'); 
-                if(idTeam == data.player.idTeam){
+                if(idTeam == data.challenge.player.idTeam){
                     setOpenModal(true);
-                    setDataRenderChallenge(data);
+                    setDataRenderChallenge(data.challenge);
+                    setOpponentsChallenge(data.opponents);
                     setOpenModalRoulette(false);
                 }    
             });
@@ -189,23 +191,6 @@ const BoardPlayer = () => {
         });
       };
 
-    const activateChallenge = (activate) => {
-        setOpenModalRoulette(false);
-        if(activate){
-            socket?.emit('renderChallenge', dataRenderChallenge);
-        } else {
-            socket?.emit('resultChallenge', {player: dataRenderChallenge.player, challengePassed: activate});
-        }
-    };
-
-    const findNameChallenge = (id) => {
-        const challengeFound = CHALLENGES_IN_BOARD.find(challenge => challenge.id == id);
-        if(challengeFound){
-            return challengeFound.name;
-        }
-        return null
-    }
-
     const startRoulette = () => {
         setShowStartRoulette(false);
         socket?.emit('openModalRoulette', {function: 'startRoulette', data: dataRenderChallenge});
@@ -225,11 +210,6 @@ const BoardPlayer = () => {
         const props = findFlagProperties(flagActive);
         return props!=null ? props : ''
     }
-
-    const backHome = () => {
-        setOpenModalRoulette(false);
-        socket?.emit('backHome', dataRenderChallenge);
-    };
 
     // const flagsMissing = () => {
     //     const flagsToShow = infoChoiceNewFlag.flagsObtained.every(flagObtained => FLAGS.filter(flag => flag.id == flagObtained));
@@ -274,19 +254,7 @@ const BoardPlayer = () => {
 
 
             <Modal open={openModal} onClose={setOpenModal}>
-                {(dataRenderChallenge.challenge != BACK_HOME) ?
-                <div>
-                    <h3>Aceptas el reto de {findNameChallenge(dataRenderChallenge.challenge)}?</h3>                    
-                    <div className='flex gap-4'>
-                        <button className='btn' onClick={() => activateChallenge(true)}>Si</button>
-                        <button className='btn' onClick={() => activateChallenge(false)}>No</button>
-                    </div>
-                </div>
-                :
-                <div>
-                    <h3>Te devolveremos al principio</h3>
-                    <button className='btn' onClick={backHome}>Ok 😥</button>
-                </div>}
+                <AcceptChallenge dataRenderChallenge={dataRenderChallenge} setOpenModalRoulette={setOpenModalRoulette} opponents={opponentsChallenge}/>
             </Modal>
             <Modal open={openModalRoulette} onClose={setOpenModalRoulette}>
                 <h3>Gira la ruleta</h3>

@@ -9,7 +9,7 @@ import { SocketContext } from '../../../context/SocketProvider';
 import PositionsTable from './PositionsTable';
 import { getCookie } from '../../../utils/cookies';
 
-const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
+const Trivia_VS = ({renderIn, dataChallenge}) => {
   const [render, setRender] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState('');
   const [options, setOptions] = useState([]);
@@ -26,6 +26,8 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
   const [playersHaveAnswered, setPlayersHaveAnswered] = useState([]);
   const [isRunningTrivia, setIsRunningTrivia] = useState(false);
   const [isLastTurnTrivia , setIsLastTurnTrivia] = useState(false);
+  const [dataTrivia, setDataTrivia] = useState({});
+  const [playerPunisher, setPlayerPunisher] = useState({});
 
   useEffect(() => {
     const properties = JSON.parse(localStorage.getItem('trivia-vs-GG'));
@@ -90,7 +92,7 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
         if(data.isLastTurnTrivia == true){          
           setRound(prev => prev+1);    
           console.log('nueva pregunta', data.newQuestion);
-          setDataTrivia(data.newQuestion);
+          handlerDataTrivia(data.newQuestion);
           setIsRunningTrivia(true);
         }
       } else if(data.isLastTurnTrivia == true){
@@ -106,10 +108,17 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
 
   },[socket]);
 
+
+  useEffect(() => {
+    setDataTrivia(dataChallenge.trivia);
+    setPlayerPunisher(dataChallenge.participants.player);
+  }, [dataChallenge]);
+
+
   useEffect(() => {
     if(round == 1){
       console.log('ENTRA A ROUND 1')
-      setDataTrivia(dataTrivia);
+      handlerDataTrivia(dataTrivia);
       setIsRunningTrivia(true);
     }
   },[])
@@ -142,7 +151,7 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
 
   }, [renderIn, category, options, currentQuestion, correctAnswer, scorePlayers, round, isRunningTrivia, winner, openModal]);
 
-  const setDataTrivia = (data_trivia) => {
+  const handlerDataTrivia = (data_trivia) => {
     if(data_trivia){
         setCategory(data_trivia.category);
         setCurrentQuestion(data_trivia.question);
@@ -156,7 +165,12 @@ const Trivia_VS = ({renderIn, dataTrivia, playerPunisher}) => {
   }
 
   const emitWinner = () => {
-    socket?.emit('stealFlag', {playerPunisher, winner});
+    socket?.emit('stealFlag', {
+      playerPunisher, 
+      winner, 
+      opponent: dataChallenge.dataOpponent.opponentSelected,
+      flagStole: dataChallenge.dataOpponent.flagStole
+    });
   }
 
   return (
