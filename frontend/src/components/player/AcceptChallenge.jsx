@@ -1,6 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react'
 import { SocketContext } from '../../context/SocketProvider';
-import { CHALLENGES_IN_BOARD, BACK_HOME, TRIVIA_VS, FLAGS } from '../../utils/constants';
+import { CHALLENGES_IN_BOARD, BACK_HOME, TRIVIA_VS, FLAGS, findFlagProperties } from '../../utils/constants';
+import StealFlag from '../challenges/common/StealFlag';
 
 const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents}) => {
 
@@ -48,10 +49,6 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
         }
     }
 
-    function getNameFlag(idFlag){
-        return FLAGS.find(flag => flag.id == idFlag);
-    }
-
     return (
         <>
             {(dataRenderChallenge.challenge != BACK_HOME) 
@@ -79,13 +76,7 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
                         {opponentSelected.flagsObtained?.length > 0
                         ?
                         <div>
-                            <label>Elige a la bandera que quieres robar..</label>
-                            <select className='select' value={flagStole} onChange={(event) => setFlagStole(event.target.value)}>
-                                <option value="">Seleccione...</option>
-                                {opponentSelected.flagsObtained.map ((flag, index) => {
-                                    return <option key={index} value={flag}>{getNameFlag(flag)}</option>
-                                })}
-                            </select>
+                            <StealFlag flagStole={flagStole} setFlagStole={setFlagStole} flagsOpponent={opponentSelected.flagsObtained}/>
                         </div>
                         :
                         <div>

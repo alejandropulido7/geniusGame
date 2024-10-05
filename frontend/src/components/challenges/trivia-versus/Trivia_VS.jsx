@@ -4,10 +4,11 @@ import AdminT from './AdminT_VS';
 import PlayerChallengeT from './PlayerChallengeT_VS';
 import OpponentInteractiveT from './OpponentInteractiveT_VS';
 import OthersPlayersT from './OthersPlayersT_VS';
-import {RENDER_CHALLENGE} from '../../../utils/constants'
+import {RENDER_CHALLENGE, findFlagProperties} from '../../../utils/constants'
 import { SocketContext } from '../../../context/SocketProvider';
 import PositionsTable from './PositionsTable';
 import { getCookie } from '../../../utils/cookies';
+import StealFlag from '../common/StealFlag';
 
 const Trivia_VS = ({renderIn, dataChallenge}) => {
   const [render, setRender] = useState(null);
@@ -28,6 +29,7 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
   const [isLastTurnTrivia , setIsLastTurnTrivia] = useState(false);
   const [dataTrivia, setDataTrivia] = useState({});
   const [playerPunisher, setPlayerPunisher] = useState({});
+  const [flagStole, setFlagStole] = useState('');
 
   useEffect(() => {
     const properties = JSON.parse(localStorage.getItem('trivia-vs-GG'));
@@ -164,6 +166,20 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
     socket?.emit('resultChallenge', {player: playerPunisher, challengePassed: false});
   }
 
+  const showResult = () => {
+    const flagStolePunisher = dataChallenge.dataOpponent.flagStole;
+    const opponent = dataChallenge.dataOpponent.opponentSelected;
+    if(playerPunisher.idTeam == winner.idTeam){
+      if(flagStolePunisher == ''){
+        return <p>El equipo {opponent.teamName} no tiene banderas, asi que el equipo {playerPunisher.teamName} conserva su posicion</p>;
+      } else {
+        return <p>El equipo {playerPunisher.teamName} ha robado la bandera {findFlagProperties(flagStolePunisher).name}</p>;
+      }
+    mk} else {
+      return <StealFlag flagStole={flagStole} setFlagStole={setFlagStole} flagsOpponent={playerPunisher.flagsObtained}/>
+    }
+  }
+
   const emitWinner = () => {
     socket?.emit('stealFlag', {
       playerPunisher, 
@@ -193,8 +209,15 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
             {renderIn == RENDER_CHALLENGE.admin && <PositionsTable positionTable={scorePlayers}/>}            
             {(winner != null) &&
               <div>
-                <p>El equipo ganador es: {winner.teamName}</p>
-                {winner == getCookie('teamName-GG') && <button onClick={emitWinner} className='btn'>Avanzar</button>}
+                <p>El equipo ganador es: {winner.teamName}</p>                
+                {winner.idTeam == getCookie('idDevice-GG') && 
+                <div>
+                  <div>
+                    {showResult()}
+                  </div>
+                  <button onClick={emitWinner} className='btn'>Avanzar</button>
+                </div>
+                }
               </div>
             }
             {(winner == null) &&
