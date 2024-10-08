@@ -30,6 +30,7 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
   const [dataTrivia, setDataTrivia] = useState({});
   const [playerPunisher, setPlayerPunisher] = useState({});
   const [flagStole, setFlagStole] = useState('');
+  const [playerOpponent, setPlayerOpponent] = useState('');
 
   useEffect(() => {
     const properties = JSON.parse(localStorage.getItem('trivia-vs-GG'));
@@ -114,13 +115,14 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
   useEffect(() => {
     setDataTrivia(dataChallenge.trivia);
     setPlayerPunisher(dataChallenge.participants.player);
+    setPlayerOpponent(dataChallenge.dataOpponent.opponentSelected);
   }, [dataChallenge]);
 
 
   useEffect(() => {
     if(round == 1){
       console.log('ENTRA A ROUND 1')
-      handlerDataTrivia(dataTrivia);
+      handlerDataTrivia(dataChallenge.trivia);
       setIsRunningTrivia(true);
     }
   },[])
@@ -168,25 +170,31 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
 
   const showResult = () => {
     const flagStolePunisher = dataChallenge.dataOpponent.flagStole;
-    const opponent = dataChallenge.dataOpponent.opponentSelected;
     if(playerPunisher.idTeam == winner.idTeam){
       if(flagStolePunisher == ''){
-        return <p>El equipo {opponent.teamName} no tiene banderas, asi que el equipo {playerPunisher.teamName} conserva su posicion</p>;
+        return <p>El equipo {playerOpponent.teamName} no tiene banderas, asi que el equipo {playerPunisher.teamName} conserva su posicion</p>;
       } else {
         return <p>El equipo {playerPunisher.teamName} ha robado la bandera {findFlagProperties(flagStolePunisher).name}</p>;
       }
-    mk} else {
+    } else if(playerOpponent.idTeam == winner.idTeam){
       return <StealFlag flagStole={flagStole} setFlagStole={setFlagStole} flagsOpponent={playerPunisher.flagsObtained}/>
     }
   }
 
   const emitWinner = () => {
-    socket?.emit('stealFlag', {
+    const data = {
       playerPunisher, 
       winner, 
       opponent: dataChallenge.dataOpponent.opponentSelected,
       flagStole: dataChallenge.dataOpponent.flagStole
-    });
+    }
+
+    if(playerOpponent.idTeam == winner.idTeam){
+      data.flagStole = flagStole;
+    }
+
+    socket?.emit('stealFlag', data);
+    socket?.emit('resultChallenge', {player: playerPunisher, challengePassed: false});
   }
 
   return (

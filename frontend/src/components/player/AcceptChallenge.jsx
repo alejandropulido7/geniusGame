@@ -26,12 +26,8 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
     const activateChallenge = (activate) => {
         setOpenModalRoulette(false);
         if(activate){
-            if(dataRenderChallenge.challenge == TRIVIA_VS){
-                const dataOpponent = { opponentSelected, flagStole };
-                socket?.emit('renderChallenge', {dataChallenge: dataRenderChallenge, dataOpponent});
-            } else {
-                socket?.emit('renderChallenge', {dataChallenge: dataRenderChallenge, dataOpponent: {}});
-            }
+            const dataOpponent = { opponentSelected, flagStole };
+            socket?.emit('renderChallenge', {dataChallenge: dataRenderChallenge, dataOpponent});
         } else {
             socket?.emit('resultChallenge', {player: dataRenderChallenge.player, challengePassed: activate});
         }

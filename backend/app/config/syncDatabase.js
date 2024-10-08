@@ -7,7 +7,7 @@ const User = require('../models/user');
 async function syncDatabase() {
     try {
       await sequelize.sync({
-        // force: true, 
+        // force: true, ßß
         logging: false}); // Usa force: true para recrear las tablas en cada reinicio (¡ten cuidado en producción!)
       console.log('Tables sync successfully');
     } catch (error) {

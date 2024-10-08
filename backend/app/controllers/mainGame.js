@@ -60,6 +60,8 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("changeFlag", changeFlag); 
 
+    gameSocket.on("stealFlag", stealFlag); 
+
     gameSocket.on("exitGamePlayer", exitGamePlayer);
 
 
@@ -282,6 +284,47 @@ async function changeFlag(data) {
         playerModified.prev_position = 1;
         updatePositions(playerModified, io);
     }
+}
+
+async function stealFlag(data) {
+    console.log('stealFlag', data);
+    // stealFlag {
+    //     playerPunisher: {
+    //       idTeam: 'f2u0gs716k',
+    //       gameId: '133915',
+    //       teamName: 'lobos2',
+    //       flagActive: 'green',
+    //       positionActive: 6,
+    //       prev_position: 1,
+    //       propPiece: { color: '#95b6d6', emoji: '😀' },
+    //       flagsObtained: [ 'blue' ],
+    //       step: 6
+    //     },
+    //     winner: {
+    //       socketId: 'C5FLTlq3JK_1olK0AABN',
+    //       idTeam: 'ub7ksx101y',
+    //       gameId: '133915',
+    //       teamName: 'lobos',
+    //       flagActive: 'blue',
+    //       positionActive: 1,
+    //       prev_position: 1,
+    //       propPiece: { color: '#ae2424', emoji: '😀' },
+    //       flagsObtained: [ 'red' ],
+    //       isLastStep: false
+    //     },
+    //     opponent: {
+    //       idTeam: 'ub7ksx101y',
+    //       gameId: '133915',
+    //       teamName: 'lobos',
+    //       flagActive: 'blue',
+    //       positionActive: 1,
+    //       prev_position: 1,
+    //       propPiece: { color: '#ae2424', emoji: '😀' },
+    //       flagsObtained: [ 'red' ]
+    //     },
+    //     flagStole: 'blue'
+    //   }
+    
 }
 
 function acting(data){

@@ -8,7 +8,7 @@ const socketHandlers = require('./app/controllers/socketHandlers')
 
 const cors = require('cors');
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5002;
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
