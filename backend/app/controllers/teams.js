@@ -180,10 +180,56 @@ async function addFlagToTeam(id_team, id_session, flag) {
     return result;
 }
 
+async function removeFlagToTeam(id_team, id_session, flag) {
+
+    const teamFound = await Team.findOne({
+        where: {
+            id_team,
+            id_session
+        }
+    }).then(team => {
+        return team;
+    }).catch(err => {
+        return null;
+    });
+
+
+    let flagsObtained = [];
+    if(teamFound){
+        const flagsFound = JSON.parse(teamFound.flags_obtained);
+        if(flagsFound != null){
+            flagsObtained = flagsFound;
+        }
+    }
+
+    if(flagsObtained.lenght > 0){
+        let indexFlag = flagsObtained.findIndex(flagFind => flagFind == flag);    
+        flagsObtained.splice(indexFlag, 1);
+    }
+    const payloadFlags = JSON.stringify(flagsObtained);
+
+    const updateFlag = await Team.update({
+        flags_obtained: payloadFlags
+    },
+    {
+        where: {
+            id_team,
+            id_session
+        }
+    });
+
+    if(updateFlag == 1){
+        return flagsObtained;
+    }
+
+    return null;
+}
+
 module.exports = {createTeam, 
     getTeam, 
     getTeamByName, 
     updatePositionTeam, 
     updatePositionTeamFromSocket, 
     getTeamById, 
-    addFlagToTeam}
+    addFlagToTeam,
+    removeFlagToTeam}

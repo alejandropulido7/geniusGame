@@ -1,5 +1,5 @@
 const detectMobileDevice = require('../utils/detectDevice');
-const {updatePositionTeamFromSocket, addFlagToTeam} = require('./teams');
+const {updatePositionTeamFromSocket, addFlagToTeam, removeFlagToTeam} = require('./teams');
 const {updateTurnOfTeamFromSocket, updateChallengingInfo, updateChallengePassed} = require('./sessions');
 const RoomStore = require('../classes/RoomStore');
 const TurnsGame = require('../classes/TurnsGame');
@@ -262,6 +262,7 @@ async function resultChallenge(data){
             if(isLastStep){
                 const validateWinGame = await addFlagToTeam( foundPlayer.idTeam, gameId, foundPlayer.flagActive);
                 foundPlayer.flagsObtained = validateWinGame.flagsObtained;
+                RoomStore.modifyUser(gameId, foundPlayer);
                 if(!validateWinGame.winGame){
                     io.sockets.in(gameId).emit('openModalChoiceNewFlag', foundPlayer);
                 } else {
@@ -286,44 +287,56 @@ async function changeFlag(data) {
     }
 }
 
+async function updateStoleFlags(winner, loser, flagStole) {
+    try {
+        const removeFlag = await removeFlagToTeam(loser.idTeam, gameId, flagStole);
+        if(removeFlag != null){
+            loser.flagsObtained = removeFlag;
+            RoomStore.modifyUser(gameId, loser);
+            const validateWinGame = await addFlagToTeam(winner.idTeam, gameId, flagStole);
+            winner.flagsObtained = validateWinGame.flagsObtained;
+            RoomStore.modifyUser(gameId, winner);
+            const players = RoomStore.getUsersInRoom(gameId);
+            if(validateWinGame.winGame){
+                io.sockets.in(gameId).emit('winGame', {foundPlayer: winner});
+            } else {
+                io.sockets.in(gameId).emit('resultChallenge', {player: winner, challengePassed: true, players});
+            }
+        } else {
+            io.sockets.in(gameId).emit('status', 'No se pudo robar la bandera '+flagStole);
+        }        
+    } catch (error) {
+        io.sockets.in(gameId).emit('status', error);
+    }
+}
+
 async function stealFlag(data) {
     console.log('stealFlag', data);
-    // stealFlag {
-    //     playerPunisher: {
-    //       idTeam: 'f2u0gs716k',
-    //       gameId: '133915',
-    //       teamName: 'lobos2',
-    //       flagActive: 'green',
-    //       positionActive: 6,
-    //       prev_position: 1,
-    //       propPiece: { color: '#95b6d6', emoji: '😀' },
-    //       flagsObtained: [ 'blue' ],
-    //       step: 6
-    //     },
-    //     winner: {
-    //       socketId: 'C5FLTlq3JK_1olK0AABN',
-    //       idTeam: 'ub7ksx101y',
-    //       gameId: '133915',
-    //       teamName: 'lobos',
-    //       flagActive: 'blue',
-    //       positionActive: 1,
-    //       prev_position: 1,
-    //       propPiece: { color: '#ae2424', emoji: '😀' },
-    //       flagsObtained: [ 'red' ],
-    //       isLastStep: false
-    //     },
-    //     opponent: {
-    //       idTeam: 'ub7ksx101y',
-    //       gameId: '133915',
-    //       teamName: 'lobos',
-    //       flagActive: 'blue',
-    //       positionActive: 1,
-    //       prev_position: 1,
-    //       propPiece: { color: '#ae2424', emoji: '😀' },
-    //       flagsObtained: [ 'red' ]
-    //     },
-    //     flagStole: 'blue'
-    //   }
+    const gameId = data.playerPunisher.gameId;
+    const opponent = RoomStore.getUserRoom(gameId, data.opponent.idTeam);
+    const punisher = RoomStore.getUserRoom(gameId, data.playerPunisher.idTeam);
+    if(punisher == null || opponent == null){
+        io.sockets.in(gameId).emit('status', 'Error encontrando los jugadores');
+        return;
+    }
+    const flagStole = data.flagStole;
+    if(data.winner.idTeam == punisher.idTeam){
+        if(flagStole != ''){
+            updateStoleFlags(punisher, opponent, flagStole);
+        } else {
+            const players = RoomStore.getUsersInRoom(gameId);
+            io.sockets.in(gameId).emit('resultChallenge', {player: punisher, challengePassed: false, players});
+        }
+    } else if(data.winner.idTeam == opponent.idTeam){
+        if(flagStole != ''){
+            updateStoleFlags(opponent, punisher, flagStole);
+        } else {
+            let punisherModified = {...punisher};
+            punisherModified.prev_position = punisher.prev_position;
+            punisherModified.positionActive = punisherModified.prev_position;
+            updatePositions(punisherModified, io);
+        }
+    }
     
 }
 

@@ -194,7 +194,6 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
     }
 
     socket?.emit('stealFlag', data);
-    socket?.emit('resultChallenge', {player: playerPunisher, challengePassed: false});
   }
 
   return (
