@@ -13,6 +13,7 @@ import './BoardPlayer.css'
 import { SocketContext } from '../../context/SocketProvider';
 import PreventBackButton from './PreventBackButton';
 import AcceptChallenge from './AcceptChallenge';
+import { FlagsPlayer } from '../challenges/common/FlagsPlayer';
 
 const BoardPlayer = () => {
 
@@ -39,6 +40,7 @@ const BoardPlayer = () => {
     const [openModalChoiceNewFlag, setOpenModalChoiceNewFlag] = useState(false);
     const [infoChoiceNewFlag, setInfoChoiceNewFlag] = useState({});
     const [opponentsChallenge, setOpponentsChallenge] = useState([]);
+    const [flagsObtained, setFlagsObtained] = useState([]);
     const {socket} = useContext(SocketContext);
 
     
@@ -63,6 +65,7 @@ const BoardPlayer = () => {
             setFlagActive(teamCreatedinSession.flag_active);
             setPrevPosition(teamCreatedinSession.prev_position)
             setPositionActive(teamCreatedinSession.position_active);
+            setFlagsObtained(JSON.parse(teamCreatedinSession.flags_obtained));
             if(socket){
                 socket.emit('joinPlayerGame', {
                     socketId: socket.id,
@@ -86,13 +89,16 @@ const BoardPlayer = () => {
                 }
             });
                        
-        }).catch(()=>{
+        }).catch((err)=>{
+            console.log(err)
             localStorage.clear();
             deleteCookie('idDevice-GG')
             deleteCookie('teamName-GG');
             navigate('../');
         });
     }
+//     Lobos = ["purple","red"]
+//     Lobos2 = ["blue"]
 
     useEffect(() => {
         setIdTeam(idTeamCookie);
@@ -173,7 +179,7 @@ const BoardPlayer = () => {
             setShowStartRoulette(true);
         }
                
-    },[activeChallenge, socket, gameFinished, winner]);
+    },[activeChallenge, socket, gameFinished, winner, flagsObtained]);
 
     
 
@@ -227,9 +233,10 @@ const BoardPlayer = () => {
                     <div className='flex flex-col justify-between h-full'>
                         <div><PreventBackButton/></div>
                         <div className='flex justify-center gap-5'>
-                            <h3>Sesion: {codeSesion}</h3>
-                            <h3>Tu equipo: {teamName}</h3>
-                            <h4>Ruta: {flagActive}</h4>
+                            <p>Sesion: {codeSesion}</p>
+                            <p>Tu equipo: {teamName}</p>
+                            <p>Ruta: {flagActive}</p>
+                            <FlagsPlayer flagsPlayer={flagsObtained}/>
                         </div>                        
                         { youTurn && 
                         <div className='w-60 m-auto'>
@@ -257,7 +264,7 @@ const BoardPlayer = () => {
                 <AcceptChallenge dataRenderChallenge={dataRenderChallenge} setOpenModalRoulette={setOpenModalRoulette} opponents={opponentsChallenge}/>
             </Modal>
             <Modal open={openModalRoulette} onClose={setOpenModalRoulette}>
-                <h3>Gira la ruleta</h3>
+                <p>Gira la ruleta</p>
                 <div className="mt-8 space-x-4">
                 {showStartRoulette 
                 ?
@@ -277,7 +284,7 @@ const BoardPlayer = () => {
             </div>
             </Modal>
             <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
-                <h3>Felicidades equipo {infoChoiceNewFlag.teamName}!! Has ganado la bandera {infoChoiceNewFlag.flagActive}.</h3>
+                <p>Felicidades equipo {infoChoiceNewFlag.teamName}!! Has ganado la bandera {infoChoiceNewFlag.flagActive}.</p>
                 {/* <p>{flagsMissing()}</p> */}
                 <p>Escoge la siguiente:</p>
                 <div className='flex gap-4'>

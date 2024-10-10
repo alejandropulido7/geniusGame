@@ -203,8 +203,12 @@ async function removeFlagToTeam(id_team, id_session, flag) {
     }
 
     if(flagsObtained.lenght > 0){
-        let indexFlag = flagsObtained.findIndex(flagFind => flagFind == flag);    
-        flagsObtained.splice(indexFlag, 1);
+        let duplicateFlags = flagsObtained.filter(flagFilter => flagFilter == flag);
+        flagsObtained = flagsObtained.filter(flagFind => flagFind != flag);    
+        if(duplicateFlags.lenght > 1){
+            duplicateFlags.pop();
+            flagsObtained.push(...duplicateFlags);ß
+        }
     }
     const payloadFlags = JSON.stringify(flagsObtained);
 

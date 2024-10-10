@@ -3,6 +3,7 @@ import {useParams, useResolvedPath} from 'react-router-dom';
 import {GlobalContext} from '../../context/GlobalContext';
 import { SocketContext } from '../../context/SocketProvider';
 import AllowJoin from './AllowJoin';
+import { FlagsPlayer } from '../challenges/common/FlagsPlayer';
 
 const DataGame = () => {
 
@@ -65,19 +66,6 @@ const DataGame = () => {
                     <h1 className=' text-3xl text-white p-2 font-bold'>Board braker</h1>
                 </div>
                 <div className='data-game-center flex gap-5 '>
-                    {players && 
-                    <div className='data-game-players w-50 p-4 shadow-md bg-yellow-300 shadow-yellow-800'>
-                        <p>Equipos: </p>
-                        {
-                            players.map((player) => {
-                                return (
-                                    <div key={player.teamName}>
-                                        <h3>{player.teamName} - {player.positionActive}</h3>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>}
                     {session && 
                     <div className='w-50 p-4 flex justify-between flex-col shadow-md shadow-yellow-800 border-0 bg-yellow-300 border-black'>
                         <h4>Sesion {session.id}</h4>
@@ -85,6 +73,24 @@ const DataGame = () => {
                         <div>
                             <p>Estado: {status}</p>
                         </div>
+                        {(players && players.length > 0) ? 
+                        <div>
+                            <p>Equipos: </p>
+                            {
+                                players.map((player) => {
+                                    return (
+                                        <div key={player.teamName}>
+                                            <div>{player.teamName}</div>
+                                            <FlagsPlayer flagsPlayer={player.flagsObtained}/>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                        :
+                        <div>
+                            <p>Esperando jugadores...</p>
+                        </div>}
                     </div>}                  
                 </div>
                 {session &&

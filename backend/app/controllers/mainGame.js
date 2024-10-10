@@ -288,6 +288,7 @@ async function changeFlag(data) {
 }
 
 async function updateStoleFlags(winner, loser, flagStole) {
+    const gameId = winner.gameId;
     try {
         const removeFlag = await removeFlagToTeam(loser.idTeam, gameId, flagStole);
         if(removeFlag != null){
@@ -297,10 +298,13 @@ async function updateStoleFlags(winner, loser, flagStole) {
             winner.flagsObtained = validateWinGame.flagsObtained;
             RoomStore.modifyUser(gameId, winner);
             const players = RoomStore.getUsersInRoom(gameId);
-            if(validateWinGame.winGame){
-                io.sockets.in(gameId).emit('winGame', {foundPlayer: winner});
-            } else {
-                io.sockets.in(gameId).emit('resultChallenge', {player: winner, challengePassed: true, players});
+            const updateChallenge = await updateChallengingInfo(gameId, false, null, null);
+            if(updateChallenge == 1){
+                if(validateWinGame.winGame){
+                    io.sockets.in(gameId).emit('winGame', {foundPlayer: winner});
+                } else {
+                    io.sockets.in(gameId).emit('resultChallenge', {player: winner, challengePassed: true, players});
+                }
             }
         } else {
             io.sockets.in(gameId).emit('status', 'No se pudo robar la bandera '+flagStole);
@@ -324,8 +328,7 @@ async function stealFlag(data) {
         if(flagStole != ''){
             updateStoleFlags(punisher, opponent, flagStole);
         } else {
-            const players = RoomStore.getUsersInRoom(gameId);
-            io.sockets.in(gameId).emit('resultChallenge', {player: punisher, challengePassed: false, players});
+            updatePositions(punisher, io);
         }
     } else if(data.winner.idTeam == opponent.idTeam){
         if(flagStole != ''){
