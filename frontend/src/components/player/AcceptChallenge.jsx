@@ -8,12 +8,15 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
     const {socket} = useContext(SocketContext);
     const [opponentSelected, setOpponentSelected] = useState({});
     const [flagStole, setFlagStole] = useState('');
+    const [showFlags, setShowFlags] = useState(false);
+    const [flagsOpponent, setFlagsOpponent] = useState([]);
 
     useEffect(() => {
         if(opponents.length == 1){
             setOpponentSelected(opponents[0]);
         }
-    }, [])
+        console.log(opponentSelected)
+    }, [opponentSelected, flagsOpponent])
 
     const findNameChallenge = (id) => {
         const challengeFound = CHALLENGES_IN_BOARD.find(challenge => challenge.id == id);
@@ -42,6 +45,8 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
         const opponentSelectedFound = opponents.find(opponent => opponent.idTeam == idTeam);
         if(opponentSelectedFound){
             setOpponentSelected(opponentSelectedFound);
+            setFlagsOpponent(opponentSelectedFound.flagsObtained)
+            setShowFlags(true);
         }
     }
 
@@ -58,7 +63,7 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
                     <select className='select' value={opponentSelected?.idTeam} onChange={(event) => handlerOpponentSelected(event.target.value)}>
                         <option value="">Seleccione...</option>
                         {opponents.map (opponent => {
-                            return <option key={opponent.id} value={opponent.id}>{opponent.teamName}</option>
+                            return <option key={opponent.idTeam} value={opponent.idTeam}>{opponent.teamName}</option>
                         })}
                     </select>
                 </div>
@@ -67,12 +72,12 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
                     <p>Tu oponente sera {opponentSelected?.teamName}</p>
                 </div>
                 }           
-                { (opponentSelected && dataRenderChallenge.challenge == TRIVIA_VS) && 
+                { showFlags && (flagsOpponent && dataRenderChallenge.challenge == TRIVIA_VS) && 
                     <div>
-                        {opponentSelected.flagsObtained?.length > 0
+                        {flagsOpponent.length > 0
                         ?
                         <div>
-                            <StealFlag flagStole={flagStole} setFlagStole={setFlagStole} flagsOpponent={opponentSelected.flagsObtained}/>
+                            <StealFlag flagStole={flagStole} setFlagStole={setFlagStole} flagsOpponent={flagsOpponent}/>
                         </div>
                         :
                         <div>

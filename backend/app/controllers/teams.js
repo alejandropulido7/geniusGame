@@ -202,10 +202,10 @@ async function removeFlagToTeam(id_team, id_session, flag) {
         }
     }
 
-    if(flagsObtained.lenght > 0){
+    if(flagsObtained.length > 0){
         let duplicateFlags = flagsObtained.filter(flagFilter => flagFilter == flag);
         flagsObtained = flagsObtained.filter(flagFind => flagFind != flag);    
-        if(duplicateFlags.lenght > 1){
+        if(duplicateFlags.length > 1){
             duplicateFlags.pop();
             flagsObtained.push(...duplicateFlags);ß
         }

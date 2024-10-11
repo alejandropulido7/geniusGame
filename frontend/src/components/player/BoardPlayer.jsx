@@ -42,7 +42,6 @@ const BoardPlayer = () => {
     const [opponentsChallenge, setOpponentsChallenge] = useState([]);
     const [flagsObtained, setFlagsObtained] = useState([]);
     const {socket} = useContext(SocketContext);
-
     
     useEffect(() => {
         const alreadyReloaded = localStorage.getItem('reloaded');
@@ -236,8 +235,13 @@ const BoardPlayer = () => {
                             <p>Sesion: {codeSesion}</p>
                             <p>Tu equipo: {teamName}</p>
                             <p>Ruta: {flagActive}</p>
-                            <FlagsPlayer flagsPlayer={flagsObtained}/>
                         </div>                        
+                        <div>
+                            <p>Tus banderas:</p>
+                            <FlagsPlayer flagsPlayer={flagsObtained}/>
+                            <div className=''>
+                            </div>
+                        </div>
                         { youTurn && 
                         <div className='w-60 m-auto'>
                             <button className='btn btn-wood w-full' onClick={throwDice}>Lanzar Dado</button>                            

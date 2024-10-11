@@ -9,8 +9,7 @@ const PreventBackButton = () => {
     const navigate = useNavigate();
     useEffect(() => {
         window.onpopstate = function () {
-            alert("No puedes");
-            window.history.go(0); // Impide retroceder
+            window.history.go(1);
         };
       }, []);
 

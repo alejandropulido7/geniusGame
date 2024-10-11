@@ -177,7 +177,11 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
         return <p>El equipo {playerPunisher.teamName} ha robado la bandera {findFlagProperties(flagStolePunisher).name}</p>;
       }
     } else if(playerOpponent.idTeam == winner.idTeam){
-      return <StealFlag flagStole={flagStole} setFlagStole={setFlagStole} flagsOpponent={playerPunisher.flagsObtained}/>
+      if(playerPunisher.flagsObtained.length > 0){
+        return <StealFlag flagStole={flagStole} setFlagStole={setFlagStole} flagsOpponent={playerPunisher.flagsObtained}/>
+      } else {
+        return <p>El equipo {playerPunisher.teamName} no tiene banderas, se regresa a la posicion anterior</p>
+      }
     }
   }
 

@@ -74,13 +74,13 @@ const DataGame = () => {
                             <p>Estado: {status}</p>
                         </div>
                         {(players && players.length > 0) ? 
-                        <div>
+                        <div className='my-5'>
                             <p>Equipos: </p>
                             {
                                 players.map((player) => {
                                     return (
-                                        <div key={player.teamName}>
-                                            <div>{player.teamName}</div>
+                                        <div key={player.teamName} className='flex justify-between'>
+                                            <div>{player.teamName.toUpperCase()}: </div>
                                             <FlagsPlayer flagsPlayer={player.flagsObtained}/>
                                         </div>
                                     )
