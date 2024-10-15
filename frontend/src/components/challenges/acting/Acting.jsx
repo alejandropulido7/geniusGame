@@ -12,7 +12,8 @@ const Acting = ({renderIn}) => {
   const [word, setWord] = useState('');
   const [wordReady, setWordReady] = useState(false);
   const [render, setRender] = useState(null);
-  const {socket} = useContext(SocketContext)
+  const {socket} = useContext(SocketContext);
+  const [teamPlayer, setTeamPlayer] = useState('');
 
   useEffect(() => {
     if(localStorage.getItem('acting-GG') != null){
@@ -30,7 +31,8 @@ const Acting = ({renderIn}) => {
   
     socket?.on('acting', (data) => {
       setWord(data.word);
-      setWordReady(data.wordReady)
+      setWordReady(data.wordReady);
+      setTeamPlayer(data.oponentMember);
     });
 
     switch (renderIn) {
@@ -38,7 +40,7 @@ const Acting = ({renderIn}) => {
         setRender(<AdminA word={word} wordReady={wordReady}/>)
       break;
       case RENDER_CHALLENGE.player:
-        setRender(<PlayerChallengeA word={word}/>);
+        setRender(<PlayerChallengeA word={word} teamPlayer={teamPlayer}/>);
       break;
       case RENDER_CHALLENGE.opponent:
         setRender(<OpponentInteractiveA wordReady={wordReady}/>);

@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import {setCookie, getCookie } from '../../utils/cookies'
 import {createSession, getSession} from '../../services/sessionService'
 import { Link, useNavigate } from 'react-router-dom';
-import {generateUUID} from '../../utils/shared';
 import {CHALLENGES_IN_BOARD} from '../../utils/constants'
 
 const ConfigGame = () => {
@@ -10,7 +9,7 @@ const ConfigGame = () => {
     const [isPreviousGame, setIsPreviousGame] = useState(false);
     const [configGame, setConfigGame] = useState({
         min_to_answer: 1,
-        lenght_board: 9,
+        lenght_board: 16,
         amount_challenges: 5,
         challenges_in_board: JSON.stringify(CHALLENGES_IN_BOARD)
     });
@@ -40,6 +39,10 @@ const ConfigGame = () => {
         setIsPreviousGame(true)
     }
 
+    useEffect(() => {
+
+    }, [configGame]);
+
 
     return (
         <div>
@@ -54,7 +57,7 @@ const ConfigGame = () => {
                 </div>
                 <div className='flex justify-between items-center gap-2'>
                     <label>Cantidad de casillas: </label>
-                    <input className='input' min={9} max={15} type='number' name='length_board' value={configGame.lenght_board} onChange={handleInputChange}/>
+                    <input className='input' min="9" max={16} type='number' name='lenght_board' value={configGame.lenght_board} onChange={handleInputChange}/>
                 </div>
                 <div className='flex justify-between items-center gap-2'>
                     <label>Cantidad de retos x bandera: </label>

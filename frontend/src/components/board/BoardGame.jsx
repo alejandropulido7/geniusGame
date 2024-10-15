@@ -75,7 +75,8 @@ const BoardGame = () => {
   
       socket.on('openModalChoiceNewFlag', (data) => {
         setOpenModalChoiceNewFlag(true);
-        setInfoChoiceNewFlag(data);
+        setInfoChoiceNewFlag(data.player);
+        setFlagPositions(data.changePositions);
       });
   
       socket.on('playerJoinedRoom', (playersInSession) => {
@@ -138,7 +139,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: 'trivia_vs',
+        challenge: 'acting',
         player: playerModified
       };
     }

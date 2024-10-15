@@ -1,6 +1,7 @@
 const Session = require('../models/session');
 const {generateUUID, createBoard} = require('../utils/shared');
-const {createAccessToken} = require('../utils/jwt')
+const {createAccessToken} = require('../utils/jwt');
+const { CHALLENGES_IN_BOARD, TRIVIA_VS } = require('../utils/constant');
 
 async function createSesion(req, res) {
 
@@ -39,6 +40,33 @@ async function createSesion(req, res) {
         return res.status(400).json({error: 'Error: '+err});
     }
        
+}
+
+async function addTriviaVsToChallenges(idGame) {
+    
+    const session = await Session.findOne({
+        where: {
+            id: idGame
+        }
+    });
+
+    if(session){
+        let challenges = JSON.parse(JSON.stringify(CHALLENGES_IN_BOARD));
+        challenges.push(TRIVIA_VS);
+        const newBoardPositions = createBoard(session.lenght_board, session.amount_challenges, challenges);
+        const sessionUpdated = await Session.update({
+            json_boardPositions: JSON.stringify(newBoardPositions)
+        }, 
+        {
+            where: {
+                id: idGame
+            }
+        });
+        if (sessionUpdated == 1){
+            return true;
+        }
+    }
+    return false;
 }
 
 function updateChallengingInfo(id_session, challenge_active, challenge_name, challenge_participants) {
@@ -114,4 +142,5 @@ module.exports = {createSesion,
     updateBoardPositions, 
     updateTurnOfTeamFromSocket, 
     updateChallengingInfo,
-    updateChallengePassed};
+    updateChallengePassed,
+    addTriviaVsToChallenges};

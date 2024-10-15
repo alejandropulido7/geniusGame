@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { FaClipboard, FaCheck } from 'react-icons/fa';
+import {QRCodeSVG} from 'qrcode.react'
 
 const AllowJoin = ({textToCopy}) => {
 
@@ -17,8 +18,8 @@ const AllowJoin = ({textToCopy}) => {
       };
 
     return (
-        <div className="w-52 flex flex-col items-center mt-5 overflow-hidden">
-            <p className="w-full h-10 block mb-4 text-wrap">{textToCopy}</p>
+        <div className="w-32ß m-auto flex flex-col items-center mt-5 overflow-hidden">
+            {/* <p className="w-full h-10 block mb-4 text-wrap">{textToCopy}</p> */}
             <button 
                 onClick={handleCopy} 
                 className="relative flex items-center px-4 py-2 bg-blue-500 text-white font-semibold rounded-md hover:bg-blue-600 transition"
@@ -32,6 +33,7 @@ const AllowJoin = ({textToCopy}) => {
                 </span>
                 )}
             </button>
+            <QRCodeSVG value={textToCopy}/>
         </div>
     )
 }

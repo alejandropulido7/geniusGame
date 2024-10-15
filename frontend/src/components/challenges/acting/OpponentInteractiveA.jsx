@@ -3,6 +3,7 @@ import ValidateChallenge from '../common/ValidateChallenge';
 import HideWord from '../common/HideWord';
 import ChooseTeamMember from '../common/ChooseTeamMember';
 import { SocketContext } from '../../../context/SocketProvider';
+import { getRandomMovie } from '../../../services/gameServices';
 
 const OpponentInteractiveA = ({wordReady}) => {
 
@@ -10,6 +11,7 @@ const OpponentInteractiveA = ({wordReady}) => {
     const [finalWord, setFinalWord] = useState('');
     const [oponentMember, setOponentMember] = useState('');
     const {socket} = useContext(SocketContext);
+    const [textButton, setTextButton] = useState('Buscar sugerencia');
     
     useEffect(() => {
       if(localStorage.getItem('acting-opp-GG') != null){
@@ -30,13 +32,21 @@ const OpponentInteractiveA = ({wordReady}) => {
       socket?.emit('acting', data);
       socket?.emit('startChallenge', {socketId: socket?.id});
     }
+
+    const getMovieSuggested = async () => {
+      const movie = await getRandomMovie();
+      if(movie){
+        setWord(movie.title);
+      }
+      setTextButton('Otra sugerencia');
+    }
   
     return (
-      <>
+      <div className='flex flex-col gap-6'>
         { !wordReady 
         ?
-          <div>
-            <input className='input' type="text" placeholder='Escribe una palabra o frase' onChange={(e) => setWord(e.target.value)}/>
+          <div className='flex flex-col gap-6'>
+            <textarea className='input' rows='2' value={word} placeholder='Escribe una palabra o frase' onChange={(e) => setWord(e.target.value)}/>
             <ChooseTeamMember setMember={setOponentMember} member={oponentMember}/>
             <button className='btn' onClick={emitWordChallenge}>Sent word</button>
           </div>
@@ -44,11 +54,11 @@ const OpponentInteractiveA = ({wordReady}) => {
           <HideWord word={finalWord}/>  
         }
         <ValidateChallenge/>
-        {finalWord == '' && 
+        {(finalWord == '' && !wordReady) && 
         <div>
-          <p>Aqui va el listado de peliculas o series sugeridos</p>
+          <button type="text" onClick={getMovieSuggested}>{textButton}</button>
         </div>}
-      </>
+      </div>
     )
   }
 

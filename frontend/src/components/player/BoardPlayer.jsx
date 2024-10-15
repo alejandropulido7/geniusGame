@@ -161,7 +161,7 @@ const BoardPlayer = () => {
             socket.on('openModalChoiceNewFlag', (data) => {
                 if(idTeamCookie && data.idTeam == idTeamCookie){
                     setOpenModalChoiceNewFlag(true);
-                    setInfoChoiceNewFlag(data);
+                    setInfoChoiceNewFlag(data.player);
                 }
             });
 

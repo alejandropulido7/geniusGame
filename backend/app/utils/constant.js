@@ -24,8 +24,27 @@ const triviaCategories = [
     {id: 31, name: 'Science: Gadgets'},
     {id: 31, name: 'Entertainment: Japanese Anime & Manga'},
     {id: 32, name: 'Entertainment: Cartoon &amp; Animations'},
-]
+];
 
-module.exports = {FLAGS, triviaCategories};
+const PICTIONARY = 'pictionary';
+const WORD_CHAIN = 'word_chain'; //Palabras encadenadas por la ultima letra
+const HUNGED = 'hunged';
+const TRIVIA = 'trivia';
+const ACTING = "acting";
+const WHISTLE_SONG = "whistle_song" //silbar cancion que el oponente ponga
+const BACK_HOME = 'back_home';
+const TRIVIA_VS = 'trivia_vs';
+
+const CHALLENGES_IN_BOARD = [
+    {id: PICTIONARY, name: 'Dibuja', icon: 'pictionary'},
+    {id: WORD_CHAIN, name: 'Cadena de palabras', icon: 'word_chain'},
+    {id: HUNGED, name: 'Ahorcado', icon: 'hunged'},
+    {id: TRIVIA, name: 'Preguntas', icon: 'trivia'},
+    {id: ACTING, name: 'Actuar', icon: 'acting'},
+    {id: BACK_HOME, name: 'Volver al inicio', icon: 'home'},
+    {id: WHISTLE_SONG, name: 'Silba o tararea', icon: 'whistle'}
+];
+
+module.exports = {FLAGS, triviaCategories, CHALLENGES_IN_BOARD, TRIVIA_VS};
 
             

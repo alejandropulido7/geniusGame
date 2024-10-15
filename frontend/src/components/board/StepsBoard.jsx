@@ -15,7 +15,7 @@ const StepsBoard = ({arrayPositions, flag, players, stlyeClass}) => {
 
   return (
     <>
-      <div className={`${stlyeClass} flex flex-wrap my-5 p-7 rounded-md overflow-visible`}>
+      <div className={`${stlyeClass} flex flex-wrap my-5 py-3 rounded-md overflow-visible`}>
           {arrayPositions.map((position, index) => (
             <div key={index} className='relative'>
               {(arrayPositions.length-1) != index

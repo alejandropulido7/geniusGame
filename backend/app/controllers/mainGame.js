@@ -1,6 +1,6 @@
 const detectMobileDevice = require('../utils/detectDevice');
 const {updatePositionTeamFromSocket, addFlagToTeam, removeFlagToTeam} = require('./teams');
-const {updateTurnOfTeamFromSocket, updateChallengingInfo, updateChallengePassed} = require('./sessions');
+const {updateTurnOfTeamFromSocket, updateChallengingInfo, updateChallengePassed, addTriviaVsToChallenges} = require('./sessions');
 const RoomStore = require('../classes/RoomStore');
 const TurnsGame = require('../classes/TurnsGame');
 const GameState = require('../classes/GameState');
@@ -264,7 +264,10 @@ async function resultChallenge(data){
                 foundPlayer.flagsObtained = validateWinGame.flagsObtained;
                 RoomStore.modifyUser(gameId, foundPlayer);
                 if(!validateWinGame.winGame){
-                    io.sockets.in(gameId).emit('openModalChoiceNewFlag', foundPlayer);
+                    const changePositions = await addTriviaVsToChallenges(gameId);
+                    if(changePositions){
+                        io.sockets.in(gameId).emit('openModalChoiceNewFlag', {player: foundPlayer, changePositions});
+                    }
                 } else {
                     io.sockets.in(gameId).emit('winGame', foundPlayer);
                 }

@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 import HideWord from '../common/HideWord';
 import { SocketContext } from '../../../context/SocketProvider';
+import ChallengeNotPassed from '../common/ChallengeNotPassed';
 
-const PlayerChallengeA = ({word}) => {
+const PlayerChallengeA = ({word, teamPlayer}) => {
 
     const [showButton, setShowButton] = useState(true);
     const {socket} = useContext(SocketContext);
+    const [gameFinished, setGameFinished] = useState(false);
 
     const emitResult = () => {
       setShowButton(false);
@@ -16,12 +18,13 @@ const PlayerChallengeA = ({word}) => {
       if(localStorage.getItem('acting-player-GG') != null){
           const properties = JSON.parse(localStorage.getItem('acting-player-GG'));
           setShowButton(prev => properties.showButton??prev);
+          setGameFinished(properties.gameFinished)
       }
     },[])
   
     useEffect(() => {
-      localStorage.setItem('acting-player-GG', JSON.stringify({showButton}));
-    },[showButton])
+      localStorage.setItem('acting-player-GG', JSON.stringify({showButton, gameFinished}));
+    },[showButton, gameFinished])
   
     return (
       <div>
@@ -34,10 +37,18 @@ const PlayerChallengeA = ({word}) => {
         <div>
           { showButton 
             ?
-            <div><button className='btn' onClick={emitResult}>Terminar</button></div>
+            <div>
+              { !gameFinished && 
+              <div>
+                <p className='py-3'>El jugador {teamPlayer} debe resolver este reto.</p>
+                <button className='btn' onClick={emitResult}>Terminar</button>
+              </div>
+              }
+              <ChallengeNotPassed gameFinished={gameFinished} setGameFinished={setGameFinished} showButton={true}/>         
+            </div>
             :
             <div>En proceso de revision...</div>
-          }          
+          } 
         </div>
         }
         <div>

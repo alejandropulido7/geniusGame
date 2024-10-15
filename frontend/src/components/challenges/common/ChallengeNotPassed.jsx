@@ -8,6 +8,18 @@ const ChallengeNotPassed = ({showButton, gameFinished, setGameFinished}) => {
     const {socket} = useContext(SocketContext);
 
     useEffect(() => {
+      const properties = JSON.parse(localStorage.getItem('notPassedChallenge-GG'));
+      if(properties != null){
+          setPreviousPosition(properties.previousPosition);
+          setDataPlayer(properties.dataPlayer);
+      }
+    },[]);
+  
+    useEffect(() => {
+      localStorage.setItem('notPassedChallenge-GG', JSON.stringify({dataPlayer, previousPosition}));
+    },[dataPlayer, previousPosition]);  
+
+    useEffect(() => {
         
         socket?.on('notPassChallenge', (data) => {
             console.log("ChallengeNotPassed", data);
@@ -23,8 +35,8 @@ const ChallengeNotPassed = ({showButton, gameFinished, setGameFinished}) => {
 
   return (
     <>
-        {gameFinished && <div>
-            <p>No pasaste el reto, te vamos a devolver a la posicion {previousPosition}</p>
+        {gameFinished && <div className='flex flex-col gap-2'>
+            <p>Te se acabó el tiempo y no pasaste el reto, te vamos a devolver a la posicion {previousPosition}</p>
             {showButton && <button className='btn' onClick={() => resultChallenge(false)}>OK</button>}      
         </div>}
     </>

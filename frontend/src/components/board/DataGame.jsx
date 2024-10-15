@@ -28,16 +28,16 @@ const DataGame = () => {
 
             socket.on('playerJoinedRoom', (playersInSession) => {
                 setPlayers(playersInSession);
-                if(playersInSession.length > 1){
-                    setActiveStartGame(true);
-                }
+                // if(playersInSession.length > 1){
+                //     setActiveStartGame(true);
+                // }
             });
             return () => {
                 socket.off('winGame');
             }
         }
         
-    }, [socket, session, activeChallenge]);
+    }, [socket, session, activeChallenge, activeStartGame]);
 
     useEffect(() => {
         let path = `${window.location.protocol}//${window.location.hostname}${window.location.port ? `:${window.location.port}` : ''}`;
@@ -95,8 +95,10 @@ const DataGame = () => {
                 </div>
                 {session &&
                 <div className='data-game-bottom m-auto '>
-                    { !session.gameStarted && activeStartGame && <button className='btn btn-wood text-white' onClick={readyToPlay}>Listo para jugar</button>}
-                    { !activeStartGame && <AllowJoin textToCopy={urlJoin}/> }
+                    { !session.gameStarted && !activeStartGame && 
+                        <button className='btn btn-wood text-white' onClick={readyToPlay}>Listo para jugar</button>
+                    }
+                    { !session.gameStarted && !activeStartGame && <AllowJoin textToCopy={urlJoin}/> }
                 </div>}                
             </div>}
             </div>}
