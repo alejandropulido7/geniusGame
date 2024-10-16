@@ -46,7 +46,7 @@ const Chronometer = ({data}) => {
 
     if(seconds == 0){
       setShowTime(false);
-      socket?.emit('notPassChallenge', data.participants.player);
+      // socket?.emit('notPassChallenge', data.participants.player);
     }
 
     return () => {   

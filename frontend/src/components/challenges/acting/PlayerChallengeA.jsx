@@ -27,14 +27,14 @@ const PlayerChallengeA = ({word, teamPlayer}) => {
     },[showButton, gameFinished])
   
     return (
-      <div>
+      <div className='flex flex-col gap-6'>
         { word == '' 
         ? 
         <div>
           <p>Esperando al oponente...</p>
         </div>
         : 
-        <div>
+        <div className='flex flex-col gap-6'>
           { showButton 
             ?
             <div>

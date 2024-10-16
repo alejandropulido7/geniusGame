@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
 
 const letrasQwerty = [
-    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-    ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-    ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
+    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'],
+    // ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+    // ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
 ];
 
 const KeyboardCW = ({texto, setTexto}) => {
@@ -46,20 +46,21 @@ const KeyboardCW = ({texto, setTexto}) => {
   
     return (
         <div>
-          <h1>Teclado QWERTY</h1>
           <p>{texto}</p>
-          {letters.map((fila, indiceFila) => (
-            <div key={indiceFila}>
-              {desordenarFila(fila).map((letra, indiceColumna) => (
-                <button className='btn' key={indiceColumna} onClick={() => agregarTexto(letra)}>
-                  {letra}
-                </button>
-              ))}
-            </div>
-          ))}
-          <div>
-            <button className='btn' onClick={borrarUltimoCaracter}>Borrar</button>
-            <button className='btn' onClick={limpiarTexto}>Limpiar</button>
+          <div className='my-5'>
+            {letters.map((fila, indiceFila) => (
+              <div className='flex flex-wrap justify-center my-2' key={indiceFila}>
+                {desordenarFila(fila).map((letra, indiceColumna) => (
+                  <button className='btn bg-gray-400 text-black my-2' key={indiceColumna} onClick={() => agregarTexto(letra)}>
+                    {letra}
+                  </button>
+                ))}
+              </div>
+            ))}
+          </div>
+          <div className='flex my-5'>
+            <button className='btn bg-orange-600 text-white' onClick={borrarUltimoCaracter}>Borrar</button>
+            <button className='btn bg-red-600 text-white' onClick={limpiarTexto}>Limpiar</button>
           </div>
         </div>
       );

@@ -14,6 +14,7 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
     const [showNotPassChallenge, setShowNotPassChallenge] = useState(false);
     const [previousPosition, setPreviousPosition] = useState(0);
     const [opponentValidation, setOpponentValidation] = useState(false);
+    const [newWord, setNewWord] = useState('');
     const {socket} = useContext(SocketContext);
 
     useEffect(() => {
@@ -115,15 +116,16 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
       <div>
         {!finishChallenge 
         ? <div>
-            <h4>Turno de {teammate}</h4>
+            <h4 className='text-red-600 text-xl'>Turno de {teammate}</h4>
+            <p>Ultima palabra: {lastWord}</p>
             {showKeyboard && 
-            <div>
+            <div className='block'>
               <KeyboardCW texto={newWord} setTexto={setNewWord}/>
-              <button className='btn' onClick={manageNewWord}>Agregar Palabra</button>
+              <button className='btn bg-green-600 text-white' onClick={manageNewWord}>Agregar Palabra</button>
             </div>}
           </div> 
         : 
-        <div>
+        <div className='flex flex-col gap-5'>
           {!opponentValidation 
           ?
           <div>

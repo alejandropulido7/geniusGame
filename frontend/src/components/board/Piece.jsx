@@ -12,7 +12,7 @@ const Piece = ({ teamName, w, h, color, emoji }) => {
   },[teamName, color, emoji]);
 
   return (
-    <div className='circle-piece relative border-2 rounded-full flex justify-center items-center'
+    <div className='circle-piece relative border-2 rounded-full flex justify-center items-center z-10'
     style={{width: w+'px', 
       height: h+'px', 
       backgroundColor: `${color}`,

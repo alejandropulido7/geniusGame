@@ -17,7 +17,7 @@ const HideWord = ({word, textButton = 'Ver la palabra secreta'}) => {
         { word != '' &&      
         <div className='order-2'>
             <button
-                className='btn'
+                className='btn bg-violet-400 text-white'
                 onMouseDown={manageHold}
                 onMouseUp={manageUnhold}
                 onTouchStart={manageHold}

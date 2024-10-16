@@ -46,9 +46,10 @@ const OpponentInteractiveA = ({wordReady}) => {
         { !wordReady 
         ?
           <div className='flex flex-col gap-6'>
+            <p>Escribe una pelicula o serie para que el equipo contrario la actue..</p>
             <textarea className='input' rows='2' value={word} placeholder='Escribe una palabra o frase' onChange={(e) => setWord(e.target.value)}/>
             <ChooseTeamMember setMember={setOponentMember} member={oponentMember}/>
-            <button className='btn' onClick={emitWordChallenge}>Sent word</button>
+            <button className='btn bg-blue-400' onClick={emitWordChallenge}>Enviar</button>
           </div>
         :
           <HideWord word={finalWord}/>  
@@ -56,7 +57,7 @@ const OpponentInteractiveA = ({wordReady}) => {
         <ValidateChallenge/>
         {(finalWord == '' && !wordReady) && 
         <div>
-          <button type="text" onClick={getMovieSuggested}>{textButton}</button>
+          <button className='btn bg-amber-300' type="text" onClick={getMovieSuggested}>{textButton}</button>
         </div>}
       </div>
     )

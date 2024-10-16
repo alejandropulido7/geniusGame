@@ -95,7 +95,7 @@ const DataGame = () => {
                 </div>
                 {session &&
                 <div className='data-game-bottom m-auto '>
-                    { !session.gameStarted && !activeStartGame && 
+                    { !session.gameStarted && activeStartGame && 
                         <button className='btn btn-wood text-white' onClick={readyToPlay}>Listo para jugar</button>
                     }
                     { !session.gameStarted && !activeStartGame && <AllowJoin textToCopy={urlJoin}/> }

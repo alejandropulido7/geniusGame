@@ -55,10 +55,10 @@ const Acting = ({renderIn}) => {
 
   return (
     <div>
-      <div className='challenge-top'>
+      {/* <div className='challenge-top'>
         <h1>Actua la pelicula o serie</h1>
         <p>Descripcion</p>
-      </div>
+      </div> */}
       <div className='challenge-center'>
         {render}
       </div>

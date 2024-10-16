@@ -4,10 +4,11 @@ import {RENDER_CHALLENGE} from '../../../utils/constants'
 import OpponentInteractiveCW from './OpponentInteractiveCW';
 import AdminCW from './AdminCW';
 import { SocketContext } from '../../../context/SocketProvider';
+import { findFlagProperties } from '../../../utils/constants';
 
 const ChainWord = ({renderIn, dataPlayer}) => {
 
-  const {lastWord, setLastWord} = useState('');
+  const [lastWord, setLastWord] = useState('');
   const [arrayWords, setArrayWords] = useState([]);
   const [render, setRender] = useState(null);
   const [showOponnent, setShowOpponent] = useState(false);
@@ -57,11 +58,11 @@ const ChainWord = ({renderIn, dataPlayer}) => {
 
 
   return (
-    <div>
-      <h1>Palabras Encadenadas</h1>      
+    <div className='flex flex-col gap-6'>
+      <h1 className='text-2xl underline text-indigo-500'>Palabras Encadenadas</h1>      
       {!showOponnent && <div>
-        <p>Tema: {topic || 'Esperando oponente'}</p>
-        {lastWord ? <p>Última Palabra: {lastWord}</p> : <p>Esperando a que el oponente envie la primera palabra...</p>}
+        <p>Tema: {topic || 'Esperando al oponente'}</p>
+        {lastWord ? <p>Última Palabra: {lastWord}</p> : <p></p>}
       </div>}
       {render}
     </div>

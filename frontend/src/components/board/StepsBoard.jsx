@@ -28,7 +28,7 @@ const StepsBoard = ({arrayPositions, flag, players, stlyeClass}) => {
                 players.map((player, index) => {
                   if(player.positionActive === position.position && flag == player.flagActive){                  
                     return (
-                    <div className={`absolute transition-all top-0 text-white`} key={player.teamName} style={{left: `${index*25}px`, rotate: `${index*10}deg`}}>
+                    <div className={`absolute transition-all top-0 text-white z-10`} key={player.teamName} style={{left: `${index*25}px`, rotate: `${index*10}deg`}}>
                       <Piece color={player.propPiece.color} emoji={player.propPiece.emoji} h={60} w={60} teamName={player.teamName}/>
                     </div>);
                   }else{

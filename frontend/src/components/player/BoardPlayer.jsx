@@ -14,6 +14,7 @@ import { SocketContext } from '../../context/SocketProvider';
 import PreventBackButton from './PreventBackButton';
 import AcceptChallenge from './AcceptChallenge';
 import { FlagsPlayer } from '../challenges/common/FlagsPlayer';
+import { DataTeam } from './DataTeam';
 
 const BoardPlayer = () => {
 
@@ -229,19 +230,15 @@ const BoardPlayer = () => {
                 ?
                 <div className='bg-white p-10 board-player-center rounded-md'>
                     { !activeChallenge && 
-                    <div className='flex flex-col justify-between h-full'>
+                    <div className='flex flex-col justify-around h-full'>
                         <div><PreventBackButton/></div>
-                        <div className='flex justify-center gap-5'>
-                            <p>Sesion: {codeSesion}</p>
-                            <p>Tu equipo: {teamName}</p>
-                            <p>Ruta: {flagActive}</p>
-                        </div>                        
-                        <div>
-                            <p>Tus banderas:</p>
-                            <FlagsPlayer flagsPlayer={flagsObtained}/>
-                            <div className=''>
-                            </div>
-                        </div>
+                        <DataTeam 
+                            codeSesion={codeSesion} 
+                            colorTable={findFlagProp().color}
+                            flagActive={findFlagProp().name} 
+                            teamName={teamName} 
+                            flagsObtained={flagsObtained}
+                        />
                         { youTurn && 
                         <div className='w-60 m-auto'>
                             <button className='btn btn-wood w-full' onClick={throwDice}>Lanzar Dado</button>                            

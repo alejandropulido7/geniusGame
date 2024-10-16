@@ -44,11 +44,10 @@ const OpponentInteractiveCW = ({lastWord}) => {
     return (
       <div>       
         { lastWord == '' ?
-        <div>
+        <div className='flex flex-col gap-5'>
           <p>Envia la primera palabra a tu oponente y selecciona un tema</p>
-          <input className='input' type="text" placeholder='Escribe una palabra segun el tema' onChange={(e) => setWord(e.target.value)}/>
-          <button onClick={emitWordChallenge}>Sent word</button>
-          <select value={topic} onChange={topicChanged}>
+          <textarea rows={2} className='input' placeholder='Escribe una palabra segun el tema' onChange={(e) => setWord(e.target.value)}/>        
+          <select className='select' value={topic} onChange={topicChanged}>
             <option value="">Selecciona un tema..</option>
             {
               OPTIONS_CHALLENGES.get('word_chain').topics.map(topicMap => {
@@ -58,6 +57,7 @@ const OpponentInteractiveCW = ({lastWord}) => {
               })
             }
           </select>
+          <button className='btn bg-indigo-400' onClick={emitWordChallenge}>Enviar palabra</button>
           {errorMessage && <p>{errorMessage}</p>}
         </div>
         : 
