@@ -139,7 +139,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: 'word_chain',
+        challenge: '',
         player: playerModified
       };
     }
@@ -206,8 +206,10 @@ const BoardGame = () => {
         <Roulette/>
       </Modal>
       <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
-        <h3>Wow! el equipo {infoChoiceNewFlag.teamName} ha ganado la bandera {infoChoiceNewFlag.flagActive}</h3>
-        <p>Esperando a que elija su proxima bandera...</p>
+        <div className='flex flex-col gap-4'>
+          <h3>Wow! el equipo {infoChoiceNewFlag.teamName} ha ganado la bandera {infoChoiceNewFlag.flagActive}</h3>
+          <p>Esperando a que elija su proxima bandera...</p>
+        </div>
       </Modal>
     </div>
   );

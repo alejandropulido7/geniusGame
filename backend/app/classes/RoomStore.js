@@ -22,12 +22,14 @@ class RoomStore {
         if (this.rooms.has(room)) {
             const users = this.rooms.get(room);           
             if (!users.has(user.idTeam)) {
+                this.rooms.get(room).set(user.idTeam, user); 
+            } else {
                 const userFound = users.has(user.idTeam);
                 if(userFound.teamName != user.teamName){
                     this.rooms.get(room).set(user.idTeam, user);                
+                } else {
+                    this.modifyUser(room, user);
                 }
-            } else {
-                this.modifyUser(room, user);
             }
             this.userRooms.set(user.socketId, room); 
         }        
@@ -66,7 +68,7 @@ class RoomStore {
             const arrayUsers = Array.from(room.values());
             const userToRemove = arrayUsers.find(player => player.socketId == idSocketToRemove);
             if(userToRemove){
-                room.delete(userToRemove.idTeam); 
+                // room.delete(userToRemove.idTeam); 
                 this.userRooms.delete(idSocketToRemove);               
             }
         }

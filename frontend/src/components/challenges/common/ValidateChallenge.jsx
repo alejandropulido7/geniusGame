@@ -8,6 +8,22 @@ const ValidateChallenge = () => {
     const {socket} = useContext(SocketContext);
 
     useEffect(() => {
+      const properties = JSON.parse(localStorage.getItem('validate-challenge-GG'));
+      if(properties != null){
+        setValidOpponent(properties.validOpponent);
+        setDataOpponent(properties.dataOpponent);;
+      } 
+    },[]);
+
+    useEffect(() => {
+      localStorage.setItem('validate-challenge-GG', JSON.stringify({
+        validOpponent,
+        dataOpponent
+      }));
+
+    },[validOpponent,dataOpponent])
+
+    useEffect(() => {
   
         if(socket){
           socket.on('stopChallenge', (dataStop) => {

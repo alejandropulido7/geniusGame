@@ -6,6 +6,7 @@ import word_chain from '../assets/images/challenges/word_chain.png';
 import trivia from '../assets/images/challenges/trivia.png';
 import whistle from '../assets/images/challenges/whistle.png';
 import home from '../assets/images/challenges/home.png';
+import versus from '../assets/images/challenges/versus.png';
 
 /*Flags images */
 
@@ -106,6 +107,10 @@ const CHALLENGES_IN_BOARD = [
     {id: WHISTLE_SONG, name: 'Silba o tararea', icon: whistle}
 ];
 
+let CHALLENGES_IN_BOARD_PLUSTRIVIA = JSON.parse(JSON.stringify(CHALLENGES_IN_BOARD)); 
+CHALLENGES_IN_BOARD_PLUSTRIVIA.push({id: TRIVIA_VS, name: 'Enfrentamiento de preguntas', icon: versus});
+ 
+
 const getRandomObject = (arrayDeObjetos) => {
     if (arrayDeObjetos.length === 0) {
       return null;  
@@ -119,6 +124,7 @@ const findFlagProperties = (flag) => {
 }
 
 export {CHALLENGES_IN_BOARD, 
+  CHALLENGES_IN_BOARD_PLUSTRIVIA,
   PICTIONARY, 
   WORD_CHAIN, 
   HUNGED, 

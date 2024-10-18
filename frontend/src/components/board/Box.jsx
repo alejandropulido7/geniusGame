@@ -1,10 +1,10 @@
 import React from 'react'
-import {CHALLENGES_IN_BOARD} from '../../utils/constants';
+import {CHALLENGES_IN_BOARD_PLUSTRIVIA} from '../../utils/constants';
 
 const Box = ({position, color, width=67, height=59}) => {
 
     const findIconChallenge = (id) => {
-        const challengeFound = CHALLENGES_IN_BOARD.find(challenge => challenge.id == id);
+        const challengeFound = CHALLENGES_IN_BOARD_PLUSTRIVIA.find(challenge => challenge.id == id);
         if(challengeFound){
             return <img width='25x' height='25px' src={challengeFound.icon}></img>
         }

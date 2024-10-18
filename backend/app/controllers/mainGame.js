@@ -90,8 +90,8 @@ async function startGame(gameId) {
     const player = RoomStore.getUsersInRoom(gameId)[0];
     console.log(player);
     const updateTurn = await updateTurnOfTeamFromSocket(player.gameId, true, player.teamName);
-    io.sockets.in(gameId).emit('prueba', "HABLALOOOOOOOOOOOOO");
     if(updateTurn == 1){
+        io.sockets.in(gameId).emit('startGame', {gameStarted: true});
         io.sockets.in(gameId).emit('turnOf', player);
     } else {
         io.sockets.in(gameId).emit('status', "Error actualizando el turno");
@@ -147,7 +147,8 @@ function turnOf(dataTeam){
 function throwDice (dataTeam) {
     const gameId = dataTeam.gameId;
     const playerMoved = RoomStore.getUserRoom(gameId, dataTeam.idTeam);
-
+    console.log(playerMoved)
+    // console.log(RoomStore.getRoomByIdSocket(dataTeam))
     if(playerMoved != undefined){
         const newPosition = playerMoved.positionActive + dataTeam.diceValue;
         const room = RoomStore.getRoomDetails(gameId);
@@ -265,7 +266,8 @@ async function resultChallenge(data){
                 RoomStore.modifyUser(gameId, foundPlayer);
                 if(!validateWinGame.winGame){
                     const changePositions = await addTriviaVsToChallenges(gameId);
-                    if(changePositions){
+                    if(changePositions.length > 0){
+                        console.log(changePositions)
                         io.sockets.in(gameId).emit('openModalChoiceNewFlag', {player: foundPlayer, changePositions});
                     }
                 } else {

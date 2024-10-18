@@ -50,10 +50,11 @@ async function addTriviaVsToChallenges(idGame) {
         }
     });
 
+    let newBoardPositions = [];
     if(session){
         let challenges = JSON.parse(JSON.stringify(CHALLENGES_IN_BOARD));
-        challenges.push(TRIVIA_VS);
-        const newBoardPositions = createBoard(session.lenght_board, session.amount_challenges, challenges);
+        challenges.push({ id: TRIVIA_VS, name: 'Enfrentamiento de preguntas', icon: TRIVIA_VS });
+        newBoardPositions = createBoard(session.lenght_board, session.amount_challenges, challenges);
         const sessionUpdated = await Session.update({
             json_boardPositions: JSON.stringify(newBoardPositions)
         }, 
@@ -63,10 +64,10 @@ async function addTriviaVsToChallenges(idGame) {
             }
         });
         if (sessionUpdated == 1){
-            return true;
+            return newBoardPositions;
         }
     }
-    return false;
+    return [];
 }
 
 function updateChallengingInfo(id_session, challenge_active, challenge_name, challenge_participants) {
