@@ -22,7 +22,6 @@ const Trivia = ({renderIn, dataTrivia}) => {
   const {socket} = useContext(SocketContext);
 
   useEffect(() => {
-    console.log(dataTrivia)
     if(dataTrivia){
       setCategory(dataTrivia.category);
       setCurrentQuestion(dataTrivia.question);
