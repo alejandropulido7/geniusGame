@@ -29,7 +29,6 @@ const Chronometer = ({data}) => {
     
     let interval = null;
     socket?.on('startChallenge', (dataPlayer) => {
-      console.log("dataPlayer-CRONO", dataPlayer);
       setPlayer(dataPlayer);
       interval = setInterval(() => {
         if (seconds > 0) {
@@ -46,7 +45,7 @@ const Chronometer = ({data}) => {
 
     if(seconds == 0){
       setShowTime(false);
-      // socket?.emit('notPassChallenge', data.participants.player);
+      socket?.emit('notPassChallenge', data.participants.player);
     }
 
     return () => {   

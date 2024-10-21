@@ -259,7 +259,6 @@ async function resultChallenge(data){
             updatePositions(playerModified, io);
         } else {
             const isLastStep = foundPlayer.isLastStep;
-            const players = RoomStore.getUsersInRoom(gameId);
             if(isLastStep){
                 const validateWinGame = await addFlagToTeam( foundPlayer.idTeam, gameId, foundPlayer.flagActive);
                 foundPlayer.flagsObtained = validateWinGame.flagsObtained;
@@ -274,7 +273,7 @@ async function resultChallenge(data){
                     io.sockets.in(gameId).emit('winGame', foundPlayer);
                 }
             } else { 
-                io.sockets.in(gameId).emit('resultChallenge', {player: foundPlayer, challengePassed, players});
+                updatePositions(foundPlayer, io, challengePassed);
             }
         }        
     } 

@@ -4,13 +4,13 @@ import { FlagsPlayer } from '../challenges/common/FlagsPlayer'
 export const DataTeam = ({codeSesion, teamName, flagActive, flagsObtained, colorTable}) => {
   return (
     <div className="overflow-x-auto">
-        <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden text-sm">
+        <table className="min-w-full bg-white shadow-md md:text-lg text-xs rounded-lg overflow-hidden">
             <thead>
             <tr className="text-white text-center" style={{backgroundColor: colorTable}}>
-                <th className="py-3 px-4 uppercase font-semibold text-sm">Session</th>
-                <th className="py-3 px-4 uppercase font-semibold text-sm">Tu equipo</th>
-                <th className="py-3 px-4 uppercase font-semibold text-sm">Ruta</th>
-                <th className="py-3 px-4 uppercase font-semibold text-sm">Tus banderas</th>
+                <th className="py-3 px-4 uppercase font-semibold">Session</th>
+                <th className="py-3 px-4 uppercase font-semibold">Tu equipo</th>
+                <th className="py-3 px-4 uppercase font-semibold">Ruta</th>
+                <th className="py-3 px-4 uppercase font-semibold">Tus banderas</th>
             </tr>
             </thead>
             <tbody>

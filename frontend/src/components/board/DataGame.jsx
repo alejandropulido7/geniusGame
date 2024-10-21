@@ -29,13 +29,13 @@ const DataGame = () => {
 
             socket.on('playerJoinedRoom', (playersInSession) => {
                 setPlayers(playersInSession);
-                // if(playersInSession.length > 1){
-                //     setActiveStartGame(true);
-                // }
+                if(playersInSession.length > 1){
+                    setActiveStartGame(true);
+                }
             });
 
             socket.on('startGame', (data) => {
-                setActiveStartGame(data.gameStarted);
+                setActiveStartGame(false);
             });
             
             return () => {
@@ -104,7 +104,7 @@ const DataGame = () => {
                     { !session.gameStarted && !activeStartGame && 
                         <button className='btn btn-wood text-white' onClick={readyToPlay}>Listo para jugar</button>
                     }
-                    { !session.gameStarted && activeStartGame && <AllowJoin textToCopy={urlJoin}/> }
+                    <AllowJoin textToCopy={urlJoin}/>
                 </div>}                
             </div>}
             </div>}

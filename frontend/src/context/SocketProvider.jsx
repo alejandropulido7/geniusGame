@@ -57,7 +57,8 @@ export const SocketProvider = ({ children, isBoard=false }) => {
                 auth: {token, isBoard},
                 reconnection: true,
                 reconnectionAttempts: 5,
-                reconnectionDelay: 1000
+                reconnectionDelay: 10000,
+                autoConnect: true
             });
             setSocket(socket);
             setToken(token);

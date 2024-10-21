@@ -11,7 +11,6 @@ const KeyboardCW = ({texto, setTexto}) => {
     const [letters, setLetters] = useState(letrasQwerty);
   
     const agregarTexto = (caracter) => {
-        console.log(caracter);
       setTexto(texto + caracter);
     };
   
@@ -46,12 +45,14 @@ const KeyboardCW = ({texto, setTexto}) => {
   
     return (
         <div>
-          <p>{texto}</p>
+          <input type="text" className='input m-auto text-center bg-slate-100' value={texto || '_______'} disabled/>
           <div className='my-5'>
             {letters.map((fila, indiceFila) => (
-              <div className='flex flex-wrap justify-center my-2' key={indiceFila}>
+              <div className='flex flex-wrap justify-center gap-1' key={indiceFila}>
                 {desordenarFila(fila).map((letra, indiceColumna) => (
-                  <button className='btn bg-gray-400 text-black my-2' key={indiceColumna} onClick={() => agregarTexto(letra)}>
+                  <button className='p-2 w-10 bg-white border-2 gap-1 rounded-md border-gray-700 hover:text-white hover:bg-black touch-manipulation text-black my-2' 
+                  style={{fontFamily: 'verdana'}}
+                  key={indiceColumna} onClick={() => agregarTexto(letra)}>
                     {letra}
                   </button>
                 ))}

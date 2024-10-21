@@ -14,7 +14,7 @@
     grid-template-columns: auto 1fr auto;
     grid-template-rows: auto 1fr auto;
     gap: 5px;
-    height: 100vh;
+    height: 100dvh;
   }
   
   .row {
@@ -75,8 +75,9 @@
     /* padding: 20px; */
     border-radius: 15px;
     margin: auto;
-    width: 85%;
-    height: 85%;
+    /* width: 85%;
+    height: 85%; */
+    margin: 20px;
   }
 
   .data-game-container {
@@ -111,5 +112,5 @@
   }
 
   .data-game-players{
-    height: 25vh;
+    height: 25dvh;
   }

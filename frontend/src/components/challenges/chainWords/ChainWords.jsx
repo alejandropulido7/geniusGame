@@ -47,6 +47,9 @@ const ChainWord = ({renderIn, dataPlayer}) => {
         setShowOpponent(true);
         setRender(<OpponentInteractiveCW lastWord={lastWord}/>)
       break;
+      default:
+        setShowOpponent(true);
+      break;
     }  
 
     return () => {
@@ -54,12 +57,12 @@ const ChainWord = ({renderIn, dataPlayer}) => {
       socket?.off('validateChallenge');
     }
 
-  },[lastWord,renderIn]);
+  },[lastWord, renderIn, arrayWords, topic]);
 
 
   return (
     <div className='flex flex-col gap-6'>
-      <h1 className='text-2xl underline text-indigo-500'>Palabras Encadenadas</h1>      
+      <h1 className='text-2xl uppercase text-indigo-500 my-5'>Palabras Encadenadas</h1>      
       {!showOponnent && <div>
         <p>Tema: {topic || 'Esperando al oponente'}</p>
         {lastWord ? <p>Última Palabra: {lastWord}</p> : <p></p>}

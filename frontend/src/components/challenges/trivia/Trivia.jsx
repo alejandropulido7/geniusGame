@@ -22,6 +22,7 @@ const Trivia = ({renderIn, dataTrivia}) => {
   const {socket} = useContext(SocketContext);
 
   useEffect(() => {
+    console.log(dataTrivia)
     if(dataTrivia){
       setCategory(dataTrivia.category);
       setCurrentQuestion(dataTrivia.question);
@@ -64,12 +65,6 @@ const Trivia = ({renderIn, dataTrivia}) => {
       break;
     } 
 
-    return () => {
-      setCategory('');
-      setCurrentQuestion('');
-      setOptions('');
-      setCorrectAnswer('');
-    }
   }, [renderIn, category, options, currentQuestion, correctAnswer]);
   
   const sendResult = () => {
@@ -87,11 +82,11 @@ const Trivia = ({renderIn, dataTrivia}) => {
         || renderIn == RENDER_CHALLENGE.player
       ) &&      
       <Modal open={openModal} onClose={setOpenModal}>
-          <div>
+          <div className='flex flex-col gap-5'>
             <p className='text-center'>{descriptionModal}</p>
             {!passChallenge && <p>La respuesta correcta era: {correctAnswer}</p>}
             {renderIn == RENDER_CHALLENGE.player && 
-            <button onClick={sendResult} className='btn'>{buttonModal}</button>
+            <button onClick={sendResult} className='btn bg-red-600 text-white'>{buttonModal}</button>
             }
           </div>
       </Modal>}   

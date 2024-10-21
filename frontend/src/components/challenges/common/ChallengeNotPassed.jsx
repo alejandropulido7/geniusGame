@@ -38,7 +38,7 @@ const ChallengeNotPassed = ({showButton, gameFinished, setGameFinished}) => {
     <>
         {gameFinished && <div className='flex flex-col gap-2'>
             <p>Te se acabó el tiempo y no pasaste el reto, te vamos a devolver a la posicion {previousPosition}</p>
-            {showButton && <button className='btn text-white' style={{background: findFlagProperties(dataPlayer.flagActive).color}} onClick={() => resultChallenge(false)}>Entendido</button>}      
+            {showButton && <button className='btn text-white shadow-md shadow-black' style={{background: findFlagProperties(dataPlayer.flagActive).color}} onClick={() => resultChallenge(false)}>Entendido</button>}      
         </div>}
     </>
   )

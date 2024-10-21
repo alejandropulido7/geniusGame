@@ -53,9 +53,8 @@ const Pictionary = ({renderIn}) => {
 
   return (
     <div>
-      <div>
-        <h1>Pictionary</h1>
-        <p>Descripcion</p>
+      <div className='flex flex-col gap-5'>
+        <h1 className='text-2xl title-wood text-white py-3'>Pictionary</h1>
         {render}
       </div>
     </div>

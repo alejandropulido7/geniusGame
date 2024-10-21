@@ -7,8 +7,26 @@ const AdminP = ({word}) => {
     const [contextBoard, setContextBoard] = useState(null);
     const [gameFinished, setGameFinished] = useState(false);
     const {socket} = useContext(SocketContext);
-
     const hideWord = ' _ '.repeat(word?.length);
+    const [dimensions, setDimensions] = useState({ 
+        width: 500,
+        height: 300, 
+    });
+
+    // const handleResize = () => {
+    //     setDimensions({
+    //         width: window.innerWidth,
+    //         height: window.innerHeight,
+    //     });
+    // };
+
+    // useEffect(() => {
+    //     window.addEventListener('resize', handleResize);
+    //     handleResize();
+    //     return () => {
+    //         window.removeEventListener('resize', handleResize);
+    //     };
+    // }, []);
 
     useEffect(() => {        
         if(word != ''){
@@ -23,6 +41,16 @@ const AdminP = ({word}) => {
     useEffect(() => {
 
         if(socket){
+            socket.on('pictionary-resize', (data) => {
+                const canvasBoard = canvasRefBoard.current;
+                if (!canvasBoard) return;
+                
+                setDimensions({
+                    width: data.width,
+                    height: data.height,
+                });
+            });
+
             socket.on('pictionary-startDraw', (data) => {
                 const canvasBoard = canvasRefBoard.current;
                 if (!canvasBoard) return;
@@ -77,17 +105,15 @@ const AdminP = ({word}) => {
             ?
             <div>
                 <p>{hideWord}</p>
-                 <p>Waiting for the word...</p>
+                 <p>Esperando la palabra para dibujar...</p>
             </div>
             :
-            <div>
-                
-                <h1>Board</h1>
+            <div className='m-auto'>
                 <canvas
                     ref={canvasRefBoard}
-                    width={500}
-                    height={300}
-                    style={{ border: '1px solid #ccc' }}
+                    width={dimensions.width > 500 ? dimensions.width * 0.8 : dimensions.width * 0.6}
+                    height={dimensions.height * 0.4}
+                    style={{ border: '1px solid #ccc', margin: 'auto' }}
                 /> 
             </div>
             }            

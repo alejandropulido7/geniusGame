@@ -2,6 +2,8 @@ import React, {useContext, useEffect, useState} from 'react'
 import { SocketContext } from '../../context/SocketProvider';
 import { CHALLENGES_IN_BOARD, BACK_HOME, TRIVIA_VS, FLAGS, findFlagProperties } from '../../utils/constants';
 import StealFlag from '../challenges/common/StealFlag';
+import SyncLoader from "react-spinners/SyncLoader";
+
 
 const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents}) => {
 
@@ -10,6 +12,7 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
     const [flagStole, setFlagStole] = useState('');
     const [showFlags, setShowFlags] = useState(false);
     const [flagsOpponent, setFlagsOpponent] = useState([]);
+    const [challengeAcepted, setChallengeAcepted] = useState(false);
 
     useEffect(() => {
         if(opponents.length == 1){
@@ -28,6 +31,7 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
 
     const activateChallenge = (activate) => {
         setOpenModalRoulette(false);
+        setChallengeAcepted(true);
         if(activate){
             const dataOpponent = { opponentSelected, flagStole };
             socket?.emit('renderChallenge', {dataChallenge: dataRenderChallenge, dataOpponent});
@@ -54,7 +58,7 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
         <>
             {(dataRenderChallenge.challenge != BACK_HOME) 
             ?
-            <div>
+            <div className='flex flex-col gap-4'>
                 <h3>Aceptas el reto de {findNameChallenge(dataRenderChallenge.challenge)}?</h3>  
                 {opponents.length > 1 
                 ? 
@@ -85,11 +89,18 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
                         </div>
                         }
                     </div>
-                }       
-                <div className='flex gap-4'>
-                    <button className='btn' onClick={() => activateChallenge(true)}>Si</button>
-                    <button className='btn' onClick={() => activateChallenge(false)}>No</button>
+                }
+                { !challengeAcepted 
+                ?        
+                <div className='flex justify-around gap-4'>
+                    <button className='btn bg-green-600 text-white' onClick={() => activateChallenge(true)}>Si</button>
+                    <button className='btn bg-red-600 text-white' onClick={() => activateChallenge(false)}>No</button>
                 </div>
+                :
+                <div>
+                    <SyncLoader/>
+                </div>
+                }
             </div>
             :
             <div>

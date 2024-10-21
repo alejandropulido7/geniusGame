@@ -13,11 +13,11 @@ const HideWord = ({word, textButton = 'Ver la palabra secreta'}) => {
     };
 
   return (
-    <div>        
+    <div className='flex flex-col'>        
         { word != '' &&      
-        <div className='order-2'>
+        <div className='order-last'>
             <button
-                className='btn bg-violet-400 text-white'
+                className='btn-wood py-2 px-6 text-white'
                 onMouseDown={manageHold}
                 onMouseUp={manageUnhold}
                 onTouchStart={manageHold}

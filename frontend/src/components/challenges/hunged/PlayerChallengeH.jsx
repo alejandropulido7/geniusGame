@@ -6,7 +6,7 @@ import { getCookie } from '../../../utils/cookies';
 import { SocketContext } from '../../../context/SocketProvider';
 
 
-const PlayerChallengeH = ({secretWord}) => {
+const PlayerChallengeH = ({secretWord, player}) => {
 
     const [wordShowed, setWordShowed] = useState('');
     const [missedAttemps, setMissedAttemps] = useState(5);
@@ -102,6 +102,7 @@ const PlayerChallengeH = ({secretWord}) => {
       };
 
     useEffect(() => {
+        setDataPlayer(player);
         if(socket){
             socket.on('notPassChallenge', (data) => {
                 if(data.socketId == socket.id){
@@ -112,7 +113,7 @@ const PlayerChallengeH = ({secretWord}) => {
                 }
               })
         }
-    }, [socket]);
+    }, [socket, player]);
 
 
     const resultChallenge = (passChallenge) => {
@@ -121,12 +122,16 @@ const PlayerChallengeH = ({secretWord}) => {
 
     return (
         <div>
+            <div className='flex flex-row flex-wrap gap-1 justify-center'>
             {(!gameFinished && secretWord && showKeyboard) &&
                 'abcdefghijklmnopqrstuvwxyz'.split('').map((letra) => (
-                <button className='btn' key={letra} onClick={() => manejarIntento(letra)} disabled={lettersGuessed.includes(letra)}>
+                <button className='p-2 w-10 bg-white border-2 rounded-md border-gray-700 disabled:bg-black disabled:text-white hover:text-white hover:bg-black touch-manipulation text-black my-2' 
+                    style={{fontFamily: 'verdana'}}
+                    key={letra} onClick={() => manejarIntento(letra)} disabled={lettersGuessed.includes(letra)}>
                     {letra}
                 </button>
             ))}
+            </div>
             {gameFinished && 
             <div>
                 <button className='btn' onClick={() => resultChallenge(true)}>Terminar</button>

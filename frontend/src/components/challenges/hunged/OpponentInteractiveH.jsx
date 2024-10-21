@@ -8,15 +8,21 @@ const OpponentInteractiveH = () => {
     const [word, setWord] = useState('');
     const [wordReady, setWordReady] = useState(false);
     const {socket} = useContext(SocketContext);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const validateWord = (text) => {
         setWord(text.trim());
     }
 
     const emitHungedChallenge = () => {
-        setWordReady(true);
-        socket?.emit('hunged', {secretWord: word, socketId: socket?.id, sendedBy: RENDER_CHALLENGE.opponent });
-        socket?.emit('startChallenge', {socketId: socket?.id});
+        if(word == ''){
+            setErrorMessage('No has escrito una palabra');
+        } else {
+            setErrorMessage('');
+            setWordReady(true);
+            socket?.emit('hunged', {secretWord: word, socketId: socket?.id, sendedBy: RENDER_CHALLENGE.opponent });
+            socket?.emit('startChallenge', {socketId: socket?.id});
+        }
       }
 
     useEffect(() => {
@@ -33,11 +39,12 @@ const OpponentInteractiveH = () => {
 
     return (
         <>
-            
             {!wordReady ? 
-            <div>
-                <input className='input' type="text" placeholder='Escribe una palabra' onChange={(e) => validateWord(e.target.value)}/>
-                <button className='btn' onClick={emitHungedChallenge}>Enviar palabra</button>
+            <div className='flex flex-col gap-4'>
+                <p>Envia una palabra para el equipo contrario</p>
+                <input className='input' type="text" placeholder='Escribe una palabra' value={word} onChange={(e) => validateWord(e.target.value)}/>
+                <button className='btn-wood py-2 text-white' onClick={emitHungedChallenge}>Enviar palabra</button>
+                {errorMessage != '' && <p className='text-red-600'>{errorMessage}</p>}
             </div>
             : 
             <HideWord word={word}/>

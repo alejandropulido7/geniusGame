@@ -34,6 +34,16 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
     },[]);
 
     useEffect(() => {
+      getTeamByName(dataPlayer.teamName, dataPlayer.gameId)
+      .then(team => {
+        const players = JSON.parse(team.players);
+        console.log(players);
+        setTeamPlayers(players);
+        setTeammate(players[indexTeammate]);
+      });
+    }, []);
+
+    useEffect(() => {
       localStorage.setItem('chainWords-player-GG', JSON.stringify({
         newWord,
         arrayWords,
@@ -69,27 +79,19 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
           setShowKeyboard(false);
           setPreviousPosition(data.prev_position);
         }
-      })
-
-      getTeamByName(dataPlayer.teamName, dataPlayer.gameId)
-      .then(team => {
-        const players = JSON.parse(team.players);
-        console.log(players);
-        setTeamPlayers(players);
-        setTeammate(players[indexTeammate]);
       });
 
-      return () => {
-        socket?.off('resultChallenge');        
-      }
-    },[socket]);
+    },[socket, teamPlayers, newWord, finishChallenge, teammate, indexTeammate, lastWord]);
 
     const manageNewWord = () => {
       if (newWord && (!lastWord || newWord.charAt(0).toLowerCase() === lastWord.slice(-1).toLowerCase())) {
-        const wordList = [...arrayWords];
+        const wordList = JSON.parse(JSON.stringify(arrayWords));
         wordList.push(newWord);
         setNewWord('');
+        setArrayWords(wordList);
         socket?.emit('chainWords', {lastWord: newWord, wordList, socketId: socket?.id});
+        console.log('wordList',wordList)
+        console.log('teamPlayers', teamPlayers)
         if(wordList.length == teamPlayers.length){
           setFinishChallenge(true);
         } else {
@@ -116,7 +118,7 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
       <div>
         {!finishChallenge 
         ? <div>
-            <h4 className='text-red-600 text-xl'>Turno de {teammate}</h4>
+            <h4 className='text-red-600 text-xl'>Turno de <span className='uppercase underline'>{teammate}</span></h4>
             <p>Ultima palabra: {lastWord}</p>
             {showKeyboard && 
             <div className='block'>
@@ -126,11 +128,11 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
           </div> 
         : 
         <div className='flex flex-col gap-5'>
-          {!opponentValidation 
+          {(!opponentValidation && !showNotPassChallenge) 
           ?
           <div>
             <p>Haz clic en Finalizar antes de que se acabe el tiempo!</p>
-            <button className='btn' onClick={stopChallenge}>Finish</button>
+            <button className='btn' onClick={stopChallenge}>Finalizar</button>
           </div>
           :
           <div>
@@ -141,7 +143,7 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
           showNotPassChallenge && 
           <div>
             <p>No pasaste el reto, te vamos a devolver a la posicion {previousPosition}</p>
-            <button className='btn' onClick={notPassChallenge}>OK</button>
+            <button className='btn' onClick={notPassChallenge}>Ok</button>
           </div>
         }
       </div>

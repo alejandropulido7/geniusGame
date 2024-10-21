@@ -39,6 +39,7 @@ const ValidateChallenge = () => {
       },[socket, dataOpponent]);
 
     const sendResultChallenge = (result) => {
+        setValidOpponent(false);
         socket?.emit('resultChallenge', {player: dataOpponent, challengePassed: result});
       }
 
@@ -46,9 +47,9 @@ const ValidateChallenge = () => {
     <>
     {validOpponent && <div>
         <p>El equipo {dataOpponent.teamName} si logra pasar el reto?</p>
-        <div className='flex gap-3'>
-          <button className='btn' onClick={() => sendResultChallenge(true)}>SI</button>
-          <button className='btn' onClick={() => sendResultChallenge(false)}>NO</button>
+        <div className='flex justify-around'>
+          <button className='btn bg-green-600 text-white' onClick={() => sendResultChallenge(true)}>SI</button>
+          <button className='btn bg-red-600 text-white' onClick={() => sendResultChallenge(false)}>NO</button>
         </div>
     </div>}
     </>

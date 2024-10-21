@@ -45,6 +45,7 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
       socket.on('renderChallenge', (dataChallengeSocket) => {
         setOpenModal(false);
         setOpenModalRoulette(false);
+        console.log('dataChallengeSocket', dataChallengeSocket)
         if(dataChallengeSocket.challenge != ''){
           setActiveChallenge(true);
           setDataChallenge(dataChallengeSocket); 
@@ -80,7 +81,7 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
         setComponentChallenge(<Trivia_VS renderIn={renderPlayer} dataChallenge={dataChallenge}/>)
         break;
       case HUNGED:
-        setComponentChallenge(<Hunged renderIn={renderPlayer}/>)
+        setComponentChallenge(<Hunged renderIn={renderPlayer} dataPlayer={dataChallenge.participants.player}/>)
         break;  
       case BACK_HOME:
         setComponentChallenge(<BackHome/>)
@@ -111,10 +112,12 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
   return (
     <>
       { activeChallenge && 
-      <div className='steps-center-container bg-white'>
-        <div className='flex flex-col'>
-          {/* <h2>Pasa el reto para poder avanzar</h2> */}
-          {renderPlayer == 'ADMIN' && <Chronometer data={dataChallenge}/>}
+      <div className='steps-center-container p-2 challenges-container bg-white'>
+        <div className='flex flex-col relative'>
+          {renderPlayer == 'ADMIN' && 
+          <div className='challenges-top'>
+            <Chronometer data={dataChallenge}/>
+          </div>}
           {componentChallenge}        
         </div>
       </div>

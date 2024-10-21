@@ -139,7 +139,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: '',
+        challenge: 'trivia',
         player: playerModified
       };
     }

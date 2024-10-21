@@ -6,7 +6,7 @@ const Box = ({position, color, width=67, height=59}) => {
     const findIconChallenge = (id) => {
         const challengeFound = CHALLENGES_IN_BOARD_PLUSTRIVIA.find(challenge => challenge.id == id);
         if(challengeFound){
-            return <img width='25x' height='25px' src={challengeFound.icon}></img>
+            return <img width='35px' height='35px' src={challengeFound.icon}></img>
         }
         return null;
     }
@@ -23,7 +23,7 @@ const Box = ({position, color, width=67, height=59}) => {
             ?
             <div className='absolute top-5 left-6 text-xl text-white font-bold'>{position.position}</div>
             :
-            <div className='absolute top-5 left-6 text-xl text-white font-bold'>
+            <div className='absolute top-3 left-4 text-xl text-white font-bold'>
                 {findIconChallenge(position.challenge)}
             </div>}
         </div>

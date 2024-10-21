@@ -217,18 +217,23 @@ const BoardPlayer = () => {
         return props!=null ? props : ''
     }
 
-    // const flagsMissing = () => {
-    //     const flagsToShow = infoChoiceNewFlag.flagsObtained.every(flagObtained => FLAGS.filter(flag => flag.id == flagObtained));
-    //     return flagsToShow;
-    // }
+    const flagsMissing = () => {
+        if(infoChoiceNewFlag.flagsObtained != null){
+            console.log('Obtained', infoChoiceNewFlag.flagsObtained)
+            const flagsToShow = FLAGS.filter(flag => !infoChoiceNewFlag.flagsObtained.includes(flag.id));
+            console.log('missing', flagsToShow)
+            return flagsToShow;
+        }
+        return [];
+    }
 
     return (
         <div>
-            <div className={`board-player-container p-10 h-auto m-auto`}
+            <div className={`board-player-container md:p-8 p-3 h-auto m-auto`}
                 style={{backgroundColor: `${findFlagProp().color}`}}>
                 { !gameFinished
                 ?
-                <div className='bg-white p-10 board-player-center rounded-md'>
+                <div className='bg-white p-6 board-player-center rounded-md'>
                     { !activeChallenge && 
                     <div className='flex flex-col justify-around h-full'>
                         <div><PreventBackButton/></div>
@@ -241,7 +246,7 @@ const BoardPlayer = () => {
                         />
                         { youTurn && 
                         <div className='w-60 m-auto'>
-                            <button className='btn btn-wood w-full' onClick={throwDice}>Lanzar Dado</button>                            
+                            <button className='btn btn-wood w-full text-white' onClick={throwDice}>Lanzar Dado</button>                            
                         </div>
                         }
                         {diceResult != 0 &&
@@ -265,40 +270,43 @@ const BoardPlayer = () => {
                 <AcceptChallenge dataRenderChallenge={dataRenderChallenge} setOpenModalRoulette={setOpenModalRoulette} opponents={opponentsChallenge}/>
             </Modal>
             <Modal open={openModalRoulette} onClose={setOpenModalRoulette}>
-                <p>Gira la ruleta</p>
-                <div className="mt-8 space-x-4">
-                {showStartRoulette 
-                ?
-                <button
-                    onClick={startRoulette}
-                    className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600" 
-                >
-                    Empezar a girar
-                </button>
-                :
-                <button
-                    onClick={stopRoulette}
-                    className="px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
-                >
-                    Detener ruleta
-                </button>}                
-            </div>
+                <div className='flex flex-col gap-4'>
+                    <p>Gira la ruleta</p>
+                    <div className="mt-8 space-x-4">
+                        {showStartRoulette 
+                        ?
+                        <button
+                            onClick={startRoulette}
+                            className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600" 
+                        >
+                            Empezar a girar
+                        </button>
+                        :
+                        <button
+                            onClick={stopRoulette}
+                            className="px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600"
+                        >
+                            Detener ruleta
+                        </button>}                
+                    </div>
+                </div>
             </Modal>
             <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
-                <p>Felicidades equipo {infoChoiceNewFlag.teamName}!! Has ganado la bandera {infoChoiceNewFlag.flagActive}.</p>
-                {/* <p>{flagsMissing()}</p> */}
-                <p>Escoge la siguiente:</p>
-                <div className='flex gap-4'>
-                    <select className='select' value={newFlagSelected} onChange={(event) => setNewFlagSelected(event.target.value)}>
-                        <option value="">Seleccione...</option>
-                        {FLAGS.map (flag => {
-                            return <option key={flag.id} value={flag.id}>{flag.name}</option>
-                        })}
-                    </select>
+                <div className='flex flex-col gap-5'>
+                    {infoChoiceNewFlag.flagActive && <p>Felicidades equipo {infoChoiceNewFlag.teamName}!! Has ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive).name}.</p>}
+                    <p>Escoge la siguiente:</p>
+                    <div className='flex justify-center gap-4'>
+                        <select className='select' value={newFlagSelected} onChange={(event) => setNewFlagSelected(event.target.value)}>
+                            <option value="">Seleccione...</option>
+                            {flagsMissing().map (flag => {
+                                return <option key={flag.id} value={flag.id}>{flag.name}</option>
+                            })}
+                        </select>
+                    </div>
+                    <button onClick={confirmNewFlag} className='btn'>
+                        Confirmar seleccion de bandera
+                    </button>
                 </div>
-                <button onClick={confirmNewFlag} className='btn'>
-                    Confirmar seleccion de bandera
-                </button>
             </Modal>
         </div>
     )

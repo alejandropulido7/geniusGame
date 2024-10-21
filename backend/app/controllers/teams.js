@@ -14,9 +14,11 @@ async function createTeam(req, res) {
             }
         });
 
-        console.log('IDS Create')
-        console.log(teamAlreadyName.id_team)
-        console.log(req.body.id_team)
+        if(teamAlreadyName){
+            console.log('IDS Create')
+            console.log(teamAlreadyName.id_team)
+            console.log(req.body.id_team)
+        }
 
         if(teamAlreadyName && teamAlreadyName.id_team != req.body.id_team){
             return res.status(400).json({error: 'Team already has been created'});

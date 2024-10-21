@@ -34,13 +34,14 @@ const OpponentInteractiveP = ({wordReady}) => {
   }
 
   return (
-    <div>
+    <div className='flex flex-col gap-5'>
       { !wordReady 
       ?
-        <div>
-          <input className='input' type="text" placeholder='Escribe una palabra o frase' onChange={(e) => setWord(e.target.value)}/>
+        <div className='flex flex-col justify-center'>
+          <label>Palabra o frase:</label>
+          <input className='input my-2' type="text" placeholder='Escribe una palabra o frase' value={word} onChange={(e) => setWord(e.target.value)}/>
           <ChooseTeamMember setMember={setOponentMember} member={oponentMember}/>
-          <button className='btn' onClick={emitWordChallenge}>Sent word</button>
+          <button className='btn-wood py-2 text-white my-4' onClick={emitWordChallenge}>Enviar palabra</button>
         </div>
       :
         <HideWord word={finalWord}/>  
