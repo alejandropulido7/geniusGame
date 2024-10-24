@@ -51,8 +51,7 @@ export const SocketProvider = ({ children, isBoard=false }) => {
     useEffect(() => {
         
         const token = getCookie('token');
-        if(token){          
-            console.log('SocketContext')  
+        if(token){           
             const socket = io(backend, {
                 auth: {token, isBoard},
                 reconnection: true,

@@ -82,8 +82,19 @@ const Trivia = ({renderIn, dataTrivia}) => {
       ) &&      
       <Modal open={openModal} onClose={setOpenModal}>
           <div className='flex flex-col gap-5'>
-            <p className='text-center'>{descriptionModal}</p>
-            {!passChallenge && <p>La respuesta correcta era: {correctAnswer}</p>}
+            <p className='text-xl text-red-600'>{descriptionModal}</p>
+            { renderIn == RENDER_CHALLENGE.admin && 
+              <div className='flex flex-col gap-5'>
+                <div>
+                  <p className='text-violet-600'>Pregunta:</p> 
+                  <p>{currentQuestion}</p>
+                </div>
+                <div>
+                  <p className='text-violet-600'>La respuesta correcta era:</p> 
+                  <p>{correctAnswer}</p>
+                </div>
+              </div>
+            }
             {renderIn == RENDER_CHALLENGE.player && 
             <button onClick={sendResult} className='btn bg-red-600 text-white'>{buttonModal}</button>
             }

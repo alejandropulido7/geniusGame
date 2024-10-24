@@ -10,7 +10,6 @@ const PlayerChallengeT_VS = ({options, round, isRunning, setIsRunning, correctAn
   const [showOptions, setShowOptions] = useState(false);
 
   useEffect(() => {
-    console.log('options', options);
     if (isRunning) {
       setShowOptions(true);
       intervalRef.current = setInterval(() => {

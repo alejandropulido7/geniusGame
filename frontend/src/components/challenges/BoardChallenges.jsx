@@ -45,7 +45,6 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
       socket.on('renderChallenge', (dataChallengeSocket) => {
         setOpenModal(false);
         setOpenModalRoulette(false);
-        console.log('dataChallengeSocket', dataChallengeSocket)
         if(dataChallengeSocket.challenge != ''){
           setActiveChallenge(true);
           setDataChallenge(dataChallengeSocket); 

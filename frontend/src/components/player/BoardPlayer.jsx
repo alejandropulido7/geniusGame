@@ -90,15 +90,12 @@ const BoardPlayer = () => {
             });
                        
         }).catch((err)=>{
-            console.log(err)
             localStorage.clear();
             deleteCookie('idDevice-GG')
             deleteCookie('teamName-GG');
             navigate('../');
         });
     }
-//     Lobos = ["purple","red"]
-//     Lobos2 = ["blue"]
 
     useEffect(() => {
         setIdTeam(idTeamCookie);
@@ -207,7 +204,6 @@ const BoardPlayer = () => {
     }
 
     const confirmNewFlag = () => {     
-        console.log('confirmNewFlag', {infoChoiceNewFlag, newFlagSelected });
         socket?.emit('changeFlag', {player: infoChoiceNewFlag, newFlag: newFlagSelected});
         setOpenModalChoiceNewFlag(false);
     };
@@ -219,9 +215,7 @@ const BoardPlayer = () => {
 
     const flagsMissing = () => {
         if(infoChoiceNewFlag.flagsObtained != null){
-            console.log('Obtained', infoChoiceNewFlag.flagsObtained)
             const flagsToShow = FLAGS.filter(flag => !infoChoiceNewFlag.flagsObtained.includes(flag.id));
-            console.log('missing', flagsToShow)
             return flagsToShow;
         }
         return [];

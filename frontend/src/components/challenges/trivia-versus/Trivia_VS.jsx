@@ -93,8 +93,7 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
 
       if(data.data.round < 3){
         if(data.isLastTurnTrivia == true){          
-          setRound(prev => prev+1);    
-          console.log('nueva pregunta', data.newQuestion);
+          setRound(prev => prev+1);
           handlerDataTrivia(data.newQuestion);
           setIsRunningTrivia(true);
         }
@@ -102,7 +101,6 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
         if(orderTable[0].rightAnswers == 0 && orderTable[1].rightAnswers == 0){
           setWinner(null);
         } else {
-          console.log(orderTable[0])
           setWinner(orderTable[0].player);
         }
         setOpenModal(true);
@@ -121,7 +119,6 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
 
   useEffect(() => {
     if(round == 1){
-      console.log('ENTRA A ROUND 1')
       handlerDataTrivia(dataChallenge.trivia);
       setIsRunningTrivia(true);
     }
@@ -129,8 +126,6 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
 
 
   useEffect(() => {
-
-    console.log('CORRECT ANSWER', correctAnswer);
 
     switch (renderIn) {
       case RENDER_CHALLENGE.admin:

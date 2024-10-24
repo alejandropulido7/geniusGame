@@ -37,7 +37,6 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
       getTeamByName(dataPlayer.teamName, dataPlayer.gameId)
       .then(team => {
         const players = JSON.parse(team.players);
-        console.log(players);
         setTeamPlayers(players);
         setTeammate(players[indexTeammate]);
       });
@@ -90,8 +89,6 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
         setNewWord('');
         setArrayWords(wordList);
         socket?.emit('chainWords', {lastWord: newWord, wordList, socketId: socket?.id});
-        console.log('wordList',wordList)
-        console.log('teamPlayers', teamPlayers)
         if(wordList.length == teamPlayers.length){
           setFinishChallenge(true);
         } else {
@@ -106,7 +103,6 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
 
     const stopChallenge = () => {
       setOpponentValidation(true);
-      console.log('dataplayer', dataPlayer);
       socket?.emit('stopChallenge', {socketId: socket?.id});
     }
 

@@ -4,7 +4,6 @@ const removeFlags = (flagsObtained, flag) => {
 
     let result = [];
     if(flagsObtained.length > 0){
-        console.log(flagsObtained)
         let duplicateFlags = flagsObtained.filter(flagFilter => flagFilter == flag);
         flagsObtained = flagsObtained.filter(flagFind => flagFind != flag);    
         if(duplicateFlags.length > 1){

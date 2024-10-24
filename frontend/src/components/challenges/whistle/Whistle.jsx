@@ -13,25 +13,28 @@ const Whistle = ({renderIn}) => {
   const [wordReady, setWordReady] = useState(false);
   const [render, setRender] = useState(null);
   const {socket} = useContext(SocketContext);
+  const [teamPlayer, setTeamPlayer] = useState('');
 
   useEffect(() => {
-    if(localStorage.getItem('whistle-GG') != null){
-        const properties = JSON.parse(localStorage.getItem('whistle-GG'));
-        setWord(prev => properties.word??prev);
-        setWordReady(prev => properties.wordReady??prev)
+    const properties = JSON.parse(localStorage.getItem('whistle-GG'));
+    if(properties != null){
+        setWord(properties.word);
+        setWordReady(properties.wordReady)
+        setTeamPlayer(properties.teamPlayer);
     }
   },[])
 
   useEffect(() => {
-    localStorage.setItem('whistle-GG', JSON.stringify({word, wordReady}));
-  },[word, wordReady])
+    localStorage.setItem('whistle-GG', JSON.stringify({word, wordReady, teamPlayer}));
+  },[word, wordReady, teamPlayer])
 
 
   useEffect(() => {
   
     socket?.on('whistle', (data) => {
       setWord(data.word);
-      setWordReady(data.wordReady)
+      setWordReady(data.wordReady);
+      setTeamPlayer(data.oponentMember);
     });
 
     switch (renderIn) {
@@ -39,7 +42,7 @@ const Whistle = ({renderIn}) => {
         setRender(<AdminW word={word} wordReady={wordReady}/>)
       break;
       case RENDER_CHALLENGE.player:
-        setRender(<PlayerChallengeW word={word}/>);
+        setRender(<PlayerChallengeW word={word} teamPlayer={teamPlayer}/>);
       break;
       case RENDER_CHALLENGE.opponent:
         setRender(<OpponentInteractiveW wordReady={wordReady}/>);
@@ -49,13 +52,12 @@ const Whistle = ({renderIn}) => {
       break;
     }    
 
-  },[socket, word, wordReady, renderIn]);
+  },[socket, word, wordReady, teamPlayer, renderIn]);
   
 
   return (
     <div>
-      <h1>Silba o tararea la cancion</h1>
-      <p>Descripcion</p>
+      <h1 className='title-wood text-white py-2 px-5 my-7 text-2xl'>Silba o tararea la cancion</h1>
       {render}
     </div>
   );

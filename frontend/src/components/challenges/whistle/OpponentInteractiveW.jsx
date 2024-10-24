@@ -1,33 +1,42 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import ValidateChallenge from '../common/ValidateChallenge';
 import HideWord from '../common/HideWord';
 import { SocketContext } from '../../../context/SocketProvider';
+import ChooseTeamMember from '../common/ChooseTeamMember';
 
 const OpponentInteractiveW = ({wordReady}) => {
 
-    const [word, setWord] = useState('');
+    const [song, setSong] = useState('');
+    const [artist, setArtist] = useState('');
     const [finalWord, setFinalWord] = useState('');
     const [oponentMember, setOponentMember] = useState('');
     const {socket} = useContext(SocketContext);
+    const [errorMessage, setErrorMessage] = useState('');
     
     useEffect(() => {
       const properties = JSON.parse(localStorage.getItem('whistle-opp-GG'));
       if(properties != null){
-          setWord(prev => properties.word??prev);
-          setFinalWord(prev => properties.finalWord??prev);
-          setOponentMember(prev => properties.oponentMember??prev);
+          setSong(properties.song);
+          setArtist(properties.artist);
+          // setOponentMember(properties.oponentMember);
+          setFinalWord(properties.finalWord);
       }
     },[]);
   
     useEffect(() => {
-      localStorage.setItem('whistle-opp-GG', JSON.stringify({word, finalWord, oponentMember}));
-    },[word, finalWord, oponentMember]);
+      localStorage.setItem('whistle-opp-GG', JSON.stringify({song, finalWord, oponentMember, artist}));
+    },[song, finalWord, oponentMember, artist]);
   
     const emitWordChallenge = () => {
-      setFinalWord(word);
-      if(socket){
-        socket.emit('whistle', {word, wordReady: true, socketId: socket.id});
-        socket.emit('startChallenge', {socketId: socket.id});
+      if(song != '' && oponentMember != '' && artist != ''){
+        setErrorMessage('');
+        const sendWord = artist + ' - ' + song;
+        setFinalWord(sendWord);
+        const data = {word: sendWord, wordReady: true, oponentMember, socketId: socket?.id};
+        socket?.emit('whistle', data);
+        socket?.emit('startChallenge', {socketId: socket?.id});
+      } else {
+        setErrorMessage('Llena todos los campos antes de enviar la canción')
       }
     }
   
@@ -35,18 +44,28 @@ const OpponentInteractiveW = ({wordReady}) => {
       <>
         { !wordReady 
         ?
-          <div>
-            <input className='input' type="text" placeholder='Escribe una palabra o frase' onChange={(e) => setWord(e.target.value)}/>
+          <div className='flex flex-col gap-4 justify-center my-3'>
+            <p>Ponle una canción al equipo contrario para que la tararee...</p>
+            <div className='flex flex-col justify-center'>
+              <label htmlFor="">Cantante o agrupación:</label>
+              <input className='input' type="text" placeholder='Cantante o agrupación' onChange={(e) => setArtist(e.target.value)}/>
+            </div>
+            <div className='flex flex-col justify-center'>
+              <label htmlFor="">Canción:</label>
+              <input className='input' type="text" placeholder='Canción' onChange={(e) => setSong(e.target.value)}/>
+            </div>
             <ChooseTeamMember setMember={setOponentMember} member={oponentMember}/>
-            <button onClick={emitWordChallenge}>Sent word</button>
+            <button className='btn-wood text-white my-4 py-2' onClick={emitWordChallenge}>Enviar</button>
           </div>
         :
-          <HideWord word={finalWord}/>  
+          <div className='my-4'>
+            <HideWord word={finalWord}/>  
+          </div>
         }
         <ValidateChallenge/>
-        <div>
-          <p>Aqui va el listado de canciones sugeridas</p>
-        </div>
+        {errorMessage != '' && 
+          <p className='text-red-600 text-center'>{errorMessage}</p>
+        }
       </>
     )
   }

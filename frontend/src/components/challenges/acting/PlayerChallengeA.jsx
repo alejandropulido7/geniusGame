@@ -20,11 +20,11 @@ const PlayerChallengeA = ({word, teamPlayer}) => {
           setShowButton(prev => properties.showButton??prev);
           setGameFinished(properties.gameFinished)
       }
-    },[])
+    },[]);
   
     useEffect(() => {
       localStorage.setItem('acting-player-GG', JSON.stringify({showButton, gameFinished}));
-    },[showButton, gameFinished])
+    },[showButton, gameFinished]);
   
     return (
       <div className='flex flex-col gap-6'>
@@ -40,7 +40,7 @@ const PlayerChallengeA = ({word, teamPlayer}) => {
             <div>
               { !gameFinished && 
               <div>
-                <p className='py-3'>El jugador {teamPlayer} debe resolver este reto.</p>
+                <p className='py-3'>El jugador <span className='text-red-600 underline uppercase'>{teamPlayer}</span> debe resolver este reto.</p>
                 <button className='btn' onClick={emitResult}>Terminar</button>
               </div>
               }

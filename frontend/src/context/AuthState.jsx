@@ -65,7 +65,6 @@ const AuthState = ({children}) => {
         
 
     const login = (userToken) => {
-        console.log(userToken)
         setToken(userToken);
         setCookie('token', userToken);
     };

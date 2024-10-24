@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import { SocketContext } from '../../context/SocketProvider';
-import { CHALLENGES_IN_BOARD, BACK_HOME, TRIVIA_VS, FLAGS, findFlagProperties } from '../../utils/constants';
+import { CHALLENGES_IN_BOARD, BACK_HOME, TRIVIA_VS, FLAGS, findFlagProperties, TRIVIA } from '../../utils/constants';
 import StealFlag from '../challenges/common/StealFlag';
 import SyncLoader from "react-spinners/SyncLoader";
 
@@ -18,7 +18,6 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
         if(opponents.length == 1){
             setOpponentSelected(opponents[0]);
         }
-        console.log(opponentSelected)
     }, [opponentSelected, flagsOpponent])
 
     const findNameChallenge = (id) => {
@@ -60,20 +59,24 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
             ?
             <div className='flex flex-col gap-4'>
                 <h3>Aceptas el reto de {findNameChallenge(dataRenderChallenge.challenge)}?</h3>  
-                {opponents.length > 1 
-                ? 
+                {dataRenderChallenge.challenge != TRIVIA && 
                 <div>
-                    <label>Elige a tu oponente</label>
-                    <select className='select' value={opponentSelected?.idTeam} onChange={(event) => handlerOpponentSelected(event.target.value)}>
-                        <option value="">Seleccione...</option>
-                        {opponents.map (opponent => {
-                            return <option key={opponent.idTeam} value={opponent.idTeam}>{opponent.teamName}</option>
-                        })}
-                    </select>
-                </div>
-                :
-                <div>
-                    <p>Tu oponente sera {opponentSelected?.teamName}</p>
+                    {(opponents.length > 1) 
+                    ? 
+                    <div>
+                        <label>Elige a tu oponente</label>
+                        <select className='select' value={opponentSelected?.idTeam} onChange={(event) => handlerOpponentSelected(event.target.value)}>
+                            <option value="">Seleccione...</option>
+                            {opponents.map (opponent => {
+                                return <option key={opponent.idTeam} value={opponent.idTeam}>{opponent.teamName}</option>
+                            })}
+                        </select>
+                    </div>
+                    :
+                    <div>
+                        <p>Tu oponente sera {opponentSelected?.teamName}</p>
+                    </div>
+                    }
                 </div>
                 }           
                 { showFlags && (flagsOpponent && dataRenderChallenge.challenge == TRIVIA_VS) && 

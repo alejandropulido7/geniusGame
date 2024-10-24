@@ -6,20 +6,20 @@ const { CHALLENGES_IN_BOARD, TRIVIA_VS } = require('../utils/constant');
 async function createSesion(req, res) {
 
     try {
-        const {min_to_answer, lenght_board, amount_challenges, challenges_in_board} = req.body.configGame;
+        const {min_to_answer, lenght_board, challenges_in_board} = req.body.configGame;
         const idHost = generateUUID(12);
         const idRoom = generateUUID(6, false);
         let challengesInBoard = challenges_in_board;
         if(challengesInBoard) challengesInBoard = JSON.parse(challengesInBoard);
         
-        const boardPositions = createBoard(lenght_board, amount_challenges, challengesInBoard);
+        const boardPositions = createBoard(lenght_board, lenght_board, challengesInBoard);
 
         const sessionCreated = await Session.create({
             id: idRoom,
             idHost,
             min_to_answer,
             lenght_board,
-            amount_challenges,
+            amount_challenges: lenght_board,
             turnOf: '',
             gameStarted: false,
             json_boardPositions: JSON.stringify(boardPositions),
@@ -112,7 +112,6 @@ function updateBoardPositions(req, res) {
 
 function getSesion(req, res) {
  
-    console.log('idRoom: '+req.query.idRoom);
     Session.findOne({        
         where: {
             id: req.query.idRoom

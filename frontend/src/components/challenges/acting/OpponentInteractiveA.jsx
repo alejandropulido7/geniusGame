@@ -12,6 +12,7 @@ const OpponentInteractiveA = ({wordReady}) => {
     const [oponentMember, setOponentMember] = useState('');
     const {socket} = useContext(SocketContext);
     const [textButton, setTextButton] = useState('Buscar sugerencia');
+    const [errorMessage, setErrorMessage] = ('');
     
     useEffect(() => {
       if(localStorage.getItem('acting-opp-GG') != null){
@@ -27,10 +28,15 @@ const OpponentInteractiveA = ({wordReady}) => {
     },[word, finalWord, oponentMember]);  
   
     const emitWordChallenge = () => {
-      setFinalWord(word);
-      const data = {word, wordReady: true, oponentMember, socketId: socket?.id};
-      socket?.emit('acting', data);
-      socket?.emit('startChallenge', {socketId: socket?.id});
+      if(word != '' && oponentMember != ''){
+        setErrorMessage('');
+        setFinalWord(word);
+        const data = {word, wordReady: true, oponentMember, socketId: socket?.id};
+        socket?.emit('acting', data);
+        socket?.emit('startChallenge', {socketId: socket?.id});
+      } else {
+        setErrorMessage('Llena todos los campos antes de enviar la película')
+      }
     }
 
     const getMovieSuggested = async () => {
@@ -59,6 +65,9 @@ const OpponentInteractiveA = ({wordReady}) => {
         <div>
           <button className='btn bg-amber-300' type="text" onClick={getMovieSuggested}>{textButton}</button>
         </div>}
+        {errorMessage != '' && 
+          <p className='text-red-600 text-center'>{errorMessage}</p>
+        }
       </div>
     )
   }

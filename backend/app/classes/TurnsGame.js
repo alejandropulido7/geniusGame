@@ -32,7 +32,6 @@ class TurnsGame {
         } else {
             const teamFound = this.turnsTrivia.get(room).find(idTeamFound => idTeamFound == idTeam );
             if(!teamFound){
-                console.log('turnoAdd', idTeam);
                 this.turnsTrivia.get(room).push(idTeam);
             }
         }

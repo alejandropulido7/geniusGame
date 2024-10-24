@@ -17,6 +17,7 @@ const PlayerChallengeT = ({options, correctAnswer}) => {
   },[options, correctAnswer])
 
   const handleResponse = (response) => {
+    socket?.emit('stopChallenge', {socketId: socket?.id});
     socket?.emit('trivia', {function: 'regular', data: {response, socketId: socket?.id}})
   };
 

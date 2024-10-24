@@ -88,7 +88,6 @@ function createNewGame(data) {
 
 async function startGame(gameId) {
     const player = RoomStore.getUsersInRoom(gameId)[0];
-    console.log(player);
     const updateTurn = await updateTurnOfTeamFromSocket(player.gameId, true, player.teamName);
     if(updateTurn == 1){
         io.sockets.in(gameId).emit('startGame', {gameStarted: true});
@@ -147,8 +146,6 @@ function turnOf(dataTeam){
 function throwDice (dataTeam) {
     const gameId = dataTeam.gameId;
     const playerMoved = RoomStore.getUserRoom(gameId, dataTeam.idTeam);
-    console.log(playerMoved)
-    // console.log(RoomStore.getRoomByIdSocket(dataTeam))
     if(playerMoved != undefined){
         const newPosition = playerMoved.positionActive + dataTeam.diceValue;
         const room = RoomStore.getRoomDetails(gameId);
@@ -179,19 +176,14 @@ function throwDice (dataTeam) {
 
 async function renderChallenge(data) {
     const gameId = data.dataChallenge.player.gameId;
-    // const players = RoomStore.getUsersInRoom(gameId); 
     const challenge_name = data.dataChallenge.challenge; 
-    console.log('renderChallenge', data);
 
     if(challenge_name != ""){
-        // const playersNoChallenge = players.filter(player => player.idTeam != data.dataChallenge.player.idTeam);
         const socketBoard = RoomStore.getRoomDetails(gameId);      
-        // const ramdomPlayerIndex = Math.floor(Math.random() * playersNoChallenge.length);
 
         const participants = {
             board: socketBoard ? socketBoard.idDevice : '0',
             player: data.dataChallenge.player,
-            // playerOpponent: playersNoChallenge[ramdomPlayerIndex]
             playerOpponent: data.dataOpponent.opponentSelected
         }
 
@@ -215,7 +207,6 @@ async function renderChallenge(data) {
 }
 
 function openModalConfirmation(data){
-    console.log('openModalConfirmation', data);
     const gameId = data.player.gameId;
     const players = RoomStore.getUsersInRoom(gameId); 
     const playersNoChallenge = players.filter(player => player.idTeam != data.player.idTeam);
@@ -266,7 +257,6 @@ async function resultChallenge(data){
                 if(!validateWinGame.winGame){
                     const changePositions = await addTriviaVsToChallenges(gameId);
                     if(changePositions.length > 0){
-                        console.log(changePositions)
                         io.sockets.in(gameId).emit('openModalChoiceNewFlag', {player: foundPlayer, changePositions});
                     }
                 } else {
@@ -319,7 +309,6 @@ async function updateStoleFlags(winner, loser, flagStole) {
 }
 
 async function stealFlag(data) {
-    console.log('stealFlag', data);
     const gameId = data.playerPunisher.gameId;
     const opponent = RoomStore.getUserRoom(gameId, data.opponent.idTeam);
     const punisher = RoomStore.getUserRoom(gameId, data.playerPunisher.idTeam);
@@ -374,15 +363,11 @@ async function trivia(data){
         foundPlayer.isLastStep = isLastStep;
     }
     if(gameId && foundPlayer){
-        console.log('trivia', data);
-        console.log('foundPlayer', foundPlayer);
         if(nameEmit == 'versus'){
             TurnsGame.addTurnTrivia(gameId, foundPlayer.idTeam);
-            console.log('turnos',TurnsGame.getTurnsTrivia(gameId));
             const isLastTurnTrivia = TurnsGame.isLastTurnTrivia(gameId);
             if(isLastTurnTrivia){
                 const newQuestion = await getConnectTrivia();
-                console.log(newQuestion);
                 io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, data: data.data, isLastTurnTrivia: true, newQuestion});
                 TurnsGame.clearTurnsTrivia(gameId);
             } else {
@@ -400,7 +385,6 @@ function pictionary(data){
 }
 
 function backHome(data) {
-    console.log('backHome', data);
     const gameId = data.player.gameId;
     const foundPlayer = RoomStore.getUserRoom(gameId, data.player.idTeam);
 

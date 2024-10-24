@@ -17,7 +17,6 @@ const DataGame = () => {
     const [urlJoin, setUrlJoin] = useState('');
 
     useEffect(() => {
-        console.log(session)
         if(socket){
             socket.on('winGame', (data) => {
                 setWinner(data.teamName);
@@ -29,13 +28,13 @@ const DataGame = () => {
 
             socket.on('playerJoinedRoom', (playersInSession) => {
                 setPlayers(playersInSession);
-                if(playersInSession.length > 1){
-                    setActiveStartGame(true);
-                }
+                // if(playersInSession.length > 1){
+                //     setActiveStartGame(true);
+                // }
             });
 
             socket.on('startGame', (data) => {
-                setActiveStartGame(false);
+                setActiveStartGame(true);
             });
             
             return () => {
@@ -53,7 +52,7 @@ const DataGame = () => {
 
     const readyToPlay = () => {
         if(players.length > 1){
-            setActiveStartGame(false);
+            setActiveStartGame(true);
             socket.emit('startGame', session.id);
         } else {
             setStatus('No hay suficientes equipos para jugar (min. 2)')

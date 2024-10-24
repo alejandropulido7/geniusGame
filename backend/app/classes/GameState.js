@@ -5,7 +5,6 @@ class GameState {
     }
 
     validateRoom(idRoom){
-        console.log(idRoom);
         return this.gameState.has(idRoom) ? true : false;
     }
 

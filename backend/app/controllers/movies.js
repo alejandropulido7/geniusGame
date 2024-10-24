@@ -18,7 +18,6 @@ async function getRandomMovie(req, res) {
         const randomResult = Math.floor(Math.random() * 19) + 1;
         
         const result = response.data.results[randomResult];
-        console.log(result)
 
         res.json(result);
     } catch (error) {

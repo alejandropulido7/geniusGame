@@ -22,11 +22,6 @@ module.exports = (io) => {
     io.on('connection', (socket) => {
         console.log('A user connected');
 
-        socket.on('prueba', (data) => {
-            console.log('dataPruebas', data)
-            console.log(socket.emailUser);
-        })
-
         // Initialize handlers
         mainGame(io, socket);
 

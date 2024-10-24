@@ -23,7 +23,6 @@ const ChallengeNotPassed = ({showButton, gameFinished, setGameFinished}) => {
     useEffect(() => {
         
         socket?.on('notPassChallenge', (data) => {
-            console.log("ChallengeNotPassed", data);
             setGameFinished(true);
             setDataPlayer(data);
             setPreviousPosition(data.prev_position);

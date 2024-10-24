@@ -28,7 +28,6 @@ const Pictionary = ({renderIn}) => {
   useEffect(() => {
 
     socket?.on('pictionary-data', (data) => {
-      console.log('pictionary-data', data)
       setWord(data.word);
       setWordReady(data.wordReady);
       setMemberTeam(data.oponentMember);

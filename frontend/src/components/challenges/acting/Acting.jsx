@@ -19,13 +19,14 @@ const Acting = ({renderIn}) => {
     if(localStorage.getItem('acting-GG') != null){
         const properties = JSON.parse(localStorage.getItem('acting-GG'));
         setWord(prev => properties.word??prev);
-        setWordReady(prev => properties.wordReady??prev)
+        setWordReady(prev => properties.wordReady??prev);
+        setTeamPlayer(properties.teamPlayer);
     }
   },[])
 
   useEffect(() => {
-    localStorage.setItem('acting-GG', JSON.stringify({word, wordReady}));
-  },[word, wordReady])
+    localStorage.setItem('acting-GG', JSON.stringify({word, wordReady, teamPlayer}));
+  },[word, wordReady, teamPlayer])
 
   useEffect(() => {
   

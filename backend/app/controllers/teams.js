@@ -14,12 +14,6 @@ async function createTeam(req, res) {
             }
         });
 
-        if(teamAlreadyName){
-            console.log('IDS Create')
-            console.log(teamAlreadyName.id_team)
-            console.log(req.body.id_team)
-        }
-
         if(teamAlreadyName && teamAlreadyName.id_team != req.body.id_team){
             return res.status(400).json({error: 'Team already has been created'});
         } else if(teamAlreadyName && teamAlreadyName.id_team == req.body.id_team) {
@@ -88,7 +82,6 @@ function getTeamByName(req, res) {
 }
 
 function getTeamById(req, res) {
-    console.log(req.query);
     Team.findOne({
         where: {
             id_team: req.query.id_team,

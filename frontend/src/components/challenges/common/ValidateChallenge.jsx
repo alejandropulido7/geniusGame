@@ -27,7 +27,6 @@ const ValidateChallenge = () => {
   
         if(socket){
           socket.on('stopChallenge', (dataStop) => {
-            console.log('dataStop', dataStop);
             setValidOpponent(true);
             setDataOpponent(dataStop);
           });
@@ -47,9 +46,9 @@ const ValidateChallenge = () => {
     <>
     {validOpponent && <div>
         <p>El equipo {dataOpponent.teamName} si logra pasar el reto?</p>
-        <div className='flex justify-around'>
-          <button className='btn bg-green-600 text-white' onClick={() => sendResultChallenge(true)}>SI</button>
-          <button className='btn bg-red-600 text-white' onClick={() => sendResultChallenge(false)}>NO</button>
+        <div className='flex justify-between my-5'>
+          <button className='btn bg-green-600 text-white w-20' onClick={() => sendResultChallenge(true)}>SI</button>
+          <button className='btn bg-red-600 text-white w-20' onClick={() => sendResultChallenge(false)}>NO</button>
         </div>
     </div>}
     </>

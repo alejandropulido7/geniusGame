@@ -4,9 +4,9 @@ const triviaCategories = [
     {id: 10, name: 'Entertainment: Books'},
     {id: 11, name: 'Entertainment: Film'},
     {id: 12, name: 'Entertainment: Music'},
-    {id: 13, name: 'Entertainment: Musicals & Theatres'},
-    {id: 14, name: 'Entertainment: Television'},
-    {id: 15, name: 'Entertainment: Video Games'},
+    // {id: 13, name: 'Entertainment: Musicals & Theatres'},
+    // {id: 14, name: 'Entertainment: Television'},
+    // {id: 15, name: 'Entertainment: Video Games'},
     {id: 16, name: 'Entertainment: Board Games'},
     {id: 17, name: 'Science & Nature'},
     {id: 18, name: 'Science: Computers'},
@@ -22,7 +22,7 @@ const triviaCategories = [
     {id: 28, name: 'Vehicles'},
     {id: 29, name: 'Entertainment: Comics'},
     {id: 31, name: 'Science: Gadgets'},
-    {id: 31, name: 'Entertainment: Japanese Anime & Manga'},
+    // {id: 31, name: 'Entertainment: Japanese Anime & Manga'},
     {id: 32, name: 'Entertainment: Cartoon &amp; Animations'},
 ];
 

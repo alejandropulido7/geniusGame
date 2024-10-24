@@ -2,7 +2,7 @@ const he = require('he');
 const axios = require('axios');
 const {triviaCategories} = require('../utils/constant');
 
-const deeplApiKey = 'f03c851f-f471-40cc-ab9c-5841776a4fcd:fx';
+const deeplApiKey = process.env.DEEPL_API;
 //another api trivia https://the-trivia-api.com/v2/questions?limit=50 (other json format)
 
 async function translateText(texts, language = 'ES') {

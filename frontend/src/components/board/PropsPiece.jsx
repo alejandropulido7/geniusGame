@@ -26,7 +26,7 @@ const PropsPiece = ({color, setColor, setEmoji, emoji = '😀'}) => {
                 <label htmlFor="emoji_piece" className='flex items-center'>Elige un emoji</label>
                 <div className='relative flex flex-col items-center space-y-4'>
                     <button className='btn rounded-full' onClick={() => setShowPicker(!showPicker)}>{emoji}</button>
-                    <div className='absolute z-10 top-7 right-0'>
+                    <div className='absolute z-20 top-7 right-0'>
                         <EmojiPicker onEmojiClick={onEmojiClick} open={showPicker} width={300}/>
                     </div>
                 </div>

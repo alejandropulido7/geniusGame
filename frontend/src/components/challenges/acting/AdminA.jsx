@@ -7,7 +7,7 @@ const AdminA = ({wordReady, word}) => {
     return (
       <div>
         <p>{hideWord}</p>
-        {!wordReady && <p>Waiting for the word...</p>}
+        {!wordReady && <p>Esperando al equipo que enviará la película...</p>}
       </div>
     )
   }

@@ -63,7 +63,6 @@ const BoardGame = () => {
       });
       
       socket.on('resultChallenge', (data) => { 
-        console.log('resultChallenge', data)  
         setOpenModalChoiceNewFlag(false); 
         setDataChallenge({});
         setActiveChallenge(false);
@@ -139,7 +138,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: 'trivia',
+        challenge: 'whistle_song',
         player: playerModified
       };
     }

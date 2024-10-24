@@ -9,6 +9,7 @@ import home from '../assets/images/challenges/home.png';
 import versus from '../assets/images/challenges/versus.png';
 
 /*Flags images */
+const BACKEND = import.meta.env.VITE_BACKEND;
 
 const colorsApp = new Map();
 colorsApp.set('blue', {color: '#4047C1', shadow: '#1C2893'});
@@ -123,7 +124,9 @@ const findFlagProperties = (flag) => {
   return FLAGS.find(flagFound => flagFound.id == flag);
 }
 
-export {CHALLENGES_IN_BOARD, 
+export {
+  BACKEND,
+  CHALLENGES_IN_BOARD, 
   CHALLENGES_IN_BOARD_PLUSTRIVIA,
   PICTIONARY, 
   WORD_CHAIN, 

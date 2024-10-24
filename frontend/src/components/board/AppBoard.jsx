@@ -1,17 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
-import { AuthContext } from '../../context/GlobalContext';
 
 const AppBoard = () => {
-
-    const {socket} = useContext(AuthContext);
-
-    useEffect(() => {
-        if(socket){
-            console.log('socket null')
-            socket.emit('prueba', 'test desde front');
-        }
-    }, [])
 
     return (
         <div>

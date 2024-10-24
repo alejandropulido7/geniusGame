@@ -30,9 +30,9 @@ const ChooseTeamMember = ({member, setMember}) => {
 
   return (
     <div className='flex flex-col gap-1'>
-      <h3>Quien quieres que resuelta el reto?</h3>
+      <h3>Quien quieres que resuelva el reto?</h3>
       <select className='select' value={member} onChange={playerTeamChanged}>
-            <option value="">Selecciona a la victima..</option>
+            <option value="" className='text-center'>Selecciona a la victima..</option>
             {
               opponentMembers.map(member => {
                 return (
