@@ -108,7 +108,7 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
             :
             <div>
                 <h3>Te devolveremos al principio</h3>
-                <button className='btn' onClick={backHome}>Ok 😥</button>
+                <button className='btn shadow-md shadow-black bg-red-600 text-white' onClick={backHome}>Ok 😥</button>
             </div>}      
         </>
     )

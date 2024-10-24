@@ -297,7 +297,9 @@ const BoardPlayer = () => {
                             })}
                         </select>
                     </div>
-                    <button onClick={confirmNewFlag} className='btn'>
+                    <button onClick={confirmNewFlag} className='btn shadow-md shadow-black text-white' 
+                        style={{backgroundColor: findFlagProperties(infoChoiceNewFlag.flagActive).color}}
+                    >
                         Confirmar seleccion de bandera
                     </button>
                 </div>

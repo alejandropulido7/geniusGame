@@ -12,7 +12,7 @@ const OpponentInteractiveA = ({wordReady}) => {
     const [oponentMember, setOponentMember] = useState('');
     const {socket} = useContext(SocketContext);
     const [textButton, setTextButton] = useState('Buscar sugerencia');
-    const [errorMessage, setErrorMessage] = ('');
+    const [errorMessage, setErrorMessage] = useState('');
     
     useEffect(() => {
       if(localStorage.getItem('acting-opp-GG') != null){

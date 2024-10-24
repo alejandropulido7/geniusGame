@@ -41,7 +41,7 @@ const PlayerChallengeA = ({word, teamPlayer}) => {
               { !gameFinished && 
               <div>
                 <p className='py-3'>El jugador <span className='text-red-600 underline uppercase'>{teamPlayer}</span> debe resolver este reto.</p>
-                <button className='btn' onClick={emitResult}>Terminar</button>
+                <button className='btn text-white shadow-md shadow-black bg-red-600' onClick={emitResult}>Terminar</button>
               </div>
               }
               <ChallengeNotPassed gameFinished={gameFinished} setGameFinished={setGameFinished} showButton={true}/>         

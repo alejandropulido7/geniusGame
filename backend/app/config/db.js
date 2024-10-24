@@ -1,12 +1,12 @@
 const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize({
-  dialect: 'postgres', // Puedes cambiarlo según tu base de datos
-  username: 'admin',
-  password: 'pass123',
-  database: 'geniusGame',
-  host: 'localhost', // Puedes cambiarlo según tu configuración
-  port: 5430, // Puedes cambiarlo según tu configuración
+  dialect: process.env.DATABASE_DIALECT,
+  username: process.env.DATABASE_USERNAME,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.DATABASE_NAME,
+  host: process.env.DATABASE_HOST,
+  port: process.env.DATABASE_PORT,
 });
 
 module.exports = sequelize;

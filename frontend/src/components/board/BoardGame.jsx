@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import {FLAGS, OPTIONS_CHALLENGES } from '../../utils/constants'
+import {findFlagProperties, FLAGS, OPTIONS_CHALLENGES } from '../../utils/constants'
 import StepsBoard from './StepsBoard';
 import {updateBoardPositions, getSession} from '../../services/sessionService';
 import {useParams, useNavigate} from 'react-router-dom';
@@ -17,11 +17,6 @@ const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
   const [playersPositions, setPlayersPositions] = useState([]);
   const {idRoom} = useParams();
-  const [configBoard, setConfigBoard] = useState({
-      lenghtBoard: 10,
-      quantityChallenges: 7
-  });
-  let boardSteps = [];
   const navigate = useNavigate();
   const {activeChallenge, setActiveChallenge, setDataChallenge, session, setSession } = useContext(GlobalContext);
   const [openModal, setOpenModal] = useState(false);
@@ -137,8 +132,8 @@ const BoardGame = () => {
     let ongoingChallenge = {};
     if(playerChallenge){
       ongoingChallenge = {
-        // challenge: playerChallenge.challenge,
-        challenge: 'whistle_song',
+        challenge: playerChallenge.challenge,
+        // challenge: 'whistle_song',
         player: playerModified
       };
     }
@@ -206,7 +201,7 @@ const BoardGame = () => {
       </Modal>
       <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
         <div className='flex flex-col gap-4'>
-          <h3>Wow! el equipo {infoChoiceNewFlag.teamName} ha ganado la bandera {infoChoiceNewFlag.flagActive}</h3>
+          <h3>Wow! el equipo {infoChoiceNewFlag.teamName} ha ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive).name}</h3>
           <p>Esperando a que elija su proxima bandera...</p>
         </div>
       </Modal>

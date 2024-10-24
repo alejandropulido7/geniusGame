@@ -43,14 +43,19 @@ const Roulette = () => {
             const winningIndex = Math.floor((360 - finalRotation + segmentAngle / 2) % 360 / segmentAngle);
             setResult(options[winningIndex].name);
             const dataResult = {...dataRenderChallenge};
-            // dataResult.challenge = options[winningIndex].id;
-            dataResult.challenge = 'acting';
+            dataResult.challenge = options[winningIndex].id;
+            // dataResult.challenge = 'acting';
             dataResult.isLastStep = true;
             socket?.emit('openModalConfirmation', dataResult);
             setStopRotation(false);
         }
 
-        return () => clearInterval(interval);
+        return () => {
+            clearInterval(interval);
+            setIsSpinning(false);
+            setStopRotation(false);
+
+        }
     }, [isSpinning, stopRotation, rotation, options]);
 
     return (
