@@ -29,21 +29,17 @@ const BoardGame = () => {
   const {socket} = useContext(SocketContext);
 
   useEffect(() => {
-    if(socket){
-      socket.on('winGame', (data) => {  
-        setGameFinished(true);  
-        setWinner(data)
-      });
-    }
-  },[gameFinished, winner, socket]);
-
-  useEffect(() => {
     getSessionCreated(idRoom); 
   },[socket]);
 
   useEffect(() => {      
 
     if(socket){
+      socket.on('winGame', (data) => {  
+        setGameFinished(true);  
+        setWinner(data)
+      });
+
       socket.on('throwDice', (data) => {   
         if(data.shouldMove){
           stepByStep(data);
@@ -83,7 +79,7 @@ const BoardGame = () => {
       }
     }
 
-  }, [socket, openModalChoiceNewFlag, playersPositions, flagPositions]);
+  }, [socket, openModalChoiceNewFlag, playersPositions, flagPositions, gameFinished, winner]);
 
   
 

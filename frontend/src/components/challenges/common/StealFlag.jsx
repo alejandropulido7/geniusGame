@@ -5,7 +5,7 @@ const StealFlag = ({flagStole, setFlagStole, flagsOpponent}) => {
   return (
     <>
         <label>Elige la bandera que quieres robar..</label>
-        <select className='select' value={flagStole} onChange={(event) => setFlagStole(event.target.value)}>
+        <select className='select m-auto' value={flagStole} onChange={(event) => setFlagStole(event.target.value)}>
             <option value="">Seleccione...</option>
             {flagsOpponent.map ((flag, index) => {
                 return <option key={index} value={flag}>{findFlagProperties(flag).name}</option>

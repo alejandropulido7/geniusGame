@@ -11,7 +11,7 @@ const OpponentInteractiveH = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const validateWord = (text) => {
-        setWord(text.trim());
+        setWord(text);
     }
 
     const emitHungedChallenge = () => {
@@ -42,7 +42,7 @@ const OpponentInteractiveH = () => {
             {!wordReady ? 
             <div className='flex flex-col gap-4'>
                 <p>Envia una palabra para el equipo contrario</p>
-                <input className='input' type="text" placeholder='Escribe una palabra' value={word} onChange={(e) => validateWord(e.target.value)}/>
+                <textarea rows={2} className='input' type="text" placeholder='Escribe una palabra' value={word} onChange={(e) => validateWord(e.target.value)}/>
                 <button className='btn-wood py-2 text-white' onClick={emitHungedChallenge}>Enviar palabra</button>
                 {errorMessage != '' && <p className='text-red-600'>{errorMessage}</p>}
             </div>

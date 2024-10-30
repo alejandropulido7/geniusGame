@@ -53,17 +53,21 @@ const PlayerChallengeH = ({secretWord, player}) => {
         previousPosition])
 
     const manejarIntento = (letra) => {
-        if (!gameFinished && !lettersGuessed.includes(letra)) {
+        let letter = letra;
+        if(letra == '_'){
+            letter = ' ';
+        }
+        if (!gameFinished && !lettersGuessed.includes(letter)) {
 
             let attempsUpdate = missedAttemps;
             let gameFinishedCopy = gameFinished;
 
-            if (!secretWord.includes(letra)) {
+            if (!secretWord.includes(letter)) {
                 attempsUpdate = attempsUpdate - 1;
                 setMissedAttemps(attempsUpdate);
             }
             const lettersGuessedCopy = [...lettersGuessed];
-            lettersGuessedCopy.push(letra);
+            lettersGuessedCopy.push(letter);
             setLettersGuessed(lettersGuessedCopy);
     
             const newWordShowed = secretWord
@@ -124,7 +128,7 @@ const PlayerChallengeH = ({secretWord, player}) => {
         <div>
             <div className='flex flex-row flex-wrap gap-1 justify-center'>
             {(!gameFinished && secretWord && showKeyboard) &&
-                'abcdefghijklmnopqrstuvwxyz'.split('').map((letra) => (
+                'abcdefghijklmnñopqrstuvwxyz_'.split('').map((letra) => (
                 <button className='p-2 w-10 bg-white border-2 rounded-md border-gray-700 disabled:bg-black disabled:text-white hover:text-white hover:bg-black touch-manipulation text-black my-2' 
                     style={{fontFamily: 'verdana'}}
                     key={letra} onClick={() => manejarIntento(letra)} disabled={lettersGuessed.includes(letra)}>
@@ -134,12 +138,12 @@ const PlayerChallengeH = ({secretWord, player}) => {
             </div>
             {gameFinished && 
             <div>
-                <button className='btn' onClick={() => resultChallenge(true)}>Terminar</button>
+                <button className='btn my-5 bg-blue-600 shadow-sm text-white shadow-black' onClick={() => resultChallenge(true)}>Terminar</button>
             </div>}
             {showNotPassChallenge && 
             <div>
                 <p>No pasaste el reto, te vamos a devolver a la posicion {previousPosition}</p>
-                <button className='btn' onClick={() => resultChallenge(false)}>OK</button>
+                <button className='btn my-5 bg-red-600 shadow-sm text-white shadow-black' onClick={() => resultChallenge(false)}>OK</button>
             </div>
             }
         </div>

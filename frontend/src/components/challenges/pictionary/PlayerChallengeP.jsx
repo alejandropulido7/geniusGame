@@ -134,7 +134,6 @@ const PlayerChallengeP = ({word, memberTeam}) => {
                         <div>
                             <HideWord word={word}/>
                         </div>
-                        <p className='absolute'>{touchAction}</p>
                         <div className='mt-10 w-full'>
                             <canvas
                                 ref={canvasRef}

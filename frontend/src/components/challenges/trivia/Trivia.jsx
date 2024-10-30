@@ -96,7 +96,7 @@ const Trivia = ({renderIn, dataTrivia}) => {
               </div>
             }
             {renderIn == RENDER_CHALLENGE.player && 
-            <button onClick={sendResult} className='btn bg-red-600 text-white'>{buttonModal}</button>
+            <button onClick={sendResult} className='btn my-5 bg-blue-600 shadow-sm text-white shadow-black'>{buttonModal}</button>
             }
           </div>
       </Modal>}   

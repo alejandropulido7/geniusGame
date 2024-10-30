@@ -52,9 +52,6 @@ const Roulette = () => {
 
         return () => {
             clearInterval(interval);
-            setIsSpinning(false);
-            setStopRotation(false);
-
         }
     }, [isSpinning, stopRotation, rotation, options]);
 

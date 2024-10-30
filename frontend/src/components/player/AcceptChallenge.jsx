@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import { SocketContext } from '../../context/SocketProvider';
-import { CHALLENGES_IN_BOARD, BACK_HOME, TRIVIA_VS, FLAGS, findFlagProperties, TRIVIA } from '../../utils/constants';
+import { CHALLENGES_IN_BOARD_PLUSTRIVIA, BACK_HOME, TRIVIA_VS, FLAGS, findFlagProperties, TRIVIA } from '../../utils/constants';
 import StealFlag from '../challenges/common/StealFlag';
 import SyncLoader from "react-spinners/SyncLoader";
 
@@ -21,7 +21,7 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
     }, [opponentSelected, flagsOpponent])
 
     const findNameChallenge = (id) => {
-        const challengeFound = CHALLENGES_IN_BOARD.find(challenge => challenge.id == id);
+        const challengeFound = CHALLENGES_IN_BOARD_PLUSTRIVIA.find(challenge => challenge.id == id);
         if(challengeFound){
             return challengeFound.name;
         }

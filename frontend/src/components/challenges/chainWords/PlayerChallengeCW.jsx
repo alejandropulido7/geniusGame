@@ -128,7 +128,7 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
           ?
           <div>
             <p>Haz clic en Finalizar antes de que se acabe el tiempo!</p>
-            <button className='btn' onClick={stopChallenge}>Finalizar</button>
+            <button className='btn my-5 text-white bg-blue-500 shadow-sm shadow-black' onClick={stopChallenge}>Finalizar</button>
           </div>
           :
           <div>
@@ -139,7 +139,7 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
           showNotPassChallenge && 
           <div>
             <p>No pasaste el reto, te vamos a devolver a la posicion {previousPosition}</p>
-            <button className='btn' onClick={notPassChallenge}>Ok</button>
+            <button className='btn bg-red-700 text-white' onClick={notPassChallenge}>Ok</button>
           </div>
         }
       </div>

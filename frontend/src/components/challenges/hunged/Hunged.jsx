@@ -60,7 +60,7 @@ const Hunged = ({renderIn, dataPlayer}) => {
   const sendedByOpponent = (data) => {
     const secretWordModified = '_'.repeat(data.secretWord.length);
     const wordSplit = secretWordModified.split('').join(' ');
-    setSecretWord(data.secretWord);
+    setSecretWord(data.secretWord.toLowerCase());
     setWordShowed(wordSplit);
   }
 

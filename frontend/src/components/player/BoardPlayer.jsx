@@ -45,6 +45,7 @@ const BoardPlayer = () => {
     const {socket} = useContext(SocketContext);
     
     useEffect(() => {
+        setShowStartRoulette(true);
         const alreadyReloaded = localStorage.getItem('reloaded');
         if (!alreadyReloaded) {
           const timer = setTimeout(() => {
@@ -53,6 +54,9 @@ const BoardPlayer = () => {
           }, 50);
     
           return () => clearTimeout(timer);
+        }
+        return () => {
+            setShowStartRoulette(true);
         }
       }, []);
     
@@ -171,9 +175,6 @@ const BoardPlayer = () => {
                 socket.off('openModalRoulette-rendering');
                 socket.off('turnOf');
             }
-        }
-        return () => {
-            setShowStartRoulette(true);
         }
                
     },[activeChallenge, socket, gameFinished, winner, flagsObtained]);

@@ -221,7 +221,7 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
                   <div>
                     {showResult()}
                   </div>
-                  <button onClick={emitWinner} className='btn'>Avanzar</button>
+                  <button onClick={emitWinner} className='btn my-5 bg-blue-600 shadow-sm text-white shadow-black'>Avanzar</button>
                 </div>
                 }
               </div>
@@ -229,7 +229,8 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
             {(winner == null) &&
               <div>
                 <p>No ha ganado ningun equipo, el equipo {playerPunisher.teamName} se devuelve a la casilla anterior </p>
-                {playerPunisher.idTeam == getCookie('idDevice-GG') && <button onClick={nobodyWon} className='btn'>Retroceder</button>}
+                {playerPunisher.idTeam == getCookie('idDevice-GG') && 
+                <button onClick={nobodyWon} className='btn my-5 bg-red-600 shadow-sm text-white shadow-black'>Retroceder</button>}
               </div>
             }
           </div>
