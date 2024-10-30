@@ -32,14 +32,14 @@ const ConfigTeam = () => {
 
 
   useEffect(() => {
-    console.warn(flagSelected);
     if(teamNameCookie){
       setTeamName(teamNameCookie);
     }
     if(tokenAdmin){
       validateSessionToken(tokenAdmin)
         .then((session) => {
-          setSessionId(session.idRoom)
+          setSessionId(session.idRoom);
+          setCookie('token', tokenAdmin);
         })
         .catch(() => {
           navigate('/');

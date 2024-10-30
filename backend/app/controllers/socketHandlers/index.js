@@ -5,17 +5,14 @@ module.exports = (io) => {
 
     io.use(async (socket, next) => {
         const token = socket.handshake.auth.token;
-        // if (!token) {
-        //     return next(new Error('No autorizado'));
-        // }
+        if (!token) {
+            return next(new Error('Sin token'));
+        }
 
-        // const payload = await validToken(token);
-        // if (payload.email == 'codingproactive@mail.com') {
-        //     return next(new Error('Email no autorizado'));
-        // }
-        // if(payload){
-        //     socket.emailUser = payload.email;
-        // }
+        const payload = await validToken(token);
+        if (!payload) {
+            return next(new Error('Token invalido'));
+        }
         next();
     });
 

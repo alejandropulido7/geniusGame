@@ -133,7 +133,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         challenge: playerChallenge.challenge,
-        // challenge: 'whistle_song',
+        // challenge: 'acting',
         player: playerModified
       };
     }
@@ -201,7 +201,7 @@ const BoardGame = () => {
       </Modal>
       <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
         <div className='flex flex-col gap-4'>
-          <h3>Wow! el equipo {infoChoiceNewFlag.teamName} ha ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive).name}</h3>
+          <h3>Wow! el equipo {infoChoiceNewFlag.teamName} ha ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive)?.name}</h3>
           <p>Esperando a que elija su proxima bandera...</p>
         </div>
       </Modal>

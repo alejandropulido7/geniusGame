@@ -21,7 +21,7 @@ const PreventBackButton = () => {
 
   return (
     <div>
-        <button className='btn' onClick={() => setOpenModal(true)}>Salir del juego</button>
+        <button className='btn bg-red-900 text-white mb-5' onClick={() => setOpenModal(true)}>Salir del juego</button>
         <Modal open={openModal} onClose={setOpenModal}>
             <div>
                 <p>¿Estás seguro de que quieres salir?</p>

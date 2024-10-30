@@ -3,8 +3,8 @@ const {getSesion, createSesion, updateBoardPositions} = require('../controllers/
 const {authRequired} = require('../validations/validateToken')
 const router = express.Router();
 
-router.get('/', getSesion);
+router.get('/', [authRequired], getSesion);
 router.post('/', [authRequired], createSesion);
-router.put('/updateBoard', updateBoardPositions);
+router.put('/updateBoard', [authRequired], updateBoardPositions);
 
 module.exports = router;

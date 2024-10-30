@@ -17,6 +17,7 @@ import AuthState from './context/AuthState.jsx';
 import PrivateUserRoute from './context/PrivateUserRoute.jsx';
 import { SocketProvider } from './context/SocketProvider.jsx';
 import Piece from './components/board/Piece.jsx';
+import { MovieList } from './components/challenges/acting/MovieList.jsx';
 
 const router = createBrowserRouter([
   {
@@ -25,8 +26,8 @@ const router = createBrowserRouter([
     errorElement: <MainScreen />,    
   },
   {
-    path: "/piece",
-    element: <Piece teamName={'Equipo 1'} w={180} h={180}/>   
+    path: "/movies",
+    element: <MovieList/>   
   },
   {
     path: "/board",

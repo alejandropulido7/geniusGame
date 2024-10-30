@@ -25,8 +25,8 @@ const ConfigGame = () => {
     };
 
     const handleSubmit = async () => {
-        const token = getCookie('token');
-        const sessionCreated = await createSession(configGame, token);
+        // const token = getCookie('token');
+        const sessionCreated = await createSession(configGame);
         if(sessionCreated){
             setCookie('idDevice-GG', sessionCreated.idHost, 1);
             setCookie('token', sessionCreated.token);

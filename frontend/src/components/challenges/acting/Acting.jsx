@@ -14,19 +14,21 @@ const Acting = ({renderIn}) => {
   const [render, setRender] = useState(null);
   const {socket} = useContext(SocketContext);
   const [teamPlayer, setTeamPlayer] = useState('');
+  const [movieImage, setMovieImage] = useState('');
 
   useEffect(() => {
-    if(localStorage.getItem('acting-GG') != null){
-        const properties = JSON.parse(localStorage.getItem('acting-GG'));
-        setWord(prev => properties.word??prev);
-        setWordReady(prev => properties.wordReady??prev);
+    const properties = JSON.parse(localStorage.getItem('acting-GG'));
+    if(properties != null){
+        setWord(properties.word);
+        setWordReady(properties.wordReady);
         setTeamPlayer(properties.teamPlayer);
+        setMovieImage(properties.movieImage)
     }
   },[])
 
   useEffect(() => {
-    localStorage.setItem('acting-GG', JSON.stringify({word, wordReady, teamPlayer}));
-  },[word, wordReady, teamPlayer])
+    localStorage.setItem('acting-GG', JSON.stringify({word, wordReady, teamPlayer, movieImage}));
+  },[word, wordReady, teamPlayer, movieImage])
 
   useEffect(() => {
   
@@ -34,11 +36,12 @@ const Acting = ({renderIn}) => {
       setWord(data.word);
       setWordReady(data.wordReady);
       setTeamPlayer(data.oponentMember);
+      setMovieImage(data.urlImage);
     });
 
     switch (renderIn) {
       case RENDER_CHALLENGE.admin:
-        setRender(<AdminA word={word} wordReady={wordReady}/>)
+        setRender(<AdminA word={word} wordReady={wordReady} movieImage={movieImage}/>)
       break;
       case RENDER_CHALLENGE.player:
         setRender(<PlayerChallengeA word={word} teamPlayer={teamPlayer}/>);
@@ -51,7 +54,7 @@ const Acting = ({renderIn}) => {
       break;
     }    
 
-  },[socket, word, wordReady, renderIn]);
+  },[socket, word, wordReady, renderIn, teamPlayer, movieImage]);
   
 
   return (
