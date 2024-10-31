@@ -123,14 +123,17 @@ const BoardPlayer = () => {
 
             socket.on('renderChallenge', (data) => {
                 setOpenModalRoulette(false);
+                setShowStartRoulette(true);
                 setOpenModal(false);
             });
 
             socket.on('resultChallenge', (data) => {
+                setOpenModalRoulette(false);
                 setOpenModalChoiceNewFlag(false);
                 setInfoChoiceNewFlag({});
                 setActiveChallenge(false);
                 setOpenModal(false);
+                setShowStartRoulette(true);
                 localStorage.clear();
             });
 
@@ -177,7 +180,10 @@ const BoardPlayer = () => {
             }
         }
                
-    },[activeChallenge, socket, gameFinished, winner, flagsObtained]);
+    },[activeChallenge, socket, 
+        gameFinished, winner, 
+        flagsObtained, openModalRoulette, 
+        openModalChoiceNewFlag, openModal]);
 
     
 
@@ -228,17 +234,19 @@ const BoardPlayer = () => {
                 style={{backgroundColor: `${findFlagProp().color}`}}>
                 { !gameFinished
                 ?
-                <div className='bg-white p-6 board-player-center rounded-md'>
+                <div className='bg-white p-6 board-player-center rounded-md relative'>
                     { !activeChallenge && 
                     <div className='flex flex-col justify-around h-full'>
                         <div><PreventBackButton/></div>
-                        <DataTeam 
-                            codeSesion={codeSesion} 
-                            colorTable={findFlagProp().color}
-                            flagActive={findFlagProp().name} 
-                            teamName={teamName} 
-                            flagsObtained={flagsObtained}
-                        />
+                        <div className='mt-6'>
+                            <DataTeam 
+                                codeSesion={codeSesion} 
+                                colorTable={findFlagProp().color}
+                                flagActive={findFlagProp().name} 
+                                teamName={teamName} 
+                                flagsObtained={flagsObtained}
+                            />
+                        </div>
                         { youTurn && 
                         <div className='w-60 m-auto'>
                             <button className='btn btn-wood w-full text-white' onClick={throwDice}>Lanzar Dado</button>                            

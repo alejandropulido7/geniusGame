@@ -51,12 +51,14 @@ const BoardGame = () => {
       socket.on('renderChallenge', (data) => {
         setOpenModalRoulette(false);
         setOpenModal(false);
+        setOpenModalChoiceNewFlag(false); 
       });
       
       socket.on('resultChallenge', (data) => { 
         setOpenModalChoiceNewFlag(false); 
         setDataChallenge({});
         setActiveChallenge(false);
+        setOpenModalRoulette(false);
         setPlayersPositions(data.players);
         setOpenModal(false);
         localStorage.clear();
@@ -128,8 +130,8 @@ const BoardGame = () => {
     let ongoingChallenge = {};
     if(playerChallenge){
       ongoingChallenge = {
-        challenge: playerChallenge.challenge,
-        // challenge: 'acting',
+        // challenge: playerChallenge.challenge,
+        challenge: 'hunged',
         player: playerModified
       };
     }

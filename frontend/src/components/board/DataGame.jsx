@@ -4,6 +4,7 @@ import {GlobalContext} from '../../context/GlobalContext';
 import { SocketContext } from '../../context/SocketProvider';
 import AllowJoin from './AllowJoin';
 import { FlagsPlayer } from '../challenges/common/FlagsPlayer';
+import PreventBackButton from '../player/PreventBackButton';
 
 const DataGame = () => {
 
@@ -66,9 +67,12 @@ const DataGame = () => {
                 style={{backgroundColor: '#FFCC00'}}>           
                 {winner != '' && <div>El ganador es: {winner}</div>}
             {idRoom && 
-            <div className='data-game-container '>
+            <div className='data-game-container relative'>
                 <div className='data-game-title top w-full h-16'>
                     <h1 className=' text-3xl text-white p-2 font-bold'>Board braker</h1>
+                </div>
+                <div>
+                    <PreventBackButton/>
                 </div>
                 <div className='data-game-center flex gap-5 '>
                     {session && 

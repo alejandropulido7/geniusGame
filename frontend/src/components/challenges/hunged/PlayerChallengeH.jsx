@@ -73,7 +73,7 @@ const PlayerChallengeH = ({secretWord, player}) => {
             const newWordShowed = secretWord
                 .split('')
                 .map((char) => (lettersGuessedCopy.includes(char) ? char : '_'))
-                .join(' ');
+                // .join(' ');
     
             setWordShowed(newWordShowed);
     
