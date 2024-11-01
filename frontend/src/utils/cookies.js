@@ -1,7 +1,5 @@
 import Cookies from 'js-cookie';
 
-const domain = import.meta.env.VITE_DOMAIN || 'localhost';
-
 
 function setCookie(name, value, expire=1) {
     Cookies.set(name, value, {expires: expire});    
@@ -12,7 +10,7 @@ function getCookie(name) {
 }
 
 function deleteCookie(name) {
-    return Cookies.remove(name, {domain});    
+    return Cookies.remove(name);    
 }
 
 function hasCookie(name) {
