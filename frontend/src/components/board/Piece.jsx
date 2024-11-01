@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import twemoji from 'twemoji'
 
 const Piece = ({ teamName, w, h, color, emoji }) => {
 
@@ -10,9 +9,6 @@ const Piece = ({ teamName, w, h, color, emoji }) => {
     const text = teamName.split(""); 
     if(text.length > 8){
       setShowSecondName(false);
-    }
-    if(emoji){
-      setEmojiModified(twemoji.parse(emoji));
     }
   },[teamName, color, emoji]);
 
