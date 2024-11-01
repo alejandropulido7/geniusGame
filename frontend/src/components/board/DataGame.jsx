@@ -72,7 +72,7 @@ const DataGame = () => {
                     <h1 className=' text-3xl text-white p-2 font-bold'>Board braker</h1>
                 </div>
                 <div>
-                    <PreventBackButton/>
+                    <PreventBackButton isBoard={true}/>
                 </div>
                 <div className='data-game-center flex gap-5 '>
                     {session && 

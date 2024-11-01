@@ -44,21 +44,21 @@ const BoardPlayer = () => {
     const [flagsObtained, setFlagsObtained] = useState([]);
     const {socket} = useContext(SocketContext);
     
-    useEffect(() => {
-        setShowStartRoulette(true);
-        const alreadyReloaded = localStorage.getItem('reloaded');
-        if (!alreadyReloaded) {
-          const timer = setTimeout(() => {
-            localStorage.setItem('reloaded', 'true');
-            window.location.reload();
-          }, 50);
+    // useEffect(() => {
+    //     setShowStartRoulette(true);
+    //     const alreadyReloaded = localStorage.getItem('reloaded');
+    //     if (!alreadyReloaded) {
+    //       const timer = setTimeout(() => {
+    //         localStorage.setItem('reloaded', 'true');
+    //         window.location.reload();
+    //       }, 50);
     
-          return () => clearTimeout(timer);
-        }
-        return () => {
-            setShowStartRoulette(true);
-        }
-      }, []);
+    //       return () => clearTimeout(timer);
+    //     }
+    //     return () => {
+    //         setShowStartRoulette(true);
+    //     }
+    //   }, []);
     
 
     const getTeamCreated = (idRoom) => {        

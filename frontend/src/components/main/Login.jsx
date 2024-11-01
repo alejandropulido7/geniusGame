@@ -2,18 +2,22 @@ import React, {useContext, useState} from 'react'
 import {loginService} from '../../services/authServices';
 import {useNavigate} from 'react-router-dom'
 import { setCookie } from '../../utils/cookies';
+import SyncLoader from "react-spinners/SyncLoader";
 
 const Login = () => {
 
   const [email, setEmail] = useState('codingproactive@mail.com');
   const [password, setPassword] = useState('1234');
+  const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const userAuthenticated = await loginService(email, password);
     if(userAuthenticated){
-      setCookie('token', userAuthenticated.token); // Llamada para guardar el token y conectar el socket
+      setCookie('token', userAuthenticated.token);
+      setIsLoading(false);
       navigate('/board');
     }
 
@@ -41,9 +45,17 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
-        Login
-      </button>
+      {
+        !isLoading 
+        ?
+        <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition duration-300">
+          Login
+        </button>
+        :
+        <div>
+            <SyncLoader/>
+        </div>
+      }
     </form>
   )
 }

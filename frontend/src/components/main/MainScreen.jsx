@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react'
 import Login from './Login';
 import ConnectRoom from './ConnectRoom';
+import { deleteCookie } from '../../utils/cookies';
 
 const MainScreen = () => {
     const [activeTab, setActiveTab] = useState('login');
 
     useEffect(() => {
         localStorage.clear();
+        deleteCookie('token');
+        deleteCookie('idDevice-GG');
     })
     
     return (
