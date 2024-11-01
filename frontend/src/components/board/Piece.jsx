@@ -24,7 +24,7 @@ const Piece = ({ teamName, w, h, color, emoji }) => {
       fontSize: `${w*0.15}px`}}>
       <div className='circle-int-piece absolute border-4 rounded-full flex items-center justify-center'
         style={{width: (w/2)+'px', height: (h/2)+'px'}}
-      >{emojiModified}</div>
+      ><img src={emojiModified} alt="" /></div>
       <div className='text-piece absolute left-0'
         style={{top: `${w*0.3}px`,
           left: `${w*0.03}px`
