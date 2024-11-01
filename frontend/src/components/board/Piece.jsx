@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import twemoji from 'twemoji'
 
 const Piece = ({ teamName, w, h, color, emoji }) => {
 
   const [showSecondName, setShowSecondName] = useState(true);
-  const [emojiModified, setEmojiModified] = useState(emoji);
 
   useEffect(() => {
     const text = teamName.split(""); 
     if(text.length > 8){
       setShowSecondName(false);
-    }
-    if(emoji){
-      setEmojiModified(twemoji.parse(emoji));
     }
   },[teamName, color, emoji]);
 
@@ -24,7 +19,7 @@ const Piece = ({ teamName, w, h, color, emoji }) => {
       fontSize: `${w*0.15}px`}}>
       <div className='circle-int-piece absolute border-4 rounded-full flex items-center justify-center'
         style={{width: (w/2)+'px', height: (h/2)+'px'}}
-      ><img src={emojiModified} alt="" /></div>
+      >{emoji}</div>
       <div className='text-piece absolute left-0'
         style={{top: `${w*0.3}px`,
           left: `${w*0.03}px`
