@@ -57,9 +57,9 @@ const OpponentInteractiveCW = ({lastWord}) => {
               })
             }
           </select>
-          <textarea rows={2} className='input' placeholder='Escribe una palabra segun el tema' onChange={(e) => setWord(e.target.value)}/>
+          <textarea rows={2} className='input' placeholder='Escribe una palabra segun el tema' onChange={(e) => setWord(e.target.value.trim())}/>
           <button className='btn bg-indigo-400' onClick={emitWordChallenge}>Enviar palabra</button>
-          {errorMessage && <p>{errorMessage}</p>}
+          {errorMessage != '' && <p className='text-red-500'>{errorMessage}</p>}
         </div>
         : 
         <div>

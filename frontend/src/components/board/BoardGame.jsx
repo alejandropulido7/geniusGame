@@ -109,8 +109,7 @@ const BoardGame = () => {
           } else {
             setTimeout(() => {
               socket.emit('openModalConfirmation', playerWithChallenge);
-              const infoModal = OPTIONS_CHALLENGES.get(playerWithChallenge.challenge);
-              setInfoModal(infoModal);
+              setInfoModal(playerWithChallenge.challenge);
               setOpenModal(true);
             }, 900);
           }
@@ -130,8 +129,8 @@ const BoardGame = () => {
     let ongoingChallenge = {};
     if(playerChallenge){
       ongoingChallenge = {
-        // challenge: playerChallenge.challenge,
-        challenge: 'hunged',
+        challenge: playerChallenge.challenge,
+        // challenge: 'hunged',
         player: playerModified
       };
     }
@@ -192,7 +191,7 @@ const BoardGame = () => {
       }
 
       <Modal open={openModal} onClose={setOpenModal}>
-        <InfoModal title={infoModal.title} description={infoModal.description}/>
+        <InfoModal idChallenge={infoModal}/>
       </Modal>
       <Modal open={openModalRoulette} onClose={setOpenModalRoulette}>
         <Roulette/>

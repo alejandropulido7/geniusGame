@@ -10,6 +10,7 @@ const OpponentInteractiveP = ({wordReady}) => {
   const [finalWord, setFinalWord] = useState('');
   const [oponentMember, setOponentMember] = useState('');
   const {socket} = useContext(SocketContext);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const properties = JSON.parse(localStorage.getItem('pictionary-opp-GG'));
@@ -27,9 +28,13 @@ const OpponentInteractiveP = ({wordReady}) => {
   const emitWordChallenge = () => {
     setFinalWord(word);
     if(socket){
-      const data = {word, wordReady: true, oponentMember, socketId: socket.id};
-      socket.emit('pictionary', {function: 'data', data});
-      socket.emit('startChallenge', {socketId: socket.id});
+      if(word != '' && oponentMember != ''){
+        const data = {word, wordReady: true, oponentMember, socketId: socket.id};
+        socket.emit('pictionary', {function: 'data', data});
+        socket.emit('startChallenge', {socketId: socket.id});
+      } else {
+        setErrorMessage('Llena todos los campos antes de enviar')
+      }
     }
   }
 
@@ -47,7 +52,9 @@ const OpponentInteractiveP = ({wordReady}) => {
         <HideWord word={finalWord}/>  
       }
       <ValidateChallenge/>
-      
+      {errorMessage != '' && 
+          <p className='text-red-600 text-center'>{errorMessage}</p>
+        }
     </div>
   )
 }
