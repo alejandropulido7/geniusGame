@@ -13,8 +13,18 @@ module.exports = (io) => {
         if (!payload) {
             return next(new Error('Token invalido'));
         }
+        socket.idRoom = payload.idRoom;
         next();
     });
+
+    //PAYLOAD TOKEN
+    // {
+    //     "idRoom": "720916",
+    //     "idHost": "xcye1bfezb7h",
+    //     "idUser": 1,
+    //     "iat": 1730504363,
+    //     "exp": 1730590763
+    //   }
 
     io.on('connection', (socket) => {
         console.log('A user connected');

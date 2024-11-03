@@ -59,6 +59,23 @@ const BoardPlayer = () => {
     //         setShowStartRoulette(true);
     //     }
     //   }, []);
+
+    useEffect(() => {
+        const handleVisibilityChange = () => {
+          if (document.visibilityState === 'visible') {
+            if (!socket || !socket.connected) {
+                console.log('reconectado')
+              socket.connect(); // Intenta reconectar si está desconectado
+            }
+          }
+        };
+    
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+    
+        return () => {
+          document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+      }, [socket]);
     
 
     const getTeamCreated = (idRoom) => {        
@@ -112,6 +129,11 @@ const BoardPlayer = () => {
     useEffect(() => {   
 
         if(socket){
+            socket.on('reloadClient', (data) => {  
+                console.log('reload')
+                window.location.reload();
+            });
+
             socket.on('winGame', (data) => {  
                 setGameFinished(true);  
                 setWinner(data);
