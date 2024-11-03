@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'joti-one';
-    src: url('./assets/fonts/JotiOne-Regular.ttf');
-    font-weight: normal;
+    src: url('./assets/fonts/DynaPuff-Regular.ttf');
+    font-weight: bold;
     font-style: normal;
 }
 @tailwind base;
