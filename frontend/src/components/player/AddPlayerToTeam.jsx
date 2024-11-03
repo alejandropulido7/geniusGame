@@ -30,7 +30,7 @@ const AddPlayerToTeam = ({players, setPlayers}) => {
 
   return (
     <>
-      <div className='flex justify-between'>
+      <div className='flex flex-col justify-between'>
         <div className='flex items-center gap-2'><FaUserPlus size={22}/><p>Miembros:</p></div>
         <div className='flex relative'>
           <input

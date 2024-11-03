@@ -84,7 +84,10 @@ const DataGame = () => {
                         </div>
                         {(players && players.length > 0) ? 
                         <div className='my-5'>
-                            <p>Equipos: </p>
+                            <div className='flex justify-between'>
+                                <p>Equipos: </p>
+                                <p>Banderas: </p>
+                            </div>
                             {
                                 players.map((player) => {
                                     return (
