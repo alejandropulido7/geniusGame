@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react'
 
 const letrasQwerty = [
-    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M'],
-    // ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-    // ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
+    ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
 ];
 
 const KeyboardCW = ({texto, setTexto}) => {
@@ -12,6 +10,7 @@ const KeyboardCW = ({texto, setTexto}) => {
   
     const agregarTexto = (caracter) => {
       setTexto(texto + caracter);
+      triggerRamdomLetters();
     };
   
     const borrarUltimoCaracter = () => {
@@ -29,19 +28,26 @@ const KeyboardCW = ({texto, setTexto}) => {
     return fila.slice().sort(() => Math.random() - 0.5);
     };
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const intervalo = setInterval(() => {
-            let modLetters = [...letters];
-            const ramdomNumber = Math.floor(Math.random() * letrasQwerty.length);
-            modLetters[ramdomNumber] = desordenarFila(letrasQwerty[ramdomNumber]);
-            setLetters(modLetters);
-        },2500);
+    //     const intervalo = setInterval(() => {
+    //         let modLetters = [...letters];
+    //         const ramdomNumber = Math.floor(Math.random() * letrasQwerty.length);
+    //         modLetters[ramdomNumber] = desordenarFila(letrasQwerty[ramdomNumber]);
+    //         setLetters(modLetters);
+    //     },2500);
 
-        return () => {
-            clearInterval(intervalo);
-        }
-    },[]);
+    //     return () => {
+    //         clearInterval(intervalo);
+    //     }
+    // },[]);
+
+    function triggerRamdomLetters(){
+      let modLetters = [...letters];
+      const ramdomNumber = Math.floor(Math.random() * letrasQwerty.length);
+      modLetters[ramdomNumber] = desordenarFila(letrasQwerty[ramdomNumber]);
+      setLetters(modLetters);
+    };
   
     return (
         <div>

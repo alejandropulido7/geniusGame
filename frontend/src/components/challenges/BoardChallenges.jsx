@@ -30,6 +30,7 @@ const BoardChallenges = ({setOpenModal, setOpenModalRoulette}) => {
           const active = session.challenge_active;
           setActiveChallenge(active);
           const challengeData = {
+            min_to_answer: session.min_to_answer,
             challenge: session.challenge_name,
             participants: JSON.parse(session.challenge_participants)
           }

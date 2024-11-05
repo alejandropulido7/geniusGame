@@ -75,7 +75,8 @@ function createNewGame(data) {
         idDevice: data.idDevice,
         mySocketId: data.idSocket,
         lenght_board: data.lenghtBoard,
-        quantity_challenges: data.quantityChallenges
+        quantity_challenges: data.quantityChallenges,
+        min_to_answer: data.minsToAnswer
     }
     RoomStore.createNewRoom(room);
     GameState.createGameStatus(room.gameId);
@@ -188,6 +189,7 @@ async function renderChallenge(data) {
         }
 
         let dataRenderChallenge = {
+            min_to_answer: socketBoard.min_to_answer,
             challenge: challenge_name,
             participants
         };

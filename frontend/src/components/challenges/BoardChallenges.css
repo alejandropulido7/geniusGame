@@ -28,3 +28,9 @@
   .challenges-center {
     grid-area: center;
   }
+
+  * {
+    -webkit-user-select: none; /* Safari and iOS */
+    -ms-user-select: none; /* Internet Explorer */
+    user-select: none; /* Standard syntax */
+  }

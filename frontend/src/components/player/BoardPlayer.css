@@ -11,6 +11,12 @@
     width: 100%;
   }
 
+  * {
+    -webkit-user-select: none; /* Safari and iOS */
+    -ms-user-select: none; /* Internet Explorer */
+    user-select: none; /* Standard syntax */
+  }
+
   .board-player-top {
     grid-area: top;
   }

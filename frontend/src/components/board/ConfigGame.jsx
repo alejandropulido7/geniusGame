@@ -52,7 +52,7 @@ const ConfigGame = () => {
                 </div>
                 <div className='flex justify-between items-center gap-2'>
                     <label>Minutos para resolver los retos: </label>
-                    <input className='input' min={1} max={2} type='number' name='min_to_answer' value={configGame.min_to_answer} onChange={handleInputChange}/>
+                    <input className='input' min={1} max={5} type='number' name='min_to_answer' value={configGame.min_to_answer} onChange={handleInputChange}/>
                 </div>
                 <div className='flex justify-between items-center gap-2'>
                     <label>Cantidad de casillas: </label>

@@ -13,7 +13,7 @@ import './BoardPlayer.css'
 import { SocketContext } from '../../context/SocketProvider';
 import PreventBackButton from './PreventBackButton';
 import AcceptChallenge from './AcceptChallenge';
-import { FlagsPlayer } from '../challenges/common/FlagsPlayer';
+import Confetti from 'react-confetti'
 import { DataTeam } from './DataTeam';
 
 const BoardPlayer = () => {
@@ -317,8 +317,9 @@ const BoardPlayer = () => {
                 </div>
             </Modal>
             <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
-                <div className='flex flex-col gap-5'>
-                    {infoChoiceNewFlag.flagActive && <p>Felicidades equipo {infoChoiceNewFlag.teamName}!! Has ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive).name}.</p>}
+                <div className='flex flex-col gap-6'>
+                    <Confetti/>
+                    <p>Felicidades equipo {infoChoiceNewFlag.teamName}!! Has ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive)?.name}.</p>
                     <p>Escoge la siguiente:</p>
                     <div className='flex justify-center gap-4'>
                         <select className='select' value={newFlagSelected} onChange={(event) => setNewFlagSelected(event.target.value)}>

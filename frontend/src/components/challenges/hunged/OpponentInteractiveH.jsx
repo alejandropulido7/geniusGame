@@ -11,7 +11,7 @@ const OpponentInteractiveH = () => {
     const [errorMessage, setErrorMessage] = useState('');
 
     const validateWord = (text) => {
-        setWord(text);
+        setWord(text.trim());
     }
 
     const emitHungedChallenge = () => {

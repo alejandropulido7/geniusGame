@@ -55,8 +55,8 @@ export const SocketProvider = ({ children, isBoard=false }) => {
             const socket = io(backend, {
                 auth: {token, isBoard},
                 reconnection: true,
-                reconnectionAttempts: 5,
-                reconnectionDelay: 10000,
+                reconnectionAttempts: Infinity,
+                reconnectionDelay: 5000,
                 autoConnect: true
             });
             setSocket(socket);

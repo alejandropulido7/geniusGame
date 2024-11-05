@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SocketContext } from '../../context/SocketProvider';
+import { GlobalContext } from '../../context/GlobalContext';
+import { HUNGED } from '../../utils/constants';
 
 
 const Chronometer = ({data}) => {
-  const [seconds, setSeconds] = useState(60);
+  const [seconds, setSeconds] = useState(60*data.min_to_answer);
   const [message, setMessage] = useState('');
   const [showTime, setShowTime] = useState(true);
   const [player, setPlayer] = useState(null);
   const {socket} = useContext(SocketContext);
+  const {dataChallenge} = useContext(GlobalContext);
 
   useEffect(() => {
     if(localStorage.getItem('timeChallenge-GG') != null){
@@ -16,7 +19,6 @@ const Chronometer = ({data}) => {
       setMessage(prev => time.message??prev);
       setShowTime(prev => time.showTime??prev);
     } 
-
   }, []);
 
   useEffect(() => {
@@ -26,7 +28,10 @@ const Chronometer = ({data}) => {
   }, [seconds, message, showTime]);
 
   useEffect(() => {
-    
+    if(data.challenge == HUNGED){
+      setSeconds(60);
+    }
+
     let interval = null;
     socket?.on('startChallenge', (dataPlayer) => {
       setPlayer(dataPlayer);

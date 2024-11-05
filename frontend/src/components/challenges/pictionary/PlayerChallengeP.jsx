@@ -19,7 +19,22 @@ const PlayerChallengeP = ({word, memberTeam}) => {
         width: 1,
         height: 1, 
     });
-    const [touchAction, setTouchAction] = useState('');
+
+    useEffect(() => {
+        const handleTouchMove = (e) => {
+          if (dibujando) {
+            e.preventDefault(); // Prevent scrolling while drawing
+          }
+        };
+    
+        // Add the event listener to the canvas
+        const canvas = canvasRef.current;
+        canvas?.addEventListener('touchmove', handleTouchMove, { passive: false });
+    
+        return () => {
+          canvas?.removeEventListener('touchmove', handleTouchMove);
+        };
+      }, [dibujando]);
 
     const handleResize = () => {
         setDimensions({
@@ -61,18 +76,16 @@ const PlayerChallengeP = ({word, memberTeam}) => {
     
     const empezarDibujo = (event) => {
         // event.preventDefault();
-        setTouchAction('none');
+        setDibujando(true);
         const { offsetX, offsetY } = obtenerCoordenadas(event);
         context.beginPath();
         context.moveTo(offsetX, offsetY);
 
         socket?.emit('pictionary', {function: 'startDraw', data: {offsetX, offsetY, socketId: socket?.id}});
 
-        setDibujando(true);
     };
 
     const dibujar = (event) => {
-        setTouchAction('none')
         // event.preventDefault();
         if (!dibujando) return;
     
@@ -85,11 +98,10 @@ const PlayerChallengeP = ({word, memberTeam}) => {
     };
 
     const terminarDibujo = () => {
-        setTouchAction('auto');
+        setDibujando(false);
         context.closePath();
 
         socket?.emit('pictionary', {function: 'stopDraw', data: {drawing: dibujando, socketId: socket?.id}});
-        setDibujando(false);
     };
 
     const cambiarColor = (nuevoColor) => {
@@ -139,7 +151,7 @@ const PlayerChallengeP = ({word, memberTeam}) => {
                                 ref={canvasRef}
                                 width={dimensions.width > 500 ? dimensions.width * 0.8 : dimensions.width * 0.6}
                                 height={dimensions.height * 0.4}
-                                style={{ border: '1px solid #ccc', touchAction: touchAction}}
+                                style={{ border: '1px solid #ccc', touchAction: 'none'}}
                                 onMouseDown={empezarDibujo}
                                 onMouseMove={dibujar}
                                 onMouseUp={terminarDibujo}
