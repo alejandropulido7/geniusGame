@@ -132,7 +132,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: 'pictionary',
+        challenge: 'word_chain',
         player: playerModified
       };
     }

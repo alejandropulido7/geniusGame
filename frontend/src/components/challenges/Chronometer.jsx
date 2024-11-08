@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SocketContext } from '../../context/SocketProvider';
 import { GlobalContext } from '../../context/GlobalContext';
-import { HUNGED } from '../../utils/constants';
+import { HUNGED, WORD_CHAIN } from '../../utils/constants';
 
 
 const Chronometer = ({data}) => {
@@ -28,12 +28,15 @@ const Chronometer = ({data}) => {
   }, [seconds, message, showTime]);
 
   useEffect(() => {
-    if(data.challenge == HUNGED){
+    if(data.challenge == HUNGED || data.challenge == WORD_CHAIN ){
       setSeconds(60);
     }
 
     let interval = null;
     socket?.on('startChallenge', (dataPlayer) => {
+      if(data.challenge == WORD_CHAIN){
+        setSeconds(60);
+      }
       setPlayer(dataPlayer);
       interval = setInterval(() => {
         if (seconds > 0) {
