@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import {findFlagProperties, FLAGS, OPTIONS_CHALLENGES } from '../../utils/constants'
 import StepsBoard from './StepsBoard';
 import {updateBoardPositions, getSession} from '../../services/sessionService';
@@ -13,7 +13,9 @@ import Winner from '../challenges/common/Winner';
 import './Board.css';
 import { SocketContext } from '../../context/SocketProvider';
 import Confetti from 'react-confetti'
-import KeepAwakeComponent from '../common/KeepAwakeComponent';
+import { KeepActiveBrowser } from '../common/KeepActiveBrowser';
+import background_game from '../../assets/audio/background_game.mp3';
+import move_piece from '../../assets/audio/move-piece-4.mp3';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
@@ -29,10 +31,31 @@ const BoardGame = () => {
   const [gameFinished, setGameFinished] = useState(false);
   const [winner, setWinner] = useState({});
   const {socket} = useContext(SocketContext);
+  const audioRefBackground = useRef(new Audio(background_game));
+  const audioRefPieceMove = useRef(new Audio(move_piece));
 
   useEffect(() => {
     getSessionCreated(idRoom); 
+    // playBackground();
   },[socket]);
+
+  const playBackground = () => {
+    const audio = audioRefBackground.current;
+    audio.loop = true;
+    audio.volume = 0.07;
+    audio
+      .play()
+      .catch((error) => {
+        console.error('Audio play failed:', error);
+      });
+  };
+
+  const playPieceMove = (volume) => {
+    const audio = audioRefPieceMove.current;
+    audio.loop = false;
+    audio.volume = volume;
+    audio.play();
+  };
 
   useEffect(() => {      
 
@@ -97,6 +120,7 @@ const BoardGame = () => {
 
     const intervalo = setInterval(() => {
       if(step < playerModified.positionActive){
+        playPieceMove(0.5);
         step = step + 1;
         playerModified.step = step;
         const playerNewPosition = playersInSession.map(player => player.teamName == playerModified.teamName ? {...player, prev_position: playerModified.prev_position, positionActive: step, step} : player);
@@ -132,7 +156,7 @@ const BoardGame = () => {
     if(playerChallenge){
       ongoingChallenge = {
         // challenge: playerChallenge.challenge,
-        challenge: 'word_chain',
+        challenge: 'whistle_song',
         player: playerModified
       };
     }
@@ -177,7 +201,7 @@ const BoardGame = () => {
 
   return (
     <div className='board-container px-20'>
-      <KeepAwakeComponent/>
+      <KeepActiveBrowser/>
       {
         !gameFinished 
         ?
@@ -193,7 +217,6 @@ const BoardGame = () => {
         :
         <Winner winner={winner}/>
       }
-
       <Modal open={openModal} onClose={setOpenModal}>
         <InfoModal idChallenge={infoModal}/>
       </Modal>

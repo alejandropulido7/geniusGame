@@ -71,7 +71,7 @@ export const MovieList = ({selectedMovie, setSelectedMovie, setUrlImage}) => {
     }
   
     return (
-      <div className="p-4 max-w-sm mx-auto space-y-4">
+      <div className="p-4 mx-auto space-y-4" style={{maxWidth: '19rem'}}>
         <h1 className="text-xl font-bold text-center">Selecciona una pelicula o escribe una propia</h1>
         
         <div className="relative">

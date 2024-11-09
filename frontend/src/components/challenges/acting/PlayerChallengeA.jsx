@@ -2,29 +2,33 @@ import React, { useState, useEffect, useContext } from 'react'
 import HideWord from '../common/HideWord';
 import { SocketContext } from '../../../context/SocketProvider';
 import ChallengeNotPassed from '../common/ChallengeNotPassed';
+import HideWordPlayer from '../common/HideWordPlayer';
 
 const PlayerChallengeA = ({word, teamPlayer}) => {
 
     const [showButton, setShowButton] = useState(true);
     const {socket} = useContext(SocketContext);
     const [gameFinished, setGameFinished] = useState(false);
+    const [showFinishButton, setShowFinishButton] = useState(false);
 
     const emitResult = () => {
       setShowButton(false);
+      setGameFinished(true);
       socket?.emit('stopChallenge', {socketId: socket?.id});
     }
 
     useEffect(() => {
-      if(localStorage.getItem('acting-player-GG') != null){
-          const properties = JSON.parse(localStorage.getItem('acting-player-GG'));
-          setShowButton(prev => properties.showButton??prev);
-          setGameFinished(properties.gameFinished)
+      const properties = JSON.parse(localStorage.getItem('acting-player-GG'));
+      if(properties != null){
+          setShowButton(properties.showButton);
+          setGameFinished(properties.gameFinished);
+          setShowFinishButton(properties.showFinishButton);
       }
     },[]);
   
     useEffect(() => {
-      localStorage.setItem('acting-player-GG', JSON.stringify({showButton, gameFinished}));
-    },[showButton, gameFinished]);
+      localStorage.setItem('acting-player-GG', JSON.stringify({showButton, gameFinished, showFinishButton}));
+    },[showButton, gameFinished, showFinishButton]);
   
     return (
       <div className='flex flex-col gap-6'>
@@ -41,7 +45,7 @@ const PlayerChallengeA = ({word, teamPlayer}) => {
               { !gameFinished && 
               <div>
                 <p className='py-3'>El jugador <span className='text-red-600 underline uppercase'>{teamPlayer}</span> debe resolver este reto.</p>
-                <button className='btn text-white shadow-md shadow-black bg-red-600' onClick={emitResult}>Terminar</button>
+                
               </div>
               }
               <ChallengeNotPassed gameFinished={gameFinished} setGameFinished={setGameFinished} showButton={true}/>         
@@ -52,9 +56,13 @@ const PlayerChallengeA = ({word, teamPlayer}) => {
         </div>
         }
         <div>
-          <HideWord word={word}/>
+          <HideWordPlayer word={word} gameFinished={gameFinished} setShowFinishButton={setShowFinishButton}/>
         </div>
-        
+        { (word != '' && !gameFinished && showFinishButton) &&           
+        <div className='mt-10'>
+          <button className='btn text-white shadow-md shadow-black bg-red-600' onClick={emitResult}>Terminar</button>
+        </div>
+        }
       </div>
     )
   }

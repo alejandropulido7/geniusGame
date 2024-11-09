@@ -34,7 +34,6 @@ const OpponentInteractiveA = ({wordReady}) => {
         setFinalWord(word);
         const data = {word, wordReady: true, oponentMember, urlImage, socketId: socket?.id};
         socket?.emit('acting', data);
-        socket?.emit('startChallenge', {socketId: socket?.id});
       } else {
         setErrorMessage('Llena todos los campos antes de enviar la película')
       }

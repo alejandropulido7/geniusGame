@@ -4,6 +4,7 @@ import ChallengeNotPassed from '../common/ChallengeNotPassed';
 import { SocketContext } from '../../../context/SocketProvider';
 import { FaEraser } from "react-icons/fa";
 import { MdCleaningServices } from "react-icons/md";
+import HideWordPlayer from '../common/HideWordPlayer';
 
 
 const PlayerChallengeP = ({word, memberTeam}) => {
@@ -19,6 +20,7 @@ const PlayerChallengeP = ({word, memberTeam}) => {
         width: 1,
         height: 1, 
     });
+    const [showFinishButton, setShowFinishButton] = useState(false);
 
     useEffect(() => {
         const handleTouchMove = (e) => {
@@ -27,7 +29,6 @@ const PlayerChallengeP = ({word, memberTeam}) => {
           }
         };
     
-        // Add the event listener to the canvas
         const canvas = canvasRef.current;
         canvas?.addEventListener('touchmove', handleTouchMove, { passive: false });
     
@@ -58,12 +59,15 @@ const PlayerChallengeP = ({word, memberTeam}) => {
         const properties = JSON.parse(localStorage.getItem('pictionary-pl-GG'));
         if(properties != null){
             setContext(properties.context);
+            setShowButton(properties.showButton);
+            setGameFinished(properties.gameFinished);
+            setShowFinishButton(properties.showFinishButton);
         }
     },[])
     
     useEffect(() => {
-        localStorage.setItem('pictionary-pl-GG', JSON.stringify({context}))
-    },[context]);
+        localStorage.setItem('pictionary-pl-GG', JSON.stringify({showFinishButton, gameFinished, showButton}))
+    },[showFinishButton, gameFinished, showButton]);
 
     useEffect(() => {
         handleResize();
@@ -144,14 +148,16 @@ const PlayerChallengeP = ({word, memberTeam}) => {
                     <div className='relative'>
                         <h1> <span className='uppercase underline text-red-500'>{memberTeam}</span> debe hacer el dibujo</h1>
                         <div>
-                            <HideWord word={word}/>
+                            <HideWordPlayer word={word} gameFinished={gameFinished} setShowFinishButton={setShowFinishButton}/>
                         </div>
                         <div className='mt-10 w-full'>
                             <canvas
                                 ref={canvasRef}
                                 width={dimensions.width > 500 ? dimensions.width * 0.8 : dimensions.width * 0.6}
                                 height={dimensions.height * 0.4}
-                                style={{ border: '1px solid #ccc', touchAction: 'none'}}
+                                style={{ border: '1px solid #ccc', 
+                                    touchAction: 'none'
+                                }}
                                 onMouseDown={empezarDibujo}
                                 onMouseMove={dibujar}
                                 onMouseUp={terminarDibujo}
@@ -168,7 +174,11 @@ const PlayerChallengeP = ({word, memberTeam}) => {
                                 <button className='w-7 h-7 border-2 border-black rounded-full flex justify-center items-center' onClick={() => cambiarColor('white')}><FaEraser className=''/></button>
                                 <button className='w-7 h-7 border-2 border-black rounded-full flex justify-center items-center' onClick={borrarTodo}><MdCleaningServices /></button>
                             </div>
-                            {showButton && <div><button className='btn mt-7 bg-red-700 text-white' onClick={finishChallenge}>Terminar</button></div>}
+                            {(showButton && word != '' && !gameFinished && showFinishButton) && 
+                                <div>
+                                    <button className='btn mt-7 bg-red-700 text-white' onClick={finishChallenge}>Terminar</button>
+                                </div>
+                            }
                         </div>
                     </div>
                     }

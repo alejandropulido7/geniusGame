@@ -95,6 +95,7 @@ const PlayerChallengeCW = ({lastWord, dataPlayer}) => {
           const newIndex = indexTeammate + 1;
           setTeammate(teamPlayers[newIndex]);
           setIndexTeammate(newIndex);
+          socket?.emit('restartTime', {socketId: socket.id});
         }       
       } else {
         alert('La palabra no cumple con las reglas del juego.');

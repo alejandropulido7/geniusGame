@@ -45,6 +45,13 @@ const CHALLENGES_IN_BOARD = [
     {id: WHISTLE_SONG, name: 'Silba o tararea', icon: 'whistle'}
 ];
 
-module.exports = {FLAGS, triviaCategories, CHALLENGES_IN_BOARD, TRIVIA_VS};
+module.exports = {FLAGS, 
+    triviaCategories, 
+    CHALLENGES_IN_BOARD,
+    PICTIONARY, 
+    WORD_CHAIN, 
+    HUNGED, 
+    TRIVIA, 
+    TRIVIA_VS};
 
             

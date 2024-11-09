@@ -31,7 +31,6 @@ const OpponentInteractiveP = ({wordReady}) => {
       if(word != '' && oponentMember != ''){
         const data = {word, wordReady: true, oponentMember, socketId: socket.id};
         socket.emit('pictionary', {function: 'data', data});
-        socket.emit('startChallenge', {socketId: socket.id});
       } else {
         setErrorMessage('Llena todos los campos antes de enviar')
       }

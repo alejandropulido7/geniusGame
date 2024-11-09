@@ -28,15 +28,9 @@ const Chronometer = ({data}) => {
   }, [seconds, message, showTime]);
 
   useEffect(() => {
-    if(data.challenge == HUNGED || data.challenge == WORD_CHAIN ){
-      setSeconds(60);
-    }
 
     let interval = null;
     socket?.on('startChallenge', (dataPlayer) => {
-      if(data.challenge == WORD_CHAIN){
-        setSeconds(60);
-      }
       setPlayer(dataPlayer);
       interval = setInterval(() => {
         if (seconds > 0) {
@@ -45,6 +39,10 @@ const Chronometer = ({data}) => {
           clearInterval(interval);
         }
       }, 1000);
+    });
+
+    socket?.on('restartTime', (dataStop) => {
+      setSeconds(data.min_to_answer);
     });
 
     socket?.on('stopChallenge', (dataStop) => {
@@ -60,7 +58,7 @@ const Chronometer = ({data}) => {
       setMessage('');   
     }
 
-  }, [seconds, data, socket]);
+  }, [seconds, socket]);
 
   return (
     <div className='bg-white text-xl rounded-md'>

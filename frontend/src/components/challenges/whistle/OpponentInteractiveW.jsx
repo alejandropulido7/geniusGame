@@ -34,7 +34,6 @@ const OpponentInteractiveW = ({wordReady}) => {
         setFinalWord(sendWord);
         const data = {word: sendWord, wordReady: true, oponentMember, socketId: socket?.id};
         socket?.emit('whistle', data);
-        socket?.emit('startChallenge', {socketId: socket?.id});
       } else {
         setErrorMessage('Llena todos los campos antes de enviar la canción')
       }

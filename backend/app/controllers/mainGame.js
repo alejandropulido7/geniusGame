@@ -5,7 +5,8 @@ const RoomStore = require('../classes/RoomStore');
 const TurnsGame = require('../classes/TurnsGame');
 const GameState = require('../classes/GameState');
 const {updatePositions} = require('../controllers/socketHandlers/commonOperations');
-const {getConnectTrivia} = require('../controllers/trivia')
+const {getConnectTrivia} = require('../controllers/trivia');
+const { TRIVIA, TRIVIA_VS, HUNGED, WORD_CHAIN } = require('../utils/constant');
 
 var io;
 var gameSocket;
@@ -49,6 +50,8 @@ const initializeGame = (sio, socket) => {
     gameSocket.on("backHome", backHome)
 
     gameSocket.on("startChallenge", startChallenge)
+
+    gameSocket.on("restartTime", restartTime)
 
     gameSocket.on("stopChallenge", stopChallenge)
 
@@ -193,10 +196,16 @@ async function renderChallenge(data) {
             challenge: challenge_name,
             participants
         };
-        if(challenge_name == 'trivia' || challenge_name == 'trivia_vs'){ 
+        if(challenge_name == TRIVIA || challenge_name == TRIVIA_VS){ 
            const dataTrivia = await getConnectTrivia();
            dataRenderChallenge.trivia = dataTrivia;
            dataRenderChallenge.dataOpponent = data.dataOpponent;
+        }
+        if(challenge_name == HUNGED){
+            dataRenderChallenge.min_to_answer = 1;
+        }
+        if(challenge_name == WORD_CHAIN){
+            dataRenderChallenge.min_to_answer = 0.5;
         }
         const participantsJson = JSON.stringify(participants);
         updateChallengingInfo(gameId, true, challenge_name, participantsJson)
@@ -403,6 +412,13 @@ function startChallenge(data){
     const user = RoomStore.getUserBySocket(gameId, data.socketId);
     io.sockets.in(gameId).emit('startChallenge', user);
 }
+
+function restartTime(data){
+    const gameId = RoomStore.getRoomByIdSocket(data.socketId);
+    const user = RoomStore.getUserBySocket(gameId, data.socketId);
+    io.sockets.in(gameId).emit('restartTime', user);
+}
+
 
 function stopChallenge(data){
     const gameId = RoomStore.getRoomByIdSocket(data.socketId);
