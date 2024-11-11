@@ -18,6 +18,7 @@ import PrivateUserRoute from './context/PrivateUserRoute.jsx';
 import { SocketProvider } from './context/SocketProvider.jsx';
 import Piece from './components/board/Piece.jsx';
 import { MovieList } from './components/challenges/acting/MovieList.jsx';
+import { AudioProvider } from './context/AudioProvider.jsx';
 
 const router = createBrowserRouter([
   {
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/board/:idRoom",
-        element: <SocketProvider isBoard={true}><BoardGame /></SocketProvider>
+        element: <SocketProvider isBoard={true}><AudioProvider><BoardGame /></AudioProvider></SocketProvider>
       },       
     ],
   },

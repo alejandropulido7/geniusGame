@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import {OPTIONS_CHALLENGES} from '../../../utils/constants'
+import {OPTIONS_CHALLENGES, WORD_CHAIN} from '../../../utils/constants'
 import ValidateChallenge from '../common/ValidateChallenge';
 import { SocketContext } from '../../../context/SocketProvider';
 
@@ -9,6 +9,7 @@ const OpponentInteractiveCW = ({lastWord}) => {
     const [topic, setTopic] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const {socket} = useContext(SocketContext);
+    const [customTopic, setCustomTopic] = useState('');
 
     useEffect(() => {
       if(localStorage.getItem('chainWords-Opp-GG') != null){
@@ -25,8 +26,18 @@ const OpponentInteractiveCW = ({lastWord}) => {
     const emitWordChallenge = () => {
       setErrorMessage('');
       if(word != '' && topic != ''){
+        if(topic == 10 && customTopic == ''){
+          setErrorMessage('Debes escribir el tema personalizado');
+          return;
+        }
         if(socket){
-          socket.emit('chainWords', {lastWord: word, wordList: [], socketId: socket.id, topic});
+          const findTopicName = OPTIONS_CHALLENGES.get(WORD_CHAIN).topics.filter(val => val.id == topic);
+          console.log(findTopicName);
+          let topicSend = findTopicName.topic;
+          if(topic == 10){
+            topicSend = customTopic;
+          }
+          socket.emit('chainWords', {lastWord: word, wordList: [], socketId: socket.id, topic: topicSend});
           socket.emit('startChallenge', {socketId: socket.id});
         }
       } else {
@@ -37,7 +48,8 @@ const OpponentInteractiveCW = ({lastWord}) => {
     const topicChanged = (event) => {
       const value = event.target.value;
       if(value != ''){
-        setTopic(event.target.value);
+        console.log(value)
+        setTopic(value);
       }
     };
 
@@ -50,13 +62,16 @@ const OpponentInteractiveCW = ({lastWord}) => {
           <select className='select' value={topic} onChange={topicChanged}>
             <option value="">Selecciona un tema..</option>
             {
-              OPTIONS_CHALLENGES.get('word_chain').topics.map(topicMap => {
+              OPTIONS_CHALLENGES.get(WORD_CHAIN).topics.map(topicMap => {
                 return (
-                  <option key={topicMap} value={topicMap}>{topicMap}</option>
+                  <option key={topicMap.id} value={topicMap.id}>{topicMap.topic}</option>
                 );
               })
             }
           </select>
+          { topic == 10 && 
+            <input className='input' type="text" placeholder='Escribe tu propio tema' onChange={(e) => setCustomTopic(e.target.value)}/>
+          }
           <textarea rows={2} className='input' placeholder='Escribe una palabra segun el tema' onChange={(e) => setWord(e.target.value.trim())}/>
           <button className='btn bg-indigo-400' onClick={emitWordChallenge}>Enviar palabra</button>
           {errorMessage != '' && <p className='text-red-500'>{errorMessage}</p>}

@@ -9,6 +9,7 @@ import { SocketContext } from '../../../context/SocketProvider';
 import PositionsTable from './PositionsTable';
 import { getCookie } from '../../../utils/cookies';
 import StealFlag from '../common/StealFlag';
+import { AudioContext } from '../../../context/AudioProvider';
 
 const Trivia_VS = ({renderIn, dataChallenge}) => {
   const [render, setRender] = useState(null);
@@ -31,6 +32,7 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
   const [playerPunisher, setPlayerPunisher] = useState({});
   const [flagStole, setFlagStole] = useState('');
   const [playerOpponent, setPlayerOpponent] = useState('');
+  const {audioRefTriviaVersus, audioRefStealFlag, playSound, stopSound} = useContext(AudioContext);
 
   useEffect(() => {
     const properties = JSON.parse(localStorage.getItem('trivia-vs-GG'));
@@ -49,6 +51,7 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
 
 
   useEffect(() => {
+    playSound(audioRefTriviaVersus, 0.5, false);
     socket?.on('trivia-versus', (data) => {
       let newTimesPlayers = playersHaveAnswered;
 
@@ -98,9 +101,11 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
           setIsRunningTrivia(true);
         }
       } else if(data.isLastTurnTrivia == true){
+        stopSound(audioRefTriviaVersus);
         if(orderTable[0].rightAnswers == 0 && orderTable[1].rightAnswers == 0){
           setWinner(null);
         } else {
+          playSound(audioRefStealFlag, 0.5, false);
           setWinner(orderTable[0].player);
         }
         setOpenModal(true);

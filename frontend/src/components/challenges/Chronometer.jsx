@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { SocketContext } from '../../context/SocketProvider';
 import { GlobalContext } from '../../context/GlobalContext';
 import { HUNGED, WORD_CHAIN } from '../../utils/constants';
+import { AudioContext } from '../../context/AudioProvider';
 
 
 const Chronometer = ({data}) => {
@@ -11,21 +12,23 @@ const Chronometer = ({data}) => {
   const [player, setPlayer] = useState(null);
   const {socket} = useContext(SocketContext);
   const {dataChallenge} = useContext(GlobalContext);
+  const {audioRefLoseChallenge, audioRefTime, playSound, stopSound} = useContext(AudioContext)
 
   useEffect(() => {
-    if(localStorage.getItem('timeChallenge-GG') != null){
-      const time = JSON.parse(localStorage.getItem('timeChallenge-GG'));
-      setSeconds(prev => time.second??prev);
-      setMessage(prev => time.message??prev);
-      setShowTime(prev => time.showTime??prev);
+    const time = JSON.parse(localStorage.getItem('timeChallenge-GG'));
+    if(time != null){
+      setSeconds(time.second);
+      setMessage(time.message);
+      setShowTime(time.showTime);
+      setPlayer(time.player);
     } 
   }, []);
 
   useEffect(() => {
     if(seconds >= 0){
-      localStorage.setItem('timeChallenge-GG', JSON.stringify({seconds, message, showTime}));
+      localStorage.setItem('timeChallenge-GG', JSON.stringify({seconds, message, showTime, player}));
     }
-  }, [seconds, message, showTime]);
+  }, [seconds, message, showTime, player]);
 
   useEffect(() => {
 
@@ -42,14 +45,19 @@ const Chronometer = ({data}) => {
     });
 
     socket?.on('restartTime', (dataStop) => {
-      setSeconds(data.min_to_answer);
+      setSeconds(30);
     });
 
     socket?.on('stopChallenge', (dataStop) => {
       clearInterval(interval);
     });
 
+    if(seconds > 0 && seconds <= 10){
+      playSound(audioRefTime, 1);
+    }
+
     if(seconds == 0){
+      playSound(audioRefLoseChallenge, 0.6);
       setShowTime(false);
       socket?.emit('notPassChallenge', data.participants.player);
     }

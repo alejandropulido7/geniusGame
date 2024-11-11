@@ -6,7 +6,7 @@ import AllowJoin from './AllowJoin';
 import { FlagsPlayer } from '../challenges/common/FlagsPlayer';
 import PreventBackButton from '../player/PreventBackButton';
 
-const DataGame = () => {
+const DataGame = ({activeSound}) => {
 
     const {idRoom} = useParams();
     const [winner, setWinner] = useState('');
@@ -29,9 +29,9 @@ const DataGame = () => {
 
             socket.on('playerJoinedRoom', (playersInSession) => {
                 setPlayers(playersInSession);
-                // if(playersInSession.length > 1){
-                //     setActiveStartGame(true);
-                // }
+                if(playersInSession.length > 1){
+                    setStatus('Conectado')
+                }
             });
 
             socket.on('startGame', (data) => {
@@ -54,6 +54,7 @@ const DataGame = () => {
     const readyToPlay = () => {
         if(players.length > 1){
             setActiveStartGame(true);
+            activeSound();
             socket.emit('startGame', session.id);
         } else {
             setStatus('No hay suficientes equipos para jugar (min. 2)')

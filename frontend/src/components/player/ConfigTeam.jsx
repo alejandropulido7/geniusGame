@@ -96,10 +96,10 @@ const ConfigTeam = () => {
   };
 
   const entrySessionGame = () => {
-    setIsLoading(true); 
     setError('');
     if(validateFields()){
       if(error == '') {
+        setIsLoading(true); 
         createTeamInRoom();        
       }
     };
@@ -111,15 +111,15 @@ const ConfigTeam = () => {
       return false;
     }
     if(teamName == ''){
-      setError('Type some name for your team');
+      setError('Escribe un nombre de equipo');
       return false;
     }
     if(players.length == 0){
-      setError('Team dont have any players');
+      setError('El equipo no tiene miembros');
       return false;
     }
     if(flagSelected == ''){
-      setError('Select one board to start');
+      setError('Selecciona una bandera para empezar');
       return false;
     }    
     return true;
@@ -162,7 +162,7 @@ const ConfigTeam = () => {
         </div>
         <div>
               { error !=='' && 
-                <p>Error: {error}</p>
+                <p className='text-red-600'>Error: {error}</p>
               }
         </div>     
         { !isLoading

@@ -14,8 +14,7 @@ import './Board.css';
 import { SocketContext } from '../../context/SocketProvider';
 import Confetti from 'react-confetti'
 import { KeepActiveBrowser } from '../common/KeepActiveBrowser';
-import background_game from '../../assets/audio/background_game.mp3';
-import move_piece from '../../assets/audio/move-piece-4.mp3';
+import { AudioContext } from '../../context/AudioProvider';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
@@ -31,31 +30,16 @@ const BoardGame = () => {
   const [gameFinished, setGameFinished] = useState(false);
   const [winner, setWinner] = useState({});
   const {socket} = useContext(SocketContext);
-  const audioRefBackground = useRef(new Audio(background_game));
-  const audioRefPieceMove = useRef(new Audio(move_piece));
+  const {playSound, audioRefBackground, 
+    audioRefPieceMove, audioRefGainFlag,
+    audioRefLoseChallenge, audioRefStealFlag,
+    audioRefTime, audioRefTriviaVersus
+  } = useContext(AudioContext);
 
   useEffect(() => {
     getSessionCreated(idRoom); 
-    // playBackground();
+    playSound(audioRefBackground, 0.07, true);
   },[socket]);
-
-  const playBackground = () => {
-    const audio = audioRefBackground.current;
-    audio.loop = true;
-    audio.volume = 0.07;
-    audio
-      .play()
-      .catch((error) => {
-        console.error('Audio play failed:', error);
-      });
-  };
-
-  const playPieceMove = (volume) => {
-    const audio = audioRefPieceMove.current;
-    audio.loop = false;
-    audio.volume = volume;
-    audio.play();
-  };
 
   useEffect(() => {      
 
@@ -120,7 +104,7 @@ const BoardGame = () => {
 
     const intervalo = setInterval(() => {
       if(step < playerModified.positionActive){
-        playPieceMove(0.5);
+        playSound(audioRefPieceMove, 0.5, false, 3);
         step = step + 1;
         playerModified.step = step;
         const playerNewPosition = playersInSession.map(player => player.teamName == playerModified.teamName ? {...player, prev_position: playerModified.prev_position, positionActive: step, step} : player);
@@ -155,8 +139,8 @@ const BoardGame = () => {
     let ongoingChallenge = {};
     if(playerChallenge){
       ongoingChallenge = {
-        // challenge: playerChallenge.challenge,
-        challenge: 'whistle_song',
+        challenge: playerChallenge.challenge,
+        // challenge: 'word_chain',
         player: playerModified
       };
     }
@@ -199,6 +183,16 @@ const BoardGame = () => {
     }
   }
 
+  function activeSound(){
+    // playSound(audioRefBackground);
+    playSound(audioRefPieceMove, 0);
+    playSound(audioRefGainFlag, 0);
+    playSound(audioRefLoseChallenge, 0);
+    playSound(audioRefStealFlag, 0);
+    playSound(audioRefTime, 0);
+    playSound(audioRefTriviaVersus, 0);
+  }
+
   return (
     <div className='board-container px-20'>
       <KeepActiveBrowser/>
@@ -210,7 +204,7 @@ const BoardGame = () => {
             { flagPositions.map((flagPosition, index) => {
               return <StepsBoard stlyeClass={classNameSteps(index)} key={flagPosition.flag} arrayPositions={flagPosition.positions} flag={flagPosition.flag} players={playersPositions}/>
             })} 
-            <DataGame/>
+            <DataGame activeSound={activeSound}/>
             <BoardChallenges setOpenModal={setOpenModal} setOpenModalRoulette={setOpenModalRoulette}/>
           </div>
         </div>
@@ -225,6 +219,7 @@ const BoardGame = () => {
       </Modal>
       <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
         <div className='flex flex-col gap-5'>
+          {openModalChoiceNewFlag && playSound(audioRefGainFlag, 0.5)}
           <Confetti/>
           <h3>Wow! el equipo <span className='uppercase text-indigo-500'>{infoChoiceNewFlag.teamName}</span> ha ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive)?.name}</h3>
           <p>Esperando a que elija su proxima bandera...</p>

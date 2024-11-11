@@ -8,12 +8,13 @@ const ConfigGame = () => {
 
     const [isPreviousGame, setIsPreviousGame] = useState(false);
     const [configGame, setConfigGame] = useState({
-        min_to_answer: 1,
+        min_to_answer: 0,
         lenght_board: 16,
         // amount_challenges: 5,
         challenges_in_board: JSON.stringify(CHALLENGES_IN_BOARD)
     });
     const navigate = useNavigate();
+    const [error, setError] = useState('');
 
 
     const handleInputChange = (event) => {
@@ -26,6 +27,11 @@ const ConfigGame = () => {
 
     const handleSubmit = async () => {
         // const token = getCookie('token');
+        setError('');
+        if(configGame.min_to_answer == 0){
+            setError('Define los minutos para cada reto');
+            return;
+        }
         const sessionCreated = await createSession(configGame);
         if(sessionCreated){
             setCookie('idDevice-GG', sessionCreated.idHost, 1);
@@ -40,7 +46,7 @@ const ConfigGame = () => {
 
     useEffect(() => {
 
-    }, [configGame]);
+    }, [configGame, error]);
 
 
     return (
@@ -76,6 +82,11 @@ const ConfigGame = () => {
                 </div>
             </div>
             }
+            <div>
+              { error !=='' && 
+                <p className='text-red-600'>Error: {error}</p>
+              }
+            </div> 
         </div>
     )
 }

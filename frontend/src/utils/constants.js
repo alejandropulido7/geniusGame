@@ -60,7 +60,17 @@ const OPTIONS_CHALLENGES = new Map();
 OPTIONS_CHALLENGES.set(WORD_CHAIN, {
   title: 'Cadena de palabras',
   description: 'When your partners guess the word, click on Finish',
-  topics: ['Paises', 'Comida', 'Frutas', 'Emociones', 'Nombres femeninos', 'Nombres masculinos', 'Deportes', 'Artistas musicales', 'Canciones']
+  topics: [
+    {id: 1, topic: 'Paises'}, 
+    {id: 2, topic: 'Comida'}, 
+    {id: 3, topic: 'Frutas'}, 
+    {id: 4, topic: 'Emociones'}, 
+    {id: 5, topic: 'Nombres femeninos'}, 
+    {id: 6, topic: 'Nombres masculinos'}, 
+    {id: 7, topic: 'Deportes'}, 
+    {id: 8, topic: 'Artistas musicales'}, 
+    {id: 9, topic: 'Canciones'}, 
+    {id: 10, topic: 'Tema propio'}]
 });
 OPTIONS_CHALLENGES.set(ACTING, {
   title: 'Actuacion',
