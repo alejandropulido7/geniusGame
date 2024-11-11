@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import {findFlagProperties, FLAGS, OPTIONS_CHALLENGES } from '../../utils/constants'
+import {findFlagProperties, FLAGS, getRandomObject, OPTIONS_CHALLENGES } from '../../utils/constants'
 import StepsBoard from './StepsBoard';
 import {updateBoardPositions, getSession} from '../../services/sessionService';
 import {useParams, useNavigate} from 'react-router-dom';
@@ -139,8 +139,8 @@ const BoardGame = () => {
     let ongoingChallenge = {};
     if(playerChallenge){
       ongoingChallenge = {
-        challenge: playerChallenge.challenge,
-        // challenge: 'word_chain',
+        // challenge: playerChallenge.challenge,
+        challenge: getRandomObject(['word_chain', 'pictionary']),
         player: playerModified
       };
     }

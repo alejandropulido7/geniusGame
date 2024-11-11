@@ -16,6 +16,7 @@ import AcceptChallenge from './AcceptChallenge';
 import Confetti from 'react-confetti'
 import { DataTeam } from './DataTeam';
 import { KeepActiveBrowser } from '../common/KeepActiveBrowser';
+import KeepAwakeComponent from '../common/KeepAwakeComponent';
 
 const BoardPlayer = () => {
 
@@ -253,7 +254,7 @@ const BoardPlayer = () => {
 
     return (
         <div>
-            <KeepActiveBrowser/>
+            <KeepAwakeComponent/>
             <div className={`board-player-container md:p-8 p-3 h-auto m-auto`}
                 style={{backgroundColor: `${findFlagProp().color}`}}>
                 { !gameFinished
