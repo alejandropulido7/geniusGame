@@ -139,8 +139,8 @@ const BoardGame = () => {
     let ongoingChallenge = {};
     if(playerChallenge){
       ongoingChallenge = {
-        // challenge: playerChallenge.challenge,
-        challenge: getRandomObject(['word_chain', 'pictionary']),
+        challenge: playerChallenge.challenge,
+        // challenge: getRandomObject(['word_chain', 'pictionary']),
         player: playerModified
       };
     }

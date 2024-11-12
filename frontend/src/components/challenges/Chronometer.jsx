@@ -12,7 +12,8 @@ const Chronometer = ({data}) => {
   const [player, setPlayer] = useState(null);
   const {socket} = useContext(SocketContext);
   const {dataChallenge} = useContext(GlobalContext);
-  const {audioRefLoseChallenge, audioRefTime, playSound, stopSound} = useContext(AudioContext)
+  const {audioRefLoseChallenge, audioRefTime, playSound, stopSound} = useContext(AudioContext);
+  const [lastSeconds, setLastSeconds] = useState(false)
 
   useEffect(() => {
     const time = JSON.parse(localStorage.getItem('timeChallenge-GG'));
@@ -53,6 +54,7 @@ const Chronometer = ({data}) => {
     });
 
     if(seconds > 0 && seconds <= 10){
+      setLastSeconds(true)
       playSound(audioRefTime, 1);
     }
 
@@ -70,7 +72,9 @@ const Chronometer = ({data}) => {
 
   return (
     <div className='bg-white text-xl rounded-md'>
-      {showTime ? <h4>Tiempo restante: {seconds} segundos</h4> : <h4>Se acabo el tiempo, en espera de que el jugador del reto confirme desde su pantalla</h4>}
+      {showTime ? 
+      <h4 className={lastSeconds ? 'text-red-600' : 'text-black'}>Tiempo restante: {seconds} segundos</h4> : 
+      <h4 className='text-indigo-500'>Se acabo el tiempo, en espera de que el jugador del reto confirme desde su pantalla</h4>}
       {message != '' && <h4>{message}</h4>}
     </div>
   );

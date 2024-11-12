@@ -19,7 +19,8 @@ export const KeepActiveBrowser = () => {
           src={video}
           loop
           muted
-          style={{ display: 'none' }}
+          playsInline
+          style={{ width: 0, height: 0, opacity: 0, display: none }}
         />
       </div>
     );
