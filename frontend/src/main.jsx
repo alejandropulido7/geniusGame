@@ -19,6 +19,8 @@ import { SocketProvider } from './context/SocketProvider.jsx';
 import Piece from './components/board/Piece.jsx';
 import { MovieList } from './components/challenges/acting/MovieList.jsx';
 import { AudioProvider } from './context/AudioProvider.jsx';
+import { VideoFlags } from './components/challenges/common/VideoFlags.jsx';
+import Winner from './components/challenges/common/Winner.jsx';
 
 const router = createBrowserRouter([
   {
@@ -27,8 +29,8 @@ const router = createBrowserRouter([
     errorElement: <MainScreen />,    
   },
   {
-    path: "/movies",
-    element: <MovieList/>   
+    path: "/winner",
+    element: <AudioProvider><Winner winner={{teamName: 'Locos'}}/></AudioProvider>   
   },
   {
     path: "/board",

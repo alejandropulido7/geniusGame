@@ -7,6 +7,9 @@ import trivia from '../assets/images/challenges/trivia.png';
 import whistle from '../assets/images/challenges/whistle.png';
 import home from '../assets/images/challenges/home.png';
 import versus from '../assets/images/challenges/versus.png';
+import video_flag_red from '../assets/videos/gain-flag-red.mp4';
+import video_flag_blue from '../assets/videos/gain-flag-blue.mp4';
+import video_flag_purple from '../assets/videos/gain-flag-purple.mp4';
 
 /*Flags images */
 const BACKEND = import.meta.env.VITE_BACKEND;
@@ -42,9 +45,9 @@ const WHISTLE_SONG = "whistle_song" //silbar cancion que el oponente ponga
 const BACK_HOME = 'back_home';
 const TRIVIA_VS = 'trivia_vs';
 const FLAGS = [
-  {id: 'blue', name: 'Azul', color: colorsApp.get('blue').color, shadow: colorsApp.get('blue').shadow}, 
-  {id: 'red', name: 'Rojo', color: colorsApp.get('red').color, shadow: colorsApp.get('red').shadow}, 
-  {id: 'purple', name: 'Morado', color: colorsApp.get('purple').color, shadow: colorsApp.get('purple').shadow}, 
+  {id: 'blue', name: 'Azul', color: colorsApp.get('blue').color, shadow: colorsApp.get('blue').shadow, video: video_flag_blue}, 
+  {id: 'red', name: 'Rojo', color: colorsApp.get('red').color, shadow: colorsApp.get('red').shadow, video: video_flag_red}, 
+  {id: 'purple', name: 'Morado', color: colorsApp.get('purple').color, shadow: colorsApp.get('purple').shadow, video: video_flag_purple}, 
   {id: 'green', name: 'Verde', color: colorsApp.get('green').color, shadow: colorsApp.get('green').shadow}
 ];
 

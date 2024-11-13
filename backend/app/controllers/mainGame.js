@@ -61,6 +61,8 @@ const initializeGame = (sio, socket) => {
 
     gameSocket.on("openModalRoulette", openModalRoulette);
 
+    gameSocket.on("openModalGainFlag", openModalGainFlag);
+
     gameSocket.on("changeFlag", changeFlag); 
 
     gameSocket.on("stealFlag", stealFlag); 
@@ -228,6 +230,12 @@ function openModalRoulette(data){
     const gameId = data.data.player.gameId;
     const nameEmit = data.function;
     io.sockets.in(gameId).emit('openModalRoulette-'+nameEmit, data.data); 
+}
+
+function openModalGainFlag(data){
+    const gameId = data.winner.gameId;
+    const player = RoomStore.getUserRoom(gameId, data.winner.idTeam);
+    io.sockets.in(gameId).emit('openModalGainFlag', {player, flag: data.flag}); 
 }
 
 

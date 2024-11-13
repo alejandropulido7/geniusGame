@@ -20,7 +20,7 @@ export const KeepActiveBrowser = () => {
           loop
           muted
           playsInline
-          style={{ width: 0, height: 0, opacity: 0, display: none }}
+          style={{ width: 0, height: 0, opacity: 0, display: 'none' }}
         />
       </div>
     );

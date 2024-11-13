@@ -114,3 +114,26 @@
   .data-game-players{
     height: 25dvh;
   }
+
+
+  /*Style for modal gain flag*/
+  .background-gain-flag {
+    position: relative;
+    border-radius: 0.75rem;
+    width: 70vh;
+    height: 70vh;
+    overflow: hidden;
+  }
+  
+  .background-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: auto;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    z-index: -1; /* Place behind other content */
+  }

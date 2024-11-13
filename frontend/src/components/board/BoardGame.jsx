@@ -35,6 +35,7 @@ const BoardGame = () => {
     audioRefLoseChallenge, audioRefStealFlag,
     audioRefTime, audioRefTriviaVersus
   } = useContext(AudioContext);
+  const [fromTriviaVs, setFromTriviaVs] = useState(false);
 
   useEffect(() => {
     getSessionCreated(idRoom); 
@@ -79,6 +80,18 @@ const BoardGame = () => {
         setInfoChoiceNewFlag(data.player);
         setFlagPositions(data.changePositions);
       });
+
+      let timer = null;
+      socket.on('openModalGainFlag', (data) => {
+        setOpenModalChoiceNewFlag(true);
+        const playerModified = data.player;
+        playerModified.flagActive = data.flag;
+        setInfoChoiceNewFlag(playerModified);
+        setFromTriviaVs(true);
+        timer = setTimeout(() => {
+          setOpenModalChoiceNewFlag(false);
+        }, 7000);
+      });
   
       socket.on('playerJoinedRoom', (playersInSession) => {
         setPlayersPositions(playersInSession);
@@ -87,6 +100,9 @@ const BoardGame = () => {
       return () => {
         socket.off('throwDice');
         socket.off('resultChallenge');
+        setInfoChoiceNewFlag(null);
+        setFromTriviaVs(false);
+        clearTimeout(timer);
       }
     }
 
@@ -139,8 +155,9 @@ const BoardGame = () => {
     let ongoingChallenge = {};
     if(playerChallenge){
       ongoingChallenge = {
-        challenge: playerChallenge.challenge,
+        // challenge: playerChallenge.challenge,
         // challenge: getRandomObject(['word_chain', 'pictionary']),
+        challenge: 'trivia_vs',
         player: playerModified
       };
     }
@@ -218,12 +235,20 @@ const BoardGame = () => {
         <Roulette/>
       </Modal>
       <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
-        <div className='flex flex-col gap-5'>
-          {openModalChoiceNewFlag && playSound(audioRefGainFlag, 0.5)}
+        {openModalChoiceNewFlag && 
+        <div className='flex justify-center items-center self-center text-white background-gain-flag'>
+          {playSound(audioRefGainFlag, 0.5)}
           <Confetti/>
-          <h3>Wow! el equipo <span className='uppercase text-indigo-500'>{infoChoiceNewFlag.teamName}</span> ha ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive)?.name}</h3>
-          <p>Esperando a que elija su proxima bandera...</p>
+          <video autoPlay muted className="background-video">
+            <source src={findFlagProperties(infoChoiceNewFlag.flagActive)?.video} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <div className='flex flex-col gap-6'>
+            <h3>Wow! el equipo <span className='uppercase underline text-black'>{infoChoiceNewFlag.teamName}</span> ha ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive)?.name}</h3>
+            {!fromTriviaVs && <p>Esperando a que elija su proxima bandera...</p>}
+          </div>
         </div>
+        }
       </Modal>
     </div>
   );

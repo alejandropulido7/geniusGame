@@ -10,6 +10,7 @@ import PositionsTable from './PositionsTable';
 import { getCookie } from '../../../utils/cookies';
 import StealFlag from '../common/StealFlag';
 import { AudioContext } from '../../../context/AudioProvider';
+import Confetti from 'react-confetti'
 
 const Trivia_VS = ({renderIn, dataChallenge}) => {
   const [render, setRender] = useState(null);
@@ -105,7 +106,6 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
         if(orderTable[0].rightAnswers == 0 && orderTable[1].rightAnswers == 0){
           setWinner(null);
         } else {
-          playSound(audioRefStealFlag, 0.5, false);
           setWinner(orderTable[0].player);
         }
         setOpenModal(true);
@@ -174,11 +174,17 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
       if(flagStolePunisher == ''){
         return <p>El equipo {playerOpponent.teamName} no tiene banderas, asi que el equipo {playerPunisher.teamName} conserva su posicion</p>;
       } else {
-        return <p>El equipo {playerPunisher.teamName} ha robado la bandera {findFlagProperties(flagStolePunisher).name}</p>;
+        return <div>
+          <Confetti/>
+          <p>El equipo {playerPunisher.teamName} ha robado la bandera {findFlagProperties(flagStolePunisher).name}</p>;
+        </div>
       }
     } else if(playerOpponent.idTeam == winner.idTeam){
       if(playerPunisher.flagsObtained.length > 0){
-        return <StealFlag flagStole={flagStole} setFlagStole={setFlagStole} flagsOpponent={playerPunisher.flagsObtained}/>
+        return <div>
+          <Confetti/>
+          <StealFlag flagStole={flagStole} setFlagStole={setFlagStole} flagsOpponent={playerPunisher.flagsObtained}/>
+        </div>
       } else {
         return <p>El equipo {playerPunisher.teamName} no tiene banderas, se regresa a la posicion anterior</p>
       }
@@ -198,6 +204,8 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
     }
 
     socket?.emit('stealFlag', data);
+    socket?.emit('openModalGainFlag', {winner, flag: data.flagStole});
+    
   }
 
   return (
@@ -223,6 +231,7 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
                 <p>El equipo ganador es: {winner.teamName}</p>                
                 {winner.idTeam == getCookie('idDevice-GG') && 
                 <div>
+                  {playSound(audioRefStealFlag, 0.5, false)}
                   <div>
                     {showResult()}
                   </div>

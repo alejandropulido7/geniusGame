@@ -1,9 +1,10 @@
 import React, { createContext, useRef } from 'react';
 import background_game from '../assets/audio/background_game-3.mp3';
 import move_piece from '../assets/audio/move-piece-1.mp3';
-import gain_flag from '../assets/audio/gain-flag.mp3';
+import steal_flag from '../assets/audio/gain-flag.mp3';
 import trivia_vs_audio from '../assets/audio/trivia-vs.mp3';
-import steal_flag from '../assets/audio/steal-flag.mp3';
+import gain_flag from '../assets/audio/steal-flag.mp3';
+import winner_game from '../assets/audio/winner-game.mp3';
 
 import lose_challenge from '../assets/audio/lose-challenge.mp3';
 import time from '../assets/audio/time.mp3';
@@ -17,6 +18,7 @@ export const AudioContext = createContext({
     audioRefStealFlag: null,
     audioRefLoseChallenge: null,
     audioRefTime: null,
+    audioRefWinnerGame: null,
     playSound: (audioRef, volume, loop, playBackRate) => {},
     stopSound: (audioRef) => {},
 });
@@ -30,7 +32,8 @@ export const AudioProvider = ({ children }) => {
         audioRefTriviaVersus: useRef(new Audio(trivia_vs_audio)),
         audioRefStealFlag: useRef(new Audio(steal_flag)),
         audioRefLoseChallenge: useRef(new Audio(lose_challenge)),
-        audioRefTime: useRef(new Audio(time))
+        audioRefTime: useRef(new Audio(time)),
+        audioRefWinnerGame: useRef(new Audio(winner_game))
     }
         
 
@@ -61,6 +64,7 @@ export const AudioProvider = ({ children }) => {
         audioRefStealFlag: initialState.audioRefStealFlag,
         audioRefLoseChallenge: initialState.audioRefLoseChallenge,
         audioRefTime: initialState.audioRefTime,
+        audioRefWinnerGame: initialState.audioRefWinnerGame,
         playSound,
         stopSound
     }}>
