@@ -8,10 +8,10 @@ export const FlagsPlayer = ({flagsPlayer}) => {
     return (
         <div className='flex justify-center'>
             {(flagsPlayer && flagsPlayer.length > 0) &&
-             flagsPlayer.map((flag) => {
+             flagsPlayer.map((flag, index) => {
                 return (
                     <Flag ß
-                    key={flag}
+                    key={index}
                     color={findFlagProperties(flag).color} 
                     shadow={findFlagProperties(flag).shadow}
                     height={24} width={32}

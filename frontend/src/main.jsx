@@ -3,23 +3,15 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import ConfigGame from './components/board/ConfigGame.jsx';
-import AppBoard from './components/board/AppBoard.jsx';
 import { createBrowserRouter, RouterProvider, BrowserRouter, Routes, Route } from 'react-router-dom'
 import BoardPlayer from './components/player/BoardPlayer.jsx';
-import AppTeam from './components/player/ConfigTeam.jsx';
 import BoardGame from './components/board/BoardGame.jsx';
-import Roulette from './components/challenges/common/Roulette.jsx';
-import Trivia from './components/challenges/trivia/Trivia.jsx';
 import MainScreen from './components/main/MainScreen.jsx';
 import ConfigTeam from './components/player/ConfigTeam.jsx';
 import AppPlayer from './components/player/AppPlayer.jsx';
-import AuthState from './context/AuthState.jsx';
 import PrivateUserRoute from './context/PrivateUserRoute.jsx';
 import { SocketProvider } from './context/SocketProvider.jsx';
-import Piece from './components/board/Piece.jsx';
-import { MovieList } from './components/challenges/acting/MovieList.jsx';
 import { AudioProvider } from './context/AudioProvider.jsx';
-import { VideoFlags } from './components/challenges/common/VideoFlags.jsx';
 import Winner from './components/challenges/common/Winner.jsx';
 
 const router = createBrowserRouter([

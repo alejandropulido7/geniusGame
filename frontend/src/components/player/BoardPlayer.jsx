@@ -140,6 +140,10 @@ const BoardPlayer = () => {
                 setGameFinished(true);  
                 setWinner(data);
             });
+
+            socket.on('status', (data) => {  
+                console.log(data)
+            });
             
             socket.on('sessionDontExist', () => {
                 navigate('../player');
@@ -295,10 +299,12 @@ const BoardPlayer = () => {
 
 
             <Modal open={openModal} onClose={setOpenModal}>
-                <AcceptChallenge dataRenderChallenge={dataRenderChallenge} setOpenModalRoulette={setOpenModalRoulette} opponents={opponentsChallenge}/>
+                <div className='p-6'>
+                    <AcceptChallenge dataRenderChallenge={dataRenderChallenge} setOpenModalRoulette={setOpenModalRoulette} opponents={opponentsChallenge}/>
+                </div>
             </Modal>
             <Modal open={openModalRoulette} onClose={setOpenModalRoulette}>
-                <div className='flex flex-col gap-4'>
+                <div className='flex flex-col gap-4 p-6'>
                     <p>Gira la ruleta</p>
                     <div className="mt-8 space-x-4">
                         {showStartRoulette 
@@ -320,8 +326,8 @@ const BoardPlayer = () => {
                 </div>
             </Modal>
             <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
-                <div className='flex flex-col gap-6'>
-                    <Confetti/>
+                <Confetti style={{width: '100%'}}/>
+                <div className='flex flex-col gap-6 p-6'>
                     <p>Felicidades equipo {infoChoiceNewFlag.teamName}!! Has ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive)?.name}.</p>
                     <p>Escoge la siguiente:</p>
                     <div className='flex justify-center gap-4'>

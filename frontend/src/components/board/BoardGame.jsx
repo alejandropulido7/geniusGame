@@ -15,6 +15,7 @@ import { SocketContext } from '../../context/SocketProvider';
 import Confetti from 'react-confetti'
 import { KeepActiveBrowser } from '../common/KeepActiveBrowser';
 import { AudioContext } from '../../context/AudioProvider';
+import { VideoGainFlags } from '../challenges/common/VideoGainFlags';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
@@ -25,6 +26,7 @@ const BoardGame = () => {
   const [openModal, setOpenModal] = useState(false);
   const [openModalRoulette, setOpenModalRoulette] = useState(false);
   const [openModalChoiceNewFlag, setOpenModalChoiceNewFlag] = useState(false);
+  const [openModalStealFlag, setOpenModalStealFlag] = useState(false);
   const [infoChoiceNewFlag, setInfoChoiceNewFlag] = useState({});
   const [infoModal, setInfoModal] = useState({});
   const [gameFinished, setGameFinished] = useState(false);
@@ -35,7 +37,7 @@ const BoardGame = () => {
     audioRefLoseChallenge, audioRefStealFlag,
     audioRefTime, audioRefTriviaVersus
   } = useContext(AudioContext);
-  const [fromTriviaVs, setFromTriviaVs] = useState(false);
+  const [flagStoleModal, setFlagStoleModal] = useState('');
 
   useEffect(() => {
     getSessionCreated(idRoom); 
@@ -63,6 +65,10 @@ const BoardGame = () => {
         setOpenModal(false);
         setOpenModalChoiceNewFlag(false); 
       });
+
+      socket.on('status', (data) => {  
+        console.log('STATUS: ', data)
+    });
       
       socket.on('resultChallenge', (data) => { 
         setOpenModalChoiceNewFlag(false); 
@@ -81,17 +87,7 @@ const BoardGame = () => {
         setFlagPositions(data.changePositions);
       });
 
-      let timer = null;
-      socket.on('openModalGainFlag', (data) => {
-        setOpenModalChoiceNewFlag(true);
-        const playerModified = data.player;
-        playerModified.flagActive = data.flag;
-        setInfoChoiceNewFlag(playerModified);
-        setFromTriviaVs(true);
-        timer = setTimeout(() => {
-          setOpenModalChoiceNewFlag(false);
-        }, 7000);
-      });
+      
   
       socket.on('playerJoinedRoom', (playersInSession) => {
         setPlayersPositions(playersInSession);
@@ -100,13 +96,32 @@ const BoardGame = () => {
       return () => {
         socket.off('throwDice');
         socket.off('resultChallenge');
-        setInfoChoiceNewFlag(null);
-        setFromTriviaVs(false);
-        clearTimeout(timer);
+        // socket.off('openModalGainFlag');
+        // clearTimeout(timer);
       }
     }
 
   }, [socket, openModalChoiceNewFlag, playersPositions, flagPositions, gameFinished, winner]);
+
+  useEffect(() => {
+      let timer = null;
+      socket?.on('openModalGainFlag', (data) => {
+        setFlagStoleModal(data.flag);
+        setInfoChoiceNewFlag(data.player);
+        console.log('data.player', data.player);
+        
+        timer = setTimeout(() => {
+          setOpenModalStealFlag(false);
+        }, 7000);
+        setOpenModalStealFlag(true);
+      });
+
+      return () => {
+        // socket?.off('openModalGainFlag');
+        clearTimeout(timer);
+      }
+
+  }, [socket])
 
   
 
@@ -158,6 +173,7 @@ const BoardGame = () => {
         // challenge: playerChallenge.challenge,
         // challenge: getRandomObject(['word_chain', 'pictionary']),
         challenge: 'trivia_vs',
+        // challenge: '',
         player: playerModified
       };
     }
@@ -229,25 +245,45 @@ const BoardGame = () => {
         <Winner winner={winner}/>
       }
       <Modal open={openModal} onClose={setOpenModal}>
-        <InfoModal idChallenge={infoModal}/>
+        <div className='p-6'>
+          <InfoModal idChallenge={infoModal}/>
+        </div>
       </Modal>
       <Modal open={openModalRoulette} onClose={setOpenModalRoulette}>
-        <Roulette/>
+        <div className='p6'>
+          <Roulette/>
+        </div>
       </Modal>
       <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
         {openModalChoiceNewFlag && 
-        <div className='flex justify-center items-center self-center text-white background-gain-flag'>
-          {playSound(audioRefGainFlag, 0.5)}
-          <Confetti/>
-          <video autoPlay muted className="background-video">
-            <source src={findFlagProperties(infoChoiceNewFlag.flagActive)?.video} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <div className='flex flex-col gap-6'>
-            <h3>Wow! el equipo <span className='uppercase underline text-black'>{infoChoiceNewFlag.teamName}</span> ha ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive)?.name}</h3>
-            {!fromTriviaVs && <p>Esperando a que elija su proxima bandera...</p>}
-          </div>
-        </div>
+          <VideoGainFlags audio={audioRefGainFlag} flagGained={infoChoiceNewFlag.flagActive} infoPlayer={infoChoiceNewFlag} waitForOpponent={true}/>
+        // <div className='flex justify-center items-center self-center text-white background-gain-flag'>
+        //   {playSound(audioRefGainFlag, 0.5)}
+        //   <Confetti/>
+        //   <video autoPlay muted className="background-video">
+        //     <source src={findFlagProperties(infoChoiceNewFlag.flagActive)?.video} type="video/mp4" />
+        //     Your browser does not support the video tag.
+        //   </video>
+        //   <div className='flex flex-col gap-6 p-6'>
+        //     <h3>Wow! el equipo <span className='uppercase underline text-black'>{infoChoiceNewFlag.teamName}</span> ha ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive)?.name}</h3>
+        //   </div>
+        // </div>
+        }
+      </Modal>
+      <Modal open={openModalStealFlag} onClose={setOpenModalStealFlag}>
+        {openModalStealFlag && 
+          <VideoGainFlags audio={audioRefGainFlag} flagGained={flagStoleModal} infoPlayer={infoChoiceNewFlag}/>
+        // <div className='flex justify-center items-center self-center text-white background-gain-flag'>
+        //   {playSound(audioRefGainFlag, 0.5)}
+        //   <Confetti/>
+        //   <video autoPlay muted className="background-video">
+        //     <source src={findFlagProperties(flagStoleModal)?.video} type="video/mp4" />
+        //     Your browser does not support the video tag.
+        //   </video>
+        //   <div className='flex flex-col gap-6 p-6'>
+        //     <h3>Wow! el equipo <span className='uppercase underline text-black'>{infoChoiceNewFlag.teamName}</span> ha ganado la bandera {findFlagProperties(flagStoleModal)?.name}</h3>
+        //   </div>
+        // </div>
         }
       </Modal>
     </div>

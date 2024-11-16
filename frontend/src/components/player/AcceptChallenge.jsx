@@ -18,7 +18,7 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
         if(opponents.length == 1){
             setOpponentSelected(opponents[0]);
             if(dataRenderChallenge.challenge == TRIVIA_VS){
-                setFlagsOpponent(opponents[0].flagsObtained);
+                setFlagsOpponent(opponents[0].flagsObtained == null ? [] : opponents[0].flagsObtained);
                 setShowFlags(true);
             }
         }

@@ -52,7 +52,7 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
 
 
   useEffect(() => {
-    playSound(audioRefTriviaVersus, 0.5, false);
+    playSound(audioRefTriviaVersus, 0.5, true);
     socket?.on('trivia-versus', (data) => {
       let newTimesPlayers = playersHaveAnswered;
 
@@ -127,7 +127,7 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
       handlerDataTrivia(dataChallenge.trivia);
       setIsRunningTrivia(true);
     }
-  },[])
+  },[dataChallenge])
 
 
   useEffect(() => {
@@ -157,6 +157,7 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
 
   const handlerDataTrivia = (data_trivia) => {
     if(data_trivia){
+        console.log('RES', data_trivia.correctAnswer)
         setCategory(data_trivia.category);
         setCurrentQuestion(data_trivia.question);
         setOptions(data_trivia.options);
@@ -176,7 +177,7 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
       } else {
         return <div>
           <Confetti/>
-          <p>El equipo {playerPunisher.teamName} ha robado la bandera {findFlagProperties(flagStolePunisher).name}</p>;
+          <p>El equipo {playerPunisher.teamName} ha robado la bandera {findFlagProperties(flagStolePunisher).name}</p>
         </div>
       }
     } else if(playerOpponent.idTeam == winner.idTeam){
@@ -192,7 +193,7 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
   }
 
   const emitWinner = () => {
-    const data = {
+    let data = {
       playerPunisher, 
       winner, 
       opponent: dataChallenge.dataOpponent.opponentSelected,
@@ -202,10 +203,14 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
     if(playerOpponent.idTeam == winner.idTeam){
       data.flagStole = flagStole;
     }
-
+    console.log('dataSend', data)
     socket?.emit('stealFlag', data);
-    socket?.emit('openModalGainFlag', {winner, flag: data.flagStole});
     
+    if((playerPunisher.idTeam == winner.idTeam && dataChallenge.dataOpponent.flagStole != '') 
+      || (playerOpponent.idTeam == winner.idTeam && playerPunisher.flagsObtained.length > 0)){
+        console.log('data.flagStole: ',data.flagStole);
+        socket?.emit('openModalGainFlag', {winner, flag: data.flagStole});
+    }
   }
 
   return (
@@ -224,14 +229,13 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
           </div>
       </div>      
       <Modal open={openModal} onClose={setOpenModal}>
-          <div className='flex justify-between flex-col'>
+          <div className='flex justify-between flex-col p-6'>
             {renderIn == RENDER_CHALLENGE.admin && <PositionsTable positionTable={scorePlayers}/>}            
             {(winner != null) &&
               <div>
                 <p>El equipo ganador es: {winner.teamName}</p>                
                 {winner.idTeam == getCookie('idDevice-GG') && 
                 <div>
-                  {playSound(audioRefStealFlag, 0.5, false)}
                   <div>
                     {showResult()}
                   </div>
