@@ -13,6 +13,7 @@ import PrivateUserRoute from './context/PrivateUserRoute.jsx';
 import { SocketProvider } from './context/SocketProvider.jsx';
 import { AudioProvider } from './context/AudioProvider.jsx';
 import Winner from './components/challenges/common/Winner.jsx';
+import WinnerPlayer from './components/challenges/common/WinnerPlayer.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/winner",
-    element: <AudioProvider><Winner winner={{teamName: 'Locos'}}/></AudioProvider>   
+    element: <AudioProvider><WinnerPlayer winner={{teamName: 'Locos', idTeam: 'fck1592oap8i'}}/></AudioProvider>   
   },
   {
     path: "/board",
