@@ -11,7 +11,7 @@ const PlayerChallengeP = ({word, memberTeam}) => {
 
     const canvasRef = useRef(null);
     const [context, setContext] = useState(null);
-    const [color, setColor] = useState('red');
+    const [color, setColor] = useState('black');
     const [dibujando, setDibujando] = useState(false);
     const [showButton, setShowButton] = useState(true);
     const [gameFinished, setGameFinished] = useState(false);
@@ -168,9 +168,10 @@ const PlayerChallengeP = ({word, memberTeam}) => {
                             />
                             <div className='flex flex-row gap-2 justify-end my-4'>
                                 <p>color: </p>
-                                <button className='w-7 h-7 border-2 border-black rounded-full bg-red-500' onClick={() => cambiarColor('red')}></button>
-                                <button className='w-7 h-7 border-2 border-black rounded-full bg-green-500' onClick={() => cambiarColor('green')}></button>
-                                <button className='w-7 h-7 border-2 border-black rounded-full bg-blue-500' onClick={() => cambiarColor('blue')}></button>
+                                <button className={`w-7 h-7 border-2 ${color == 'black' ? 'border-pink-500' : 'border-black'} rounded-full bg-black`} onClick={() => cambiarColor('black')}></button>
+                                <button className={`w-7 h-7 border-2 ${color == 'red' ? 'border-green-500' : 'border-black'} rounded-full bg-red-500`} onClick={() => cambiarColor('red')}></button>
+                                <button className={`w-7 h-7 border-2 ${color == 'green' ? 'border-pink-500' : 'border-black'} rounded-full bg-green-500`} onClick={() => cambiarColor('green')}></button>
+                                <button className={`w-7 h-7 border-2 ${color == 'blue' ? 'border-pink-500' : 'border-black'} rounded-full bg-blue-500`} onClick={() => cambiarColor('blue')}></button>
                                 <button className='w-7 h-7 border-2 border-black rounded-full flex justify-center items-center' onClick={() => cambiarColor('white')}><FaEraser className=''/></button>
                                 <button className='w-7 h-7 border-2 border-black rounded-full flex justify-center items-center' onClick={borrarTodo}><MdCleaningServices /></button>
                             </div>

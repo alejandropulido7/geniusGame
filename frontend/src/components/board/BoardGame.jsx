@@ -41,7 +41,7 @@ const BoardGame = () => {
 
   useEffect(() => {
     getSessionCreated(idRoom); 
-    playSound(audioRefBackground, 0.07, true);
+    // playSound(audioRefBackground, 0.07, true);
   },[socket]);
 
   useEffect(() => {      
@@ -135,7 +135,7 @@ const BoardGame = () => {
 
     const intervalo = setInterval(() => {
       if(step < playerModified.positionActive){
-        playSound(audioRefPieceMove, 0.5, false, 3);
+        playSound(audioRefPieceMove, 0.5, false, 4);
         step = step + 1;
         playerModified.step = step;
         const playerNewPosition = playersInSession.map(player => player.teamName == playerModified.teamName ? {...player, prev_position: playerModified.prev_position, positionActive: step, step} : player);
@@ -170,9 +170,9 @@ const BoardGame = () => {
     let ongoingChallenge = {};
     if(playerChallenge){
       ongoingChallenge = {
-        // challenge: playerChallenge.challenge,
-        challenge: getRandomObject(['word_chain', 'pictionary']),
-        // challenge: 'trivia_vs',
+        challenge: playerChallenge.challenge,
+        // challenge: getRandomObject(['word_chain', 'pictionary']),
+        // challenge: 'pictionary',
         // challenge: '',
         player: playerModified
       };
