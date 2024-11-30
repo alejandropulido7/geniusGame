@@ -386,9 +386,18 @@ async function trivia(data){
             TurnsGame.addTurnTrivia(gameId, foundPlayer.idTeam);
             const isLastTurnTrivia = TurnsGame.isLastTurnTrivia(gameId);
             if(isLastTurnTrivia){
-                const newQuestion = await getConnectTrivia();
-                io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, data: data.data, isLastTurnTrivia: true, newQuestion});
-                TurnsGame.clearTurnsTrivia(gameId);
+                const waitTime = 3500 - data.data.milliseconds;
+                setTimeout(() => {
+                    console.log('VERSUS-time', waitTime);
+                    getConnectTrivia()
+                    .then(newQuestion => {
+                        io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, data: data.data, isLastTurnTrivia: true, newQuestion});
+                        TurnsGame.clearTurnsTrivia(gameId);
+                    })
+                    .catch(err => {
+                        console.error(err);
+                    });
+                }, waitTime);
             } else {
                 io.sockets.in(gameId).emit('trivia-'+nameEmit, {player: foundPlayer, data: data.data, isLastTurnTrivia: false});
             }
