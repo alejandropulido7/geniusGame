@@ -7,12 +7,12 @@ const sequelize = new Sequelize({
   database: process.env.DATABASE_NAME,
   host: process.env.DATABASE_HOST,
   port: process.env.DATABASE_PORT,
-  // dialectOptions: {
-  //   ssl: {
-  //     require: true,
-  //     rejectUnauthorized: false // disable this if the SSL certificate is self-signed
-  //   }
-  // }
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false // disable this if the SSL certificate is self-signed
+    }
+  }
 });
 
 module.exports = sequelize;
