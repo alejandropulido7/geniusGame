@@ -13,6 +13,7 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
     const [showFlags, setShowFlags] = useState(false);
     const [flagsOpponent, setFlagsOpponent] = useState([]);
     const [challengeAcepted, setChallengeAcepted] = useState(false);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         if(opponents.length == 1){
@@ -33,8 +34,13 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
     }
 
     const activateChallenge = (activate) => {
+        setError('');
         setOpenModalRoulette(false);
         setChallengeAcepted(true);
+        if(opponentSelected == null){
+            setError('Error: Elija un oponente');
+            return;
+        }
         if(activate){
             const dataOpponent = { opponentSelected, flagStole };
             socket?.emit('renderChallenge', {dataChallenge: dataRenderChallenge, dataOpponent});
@@ -108,6 +114,7 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
                     <SyncLoader/>
                 </div>
                 }
+                <div>{error && <p>{error}</p>}</div>
             </div>
             :
             <div>
