@@ -260,7 +260,7 @@ const BoardPlayer = () => {
 
     return (
         <div>
-            <WakeLockComponent/>
+            <KeepAwakeComponent/>
             <div className={`board-player-container md:p-8 p-3 h-auto m-auto`}
                 style={{backgroundColor: `${findFlagProp().color}`}}>
                 { !gameFinished
