@@ -17,6 +17,7 @@ import Confetti from 'react-confetti'
 import { DataTeam } from './DataTeam';
 import { KeepActiveBrowser } from '../common/KeepActiveBrowser';
 import KeepAwakeComponent from '../common/KeepAwakeComponent';
+import WakeLockComponent from '../common/WakeLockComponent';
 
 const BoardPlayer = () => {
 
@@ -45,6 +46,8 @@ const BoardPlayer = () => {
     const [opponentsChallenge, setOpponentsChallenge] = useState([]);
     const [flagsObtained, setFlagsObtained] = useState([]);
     const {socket} = useContext(SocketContext);
+    const { requestWakeLock, releaseWakeLock, isLocked } = useWakeLock();
+
     
     // useEffect(() => {
     //     setShowStartRoulette(true);
@@ -258,7 +261,7 @@ const BoardPlayer = () => {
 
     return (
         <div>
-            <KeepAwakeComponent/>
+            <WakeLockComponent/>
             <div className={`board-player-container md:p-8 p-3 h-auto m-auto`}
                 style={{backgroundColor: `${findFlagProp().color}`}}>
                 { !gameFinished
@@ -294,7 +297,7 @@ const BoardPlayer = () => {
                 </div>
                 :
                 <Winner winner={winner}/>
-                }                
+                }    
             </div>
 
 

@@ -16,6 +16,7 @@ import Confetti from 'react-confetti'
 import { KeepActiveBrowser } from '../common/KeepActiveBrowser';
 import { AudioContext } from '../../context/AudioProvider';
 import { VideoGainFlags } from '../challenges/common/VideoGainFlags';
+import KeepAwakeComponent from '../common/KeepAwakeComponent';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
@@ -228,7 +229,7 @@ const BoardGame = () => {
 
   return (
     <div className='board-container px-20'>
-      <KeepActiveBrowser/>
+      <KeepAwakeComponent/>
       {
         !gameFinished 
         ?
