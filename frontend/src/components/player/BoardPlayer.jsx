@@ -46,7 +46,6 @@ const BoardPlayer = () => {
     const [opponentsChallenge, setOpponentsChallenge] = useState([]);
     const [flagsObtained, setFlagsObtained] = useState([]);
     const {socket} = useContext(SocketContext);
-    const { requestWakeLock, releaseWakeLock, isLocked } = useWakeLock();
 
     
     // useEffect(() => {
