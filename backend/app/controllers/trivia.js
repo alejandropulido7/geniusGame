@@ -1,28 +1,9 @@
 const he = require('he');
 const axios = require('axios');
 const {triviaCategories} = require('../utils/constant');
-
-const deeplApiKey = process.env.DEEPL_API;
+const {translateText} = require('./translate');
 //another api trivia https://the-trivia-api.com/v2/questions?limit=50 (other json format)
 
-async function translateText(texts, language = 'ES') {
-    try {
-      const response = await axios.post(
-        'https://api-free.deepl.com/v2/translate', {
-          text: texts,
-          target_lang: language,
-        }, 
-        {
-            headers: {
-            "Authorization": `DeepL-Auth-Key ${deeplApiKey}`,
-            "Content-Type": 'application/json'
-            }
-        });
-      return response.data.translations;
-    } catch (error) {
-        throw new Error('Error traduciendo: ' + error);
-    }
-};
 
 async function getQuestionTrivia(req, res) { 
     const amount = req.query.amount;

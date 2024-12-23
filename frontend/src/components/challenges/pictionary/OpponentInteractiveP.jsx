@@ -3,6 +3,7 @@ import ChooseTeamMember from '../common/ChooseTeamMember';
 import HideWord from '../common/HideWord';
 import ValidateChallenge from '../common/ValidateChallenge';
 import { SocketContext } from '../../../context/SocketProvider';
+import { RandomWord } from '../common/RandomWord';
 
 const OpponentInteractiveP = ({wordReady}) => {
 
@@ -45,6 +46,7 @@ const OpponentInteractiveP = ({wordReady}) => {
           <label>Palabra o frase:</label>
           <input className='input my-2' type="text" placeholder='Escribe una palabra o frase' value={word} onChange={(e) => setWord(e.target.value)}/>
           <ChooseTeamMember setMember={setOponentMember} member={oponentMember}/>
+          <RandomWord setWord={setWord}/>
           <button className='btn-wood py-2 text-white my-4' onClick={emitWordChallenge}>Enviar palabra</button>
         </div>
       :

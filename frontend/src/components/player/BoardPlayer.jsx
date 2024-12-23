@@ -15,9 +15,7 @@ import PreventBackButton from './PreventBackButton';
 import AcceptChallenge from './AcceptChallenge';
 import Confetti from 'react-confetti'
 import { DataTeam } from './DataTeam';
-import { KeepActiveBrowser } from '../common/KeepActiveBrowser';
 import KeepAwakeComponent from '../common/KeepAwakeComponent';
-import WakeLockComponent from '../common/WakeLockComponent';
 
 const BoardPlayer = () => {
 

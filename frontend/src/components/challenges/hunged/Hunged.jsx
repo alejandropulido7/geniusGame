@@ -71,13 +71,13 @@ const Hunged = ({renderIn, dataPlayer}) => {
   }
 
   return (
-    <div>
+    <div className='my-6'>
       {renderIn != RENDER_CHALLENGE.opponent && 
        <div>
         {gameFinished ?
-          <div className='text-xl'>
+          <div className='text-xl gap-2 flex flex-col'>
             <p>{missedAttemps === 0 && wordShowed.includes('_') ? 'Perdiste. La palabra era:' : '¡Felicidades! Has ganado. La palabra era:'}</p>
-            <p>{secretWord}</p>
+            <p className='text-2xl uppercase text-red-500 underline'>{secretWord}</p>
           </div>
           : 
           <div className='flex flex-col gap-5'>
