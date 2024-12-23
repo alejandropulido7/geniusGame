@@ -14,6 +14,7 @@ import { SocketProvider } from './context/SocketProvider.jsx';
 import { AudioProvider } from './context/AudioProvider.jsx';
 import Winner from './components/challenges/common/Winner.jsx';
 import WinnerPlayer from './components/challenges/common/WinnerPlayer.jsx';
+import { Spotify } from './components/challenges/whistle/Spotify.jsx';
 
 const router = createBrowserRouter([
   {
@@ -22,8 +23,8 @@ const router = createBrowserRouter([
     errorElement: <MainScreen />,    
   },
   {
-    path: "/winner",
-    element: <AudioProvider><WinnerPlayer winner={{teamName: 'Locos', idTeam: 'fck1592oap8i'}}/></AudioProvider>   
+    path: "/spotify",
+    element: <Spotify/>   
   },
   {
     path: "/board",

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
 import {findFlagProperties, FLAGS, getRandomObject, OPTIONS_CHALLENGES } from '../../utils/constants'
 import StepsBoard from './StepsBoard';
-import {updateBoardPositions, getSession} from '../../services/sessionService';
+import {getSession} from '../../services/sessionService';
 import {useParams, useNavigate} from 'react-router-dom';
 import BoardChallenges from '../challenges/BoardChallenges';
 import DataGame from './DataGame';
@@ -12,8 +12,6 @@ import Roulette from '../challenges/common/Roulette';
 import Winner from '../challenges/common/Winner';
 import './Board.css';
 import { SocketContext } from '../../context/SocketProvider';
-import Confetti from 'react-confetti'
-import { KeepActiveBrowser } from '../common/KeepActiveBrowser';
 import { AudioContext } from '../../context/AudioProvider';
 import { VideoGainFlags } from '../challenges/common/VideoGainFlags';
 import KeepAwakeComponent from '../common/KeepAwakeComponent';
@@ -36,13 +34,15 @@ const BoardGame = () => {
   const {playSound, audioRefBackground, 
     audioRefPieceMove, audioRefGainFlag,
     audioRefLoseChallenge, audioRefStealFlag,
-    audioRefTime, audioRefTriviaVersus
+    audioRefTime, audioRefTriviaVersus, stopSound
   } = useContext(AudioContext);
   const [flagStoleModal, setFlagStoleModal] = useState('');
 
   useEffect(() => {
     getSessionCreated(idRoom); 
-    // playSound(audioRefBackground, 0.07, true);
+    return () => {
+      stopSound(audioRefBackground, 0.07, true);
+    }
   },[socket]);
 
   useEffect(() => {      
@@ -97,8 +97,6 @@ const BoardGame = () => {
       return () => {
         socket.off('throwDice');
         socket.off('resultChallenge');
-        // socket.off('openModalGainFlag');
-        // clearTimeout(timer);
       }
     }
 
@@ -118,7 +116,6 @@ const BoardGame = () => {
       });
 
       return () => {
-        // socket?.off('openModalGainFlag');
         clearTimeout(timer);
       }
 
@@ -171,10 +168,10 @@ const BoardGame = () => {
     let ongoingChallenge = {};
     if(playerChallenge){
       ongoingChallenge = {
-        challenge: playerChallenge.challenge,
+        // challenge: playerChallenge.challenge,
         // challenge: getRandomObject(['word_chain', 'pictionary']),
         // challenge: 'pictionary',
-        // challenge: '',
+        challenge: 'whistle_song',
         player: playerModified
       };
     }
@@ -218,7 +215,7 @@ const BoardGame = () => {
   }
 
   function activeSound(){
-    // playSound(audioRefBackground);
+    playSound(audioRefBackground);
     playSound(audioRefPieceMove, 0);
     playSound(audioRefGainFlag, 0);
     playSound(audioRefLoseChallenge, 0);
@@ -258,33 +255,11 @@ const BoardGame = () => {
       <Modal open={openModalChoiceNewFlag} onClose={setOpenModalChoiceNewFlag}>
         {openModalChoiceNewFlag && 
           <VideoGainFlags audio={audioRefGainFlag} flagGained={infoChoiceNewFlag.flagActive} infoPlayer={infoChoiceNewFlag} waitForOpponent={true}/>
-        // <div className='flex justify-center items-center self-center text-white background-gain-flag'>
-        //   {playSound(audioRefGainFlag, 0.5)}
-        //   <Confetti/>
-        //   <video autoPlay muted className="background-video">
-        //     <source src={findFlagProperties(infoChoiceNewFlag.flagActive)?.video} type="video/mp4" />
-        //     Your browser does not support the video tag.
-        //   </video>
-        //   <div className='flex flex-col gap-6 p-6'>
-        //     <h3>Wow! el equipo <span className='uppercase underline text-black'>{infoChoiceNewFlag.teamName}</span> ha ganado la bandera {findFlagProperties(infoChoiceNewFlag.flagActive)?.name}</h3>
-        //   </div>
-        // </div>
         }
       </Modal>
       <Modal open={openModalStealFlag} onClose={setOpenModalStealFlag}>
         {openModalStealFlag && 
           <VideoGainFlags audio={audioRefGainFlag} flagGained={flagStoleModal} infoPlayer={infoChoiceNewFlag}/>
-        // <div className='flex justify-center items-center self-center text-white background-gain-flag'>
-        //   {playSound(audioRefGainFlag, 0.5)}
-        //   <Confetti/>
-        //   <video autoPlay muted className="background-video">
-        //     <source src={findFlagProperties(flagStoleModal)?.video} type="video/mp4" />
-        //     Your browser does not support the video tag.
-        //   </video>
-        //   <div className='flex flex-col gap-6 p-6'>
-        //     <h3>Wow! el equipo <span className='uppercase underline text-black'>{infoChoiceNewFlag.teamName}</span> ha ganado la bandera {findFlagProperties(flagStoleModal)?.name}</h3>
-        //   </div>
-        // </div>
         }
       </Modal>
     </div>

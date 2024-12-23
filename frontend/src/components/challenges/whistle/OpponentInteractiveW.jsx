@@ -3,6 +3,7 @@ import ValidateChallenge from '../common/ValidateChallenge';
 import HideWord from '../common/HideWord';
 import { SocketContext } from '../../../context/SocketProvider';
 import ChooseTeamMember from '../common/ChooseTeamMember';
+import { Spotify } from './Spotify';
 
 const OpponentInteractiveW = ({wordReady}) => {
 
@@ -30,12 +31,12 @@ const OpponentInteractiveW = ({wordReady}) => {
     const emitWordChallenge = () => {
       if(song != '' && oponentMember != '' && artist != ''){
         setErrorMessage('');
-        const sendWord = artist + ' - ' + song;
+        const sendWord = 'Artista: '+artist + ' | Canción: ' + song;
         setFinalWord(sendWord);
         const data = {word: sendWord, wordReady: true, oponentMember, socketId: socket?.id};
         socket?.emit('whistle', data);
       } else {
-        setErrorMessage('Llena todos los campos antes de enviar la canción')
+        setErrorMessage('Llena todos los campos antes de enviar la canción');
       }
     }
   
@@ -45,14 +46,7 @@ const OpponentInteractiveW = ({wordReady}) => {
         ?
           <div className='flex flex-col gap-4 justify-center my-3'>
             <p>Ponle una canción al equipo contrario para que la tararee...</p>
-            <div className='flex flex-col justify-center'>
-              <label htmlFor="">Cantante o agrupación:</label>
-              <input className='input' type="text" placeholder='Cantante o agrupación' onChange={(e) => setArtist(e.target.value)}/>
-            </div>
-            <div className='flex flex-col justify-center'>
-              <label htmlFor="">Canción:</label>
-              <input className='input' type="text" placeholder='Canción' onChange={(e) => setSong(e.target.value)}/>
-            </div>
+            <Spotify setArtistInput={setArtist} setSongInput={setSong}/>
             <ChooseTeamMember setMember={setOponentMember} member={oponentMember}/>
             <button className='btn-wood text-white my-4 py-2' onClick={emitWordChallenge}>Enviar</button>
           </div>
