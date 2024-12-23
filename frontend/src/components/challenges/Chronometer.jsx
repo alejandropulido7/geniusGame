@@ -59,6 +59,7 @@ const Chronometer = ({data}) => {
     }
 
     if(seconds == 0){
+      clearInterval(interval);
       playSound(audioRefLoseChallenge, 0.6);
       setShowTime(false);
       socket?.emit('notPassChallenge', data.participants.player);
