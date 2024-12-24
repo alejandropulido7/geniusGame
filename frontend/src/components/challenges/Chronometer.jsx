@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { SocketContext } from '../../context/SocketProvider';
 import { GlobalContext } from '../../context/GlobalContext';
 import { HUNGED, WORD_CHAIN } from '../../utils/constants';
 import { AudioContext } from '../../context/AudioProvider';
+import lose_challenge from '../../assets/audio/lose-challenge.mp3';
+import time from '../../assets/audio/time.mp3';
 
 
 const Chronometer = ({data}) => {
@@ -12,8 +14,10 @@ const Chronometer = ({data}) => {
   const [player, setPlayer] = useState(null);
   const {socket} = useContext(SocketContext);
   const {dataChallenge} = useContext(GlobalContext);
-  const {audioRefLoseChallenge, audioRefTime, playSound, stopSound} = useContext(AudioContext);
-  const [lastSeconds, setLastSeconds] = useState(false)
+  const {playSound, stopSound} = useContext(AudioContext);
+  const [lastSeconds, setLastSeconds] = useState(false);
+  const audioRefLoseChallenge = useRef(new Audio(lose_challenge));
+  const audioRefTime = useRef(new Audio(time));
 
   useEffect(() => {
     const time = JSON.parse(localStorage.getItem('timeChallenge-GG'));
