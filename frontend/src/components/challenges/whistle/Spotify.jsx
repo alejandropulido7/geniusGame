@@ -34,6 +34,9 @@ export const Spotify = ({setArtistInput, setSongInput}) => {
         const value = e.target.value;
         setShowArtists(true);
         setQuery(value);
+        if(value == ''){
+          setShowArtists(false);
+        }
     
         if (typingTimeout) {
           clearTimeout(typingTimeout);

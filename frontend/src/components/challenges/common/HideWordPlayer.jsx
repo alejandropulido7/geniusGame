@@ -1,12 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { SocketContext } from '../../../context/SocketProvider';
+import { AudioContext } from '../../../context/AudioProvider';
+import show_word_audio from '../../../assets/audio/show_word.mp3'
 
 const HideWordPlayer = ({word, gameFinished, setShowFinishButton}) => {
 
     const [showWord, setShowWord] = useState(false);
     const [textButton, setTextButton] = useState('Ver la palabra secreta y empezar el reto');
     const [startChallenge, setStartChallenge] = useState(false);
-    const {socket} = useContext(SocketContext)
+    const {socket} = useContext(SocketContext);
+    const {playSound} = useContext(AudioContext);
+    const audioShowWord = useRef(new Audio(show_word_audio));
 
     useEffect(() => {
         const properties = localStorage.getItem('hideWord-GG');
@@ -29,6 +33,7 @@ const HideWordPlayer = ({word, gameFinished, setShowFinishButton}) => {
     };
 
     const manageUnholdStart = () => {
+        playSound(audioShowWord, 1);
         setStartChallenge(true)
         socket?.emit('startChallenge', {socketId: socket?.id});
         setShowFinishButton(true);

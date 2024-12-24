@@ -11,31 +11,11 @@ import time from '../assets/audio/time.mp3';
 
 
 export const AudioContext = createContext({
-    audioRefBackground: null,
-    audioRefPieceMove: null,
-    audioRefGainFlag: null,
-    audioRefTriviaVersus: null,
-    audioRefStealFlag: null,
-    audioRefLoseChallenge: null,
-    audioRefTime: null,
-    audioRefWinnerGame: null,
     playSound: (audioRef, volume, loop, playBackRate) => {},
     stopSound: (audioRef) => {},
 });
 
-export const AudioProvider = ({ children }) => {
-
-    const initialState = {
-        audioRefBackground: useRef(new Audio(background_game)),
-        audioRefPieceMove: useRef(new Audio(move_piece)),
-        audioRefGainFlag: useRef(new Audio(gain_flag)),
-        audioRefTriviaVersus: useRef(new Audio(trivia_vs_audio)),
-        audioRefStealFlag: useRef(new Audio(steal_flag)),
-        audioRefLoseChallenge: useRef(new Audio(lose_challenge)),
-        audioRefTime: useRef(new Audio(time)),
-        audioRefWinnerGame: useRef(new Audio(winner_game))
-    }
-        
+export const AudioProvider = ({ children }) => {        
 
     const playSound = (audioRef, volume=0.5, loop=false, playBackRate=1) => {
         const audio = audioRef.current;
@@ -57,14 +37,6 @@ export const AudioProvider = ({ children }) => {
 
   return (
     <AudioContext.Provider value={{
-        audioRefBackground: initialState.audioRefBackground,
-        audioRefPieceMove: initialState.audioRefPieceMove,
-        audioRefGainFlag: initialState.audioRefGainFlag,
-        audioRefTriviaVersus: initialState.audioRefTriviaVersus,
-        audioRefStealFlag: initialState.audioRefStealFlag,
-        audioRefLoseChallenge: initialState.audioRefLoseChallenge,
-        audioRefTime: initialState.audioRefTime,
-        audioRefWinnerGame: initialState.audioRefWinnerGame,
         playSound,
         stopSound
     }}>

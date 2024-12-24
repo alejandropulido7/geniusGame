@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import Modal from '../../common/modal/Modal';
 import AdminT from './AdminT_VS';
 import PlayerChallengeT from './PlayerChallengeT_VS';
@@ -10,7 +10,8 @@ import PositionsTable from './PositionsTable';
 import { getCookie } from '../../../utils/cookies';
 import StealFlag from '../common/StealFlag';
 import { AudioContext } from '../../../context/AudioProvider';
-import Confetti from 'react-confetti'
+import Confetti from 'react-confetti';
+import trivia_vs_audio from '../../../assets/audio/trivia-vs.mp3';
 
 const Trivia_VS = ({renderIn, dataChallenge}) => {
   const [render, setRender] = useState(null);
@@ -33,7 +34,8 @@ const Trivia_VS = ({renderIn, dataChallenge}) => {
   const [playerPunisher, setPlayerPunisher] = useState({});
   const [flagStole, setFlagStole] = useState('');
   const [playerOpponent, setPlayerOpponent] = useState('');
-  const {audioRefTriviaVersus, audioRefStealFlag, playSound, stopSound} = useContext(AudioContext);
+  const {audioRefStealFlag, playSound, stopSound} = useContext(AudioContext);
+  const audioRefTriviaVersus = useRef(new Audio(trivia_vs_audio));
 
   useEffect(() => {
     const properties = JSON.parse(localStorage.getItem('trivia-vs-GG'));
