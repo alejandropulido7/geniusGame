@@ -5,14 +5,16 @@ import winner_video from '../../../assets/videos/win-game.mp4';
 import winner_video_turn from '../../../assets/videos/win-game-turn.mp4';
 import './Winner.css';
 import { AudioContext } from '../../../context/AudioProvider';
+import winner_game from '../../../assets/audio/winner-game.mp3';
 
 
 
 const Winner = ({winner}) => {
 
     const navigate = useNavigate();
-    const {audioRefWinnerGame, playSound, stopSound} = useContext(AudioContext);
+    const {playSound, stopSound} = useContext(AudioContext);
     const [secondVideo, setSecondVideo] = useState(false);
+    const audioRefWinnerGame = useRef(new Audio(winner_game));
 
     useEffect(() => {
       playSound(audioRefWinnerGame, 1, false);

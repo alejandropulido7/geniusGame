@@ -15,6 +15,15 @@ import { SocketContext } from '../../context/SocketProvider';
 import { AudioContext } from '../../context/AudioProvider';
 import { VideoGainFlags } from '../challenges/common/VideoGainFlags';
 import KeepAwakeComponent from '../common/KeepAwakeComponent';
+import background_game from '../../assets/audio/background_game-3.mp3';
+import move_piece from '../../assets/audio/move-piece-1.mp3';
+import steal_flag from '../../assets/audio/gain-flag.mp3';
+import trivia_vs_audio from '../../assets/audio/trivia-vs.mp3';
+import gain_flag from '../../assets/audio/steal-flag.mp3';
+import winner_game from '../../assets/audio/winner-game.mp3';
+import lose_challenge from '../../assets/audio/lose-challenge.mp3';
+import time from '../../assets/audio/time.mp3';
+import render_challenge_audio from '../../assets/audio/render_challenge.mp3';
 
 const BoardGame = () => {
   const [flagPositions, setFlagPositions] = useState([]);
@@ -31,12 +40,16 @@ const BoardGame = () => {
   const [gameFinished, setGameFinished] = useState(false);
   const [winner, setWinner] = useState({});
   const {socket} = useContext(SocketContext);
-  const {playSound, audioRefBackground, 
-    audioRefPieceMove, audioRefGainFlag,
-    audioRefLoseChallenge, audioRefStealFlag,
-    audioRefTime, audioRefTriviaVersus, stopSound
-  } = useContext(AudioContext);
+  const {playSound, stopSound } = useContext(AudioContext);
   const [flagStoleModal, setFlagStoleModal] = useState('');
+  const audioRefBackground = useRef(new Audio(background_game));
+  const audioRefPieceMove = useRef(new Audio(move_piece));
+  const audioRefGainFlag = useRef(new Audio(gain_flag));
+  const audioRefLoseChallenge = useRef(new Audio(lose_challenge));
+  const audioRefStealFlag = useRef(new Audio(steal_flag));
+  const audioRefTime = useRef(new Audio(time));
+  const audioRefTriviaVersus = useRef(new Audio(trivia_vs_audio));
+  const audioRefRenderChallenge = useRef(new Audio(render_challenge_audio));
 
   useEffect(() => {
     getSessionCreated(idRoom); 
@@ -141,6 +154,7 @@ const BoardGame = () => {
       } else {
         clearInterval(intervalo);
         if((playerWithChallenge && playerWithChallenge.challenge != '') || isLastStep){
+          playSound(audioRefRenderChallenge, 1);
           playerWithChallenge.isLastStep = isLastStep;
           if(isLastStep){
             socket.emit('openModalRoulette', { function: 'rendering', data: playerWithChallenge});
@@ -215,7 +229,7 @@ const BoardGame = () => {
   }
 
   function activeSound(){
-    playSound(audioRefBackground);
+    playSound(audioRefBackground, 0.4);
     playSound(audioRefPieceMove, 0);
     playSound(audioRefGainFlag, 0);
     playSound(audioRefLoseChallenge, 0);

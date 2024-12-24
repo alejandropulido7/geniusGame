@@ -1,8 +1,12 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import { SocketContext } from '../../context/SocketProvider';
 import { CHALLENGES_IN_BOARD_PLUSTRIVIA, BACK_HOME, TRIVIA_VS, FLAGS, findFlagProperties, TRIVIA } from '../../utils/constants';
 import StealFlag from '../challenges/common/StealFlag';
 import SyncLoader from "react-spinners/SyncLoader";
+import { AudioContext } from '../../context/AudioProvider';
+import no_accept_challenge from '../../assets/audio/no_accept_challenge.mp3'
+import accept_challenge from '../../assets/audio/accept_challenge.mp3'
+
 
 
 const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents}) => {
@@ -14,6 +18,9 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
     const [flagsOpponent, setFlagsOpponent] = useState([]);
     const [challengeAcepted, setChallengeAcepted] = useState(false);
     const [error, setError] = useState('');
+    const {playSound} = useContext(AudioContext);
+    const acceptChallenge = useRef(new Audio(accept_challenge));
+    const noAcceptChallenge = useRef(new Audio(no_accept_challenge));
 
     useEffect(() => {
         if(opponents.length == 1){
@@ -42,9 +49,11 @@ const AcceptChallenge = ({dataRenderChallenge, setOpenModalRoulette, opponents})
             return;
         }
         if(activate){
+            playSound(acceptChallenge, 1);
             const dataOpponent = { opponentSelected, flagStole };
             socket?.emit('renderChallenge', {dataChallenge: dataRenderChallenge, dataOpponent});
         } else {
+            playSound(noAcceptChallenge, 1);
             socket?.emit('resultChallenge', {player: dataRenderChallenge.player, challengePassed: activate});
         }
     };
