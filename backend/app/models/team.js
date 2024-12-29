@@ -8,6 +8,10 @@ const Team = sequelize.define('Team', {
         autoIncrement: true,
         primaryKey: true
     },
+    order: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     id_team: {
         type: DataTypes.TEXT,
         allowNull: false

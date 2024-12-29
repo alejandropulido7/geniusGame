@@ -12,6 +12,7 @@ const PrivateUserRoute = ({children}) => {
         if(token){
             validateUserToken(token)
             .then(session => {
+                console.log({session})
                 if(session){
                     setRedirectionHome(false);
                 } else {

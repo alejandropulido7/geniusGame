@@ -32,7 +32,21 @@ class RoomStore {
                 }
             }
             this.userRooms.set(user.socketId, room); 
+            this.sortRoomUsers(room);
         }        
+    }
+
+    sortRoomUsers(room) {
+        if (this.rooms.has(room)) {
+            const usersMap = this.rooms.get(room);
+            const sortedUsersArray = Array.from(usersMap.entries()).sort((a, b) => {
+                const userA = a[1];
+                const userB = b[1]; 
+                return userA.order - userB.order;
+            });
+            const sortedUsersMap = new Map(sortedUsersArray);
+            this.rooms.set(room, sortedUsersMap);
+        }
     }
 
     getRoomByIdSocket(id){
@@ -68,7 +82,7 @@ class RoomStore {
             const arrayUsers = Array.from(room.values());
             const userToRemove = arrayUsers.find(player => player.socketId == idSocketToRemove);
             if(userToRemove){
-                // room.delete(userToRemove.idTeam); 
+                room.delete(userToRemove.idTeam); 
                 this.userRooms.delete(idSocketToRemove);               
             }
         }

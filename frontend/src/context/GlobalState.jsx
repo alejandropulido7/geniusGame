@@ -12,7 +12,9 @@ const GlobalState = ({children}) => {
         dataChallenge: {},
         activeChallenge: false,
         renderPlayer: '',
-        session: {}
+        session: {},
+        wakeLock: null,
+        status: ''
     }
 
     const challengeReducer = (state, action)=>{
@@ -25,7 +27,11 @@ const GlobalState = ({children}) => {
             case 'RENDER_CHALLENGE':
                 return { ...state, renderPlayer: action.payload};
             case 'RENDER_SESSION':
-                return { ...state, session: action.payload};       
+                return { ...state, session: action.payload}; 
+            case 'SET_WAKELOCK':
+                return { ...state, wakeLock: action.payload};
+            case 'SET_STATUS':
+                return { ...state, status: action.payload}; 
             default:
                 return state;
         }       
@@ -61,16 +67,34 @@ const GlobalState = ({children}) => {
         })
     }
 
+    const setWakeLock = (data) => {        
+        dispatch({
+            type: 'SET_WAKELOCK',
+            payload: data
+        })
+    }
+
+    const setStatus = (data) => {        
+        dispatch({
+            type: 'SET_STATUS',
+            payload: data
+        })
+    }
+
     return (
         <GlobalContext.Provider value={{
             activeChallenge: state.activeChallenge,
             dataChallenge: state.dataChallenge,
             renderPlayer: state.renderPlayer,
             session: state.session,
+            wakeLock: state.wakeLock,
+            status: state.status,
             setDataChallenge,
             setActiveChallenge,
             setRenderPlayer,
-            setSession
+            setSession,
+            setWakeLock,
+            setStatus
         }}>
             {children}
         </GlobalContext.Provider>

@@ -1,20 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { GlobalContext } from '../../context/GlobalContext';
 
 const KeepAwakeComponent = () => {
-  let wakeLock = null;
+  // const [wakeLock, setWakeLock] = useState(null);
+  // const [status, setStatus] = useState('');
+  const {status, setStatus, wakeLock, setWakeLock} = useContext(GlobalContext);
 
   // Function to request the wake lock
   const requestWakeLock = async () => {
     try {
-      wakeLock = await navigator.wakeLock.request('screen');
-      console.log("Wake lock is active");
-
-      // Listen for wake lock release (e.g., if the device is low on battery)
-      wakeLock.addEventListener('release', () => {
-        console.log("Wake lock was released");
+      const newWakeLock = await navigator.wakeLock.request('screen');
+      newWakeLock.addEventListener('release', () => {
+        setStatus("Wake lock was released");
       });
+
+      setStatus("Wake lock is active");
+      setWakeLock(newWakeLock);
     } catch (err) {
-      console.error(`Failed to obtain wake lock: ${err.message}`);
+      setStatus(`Failed to obtain wake lock: ${err.message}`);
     }
   };
 
@@ -22,31 +25,39 @@ const KeepAwakeComponent = () => {
   const releaseWakeLock = () => {
     if (wakeLock) {
       wakeLock.release();
-      wakeLock = null;
+      setWakeLock(null);
+      setStatus('Wake Lock was released');
+    }
+  };
+
+  const handleVisibilityChange = () => {
+    if (wakeLock && document.visibilityState === 'visible') {
+      requestWakeLock();
     }
   };
 
   useEffect(() => {
-    // Request wake lock when component mounts
     requestWakeLock();
 
-    // Set up a listener to reapply wake lock on visibility change
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'visible' && !wakeLock) {
-        requestWakeLock();
-      }
-    };
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
-    // Clean up when component unmounts
     return () => {
       releaseWakeLock();
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
+    }
   }, []);
+
+  useEffect(() => {
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    document.addEventListener('fullscreenchange', handleVisibilityChange);
+
+    return () => {
+      // releaseWakeLock();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      document.removeEventListener('fullscreenchange', handleVisibilityChange);
+    };
+  }, [wakeLock]);
 
   return (
     <>
+      <p>{status}</p>
     </>
   );
 };
