@@ -57,7 +57,6 @@ const KeepAwakeComponent = () => {
 
   return (
     <>
-      <p>{status}</p>
     </>
   );
 };
