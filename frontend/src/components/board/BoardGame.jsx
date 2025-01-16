@@ -182,10 +182,10 @@ const BoardGame = () => {
     let ongoingChallenge = {};
     if(playerChallenge){
       ongoingChallenge = {
-        // challenge: playerChallenge.challenge,
+        challenge: playerChallenge.challenge,
         // challenge: getRandomObject(['word_chain', 'pictionary']),
         // challenge: 'pictionary',
-        challenge: 'whistle_song',
+        // challenge: 'whistle_song',
         player: playerModified
       };
     }
@@ -229,7 +229,7 @@ const BoardGame = () => {
   }
 
   function activeSound(){
-    playSound(audioRefBackground, 0.4);
+    playSound(audioRefBackground, 0.2, true);
     playSound(audioRefPieceMove, 0);
     playSound(audioRefGainFlag, 0);
     playSound(audioRefLoseChallenge, 0);
