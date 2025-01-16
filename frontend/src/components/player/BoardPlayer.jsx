@@ -16,6 +16,8 @@ import AcceptChallenge from './AcceptChallenge';
 import Confetti from 'react-confetti'
 import { DataTeam } from './DataTeam';
 import KeepAwakeComponent from '../common/KeepAwakeComponent';
+import WakeLockComponent from '../common/WakeLockComponent';
+import { KeepActiveBrowser } from '../common/KeepActiveBrowser';
 
 const BoardPlayer = () => {
 
@@ -99,7 +101,8 @@ const BoardPlayer = () => {
                     positionActive: teamCreatedinSession.position_active,
                     prev_position: teamCreatedinSession.prev_position,
                     propPiece: JSON.parse(teamCreatedinSession.prop_piece),
-                    flagsObtained: JSON.parse(teamCreatedinSession.flags_obtained)
+                    flagsObtained: JSON.parse(teamCreatedinSession.flags_obtained),
+                    order: teamCreatedinSession.order
                 });
             }
 
@@ -258,7 +261,7 @@ const BoardPlayer = () => {
 
     return (
         <div>
-            <KeepAwakeComponent/>
+            <KeepActiveBrowser/>
             <div className={`board-player-container md:p-8 p-3 h-auto m-auto`}
                 style={{backgroundColor: `${findFlagProp().color}`}}>
                 { !gameFinished

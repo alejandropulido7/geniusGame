@@ -23,7 +23,7 @@ const ConfigTeam = () => {
   const [error, setError] = useState('');
   const [flagSelected, setFlagSelected] = useState('');
   const navigate = useNavigate();
-  const {setActiveChallenge} = useContext(GlobalContext);
+  const {setActiveChallenge, setWakeLock, setStatus} = useContext(GlobalContext);
   const {tokenAdmin} = useParams();
   const [pieceChose, setPieceChose] = useState(null);
   const [color, setColor] = useState("#cacaca");
@@ -78,6 +78,7 @@ const ConfigTeam = () => {
                 navigate('/player/room/'+team.idRoom);
               } else {
                 setError(team.error);
+                setIsLoading(false)
               }
             })
             .catch(err => {
@@ -95,7 +96,22 @@ const ConfigTeam = () => {
     setFlagSelected(event.target.value);
   };
 
+  const requestWakeLock = async () => {
+    try {
+      const newWakeLock = await navigator.wakeLock.request('screen');
+      newWakeLock.addEventListener('release', () => {
+        setStatus("Wake lock was released");
+      });
+
+      setStatus("Wake lock is active");
+      setWakeLock(newWakeLock);
+    } catch (err) {
+      setStatus(`Failed to obtain wake lock: ${err.message}`);
+    }
+  };
+
   const entrySessionGame = () => {
+    requestWakeLock();
     setError('');
     if(validateFields()){
       if(error == '') {
