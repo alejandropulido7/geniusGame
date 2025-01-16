@@ -14,6 +14,14 @@ async function createTeam(req, res) {
             }
         });
 
+        const amountTeams = await Team.count({
+            where: {
+                id_session: req.body.id_session
+            }
+        });
+
+        console.log('amountTeams', amountTeams)
+
         if(teamAlreadyName && teamAlreadyName.id_team != req.body.id_team){
             return res.status(400).json({error: 'Team already has been created'});
         } else if(teamAlreadyName && teamAlreadyName.id_team == req.body.id_team) {
@@ -21,15 +29,17 @@ async function createTeam(req, res) {
                 idTeam: teamAlreadyName.id_team,
                 teamName: teamAlreadyName.name_team,
                 prop_piece: teamAlreadyName.prop_piece,
-                idRoom: teamAlreadyName.id_session
+                idRoom: teamAlreadyName.id_session,
+                order: teamAlreadyName.order
             });    
-            return res.status(200).json({idRoom: teamAlreadyName.id_session, idTeam: teamAlreadyName.id_team, teamName: teamAlreadyName.name_team, token});
+            return res.status(200).json({idRoom: teamAlreadyName.id_session, idTeam: teamAlreadyName.id_team, teamName: teamAlreadyName.name_team, order: teamAlreadyName.order, token});
         }
 
         const idTeam = generateUUID(10);
         const teamCreated = await Team.create({
             name_team: req.body.name_team,
             id_team: idTeam,
+            order: amountTeams + 1,
             prop_piece: req.body.prop_piece,
             score_game: 0,
             status: true,

@@ -5,10 +5,14 @@ export const GlobalContext = createContext({
     dataChallenge: {},
     renderPlayer: '',
     session: {}, 
+    wakeLock: null,
+    status: '',
     setSession: (data)=>{},
     setDataChallenge: (data)=>{},
     setActiveChallenge: (data)=>{},
-    setRenderPlayer: (data)=>{}
+    setRenderPlayer: (data)=>{},
+    setWakeLock: (data)=>{},
+    setStatus: (data)=>{}
 });
 
 export const AuthContext = createContext({

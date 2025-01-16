@@ -46,7 +46,7 @@ const login = async (req, res) => {
         if(!passwordIsValid) return res.status(400).json({message: "Incorrect password"});
         
         const token = await createAccessToken({
-            id: userFound.id,
+            idUser: userFound.id,
             email: userFound.email
         });
         res.cookie('token', token);            
@@ -100,8 +100,8 @@ const logout = async (req, res) => {
 const validateUserToken = async (req, res) => {
     try {
         const payload =  await validToken(req.params.token);
-        if(payload.id == '') return res.status(400).json({message: "Token not valid"});
-        const userFound = await User.findByPk(payload.id);
+        if(payload.idUser == '') return res.status(400).json({message: "Token not valid"});
+        const userFound = await User.findByPk(payload.idUser);
         if(!userFound) return res.status(400).json({message: "User not found"});
         res.send({
             username: userFound.username,
